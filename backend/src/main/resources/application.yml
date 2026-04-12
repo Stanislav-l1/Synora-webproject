@@ -1,0 +1,121 @@
+spring:
+  application:
+    name: synora-backend
+
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/synora}
+    username: ${DB_USER:synora}
+    password: ${DB_PASSWORD:synora_pass}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+
+  jpa:
+    hibernate:
+      ddl-auto: validate          # Flyway управляет схемой, JPA только валидирует
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        default_batch_fetch_size: 16
+        jdbc:
+          batch_size: 50
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: false
+    validate-on-migrate: true
+
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+      timeout: 5000ms
+      lettuce:
+        pool:
+          max-active: 10
+          max-idle: 5
+
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 100MB
+
+server:
+  port: ${SERVER_PORT:8080}
+  compression:
+    enabled: true
+    mime-types: application/json,text/html
+  error:
+    include-message: never      # не утекаем stacktrace в production
+
+jwt:
+  secret: ${JWT_SECRET:changeme-in-production-use-256-bit-key}
+  access-token-expiration: 900       # 15 минут (секунды)
+  refresh-token-expiration: 604800   # 7 дней
+
+aws:
+  s3:
+    endpoint: ${S3_ENDPOINT:http://localhost:9000}   # MinIO в dev
+    bucket: ${S3_BUCKET:synora-files}
+    access-key: ${S3_ACCESS_KEY:minioadmin}
+    secret-key: ${S3_SECRET_KEY:minioadmin}
+    region: ${S3_REGION:us-east-1}
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: ${SWAGGER_ENABLED:true}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus,caches
+  endpoint:
+    health:
+      show-details: when-authorized
+      show-components: when-authorized
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    tags:
+      application: synora-backend
+    distribution:
+      percentiles-histogram:
+        http.server.requests: true
+
+logging:
+  level:
+    com.synora: ${LOG_LEVEL:INFO}
+    org.springframework.security: WARN
+
+---
+# Production profile override
+spring:
+  config:
+    activate:
+      on-profile: prod
+  jpa:
+    show-sql: false
+  flyway:
+    baseline-on-migrate: false
+
+server:
+  error:
+    include-message: never
+    include-stacktrace: never
+
+springdoc:
+  swagger-ui:
+    enabled: false

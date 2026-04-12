@@ -1,0 +1,1315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.synora.modules.auth.AuthControllerTest" time="42.011" tests="11" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="21"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1251"/>
+    <property name="java.class.path" value="C:\Users\stas5\Synora-proj\backend\target\test-classes;C:\Users\stas5\Synora-proj\backend\target\classes;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-starter-web\3.3.0\spring-boot-starter-web-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-starter\3.3.0\spring-boot-starter-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot\3.3.0\spring-boot-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\3.3.0\spring-boot-autoconfigure-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-starter-logging\3.3.0\spring-boot-starter-logging-3.3.0.jar;C:\Users\stas5\.m2\repository\ch\qos\logback\logback-classic\1.5.6\logback-classic-1.5.6.jar;C:\Users\stas5\.m2\repository\ch\qos\logback\logback-core\1.5.6\logback-core-1.5.6.jar;C:\Users\stas5\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.23.1\log4j-to-slf4j-2.23.1.jar;C:\Users\stas5\.m2\repository\org\apache\logging\log4j\log4j-api\2.23.1\log4j-api-2.23.1.jar;C:\Users\stas5\.m2\repository\org\slf4j\jul-to-slf4j\2.0.13\jul-to-slf4j-2.0.13.jar;C:\Users\stas5\.m2\repository\jakarta\annotation\jakarta.annotation-api\2.1.1\jakarta.annotation-api-2.1.1.jar;C:\Users\stas5\.m2\repository\org\yaml\snakeyaml\2.2\snakeyaml-2.2.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-starter-json\3.3.0\spring-boot-starter-json-3.3.0.jar;C:\Users\stas5\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jdk8\2.17.1\jackson-datatype-jdk8-2.17.1.jar;C:\Users\stas5\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.17.1\jackson-datatype-jsr310-2.17.1.jar;C:\Users\stas5\.m2\repository\com\fasterxml\jackson\module\jackson-module-parameter-names\2.17.1\jackson-module-parameter-names-2.17.1.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-starter-tomcat\3.3.0\spring-boot-starter-tomcat-3.3.0.jar;C:\Users\stas5\.m2\repository\org\apache\tomcat\embed\tomcat-embed-core\10.1.24\tomcat-embed-core-10.1.24.jar;C:\Users\stas5\.m2\repository\org\apache\tomcat\embed\tomcat-embed-websocket\10.1.24\tomcat-embed-websocket-10.1.24.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-web\6.1.8\spring-web-6.1.8.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-beans\6.1.8\spring-beans-6.1.8.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-webmvc\6.1.8\spring-webmvc-6.1.8.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-context\6.1.8\spring-context-6.1.8.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-expression\6.1.8\spring-expression-6.1.8.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-starter-websocket\3.3.0\spring-boot-starter-websocket-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-messaging\6.1.8\spring-messaging-6.1.8.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-websocket\6.1.8\spring-websocket-6.1.8.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-starter-security\3.3.0\spring-boot-starter-security-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-aop\6.1.8\spring-aop-6.1.8.jar;C:\Users\stas5\.m2\repository\org\springframework\security\spring-security-config\6.3.0\spring-security-config-6.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\security\spring-security-web\6.3.0\spring-security-web-6.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-starter-validation\3.3.0\spring-boot-starter-validation-3.3.0.jar;C:\Users\stas5\.m2\repository\org\apache\tomcat\embed\tomcat-embed-el\10.1.24\tomcat-embed-el-10.1.24.jar;C:\Users\stas5\.m2\repository\org\hibernate\validator\hibernate-validator\8.0.1.Final\hibernate-validator-8.0.1.Final.jar;C:\Users\stas5\.m2\repository\jakarta\validation\jakarta.validation-api\3.0.2\jakarta.validation-api-3.0.2.jar;C:\Users\stas5\.m2\repository\org\jboss\logging\jboss-logging\3.5.3.Final\jboss-logging-3.5.3.Final.jar;C:\Users\stas5\.m2\repository\com\fasterxml\classmate\1.7.0\classmate-1.7.0.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-starter-data-jpa\3.3.0\spring-boot-starter-data-jpa-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-starter-aop\3.3.0\spring-boot-starter-aop-3.3.0.jar;C:\Users\stas5\.m2\repository\org\aspectj\aspectjweaver\1.9.22\aspectjweaver-1.9.22.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-starter-jdbc\3.3.0\spring-boot-starter-jdbc-3.3.0.jar;C:\Users\stas5\.m2\repository\com\zaxxer\HikariCP\5.1.0\HikariCP-5.1.0.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-jdbc\6.1.8\spring-jdbc-6.1.8.jar;C:\Users\stas5\.m2\repository\org\hibernate\orm\hibernate-core\6.5.2.Final\hibernate-core-6.5.2.Final.jar;C:\Users\stas5\.m2\repository\jakarta\persistence\jakarta.persistence-api\3.1.0\jakarta.persistence-api-3.1.0.jar;C:\Users\stas5\.m2\repository\jakarta\transaction\jakarta.transaction-api\2.0.1\jakarta.transaction-api-2.0.1.jar;C:\Users\stas5\.m2\repository\org\hibernate\common\hibernate-commons-annotations\6.0.6.Final\hibernate-commons-annotations-6.0.6.Final.jar;C:\Users\stas5\.m2\repository\io\smallrye\jandex\3.1.2\jandex-3.1.2.jar;C:\Users\stas5\.m2\repository\net\bytebuddy\byte-buddy\1.14.16\byte-buddy-1.14.16.jar;C:\Users\stas5\.m2\repository\org\glassfish\jaxb\jaxb-runtime\4.0.5\jaxb-runtime-4.0.5.jar;C:\Users\stas5\.m2\repository\org\glassfish\jaxb\jaxb-core\4.0.5\jaxb-core-4.0.5.jar;C:\Users\stas5\.m2\repository\org\eclipse\angus\angus-activation\2.0.2\angus-activation-2.0.2.jar;C:\Users\stas5\.m2\repository\org\glassfish\jaxb\txw2\4.0.5\txw2-4.0.5.jar;C:\Users\stas5\.m2\repository\com\sun\istack\istack-commons-runtime\4.1.2\istack-commons-runtime-4.1.2.jar;C:\Users\stas5\.m2\repository\jakarta\inject\jakarta.inject-api\2.0.1\jakarta.inject-api-2.0.1.jar;C:\Users\stas5\.m2\repository\org\antlr\antlr4-runtime\4.13.0\antlr4-runtime-4.13.0.jar;C:\Users\stas5\.m2\repository\org\springframework\data\spring-data-jpa\3.3.0\spring-data-jpa-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\data\spring-data-commons\3.3.0\spring-data-commons-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-orm\6.1.8\spring-orm-6.1.8.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-tx\6.1.8\spring-tx-6.1.8.jar;C:\Users\stas5\.m2\repository\org\slf4j\slf4j-api\2.0.13\slf4j-api-2.0.13.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-aspects\6.1.8\spring-aspects-6.1.8.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-starter-data-redis\3.3.0\spring-boot-starter-data-redis-3.3.0.jar;C:\Users\stas5\.m2\repository\io\lettuce\lettuce-core\6.3.2.RELEASE\lettuce-core-6.3.2.RELEASE.jar;C:\Users\stas5\.m2\repository\io\netty\netty-common\4.1.110.Final\netty-common-4.1.110.Final.jar;C:\Users\stas5\.m2\repository\io\netty\netty-handler\4.1.110.Final\netty-handler-4.1.110.Final.jar;C:\Users\stas5\.m2\repository\io\netty\netty-transport-native-unix-common\4.1.110.Final\netty-transport-native-unix-common-4.1.110.Final.jar;C:\Users\stas5\.m2\repository\io\netty\netty-transport\4.1.110.Final\netty-transport-4.1.110.Final.jar;C:\Users\stas5\.m2\repository\io\projectreactor\reactor-core\3.6.6\reactor-core-3.6.6.jar;C:\Users\stas5\.m2\repository\org\springframework\data\spring-data-redis\3.3.0\spring-data-redis-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\data\spring-data-keyvalue\3.3.0\spring-data-keyvalue-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-oxm\6.1.8\spring-oxm-6.1.8.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-context-support\6.1.8\spring-context-support-6.1.8.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-starter-actuator\3.3.0\spring-boot-starter-actuator-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-actuator-autoconfigure\3.3.0\spring-boot-actuator-autoconfigure-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-actuator\3.3.0\spring-boot-actuator-3.3.0.jar;C:\Users\stas5\.m2\repository\io\micrometer\micrometer-observation\1.13.0\micrometer-observation-1.13.0.jar;C:\Users\stas5\.m2\repository\io\micrometer\micrometer-commons\1.13.0\micrometer-commons-1.13.0.jar;C:\Users\stas5\.m2\repository\io\micrometer\micrometer-jakarta9\1.13.0\micrometer-jakarta9-1.13.0.jar;C:\Users\stas5\.m2\repository\io\micrometer\micrometer-registry-prometheus\1.13.0\micrometer-registry-prometheus-1.13.0.jar;C:\Users\stas5\.m2\repository\io\micrometer\micrometer-core\1.13.0\micrometer-core-1.13.0.jar;C:\Users\stas5\.m2\repository\org\hdrhistogram\HdrHistogram\2.2.1\HdrHistogram-2.2.1.jar;C:\Users\stas5\.m2\repository\org\latencyutils\LatencyUtils\2.0.3\LatencyUtils-2.0.3.jar;C:\Users\stas5\.m2\repository\io\prometheus\prometheus-metrics-core\1.2.1\prometheus-metrics-core-1.2.1.jar;C:\Users\stas5\.m2\repository\io\prometheus\prometheus-metrics-model\1.2.1\prometheus-metrics-model-1.2.1.jar;C:\Users\stas5\.m2\repository\io\prometheus\prometheus-metrics-config\1.2.1\prometheus-metrics-config-1.2.1.jar;C:\Users\stas5\.m2\repository\io\prometheus\prometheus-metrics-tracer-common\1.2.1\prometheus-metrics-tracer-common-1.2.1.jar;C:\Users\stas5\.m2\repository\io\prometheus\prometheus-metrics-exposition-formats\1.2.1\prometheus-metrics-exposition-formats-1.2.1.jar;C:\Users\stas5\.m2\repository\io\prometheus\prometheus-metrics-shaded-protobuf\1.2.1\prometheus-metrics-shaded-protobuf-1.2.1.jar;C:\Users\stas5\.m2\repository\org\postgresql\postgresql\42.7.3\postgresql-42.7.3.jar;C:\Users\stas5\.m2\repository\org\checkerframework\checker-qual\3.42.0\checker-qual-3.42.0.jar;C:\Users\stas5\.m2\repository\org\flywaydb\flyway-core\10.10.0\flyway-core-10.10.0.jar;C:\Users\stas5\.m2\repository\com\fasterxml\jackson\dataformat\jackson-dataformat-toml\2.17.1\jackson-dataformat-toml-2.17.1.jar;C:\Users\stas5\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.17.1\jackson-core-2.17.1.jar;C:\Users\stas5\.m2\repository\com\google\code\gson\gson\2.10.1\gson-2.10.1.jar;C:\Users\stas5\.m2\repository\org\flywaydb\flyway-database-postgresql\10.10.0\flyway-database-postgresql-10.10.0.jar;C:\Users\stas5\.m2\repository\io\jsonwebtoken\jjwt-api\0.12.6\jjwt-api-0.12.6.jar;C:\Users\stas5\.m2\repository\io\jsonwebtoken\jjwt-impl\0.12.6\jjwt-impl-0.12.6.jar;C:\Users\stas5\.m2\repository\io\jsonwebtoken\jjwt-jackson\0.12.6\jjwt-jackson-0.12.6.jar;C:\Users\stas5\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.17.1\jackson-databind-2.17.1.jar;C:\Users\stas5\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.17.1\jackson-annotations-2.17.1.jar;C:\Users\stas5\.m2\repository\org\projectlombok\lombok\1.18.32\lombok-1.18.32.jar;C:\Users\stas5\.m2\repository\org\springdoc\springdoc-openapi-starter-webmvc-ui\2.5.0\springdoc-openapi-starter-webmvc-ui-2.5.0.jar;C:\Users\stas5\.m2\repository\org\springdoc\springdoc-openapi-starter-webmvc-api\2.5.0\springdoc-openapi-starter-webmvc-api-2.5.0.jar;C:\Users\stas5\.m2\repository\org\springdoc\springdoc-openapi-starter-common\2.5.0\springdoc-openapi-starter-common-2.5.0.jar;C:\Users\stas5\.m2\repository\io\swagger\core\v3\swagger-core-jakarta\2.2.21\swagger-core-jakarta-2.2.21.jar;C:\Users\stas5\.m2\repository\org\apache\commons\commons-lang3\3.14.0\commons-lang3-3.14.0.jar;C:\Users\stas5\.m2\repository\io\swagger\core\v3\swagger-annotations-jakarta\2.2.21\swagger-annotations-jakarta-2.2.21.jar;C:\Users\stas5\.m2\repository\io\swagger\core\v3\swagger-models-jakarta\2.2.21\swagger-models-jakarta-2.2.21.jar;C:\Users\stas5\.m2\repository\com\fasterxml\jackson\dataformat\jackson-dataformat-yaml\2.17.1\jackson-dataformat-yaml-2.17.1.jar;C:\Users\stas5\.m2\repository\org\webjars\swagger-ui\5.13.0\swagger-ui-5.13.0.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\s3\2.26.12\s3-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\aws-xml-protocol\2.26.12\aws-xml-protocol-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\aws-query-protocol\2.26.12\aws-query-protocol-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\protocol-core\2.26.12\protocol-core-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\arns\2.26.12\arns-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\profiles\2.26.12\profiles-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\crt-core\2.26.12\crt-core-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\http-auth\2.26.12\http-auth-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\identity-spi\2.26.12\identity-spi-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\http-auth-spi\2.26.12\http-auth-spi-2.26.12.jar;C:\Users\stas5\.m2\repository\org\reactivestreams\reactive-streams\1.0.4\reactive-streams-1.0.4.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\http-auth-aws\2.26.12\http-auth-aws-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\checksums\2.26.12\checksums-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\checksums-spi\2.26.12\checksums-spi-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\retries-spi\2.26.12\retries-spi-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\sdk-core\2.26.12\sdk-core-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\retries\2.26.12\retries-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\auth\2.26.12\auth-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\eventstream\eventstream\1.0.1\eventstream-1.0.1.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\http-client-spi\2.26.12\http-client-spi-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\regions\2.26.12\regions-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\annotations\2.26.12\annotations-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\utils\2.26.12\utils-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\aws-core\2.26.12\aws-core-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\metrics-spi\2.26.12\metrics-spi-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\json-utils\2.26.12\json-utils-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\third-party-jackson-core\2.26.12\third-party-jackson-core-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\endpoints-spi\2.26.12\endpoints-spi-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\apache-client\2.26.12\apache-client-2.26.12.jar;C:\Users\stas5\.m2\repository\org\apache\httpcomponents\httpclient\4.5.13\httpclient-4.5.13.jar;C:\Users\stas5\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\stas5\.m2\repository\org\apache\httpcomponents\httpcore\4.4.16\httpcore-4.4.16.jar;C:\Users\stas5\.m2\repository\commons-codec\commons-codec\1.16.1\commons-codec-1.16.1.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\netty-nio-client\2.26.12\netty-nio-client-2.26.12.jar;C:\Users\stas5\.m2\repository\io\netty\netty-codec-http\4.1.110.Final\netty-codec-http-4.1.110.Final.jar;C:\Users\stas5\.m2\repository\io\netty\netty-codec-http2\4.1.110.Final\netty-codec-http2-4.1.110.Final.jar;C:\Users\stas5\.m2\repository\io\netty\netty-codec\4.1.110.Final\netty-codec-4.1.110.Final.jar;C:\Users\stas5\.m2\repository\io\netty\netty-buffer\4.1.110.Final\netty-buffer-4.1.110.Final.jar;C:\Users\stas5\.m2\repository\io\netty\netty-transport-classes-epoll\4.1.110.Final\netty-transport-classes-epoll-4.1.110.Final.jar;C:\Users\stas5\.m2\repository\io\netty\netty-resolver\4.1.110.Final\netty-resolver-4.1.110.Final.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-starter-test\3.3.0\spring-boot-starter-test-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-test\3.3.0\spring-boot-test-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-test-autoconfigure\3.3.0\spring-boot-test-autoconfigure-3.3.0.jar;C:\Users\stas5\.m2\repository\com\jayway\jsonpath\json-path\2.9.0\json-path-2.9.0.jar;C:\Users\stas5\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\4.0.2\jakarta.xml.bind-api-4.0.2.jar;C:\Users\stas5\.m2\repository\jakarta\activation\jakarta.activation-api\2.1.3\jakarta.activation-api-2.1.3.jar;C:\Users\stas5\.m2\repository\net\minidev\json-smart\2.5.1\json-smart-2.5.1.jar;C:\Users\stas5\.m2\repository\net\minidev\accessors-smart\2.5.1\accessors-smart-2.5.1.jar;C:\Users\stas5\.m2\repository\org\ow2\asm\asm\9.6\asm-9.6.jar;C:\Users\stas5\.m2\repository\org\assertj\assertj-core\3.25.3\assertj-core-3.25.3.jar;C:\Users\stas5\.m2\repository\org\awaitility\awaitility\4.2.1\awaitility-4.2.1.jar;C:\Users\stas5\.m2\repository\org\hamcrest\hamcrest\2.2\hamcrest-2.2.jar;C:\Users\stas5\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.2\junit-jupiter-5.10.2.jar;C:\Users\stas5\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\stas5\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\stas5\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\stas5\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\stas5\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.2\junit-jupiter-params-5.10.2.jar;C:\Users\stas5\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\stas5\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;C:\Users\stas5\.m2\repository\org\mockito\mockito-core\5.11.0\mockito-core-5.11.0.jar;C:\Users\stas5\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.16\byte-buddy-agent-1.14.16.jar;C:\Users\stas5\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\stas5\.m2\repository\org\mockito\mockito-junit-jupiter\5.11.0\mockito-junit-jupiter-5.11.0.jar;C:\Users\stas5\.m2\repository\org\skyscreamer\jsonassert\1.5.1\jsonassert-1.5.1.jar;C:\Users\stas5\.m2\repository\com\vaadin\external\google\android-json\0.0.20131108.vaadin1\android-json-0.0.20131108.vaadin1.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-core\6.1.8\spring-core-6.1.8.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-jcl\6.1.8\spring-jcl-6.1.8.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-test\6.1.8\spring-test-6.1.8.jar;C:\Users\stas5\.m2\repository\org\xmlunit\xmlunit-core\2.9.1\xmlunit-core-2.9.1.jar;C:\Users\stas5\.m2\repository\org\springframework\security\spring-security-test\6.3.0\spring-security-test-6.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\security\spring-security-core\6.3.0\spring-security-core-6.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\security\spring-security-crypto\6.3.0\spring-security-crypto-6.3.0.jar;C:\Users\stas5\.m2\repository\org\testcontainers\postgresql\1.20.4\postgresql-1.20.4.jar;C:\Users\stas5\.m2\repository\org\testcontainers\jdbc\1.20.4\jdbc-1.20.4.jar;C:\Users\stas5\.m2\repository\org\testcontainers\database-commons\1.20.4\database-commons-1.20.4.jar;C:\Users\stas5\.m2\repository\org\testcontainers\junit-jupiter\1.20.4\junit-jupiter-1.20.4.jar;C:\Users\stas5\.m2\repository\org\testcontainers\testcontainers\1.20.4\testcontainers-1.20.4.jar;C:\Users\stas5\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\stas5\.m2\repository\org\hamcrest\hamcrest-core\2.2\hamcrest-core-2.2.jar;C:\Users\stas5\.m2\repository\org\apache\commons\commons-compress\1.24.0\commons-compress-1.24.0.jar;C:\Users\stas5\.m2\repository\org\rnorth\duct-tape\duct-tape\1.0.8\duct-tape-1.0.8.jar;C:\Users\stas5\.m2\repository\org\jetbrains\annotations\17.0.0\annotations-17.0.0.jar;C:\Users\stas5\.m2\repository\com\github\docker-java\docker-java-api\3.4.0\docker-java-api-3.4.0.jar;C:\Users\stas5\.m2\repository\com\github\docker-java\docker-java-transport-zerodep\3.4.0\docker-java-transport-zerodep-3.4.0.jar;C:\Users\stas5\.m2\repository\com\github\docker-java\docker-java-transport\3.4.0\docker-java-transport-3.4.0.jar;C:\Users\stas5\.m2\repository\net\java\dev\jna\jna\5.13.0\jna-5.13.0.jar;"/>
+    <property name="java.vm.vendor" value="Amazon.com Inc."/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="catalina.useNaming" value="false"/>
+    <property name="java.vendor.url" value="https://aws.amazon.com/corretto/"/>
+    <property name="user.timezone" value="Asia/Qyzylorda"/>
+    <property name="org.jboss.logging.provider" value="slf4j"/>
+    <property name="user.country.format" value="KZ"/>
+    <property name="os.name" value="Windows 11"/>
+    <property name="java.vm.specification.version" value="21"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="RU"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Amazon Corretto\jdk21.0.10_7\bin"/>
+    <property name="sun.java.command" value="C:\Users\stas5\AppData\Local\Temp\surefire10809322830494055535\surefirebooter-20260412140144960_3.jar C:\Users\stas5\AppData\Local\Temp\surefire10809322830494055535 2026-04-12T14-01-44_707-jvmRun1 surefire-20260412140144960_1tmp surefire_0-20260412140144960_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Users\stas5\Synora-proj\backend\target\test-classes;C:\Users\stas5\Synora-proj\backend\target\classes;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-starter-web\3.3.0\spring-boot-starter-web-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-starter\3.3.0\spring-boot-starter-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot\3.3.0\spring-boot-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\3.3.0\spring-boot-autoconfigure-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-starter-logging\3.3.0\spring-boot-starter-logging-3.3.0.jar;C:\Users\stas5\.m2\repository\ch\qos\logback\logback-classic\1.5.6\logback-classic-1.5.6.jar;C:\Users\stas5\.m2\repository\ch\qos\logback\logback-core\1.5.6\logback-core-1.5.6.jar;C:\Users\stas5\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.23.1\log4j-to-slf4j-2.23.1.jar;C:\Users\stas5\.m2\repository\org\apache\logging\log4j\log4j-api\2.23.1\log4j-api-2.23.1.jar;C:\Users\stas5\.m2\repository\org\slf4j\jul-to-slf4j\2.0.13\jul-to-slf4j-2.0.13.jar;C:\Users\stas5\.m2\repository\jakarta\annotation\jakarta.annotation-api\2.1.1\jakarta.annotation-api-2.1.1.jar;C:\Users\stas5\.m2\repository\org\yaml\snakeyaml\2.2\snakeyaml-2.2.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-starter-json\3.3.0\spring-boot-starter-json-3.3.0.jar;C:\Users\stas5\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jdk8\2.17.1\jackson-datatype-jdk8-2.17.1.jar;C:\Users\stas5\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.17.1\jackson-datatype-jsr310-2.17.1.jar;C:\Users\stas5\.m2\repository\com\fasterxml\jackson\module\jackson-module-parameter-names\2.17.1\jackson-module-parameter-names-2.17.1.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-starter-tomcat\3.3.0\spring-boot-starter-tomcat-3.3.0.jar;C:\Users\stas5\.m2\repository\org\apache\tomcat\embed\tomcat-embed-core\10.1.24\tomcat-embed-core-10.1.24.jar;C:\Users\stas5\.m2\repository\org\apache\tomcat\embed\tomcat-embed-websocket\10.1.24\tomcat-embed-websocket-10.1.24.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-web\6.1.8\spring-web-6.1.8.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-beans\6.1.8\spring-beans-6.1.8.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-webmvc\6.1.8\spring-webmvc-6.1.8.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-context\6.1.8\spring-context-6.1.8.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-expression\6.1.8\spring-expression-6.1.8.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-starter-websocket\3.3.0\spring-boot-starter-websocket-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-messaging\6.1.8\spring-messaging-6.1.8.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-websocket\6.1.8\spring-websocket-6.1.8.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-starter-security\3.3.0\spring-boot-starter-security-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-aop\6.1.8\spring-aop-6.1.8.jar;C:\Users\stas5\.m2\repository\org\springframework\security\spring-security-config\6.3.0\spring-security-config-6.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\security\spring-security-web\6.3.0\spring-security-web-6.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-starter-validation\3.3.0\spring-boot-starter-validation-3.3.0.jar;C:\Users\stas5\.m2\repository\org\apache\tomcat\embed\tomcat-embed-el\10.1.24\tomcat-embed-el-10.1.24.jar;C:\Users\stas5\.m2\repository\org\hibernate\validator\hibernate-validator\8.0.1.Final\hibernate-validator-8.0.1.Final.jar;C:\Users\stas5\.m2\repository\jakarta\validation\jakarta.validation-api\3.0.2\jakarta.validation-api-3.0.2.jar;C:\Users\stas5\.m2\repository\org\jboss\logging\jboss-logging\3.5.3.Final\jboss-logging-3.5.3.Final.jar;C:\Users\stas5\.m2\repository\com\fasterxml\classmate\1.7.0\classmate-1.7.0.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-starter-data-jpa\3.3.0\spring-boot-starter-data-jpa-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-starter-aop\3.3.0\spring-boot-starter-aop-3.3.0.jar;C:\Users\stas5\.m2\repository\org\aspectj\aspectjweaver\1.9.22\aspectjweaver-1.9.22.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-starter-jdbc\3.3.0\spring-boot-starter-jdbc-3.3.0.jar;C:\Users\stas5\.m2\repository\com\zaxxer\HikariCP\5.1.0\HikariCP-5.1.0.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-jdbc\6.1.8\spring-jdbc-6.1.8.jar;C:\Users\stas5\.m2\repository\org\hibernate\orm\hibernate-core\6.5.2.Final\hibernate-core-6.5.2.Final.jar;C:\Users\stas5\.m2\repository\jakarta\persistence\jakarta.persistence-api\3.1.0\jakarta.persistence-api-3.1.0.jar;C:\Users\stas5\.m2\repository\jakarta\transaction\jakarta.transaction-api\2.0.1\jakarta.transaction-api-2.0.1.jar;C:\Users\stas5\.m2\repository\org\hibernate\common\hibernate-commons-annotations\6.0.6.Final\hibernate-commons-annotations-6.0.6.Final.jar;C:\Users\stas5\.m2\repository\io\smallrye\jandex\3.1.2\jandex-3.1.2.jar;C:\Users\stas5\.m2\repository\net\bytebuddy\byte-buddy\1.14.16\byte-buddy-1.14.16.jar;C:\Users\stas5\.m2\repository\org\glassfish\jaxb\jaxb-runtime\4.0.5\jaxb-runtime-4.0.5.jar;C:\Users\stas5\.m2\repository\org\glassfish\jaxb\jaxb-core\4.0.5\jaxb-core-4.0.5.jar;C:\Users\stas5\.m2\repository\org\eclipse\angus\angus-activation\2.0.2\angus-activation-2.0.2.jar;C:\Users\stas5\.m2\repository\org\glassfish\jaxb\txw2\4.0.5\txw2-4.0.5.jar;C:\Users\stas5\.m2\repository\com\sun\istack\istack-commons-runtime\4.1.2\istack-commons-runtime-4.1.2.jar;C:\Users\stas5\.m2\repository\jakarta\inject\jakarta.inject-api\2.0.1\jakarta.inject-api-2.0.1.jar;C:\Users\stas5\.m2\repository\org\antlr\antlr4-runtime\4.13.0\antlr4-runtime-4.13.0.jar;C:\Users\stas5\.m2\repository\org\springframework\data\spring-data-jpa\3.3.0\spring-data-jpa-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\data\spring-data-commons\3.3.0\spring-data-commons-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-orm\6.1.8\spring-orm-6.1.8.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-tx\6.1.8\spring-tx-6.1.8.jar;C:\Users\stas5\.m2\repository\org\slf4j\slf4j-api\2.0.13\slf4j-api-2.0.13.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-aspects\6.1.8\spring-aspects-6.1.8.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-starter-data-redis\3.3.0\spring-boot-starter-data-redis-3.3.0.jar;C:\Users\stas5\.m2\repository\io\lettuce\lettuce-core\6.3.2.RELEASE\lettuce-core-6.3.2.RELEASE.jar;C:\Users\stas5\.m2\repository\io\netty\netty-common\4.1.110.Final\netty-common-4.1.110.Final.jar;C:\Users\stas5\.m2\repository\io\netty\netty-handler\4.1.110.Final\netty-handler-4.1.110.Final.jar;C:\Users\stas5\.m2\repository\io\netty\netty-transport-native-unix-common\4.1.110.Final\netty-transport-native-unix-common-4.1.110.Final.jar;C:\Users\stas5\.m2\repository\io\netty\netty-transport\4.1.110.Final\netty-transport-4.1.110.Final.jar;C:\Users\stas5\.m2\repository\io\projectreactor\reactor-core\3.6.6\reactor-core-3.6.6.jar;C:\Users\stas5\.m2\repository\org\springframework\data\spring-data-redis\3.3.0\spring-data-redis-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\data\spring-data-keyvalue\3.3.0\spring-data-keyvalue-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-oxm\6.1.8\spring-oxm-6.1.8.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-context-support\6.1.8\spring-context-support-6.1.8.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-starter-actuator\3.3.0\spring-boot-starter-actuator-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-actuator-autoconfigure\3.3.0\spring-boot-actuator-autoconfigure-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-actuator\3.3.0\spring-boot-actuator-3.3.0.jar;C:\Users\stas5\.m2\repository\io\micrometer\micrometer-observation\1.13.0\micrometer-observation-1.13.0.jar;C:\Users\stas5\.m2\repository\io\micrometer\micrometer-commons\1.13.0\micrometer-commons-1.13.0.jar;C:\Users\stas5\.m2\repository\io\micrometer\micrometer-jakarta9\1.13.0\micrometer-jakarta9-1.13.0.jar;C:\Users\stas5\.m2\repository\io\micrometer\micrometer-registry-prometheus\1.13.0\micrometer-registry-prometheus-1.13.0.jar;C:\Users\stas5\.m2\repository\io\micrometer\micrometer-core\1.13.0\micrometer-core-1.13.0.jar;C:\Users\stas5\.m2\repository\org\hdrhistogram\HdrHistogram\2.2.1\HdrHistogram-2.2.1.jar;C:\Users\stas5\.m2\repository\org\latencyutils\LatencyUtils\2.0.3\LatencyUtils-2.0.3.jar;C:\Users\stas5\.m2\repository\io\prometheus\prometheus-metrics-core\1.2.1\prometheus-metrics-core-1.2.1.jar;C:\Users\stas5\.m2\repository\io\prometheus\prometheus-metrics-model\1.2.1\prometheus-metrics-model-1.2.1.jar;C:\Users\stas5\.m2\repository\io\prometheus\prometheus-metrics-config\1.2.1\prometheus-metrics-config-1.2.1.jar;C:\Users\stas5\.m2\repository\io\prometheus\prometheus-metrics-tracer-common\1.2.1\prometheus-metrics-tracer-common-1.2.1.jar;C:\Users\stas5\.m2\repository\io\prometheus\prometheus-metrics-exposition-formats\1.2.1\prometheus-metrics-exposition-formats-1.2.1.jar;C:\Users\stas5\.m2\repository\io\prometheus\prometheus-metrics-shaded-protobuf\1.2.1\prometheus-metrics-shaded-protobuf-1.2.1.jar;C:\Users\stas5\.m2\repository\org\postgresql\postgresql\42.7.3\postgresql-42.7.3.jar;C:\Users\stas5\.m2\repository\org\checkerframework\checker-qual\3.42.0\checker-qual-3.42.0.jar;C:\Users\stas5\.m2\repository\org\flywaydb\flyway-core\10.10.0\flyway-core-10.10.0.jar;C:\Users\stas5\.m2\repository\com\fasterxml\jackson\dataformat\jackson-dataformat-toml\2.17.1\jackson-dataformat-toml-2.17.1.jar;C:\Users\stas5\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.17.1\jackson-core-2.17.1.jar;C:\Users\stas5\.m2\repository\com\google\code\gson\gson\2.10.1\gson-2.10.1.jar;C:\Users\stas5\.m2\repository\org\flywaydb\flyway-database-postgresql\10.10.0\flyway-database-postgresql-10.10.0.jar;C:\Users\stas5\.m2\repository\io\jsonwebtoken\jjwt-api\0.12.6\jjwt-api-0.12.6.jar;C:\Users\stas5\.m2\repository\io\jsonwebtoken\jjwt-impl\0.12.6\jjwt-impl-0.12.6.jar;C:\Users\stas5\.m2\repository\io\jsonwebtoken\jjwt-jackson\0.12.6\jjwt-jackson-0.12.6.jar;C:\Users\stas5\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.17.1\jackson-databind-2.17.1.jar;C:\Users\stas5\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.17.1\jackson-annotations-2.17.1.jar;C:\Users\stas5\.m2\repository\org\projectlombok\lombok\1.18.32\lombok-1.18.32.jar;C:\Users\stas5\.m2\repository\org\springdoc\springdoc-openapi-starter-webmvc-ui\2.5.0\springdoc-openapi-starter-webmvc-ui-2.5.0.jar;C:\Users\stas5\.m2\repository\org\springdoc\springdoc-openapi-starter-webmvc-api\2.5.0\springdoc-openapi-starter-webmvc-api-2.5.0.jar;C:\Users\stas5\.m2\repository\org\springdoc\springdoc-openapi-starter-common\2.5.0\springdoc-openapi-starter-common-2.5.0.jar;C:\Users\stas5\.m2\repository\io\swagger\core\v3\swagger-core-jakarta\2.2.21\swagger-core-jakarta-2.2.21.jar;C:\Users\stas5\.m2\repository\org\apache\commons\commons-lang3\3.14.0\commons-lang3-3.14.0.jar;C:\Users\stas5\.m2\repository\io\swagger\core\v3\swagger-annotations-jakarta\2.2.21\swagger-annotations-jakarta-2.2.21.jar;C:\Users\stas5\.m2\repository\io\swagger\core\v3\swagger-models-jakarta\2.2.21\swagger-models-jakarta-2.2.21.jar;C:\Users\stas5\.m2\repository\com\fasterxml\jackson\dataformat\jackson-dataformat-yaml\2.17.1\jackson-dataformat-yaml-2.17.1.jar;C:\Users\stas5\.m2\repository\org\webjars\swagger-ui\5.13.0\swagger-ui-5.13.0.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\s3\2.26.12\s3-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\aws-xml-protocol\2.26.12\aws-xml-protocol-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\aws-query-protocol\2.26.12\aws-query-protocol-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\protocol-core\2.26.12\protocol-core-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\arns\2.26.12\arns-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\profiles\2.26.12\profiles-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\crt-core\2.26.12\crt-core-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\http-auth\2.26.12\http-auth-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\identity-spi\2.26.12\identity-spi-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\http-auth-spi\2.26.12\http-auth-spi-2.26.12.jar;C:\Users\stas5\.m2\repository\org\reactivestreams\reactive-streams\1.0.4\reactive-streams-1.0.4.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\http-auth-aws\2.26.12\http-auth-aws-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\checksums\2.26.12\checksums-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\checksums-spi\2.26.12\checksums-spi-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\retries-spi\2.26.12\retries-spi-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\sdk-core\2.26.12\sdk-core-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\retries\2.26.12\retries-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\auth\2.26.12\auth-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\eventstream\eventstream\1.0.1\eventstream-1.0.1.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\http-client-spi\2.26.12\http-client-spi-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\regions\2.26.12\regions-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\annotations\2.26.12\annotations-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\utils\2.26.12\utils-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\aws-core\2.26.12\aws-core-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\metrics-spi\2.26.12\metrics-spi-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\json-utils\2.26.12\json-utils-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\third-party-jackson-core\2.26.12\third-party-jackson-core-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\endpoints-spi\2.26.12\endpoints-spi-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\apache-client\2.26.12\apache-client-2.26.12.jar;C:\Users\stas5\.m2\repository\org\apache\httpcomponents\httpclient\4.5.13\httpclient-4.5.13.jar;C:\Users\stas5\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\stas5\.m2\repository\org\apache\httpcomponents\httpcore\4.4.16\httpcore-4.4.16.jar;C:\Users\stas5\.m2\repository\commons-codec\commons-codec\1.16.1\commons-codec-1.16.1.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\netty-nio-client\2.26.12\netty-nio-client-2.26.12.jar;C:\Users\stas5\.m2\repository\io\netty\netty-codec-http\4.1.110.Final\netty-codec-http-4.1.110.Final.jar;C:\Users\stas5\.m2\repository\io\netty\netty-codec-http2\4.1.110.Final\netty-codec-http2-4.1.110.Final.jar;C:\Users\stas5\.m2\repository\io\netty\netty-codec\4.1.110.Final\netty-codec-4.1.110.Final.jar;C:\Users\stas5\.m2\repository\io\netty\netty-buffer\4.1.110.Final\netty-buffer-4.1.110.Final.jar;C:\Users\stas5\.m2\repository\io\netty\netty-transport-classes-epoll\4.1.110.Final\netty-transport-classes-epoll-4.1.110.Final.jar;C:\Users\stas5\.m2\repository\io\netty\netty-resolver\4.1.110.Final\netty-resolver-4.1.110.Final.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-starter-test\3.3.0\spring-boot-starter-test-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-test\3.3.0\spring-boot-test-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-test-autoconfigure\3.3.0\spring-boot-test-autoconfigure-3.3.0.jar;C:\Users\stas5\.m2\repository\com\jayway\jsonpath\json-path\2.9.0\json-path-2.9.0.jar;C:\Users\stas5\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\4.0.2\jakarta.xml.bind-api-4.0.2.jar;C:\Users\stas5\.m2\repository\jakarta\activation\jakarta.activation-api\2.1.3\jakarta.activation-api-2.1.3.jar;C:\Users\stas5\.m2\repository\net\minidev\json-smart\2.5.1\json-smart-2.5.1.jar;C:\Users\stas5\.m2\repository\net\minidev\accessors-smart\2.5.1\accessors-smart-2.5.1.jar;C:\Users\stas5\.m2\repository\org\ow2\asm\asm\9.6\asm-9.6.jar;C:\Users\stas5\.m2\repository\org\assertj\assertj-core\3.25.3\assertj-core-3.25.3.jar;C:\Users\stas5\.m2\repository\org\awaitility\awaitility\4.2.1\awaitility-4.2.1.jar;C:\Users\stas5\.m2\repository\org\hamcrest\hamcrest\2.2\hamcrest-2.2.jar;C:\Users\stas5\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.2\junit-jupiter-5.10.2.jar;C:\Users\stas5\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\stas5\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\stas5\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\stas5\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\stas5\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.2\junit-jupiter-params-5.10.2.jar;C:\Users\stas5\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\stas5\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;C:\Users\stas5\.m2\repository\org\mockito\mockito-core\5.11.0\mockito-core-5.11.0.jar;C:\Users\stas5\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.16\byte-buddy-agent-1.14.16.jar;C:\Users\stas5\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\stas5\.m2\repository\org\mockito\mockito-junit-jupiter\5.11.0\mockito-junit-jupiter-5.11.0.jar;C:\Users\stas5\.m2\repository\org\skyscreamer\jsonassert\1.5.1\jsonassert-1.5.1.jar;C:\Users\stas5\.m2\repository\com\vaadin\external\google\android-json\0.0.20131108.vaadin1\android-json-0.0.20131108.vaadin1.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-core\6.1.8\spring-core-6.1.8.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-jcl\6.1.8\spring-jcl-6.1.8.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-test\6.1.8\spring-test-6.1.8.jar;C:\Users\stas5\.m2\repository\org\xmlunit\xmlunit-core\2.9.1\xmlunit-core-2.9.1.jar;C:\Users\stas5\.m2\repository\org\springframework\security\spring-security-test\6.3.0\spring-security-test-6.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\security\spring-security-core\6.3.0\spring-security-core-6.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\security\spring-security-crypto\6.3.0\spring-security-crypto-6.3.0.jar;C:\Users\stas5\.m2\repository\org\testcontainers\postgresql\1.20.4\postgresql-1.20.4.jar;C:\Users\stas5\.m2\repository\org\testcontainers\jdbc\1.20.4\jdbc-1.20.4.jar;C:\Users\stas5\.m2\repository\org\testcontainers\database-commons\1.20.4\database-commons-1.20.4.jar;C:\Users\stas5\.m2\repository\org\testcontainers\junit-jupiter\1.20.4\junit-jupiter-1.20.4.jar;C:\Users\stas5\.m2\repository\org\testcontainers\testcontainers\1.20.4\testcontainers-1.20.4.jar;C:\Users\stas5\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\stas5\.m2\repository\org\hamcrest\hamcrest-core\2.2\hamcrest-core-2.2.jar;C:\Users\stas5\.m2\repository\org\apache\commons\commons-compress\1.24.0\commons-compress-1.24.0.jar;C:\Users\stas5\.m2\repository\org\rnorth\duct-tape\duct-tape\1.0.8\duct-tape-1.0.8.jar;C:\Users\stas5\.m2\repository\org\jetbrains\annotations\17.0.0\annotations-17.0.0.jar;C:\Users\stas5\.m2\repository\com\github\docker-java\docker-java-api\3.4.0\docker-java-api-3.4.0.jar;C:\Users\stas5\.m2\repository\com\github\docker-java\docker-java-transport-zerodep\3.4.0\docker-java-transport-zerodep-3.4.0.jar;C:\Users\stas5\.m2\repository\com\github\docker-java\docker-java-transport\3.4.0\docker-java-transport-3.4.0.jar;C:\Users\stas5\.m2\repository\net\java\dev\jna\jna\5.13.0\jna-5.13.0.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\stas5"/>
+    <property name="user.language" value="ru"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2026-01-20"/>
+    <property name="java.home" value="C:\Program Files\Amazon Corretto\jdk21.0.10_7"/>
+    <property name="spring.profiles.active" value="test"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\stas5\Synora-proj\backend"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="FILE_LOG_CHARSET" value="UTF-8"/>
+    <property name="java.awt.headless" value="true"/>
+    <property name="surefire.real.class.path" value="C:\Users\stas5\AppData\Local\Temp\surefire10809322830494055535\surefirebooter-20260412140144960_3.jar"/>
+    <property name="api.version" value="1.44"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="21.0.10+7-LTS"/>
+    <property name="user.name" value="stas5"/>
+    <property name="stdout.encoding" value="Cp1251"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="java.vendor.version" value="Corretto-21.0.10.7.1"/>
+    <property name="localRepository" value="C:\Users\stas5\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://github.com/corretto/corretto-21/issues/"/>
+    <property name="java.io.tmpdir" value="C:\Users\stas5\AppData\Local\Temp\"/>
+    <property name="catalina.home" value="C:\Users\stas5\AppData\Local\Temp\tomcat.0.1996913815210183262"/>
+    <property name="com.zaxxer.hikari.pool_number" value="1"/>
+    <property name="java.version" value="21.0.10"/>
+    <property name="user.dir" value="C:\Users\stas5\Synora-proj\backend"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="PID" value="29892"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="CONSOLE_LOG_CHARSET" value="UTF-8"/>
+    <property name="catalina.base" value="C:\Users\stas5\AppData\Local\Temp\tomcat.0.1996913815210183262"/>
+    <property name="native.encoding" value="Cp1251"/>
+    <property name="java.library.path" value="C:\Program Files\Amazon Corretto\jdk21.0.10_7\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Users\stas5\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\stas5\bin;C:\Users\stas5\AppData\Local\Programs\Microsoft VS Code;C:\Program Files\Amazon Corretto\jdk21.0.10_7\bin;C:\Program Files\Python312\Scripts;C:\Program Files\Python312;C:\Windows\System32\HWAudioDriver;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\Git\cmd;D:\dev\android\Sdk\cmdline-tools\latest\cmdline-tools\bin;C:\Users\stas5\AppData\Local\Android\Sdk\cmdline-tools\latest\bin\platform-tools;C:\Users\stas5\AppData\Local\Android\Sdk\cmdline-tools\latest\bin\cmdline-tools\latest\bin;C:\Users\stas5\AppData\Local\Android\Sdk\cmdline-tools\latest\bin\tools;C:\Users\stas5\AppData\Local\Android\Sdk\cmdline-tools\latest\bin\tools\bin;C:\Users\stas5\AppData\Local\Android\Sdk\cmdline-tools\latest\bin\build-tools\34.0.0;C:\Program Files\nodejs;C:\Program Files\Docker\Docker\resources\bin;C:\Users\stas5\AppData\Local\Microsoft\WindowsApps;C:\Users\stas5\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\stas5\flutter\bin;C:\Users\stas5\flutter\flutter\bin;C:\Users\stas5\.android\cmdline-tools\bin;C:\Users\stas5\AppData\Roaming\npm;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="Cp1251"/>
+    <property name="java.vendor" value="Amazon.com Inc."/>
+    <property name="java.vm.version" value="21.0.10+7-LTS"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="65.0"/>
+    <property name="LOGGED_APPLICATION_NAME" value="[synora-backend] "/>
+  </properties>
+  <testcase name="me_authenticated_returnsUser" classname="com.synora.modules.auth.AuthControllerTest" time="3.521">
+    <system-out><![CDATA[Standard Commons Logging discovery in action with spring-jcl: please remove commons-logging.jar from classpath in order to avoid potential conflicts
+14:01:46.679 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.synora.modules.auth.AuthControllerTest]: AuthControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+14:01:46.968 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.synora.SynoraApplication for test class com.synora.modules.auth.AuthControllerTest
+14:01:47.263 [main] INFO org.testcontainers.images.PullPolicy -- Image pull policy will be performed by: DefaultPullPolicy()
+14:01:47.267 [main] INFO org.testcontainers.utility.ImageNameSubstitutor -- Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+14:01:47.357 [main] INFO org.testcontainers.DockerClientFactory -- Testcontainers version: 1.20.4
+14:01:47.698 [main] INFO org.testcontainers.dockerclient.DockerClientProviderStrategy -- Loaded org.testcontainers.dockerclient.NpipeSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+14:01:48.192 [main] INFO org.testcontainers.dockerclient.DockerClientProviderStrategy -- Found Docker environment with Environment variables, system properties and defaults. Resolved dockerHost=npipe:////./pipe/dockerDesktopLinuxEngine
+14:01:48.200 [main] INFO org.testcontainers.DockerClientFactory -- Docker host IP address is localhost
+14:01:48.229 [main] INFO org.testcontainers.DockerClientFactory -- Connected to docker: 
+  Server Version: 29.3.1
+  API Version: 1.54
+  Operating System: Docker Desktop
+  Total Memory: 7809 MB
+  Labels: 
+    com.docker.desktop.address=npipe://\\.\pipe\docker_cli
+14:01:48.240 [main] INFO org.testcontainers.DockerClientFactory -- Checking the system...
+14:01:48.248 [main] INFO org.testcontainers.DockerClientFactory -- ✔︎ Docker server version should be at least 1.6.0
+14:01:48.390 [main] INFO tc.postgres:16-alpine -- Creating container for image: postgres:16-alpine
+14:01:48.630 [main] INFO tc.testcontainers/ryuk:0.11.0 -- Creating container for image: testcontainers/ryuk:0.11.0
+14:01:48.939 [main] INFO tc.testcontainers/ryuk:0.11.0 -- Container testcontainers/ryuk:0.11.0 is starting: da6f9d643a54f98740e7df06c05cbfe7652b59fab29a3de97dac4afb06729c05
+14:01:49.708 [main] INFO tc.testcontainers/ryuk:0.11.0 -- Container testcontainers/ryuk:0.11.0 started in PT1.0779632S
+14:01:49.939 [main] INFO tc.postgres:16-alpine -- Container postgres:16-alpine is starting: 428f856abe63ba60f2beb9f67e02125bdbb5bbb8cf0c0991f2c4beb42ff94e67
+14:01:53.792 [main] INFO tc.postgres:16-alpine -- Container postgres:16-alpine started in PT5.4018364S
+14:01:53.793 [main] INFO tc.postgres:16-alpine -- Container is started (JDBC URL: jdbc:postgresql://localhost:58656/synora_test?loggerLevel=OFF)
+14:01:53.798 [main] INFO tc.redis:7-alpine -- Creating container for image: redis:7-alpine
+14:01:54.084 [main] INFO tc.redis:7-alpine -- Container redis:7-alpine is starting: 8da5006ddea3f3764a67b958374e90271223f6e338fae6a9a6ccd7bb8089ce74
+14:01:54.766 [main] INFO tc.redis:7-alpine -- Container redis:7-alpine started in PT0.9686817S
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.3.0)
+
+14:01:55.598 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mc.s.modules.auth.AuthControllerTest     &amp#27;[0;39m | none | Starting AuthControllerTest using Java 21.0.10 with PID 29892 (started by stas5 in C:\Users\stas5\Synora-proj\backend)
+14:01:55.598 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mc.s.modules.auth.AuthControllerTest     &amp#27;[0;39m | none | Running with Spring Boot v3.3.0, Spring v6.1.8
+14:01:55.598 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mc.s.modules.auth.AuthControllerTest     &amp#27;[0;39m | none | The following 1 profile is active: "test"
+14:01:58.695 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36m.s.d.r.c.RepositoryConfigurationDelegate&amp#27;[0;39m | none | Multiple Spring Data modules found, entering strict repository configuration mode
+14:01:58.703 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36m.s.d.r.c.RepositoryConfigurationDelegate&amp#27;[0;39m | none | Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+14:01:59.142 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36m.s.d.r.c.RepositoryConfigurationDelegate&amp#27;[0;39m | none | Finished Spring Data repository scanning in 426 ms. Found 19 JPA repository interfaces.
+14:01:59.169 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36m.s.d.r.c.RepositoryConfigurationDelegate&amp#27;[0;39m | none | Multiple Spring Data modules found, entering strict repository configuration mode
+14:01:59.169 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36m.s.d.r.c.RepositoryConfigurationDelegate&amp#27;[0;39m | none | Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+14:01:59.217 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36m.RepositoryConfigurationExtensionSupport&amp#27;[0;39m | none | Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.synora.modules.auth.repository.RefreshTokenRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+14:01:59.217 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36m.RepositoryConfigurationExtensionSupport&amp#27;[0;39m | none | Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.synora.modules.file.repository.FileUploadRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+14:01:59.217 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36m.RepositoryConfigurationExtensionSupport&amp#27;[0;39m | none | Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.synora.modules.message.repository.ChatMemberRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+14:01:59.217 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36m.RepositoryConfigurationExtensionSupport&amp#27;[0;39m | none | Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.synora.modules.message.repository.ChatRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+14:01:59.217 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36m.RepositoryConfigurationExtensionSupport&amp#27;[0;39m | none | Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.synora.modules.message.repository.MessageRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+14:01:59.217 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36m.RepositoryConfigurationExtensionSupport&amp#27;[0;39m | none | Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.synora.modules.notification.repository.NotificationRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+14:01:59.217 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36m.RepositoryConfigurationExtensionSupport&amp#27;[0;39m | none | Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.synora.modules.post.repository.CommentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+14:01:59.217 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36m.RepositoryConfigurationExtensionSupport&amp#27;[0;39m | none | Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.synora.modules.post.repository.PostBookmarkRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+14:01:59.217 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36m.RepositoryConfigurationExtensionSupport&amp#27;[0;39m | none | Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.synora.modules.post.repository.PostLikeRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+14:01:59.217 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36m.RepositoryConfigurationExtensionSupport&amp#27;[0;39m | none | Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.synora.modules.post.repository.PostRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+14:01:59.217 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36m.RepositoryConfigurationExtensionSupport&amp#27;[0;39m | none | Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.synora.modules.post.repository.TagRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+14:01:59.217 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36m.RepositoryConfigurationExtensionSupport&amp#27;[0;39m | none | Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.synora.modules.project.repository.KanbanColumnRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+14:01:59.217 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36m.RepositoryConfigurationExtensionSupport&amp#27;[0;39m | none | Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.synora.modules.project.repository.ProjectMemberRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+14:01:59.217 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36m.RepositoryConfigurationExtensionSupport&amp#27;[0;39m | none | Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.synora.modules.project.repository.ProjectRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+14:01:59.217 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36m.RepositoryConfigurationExtensionSupport&amp#27;[0;39m | none | Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.synora.modules.project.repository.TaskRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+14:01:59.217 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36m.RepositoryConfigurationExtensionSupport&amp#27;[0;39m | none | Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.synora.modules.report.repository.ReportRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+14:01:59.217 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36m.RepositoryConfigurationExtensionSupport&amp#27;[0;39m | none | Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.synora.modules.reputation.repository.ReputationEventRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+14:01:59.217 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36m.RepositoryConfigurationExtensionSupport&amp#27;[0;39m | none | Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.synora.modules.user.repository.UserFollowRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+14:01:59.217 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36m.RepositoryConfigurationExtensionSupport&amp#27;[0;39m | none | Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.synora.modules.user.repository.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+14:01:59.217 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36m.s.d.r.c.RepositoryConfigurationDelegate&amp#27;[0;39m | none | Finished Spring Data repository scanning in 32 ms. Found 0 Redis repository interfaces.
+14:02:01.427 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mo.s.b.w.embedded.tomcat.TomcatWebServer &amp#27;[0;39m | none | Tomcat initialized with port 0 (http)
+14:02:01.476 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mo.apache.catalina.core.StandardService  &amp#27;[0;39m | none | Starting service [Tomcat]
+14:02:01.478 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mo.apache.catalina.core.StandardEngine   &amp#27;[0;39m | none | Starting Servlet engine: [Apache Tomcat/10.1.24]
+14:02:01.656 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mo.a.c.c.C.[Tomcat].[localhost].[/]      &amp#27;[0;39m | none | Initializing Spring embedded WebApplicationContext
+14:02:01.656 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mw.s.c.ServletWebServerApplicationContext&amp#27;[0;39m | none | Root WebApplicationContext: initialization completed in 6027 ms
+Standard Commons Logging discovery in action with spring-jcl: please remove commons-logging.jar from classpath in order to avoid potential conflicts
+14:02:03.127 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.zaxxer.hikari.HikariDataSource      &amp#27;[0;39m | none | HikariPool-1 - Starting...
+14:02:03.751 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.zaxxer.hikari.pool.HikariPool       &amp#27;[0;39m | none | HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1b897ffb
+14:02:03.757 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.zaxxer.hikari.HikariDataSource      &amp#27;[0;39m | none | HikariPool-1 - Start completed.
+14:02:03.892 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36morg.flywaydb.core.FlywayExecutor        &amp#27;[0;39m | none | Database: jdbc:postgresql://localhost:58656/synora_test (PostgreSQL 16.13)
+14:02:04.135 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mo.f.c.i.s.JdbcTableSchemaHistory        &amp#27;[0;39m | none | Schema history table "public"."flyway_schema_history" does not exist yet
+14:02:04.153 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mo.f.core.internal.command.DbValidate    &amp#27;[0;39m | none | Successfully validated 7 migrations (execution time 00:00.149s)
+14:02:04.263 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mo.f.c.i.s.JdbcTableSchemaHistory        &amp#27;[0;39m | none | Creating Schema History table "public"."flyway_schema_history" ...
+14:02:04.423 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mo.f.core.internal.command.DbMigrate     &amp#27;[0;39m | none | Current version of schema "public": << Empty Schema >>
+14:02:04.469 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mo.f.core.internal.command.DbMigrate     &amp#27;[0;39m | none | Migrating schema "public" to version "1 - create users"
+14:02:04.714 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mo.f.core.internal.command.DbMigrate     &amp#27;[0;39m | none | Migrating schema "public" to version "2 - create posts"
+14:02:04.880 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mo.f.core.internal.command.DbMigrate     &amp#27;[0;39m | none | Migrating schema "public" to version "3 - create projects"
+14:02:05.069 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mo.f.core.internal.command.DbMigrate     &amp#27;[0;39m | none | Migrating schema "public" to version "4 - create messages"
+14:02:05.183 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mo.f.core.internal.command.DbMigrate     &amp#27;[0;39m | none | Migrating schema "public" to version "5 - create notifications"
+14:02:05.304 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mo.f.core.internal.command.DbMigrate     &amp#27;[0;39m | none | Migrating schema "public" to version "6 - create files reputation"
+14:02:05.463 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mo.f.core.internal.command.DbMigrate     &amp#27;[0;39m | none | Migrating schema "public" to version "7 - seed data"
+14:02:05.521 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mo.f.core.internal.command.DbMigrate     &amp#27;[0;39m | none | Successfully applied 7 migrations to schema "public", now at version v7 (execution time 00:00.724s)
+14:02:05.880 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mo.hibernate.jpa.internal.util.LogHelper &amp#27;[0;39m | none | HHH000204: Processing PersistenceUnitInfo [name: default]
+14:02:06.072 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.Version                   &amp#27;[0;39m | none | HHH000412: Hibernate ORM core version 6.5.2.Final
+14:02:06.179 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mo.h.c.internal.RegionFactoryInitiator   &amp#27;[0;39m | none | HHH000026: Second-level cache disabled
+14:02:06.827 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mo.s.o.j.p.SpringPersistenceUnitInfo     &amp#27;[0;39m | none | No LoadTimeWeaver setup: ignoring JPA class transformer
+14:02:06.953 &amp#27;[31mWARN &amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.orm.deprecation           &amp#27;[0;39m | none | HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+14:02:09.676 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mo.h.e.t.j.p.i.JtaPlatformInitiator      &amp#27;[0;39m | none | HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+14:02:09.864 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mj.LocalContainerEntityManagerFactoryBean&amp#27;[0;39m | none | Initialized JPA EntityManagerFactory for persistence unit 'default'
+14:02:10.367 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mo.s.d.j.r.query.QueryEnhancerFactory    &amp#27;[0;39m | none | Hibernate is in classpath; If applicable, HQL parser will be used.
+14:02:11.405 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | none | Filter 'requestLoggingFilter' configured for use
+14:02:11.406 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.JwtAuthFilter         &amp#27;[0;39m | none | Filter 'jwtAuthFilter' configured for use
+14:02:15.644 &amp#27;[31mWARN &amp#27;[0;39m [           main] &amp#27;[36mJpaBaseConfiguration$JpaWebConfiguration&amp#27;[0;39m | none | spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+14:02:15.785 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36meAuthenticationProviderManagerConfigurer&amp#27;[0;39m | none | Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+14:02:15.785 &amp#27;[31mWARN &amp#27;[0;39m [           main] &amp#27;[36mr$InitializeUserDetailsManagerConfigurer&amp#27;[0;39m | none | Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+14:02:16.905 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mo.s.b.a.e.web.EndpointLinksResolver     &amp#27;[0;39m | none | Exposing 4 endpoints beneath base path '/actuator'
+14:02:17.118 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mo.s.s.web.DefaultSecurityFilterChain    &amp#27;[0;39m | none | Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@24102fec, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@734c0274, org.springframework.security.web.context.SecurityContextHolderFilter@7f71d07f, org.springframework.security.web.header.HeaderWriterFilter@96f0210, org.springframework.web.filter.CorsFilter@7f38646d, org.springframework.security.web.authentication.logout.LogoutFilter@1f001021, com.synora.config.JwtAuthFilter@516ffa73, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3c721652, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@e155391, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@122b93ca, org.springframework.security.web.session.SessionManagementFilter@58f8b0b6, org.springframework.security.web.access.ExceptionTranslationFilter@2b3a4b06, org.springframework.security.web.access.intercept.AuthorizationFilter@1d7630cb]
+14:02:18.326 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | none | Filter 'requestLoggingFilter' configured for use
+14:02:18.326 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.JwtAuthFilter         &amp#27;[0;39m | none | Filter 'jwtAuthFilter' configured for use
+14:02:18.328 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mo.a.c.c.C.[Tomcat].[localhost].[/]      &amp#27;[0;39m | none | Initializing Spring TestDispatcherServlet ''
+14:02:18.328 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mo.s.t.web.servlet.TestDispatcherServlet &amp#27;[0;39m | none | Initializing Servlet ''
+14:02:18.330 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mo.s.t.web.servlet.TestDispatcherServlet &amp#27;[0;39m | none | Completed initialization in 2 ms
+14:02:18.521 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mo.s.b.w.embedded.tomcat.TomcatWebServer &amp#27;[0;39m | none | Tomcat started on port 34577 (http) with context path '/'
+14:02:18.525 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mo.s.m.s.b.SimpleBrokerMessageHandler    &amp#27;[0;39m | none | Starting...
+14:02:18.525 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mo.s.m.s.b.SimpleBrokerMessageHandler    &amp#27;[0;39m | none | BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@2ce9de5]]
+14:02:18.525 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mo.s.m.s.b.SimpleBrokerMessageHandler    &amp#27;[0;39m | none | Started.
+14:02:18.550 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mc.s.modules.auth.AuthControllerTest     &amp#27;[0;39m | none | Started AuthControllerTest in 23.726 seconds (process running for 33.317)
+14:02:20.264 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 6f74e98c | Securing POST /api/v1/auth/register
+14:02:20.304 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.s.w.a.AnonymousAuthenticationFilter &amp#27;[0;39m | 6f74e98c | Set SecurityContextHolder to anonymous SecurityContext
+14:02:20.320 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 6f74e98c | Secured POST /api/v1/auth/register
+14:02:20.760 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 6f74e98c | 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.username=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.username=? 
+    fetch
+        first ? rows only
+14:02:20.773 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 6f74e98c | 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.email=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.email=? 
+    fetch
+        first ? rows only
+14:02:21.856 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 6f74e98c | 
+    insert 
+    into
+        users
+        (is_active, avatar_url, is_banned, bio, created_at, display_name, email, github_url, location, password_hash, reputation_score, role, updated_at, username, website_url, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        users
+        (is_active, avatar_url, is_banned, bio, created_at, display_name, email, github_url, location, password_hash, reputation_score, role, updated_at, username, website_url, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+14:02:21.875 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 6f74e98c | 
+    insert 
+    into
+        refresh_tokens
+        (created_at, expires_at, token, user_id) 
+    values
+        (?, ?, ?, ?) 
+    returning id
+Hibernate: 
+    insert 
+    into
+        refresh_tokens
+        (created_at, expires_at, token, user_id) 
+    values
+        (?, ?, ?, ?) 
+    returning id
+14:02:21.997 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | 6f74e98c | POST /api/v1/auth/register 201 1785ms
+14:02:22.034 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 0a5ccd76 | Securing GET /api/v1/auth/me
+14:02:22.179 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 0a5ccd76 | 
+    select
+        u1_0.id,
+        u1_0.is_active,
+        u1_0.avatar_url,
+        u1_0.is_banned,
+        u1_0.bio,
+        u1_0.created_at,
+        u1_0.display_name,
+        u1_0.email,
+        u1_0.github_url,
+        u1_0.location,
+        u1_0.password_hash,
+        u1_0.reputation_score,
+        u1_0.role,
+        u1_0.updated_at,
+        u1_0.username,
+        u1_0.website_url 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.is_active,
+        u1_0.avatar_url,
+        u1_0.is_banned,
+        u1_0.bio,
+        u1_0.created_at,
+        u1_0.display_name,
+        u1_0.email,
+        u1_0.github_url,
+        u1_0.location,
+        u1_0.password_hash,
+        u1_0.reputation_score,
+        u1_0.role,
+        u1_0.updated_at,
+        u1_0.username,
+        u1_0.website_url 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+14:02:22.213 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 0a5ccd76 | Secured GET /api/v1/auth/me
+14:02:22.235 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | 0a5ccd76 | GET /api/v1/auth/me 200 203ms
+]]></system-out>
+    <system-err><![CDATA[WARNING: A Java agent has been loaded dynamically (C:\Users\stas5\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.16\byte-buddy-agent-1.14.16.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+]]></system-err>
+  </testcase>
+  <testcase name="login_success" classname="com.synora.modules.auth.AuthControllerTest" time="1.629">
+    <system-out><![CDATA[14:02:22.393 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | f348d4d1 | Securing POST /api/v1/auth/register
+14:02:22.393 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.s.w.a.AnonymousAuthenticationFilter &amp#27;[0;39m | f348d4d1 | Set SecurityContextHolder to anonymous SecurityContext
+14:02:22.393 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | f348d4d1 | Secured POST /api/v1/auth/register
+14:02:22.393 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | f348d4d1 | 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.username=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.username=? 
+    fetch
+        first ? rows only
+14:02:22.411 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | f348d4d1 | 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.email=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.email=? 
+    fetch
+        first ? rows only
+14:02:23.160 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | f348d4d1 | 
+    insert 
+    into
+        users
+        (is_active, avatar_url, is_banned, bio, created_at, display_name, email, github_url, location, password_hash, reputation_score, role, updated_at, username, website_url, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        users
+        (is_active, avatar_url, is_banned, bio, created_at, display_name, email, github_url, location, password_hash, reputation_score, role, updated_at, username, website_url, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+14:02:23.172 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | f348d4d1 | 
+    insert 
+    into
+        refresh_tokens
+        (created_at, expires_at, token, user_id) 
+    values
+        (?, ?, ?, ?) 
+    returning id
+Hibernate: 
+    insert 
+    into
+        refresh_tokens
+        (created_at, expires_at, token, user_id) 
+    values
+        (?, ?, ?, ?) 
+    returning id
+14:02:23.253 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | f348d4d1 | POST /api/v1/auth/register 201 868ms
+14:02:23.257 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 0ce0ed7f | Securing POST /api/v1/auth/login
+14:02:23.258 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.s.w.a.AnonymousAuthenticationFilter &amp#27;[0;39m | 0ce0ed7f | Set SecurityContextHolder to anonymous SecurityContext
+14:02:23.258 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 0ce0ed7f | Secured POST /api/v1/auth/login
+14:02:23.274 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 0ce0ed7f | 
+    select
+        u1_0.id,
+        u1_0.is_active,
+        u1_0.avatar_url,
+        u1_0.is_banned,
+        u1_0.bio,
+        u1_0.created_at,
+        u1_0.display_name,
+        u1_0.email,
+        u1_0.github_url,
+        u1_0.location,
+        u1_0.password_hash,
+        u1_0.reputation_score,
+        u1_0.role,
+        u1_0.updated_at,
+        u1_0.username,
+        u1_0.website_url 
+    from
+        users u1_0 
+    where
+        u1_0.username=? 
+        or u1_0.email=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.is_active,
+        u1_0.avatar_url,
+        u1_0.is_banned,
+        u1_0.bio,
+        u1_0.created_at,
+        u1_0.display_name,
+        u1_0.email,
+        u1_0.github_url,
+        u1_0.location,
+        u1_0.password_hash,
+        u1_0.reputation_score,
+        u1_0.role,
+        u1_0.updated_at,
+        u1_0.username,
+        u1_0.website_url 
+    from
+        users u1_0 
+    where
+        u1_0.username=? 
+        or u1_0.email=?
+14:02:23.988 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 0ce0ed7f | 
+    insert 
+    into
+        refresh_tokens
+        (created_at, expires_at, token, user_id) 
+    values
+        (?, ?, ?, ?) 
+    returning id
+Hibernate: 
+    insert 
+    into
+        refresh_tokens
+        (created_at, expires_at, token, user_id) 
+    values
+        (?, ?, ?, ?) 
+    returning id
+14:02:24.001 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | 0ce0ed7f | POST /api/v1/auth/login 200 745ms
+]]></system-out>
+  </testcase>
+  <testcase name="register_invalidInput_returns400" classname="com.synora.modules.auth.AuthControllerTest" time="0.035">
+    <system-out><![CDATA[14:02:24.014 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 3cf575f2 | Securing POST /api/v1/auth/register
+14:02:24.014 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.s.w.a.AnonymousAuthenticationFilter &amp#27;[0;39m | 3cf575f2 | Set SecurityContextHolder to anonymous SecurityContext
+14:02:24.014 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 3cf575f2 | Secured POST /api/v1/auth/register
+14:02:24.045 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | 3cf575f2 | POST /api/v1/auth/register 400 31ms
+]]></system-out>
+  </testcase>
+  <testcase name="refresh_invalidToken_returns401" classname="com.synora.modules.auth.AuthControllerTest" time="0.03">
+    <system-out><![CDATA[14:02:24.054 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | ba64d164 | Securing POST /api/v1/auth/refresh
+14:02:24.054 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.s.w.a.AnonymousAuthenticationFilter &amp#27;[0;39m | ba64d164 | Set SecurityContextHolder to anonymous SecurityContext
+14:02:24.054 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | ba64d164 | Secured POST /api/v1/auth/refresh
+14:02:24.061 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | ba64d164 | 
+    select
+        rt1_0.id,
+        rt1_0.created_at,
+        rt1_0.expires_at,
+        rt1_0.token,
+        rt1_0.user_id 
+    from
+        refresh_tokens rt1_0 
+    where
+        rt1_0.token=?
+Hibernate: 
+    select
+        rt1_0.id,
+        rt1_0.created_at,
+        rt1_0.expires_at,
+        rt1_0.token,
+        rt1_0.user_id 
+    from
+        refresh_tokens rt1_0 
+    where
+        rt1_0.token=?
+14:02:24.075 &amp#27;[31mWARN &amp#27;[0;39m [           main] &amp#27;[36mc.s.s.exception.GlobalExceptionHandler  &amp#27;[0;39m | ba64d164 | AppException [UNAUTHORIZED]: Refresh token not found
+14:02:24.078 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | ba64d164 | POST /api/v1/auth/refresh 401 24ms
+]]></system-out>
+  </testcase>
+  <testcase name="register_success" classname="com.synora.modules.auth.AuthControllerTest" time="0.438">
+    <system-out><![CDATA[14:02:24.087 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 880da214 | Securing POST /api/v1/auth/register
+14:02:24.087 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.s.w.a.AnonymousAuthenticationFilter &amp#27;[0;39m | 880da214 | Set SecurityContextHolder to anonymous SecurityContext
+14:02:24.087 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 880da214 | Secured POST /api/v1/auth/register
+14:02:24.087 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 880da214 | 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.username=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.username=? 
+    fetch
+        first ? rows only
+14:02:24.100 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 880da214 | 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.email=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.email=? 
+    fetch
+        first ? rows only
+14:02:24.492 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 880da214 | 
+    insert 
+    into
+        users
+        (is_active, avatar_url, is_banned, bio, created_at, display_name, email, github_url, location, password_hash, reputation_score, role, updated_at, username, website_url, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        users
+        (is_active, avatar_url, is_banned, bio, created_at, display_name, email, github_url, location, password_hash, reputation_score, role, updated_at, username, website_url, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+14:02:24.509 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 880da214 | 
+    insert 
+    into
+        refresh_tokens
+        (created_at, expires_at, token, user_id) 
+    values
+        (?, ?, ?, ?) 
+    returning id
+Hibernate: 
+    insert 
+    into
+        refresh_tokens
+        (created_at, expires_at, token, user_id) 
+    values
+        (?, ?, ?, ?) 
+    returning id
+14:02:24.517 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | 880da214 | POST /api/v1/auth/register 201 430ms
+]]></system-out>
+  </testcase>
+  <testcase name="refresh_tokenRotation_oldTokenInvalid" classname="com.synora.modules.auth.AuthControllerTest" time="0.583">
+    <system-out><![CDATA[14:02:24.528 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 73610764 | Securing POST /api/v1/auth/register
+14:02:24.529 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.s.w.a.AnonymousAuthenticationFilter &amp#27;[0;39m | 73610764 | Set SecurityContextHolder to anonymous SecurityContext
+14:02:24.529 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 73610764 | Secured POST /api/v1/auth/register
+14:02:24.531 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 73610764 | 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.username=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.username=? 
+    fetch
+        first ? rows only
+14:02:24.538 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 73610764 | 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.email=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.email=? 
+    fetch
+        first ? rows only
+14:02:24.993 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 73610764 | 
+    insert 
+    into
+        users
+        (is_active, avatar_url, is_banned, bio, created_at, display_name, email, github_url, location, password_hash, reputation_score, role, updated_at, username, website_url, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        users
+        (is_active, avatar_url, is_banned, bio, created_at, display_name, email, github_url, location, password_hash, reputation_score, role, updated_at, username, website_url, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+14:02:25.003 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 73610764 | 
+    insert 
+    into
+        refresh_tokens
+        (created_at, expires_at, token, user_id) 
+    values
+        (?, ?, ?, ?) 
+    returning id
+Hibernate: 
+    insert 
+    into
+        refresh_tokens
+        (created_at, expires_at, token, user_id) 
+    values
+        (?, ?, ?, ?) 
+    returning id
+14:02:25.017 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | 73610764 | POST /api/v1/auth/register 201 490ms
+14:02:25.022 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | fe940687 | Securing POST /api/v1/auth/refresh
+14:02:25.022 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.s.w.a.AnonymousAuthenticationFilter &amp#27;[0;39m | fe940687 | Set SecurityContextHolder to anonymous SecurityContext
+14:02:25.022 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | fe940687 | Secured POST /api/v1/auth/refresh
+14:02:25.029 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | fe940687 | 
+    select
+        rt1_0.id,
+        rt1_0.created_at,
+        rt1_0.expires_at,
+        rt1_0.token,
+        rt1_0.user_id 
+    from
+        refresh_tokens rt1_0 
+    where
+        rt1_0.token=?
+Hibernate: 
+    select
+        rt1_0.id,
+        rt1_0.created_at,
+        rt1_0.expires_at,
+        rt1_0.token,
+        rt1_0.user_id 
+    from
+        refresh_tokens rt1_0 
+    where
+        rt1_0.token=?
+14:02:25.060 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | fe940687 | 
+    select
+        u1_0.id,
+        u1_0.is_active,
+        u1_0.avatar_url,
+        u1_0.is_banned,
+        u1_0.bio,
+        u1_0.created_at,
+        u1_0.display_name,
+        u1_0.email,
+        u1_0.github_url,
+        u1_0.location,
+        u1_0.password_hash,
+        u1_0.reputation_score,
+        u1_0.role,
+        u1_0.updated_at,
+        u1_0.username,
+        u1_0.website_url 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.is_active,
+        u1_0.avatar_url,
+        u1_0.is_banned,
+        u1_0.bio,
+        u1_0.created_at,
+        u1_0.display_name,
+        u1_0.email,
+        u1_0.github_url,
+        u1_0.location,
+        u1_0.password_hash,
+        u1_0.reputation_score,
+        u1_0.role,
+        u1_0.updated_at,
+        u1_0.username,
+        u1_0.website_url 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+14:02:25.065 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | fe940687 | 
+    insert 
+    into
+        refresh_tokens
+        (created_at, expires_at, token, user_id) 
+    values
+        (?, ?, ?, ?) 
+    returning id
+Hibernate: 
+    insert 
+    into
+        refresh_tokens
+        (created_at, expires_at, token, user_id) 
+    values
+        (?, ?, ?, ?) 
+    returning id
+14:02:25.078 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | fe940687 | 
+    delete 
+    from
+        refresh_tokens 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        refresh_tokens 
+    where
+        id=?
+14:02:25.087 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | fe940687 | POST /api/v1/auth/refresh 200 67ms
+14:02:25.089 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 863151de | Securing POST /api/v1/auth/refresh
+14:02:25.089 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.s.w.a.AnonymousAuthenticationFilter &amp#27;[0;39m | 863151de | Set SecurityContextHolder to anonymous SecurityContext
+14:02:25.090 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 863151de | Secured POST /api/v1/auth/refresh
+14:02:25.092 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 863151de | 
+    select
+        rt1_0.id,
+        rt1_0.created_at,
+        rt1_0.expires_at,
+        rt1_0.token,
+        rt1_0.user_id 
+    from
+        refresh_tokens rt1_0 
+    where
+        rt1_0.token=?
+Hibernate: 
+    select
+        rt1_0.id,
+        rt1_0.created_at,
+        rt1_0.expires_at,
+        rt1_0.token,
+        rt1_0.user_id 
+    from
+        refresh_tokens rt1_0 
+    where
+        rt1_0.token=?
+14:02:25.100 &amp#27;[31mWARN &amp#27;[0;39m [           main] &amp#27;[36mc.s.s.exception.GlobalExceptionHandler  &amp#27;[0;39m | 863151de | AppException [UNAUTHORIZED]: Refresh token not found
+14:02:25.101 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | 863151de | POST /api/v1/auth/refresh 401 13ms
+]]></system-out>
+  </testcase>
+  <testcase name="me_unauthenticated_returns401" classname="com.synora.modules.auth.AuthControllerTest" time="0.019">
+    <system-out><![CDATA[14:02:25.115 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 8f3a94f0 | Securing GET /api/v1/auth/me
+14:02:25.115 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.s.w.a.AnonymousAuthenticationFilter &amp#27;[0;39m | 8f3a94f0 | Set SecurityContextHolder to anonymous SecurityContext
+14:02:25.115 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | 8f3a94f0 | GET /api/v1/auth/me 401 4ms
+]]></system-out>
+  </testcase>
+  <testcase name="register_duplicateUsername_returns409" classname="com.synora.modules.auth.AuthControllerTest" time="0.593">
+    <system-out><![CDATA[14:02:25.133 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | ecbd0699 | Securing POST /api/v1/auth/register
+14:02:25.133 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.s.w.a.AnonymousAuthenticationFilter &amp#27;[0;39m | ecbd0699 | Set SecurityContextHolder to anonymous SecurityContext
+14:02:25.133 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | ecbd0699 | Secured POST /api/v1/auth/register
+14:02:25.141 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | ecbd0699 | 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.username=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.username=? 
+    fetch
+        first ? rows only
+14:02:25.150 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | ecbd0699 | 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.email=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.email=? 
+    fetch
+        first ? rows only
+14:02:25.573 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | ecbd0699 | 
+    insert 
+    into
+        users
+        (is_active, avatar_url, is_banned, bio, created_at, display_name, email, github_url, location, password_hash, reputation_score, role, updated_at, username, website_url, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        users
+        (is_active, avatar_url, is_banned, bio, created_at, display_name, email, github_url, location, password_hash, reputation_score, role, updated_at, username, website_url, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+14:02:25.616 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | ecbd0699 | 
+    insert 
+    into
+        refresh_tokens
+        (created_at, expires_at, token, user_id) 
+    values
+        (?, ?, ?, ?) 
+    returning id
+Hibernate: 
+    insert 
+    into
+        refresh_tokens
+        (created_at, expires_at, token, user_id) 
+    values
+        (?, ?, ?, ?) 
+    returning id
+14:02:25.677 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | ecbd0699 | POST /api/v1/auth/register 201 544ms
+14:02:25.679 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 876be135 | Securing POST /api/v1/auth/register
+14:02:25.680 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.s.w.a.AnonymousAuthenticationFilter &amp#27;[0;39m | 876be135 | Set SecurityContextHolder to anonymous SecurityContext
+14:02:25.680 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 876be135 | Secured POST /api/v1/auth/register
+14:02:25.684 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 876be135 | 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.username=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.username=? 
+    fetch
+        first ? rows only
+14:02:25.715 &amp#27;[31mWARN &amp#27;[0;39m [           main] &amp#27;[36mc.s.s.exception.GlobalExceptionHandler  &amp#27;[0;39m | 876be135 | AppException [CONFLICT]: Username already taken: user_97fef8c9
+14:02:25.717 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | 876be135 | POST /api/v1/auth/register 409 38ms
+]]></system-out>
+  </testcase>
+  <testcase name="login_wrongPassword_returns401" classname="com.synora.modules.auth.AuthControllerTest" time="1.253">
+    <system-out><![CDATA[14:02:25.726 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | b4bbde65 | Securing POST /api/v1/auth/register
+14:02:25.727 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.s.w.a.AnonymousAuthenticationFilter &amp#27;[0;39m | b4bbde65 | Set SecurityContextHolder to anonymous SecurityContext
+14:02:25.727 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | b4bbde65 | Secured POST /api/v1/auth/register
+14:02:25.729 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | b4bbde65 | 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.username=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.username=? 
+    fetch
+        first ? rows only
+14:02:25.743 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | b4bbde65 | 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.email=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.email=? 
+    fetch
+        first ? rows only
+14:02:26.394 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | b4bbde65 | 
+    insert 
+    into
+        users
+        (is_active, avatar_url, is_banned, bio, created_at, display_name, email, github_url, location, password_hash, reputation_score, role, updated_at, username, website_url, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        users
+        (is_active, avatar_url, is_banned, bio, created_at, display_name, email, github_url, location, password_hash, reputation_score, role, updated_at, username, website_url, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+14:02:26.401 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | b4bbde65 | 
+    insert 
+    into
+        refresh_tokens
+        (created_at, expires_at, token, user_id) 
+    values
+        (?, ?, ?, ?) 
+    returning id
+Hibernate: 
+    insert 
+    into
+        refresh_tokens
+        (created_at, expires_at, token, user_id) 
+    values
+        (?, ?, ?, ?) 
+    returning id
+14:02:26.412 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | b4bbde65 | POST /api/v1/auth/register 201 688ms
+14:02:26.415 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 3a52e16e | Securing POST /api/v1/auth/login
+14:02:26.415 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.s.w.a.AnonymousAuthenticationFilter &amp#27;[0;39m | 3a52e16e | Set SecurityContextHolder to anonymous SecurityContext
+14:02:26.416 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 3a52e16e | Secured POST /api/v1/auth/login
+14:02:26.416 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 3a52e16e | 
+    select
+        u1_0.id,
+        u1_0.is_active,
+        u1_0.avatar_url,
+        u1_0.is_banned,
+        u1_0.bio,
+        u1_0.created_at,
+        u1_0.display_name,
+        u1_0.email,
+        u1_0.github_url,
+        u1_0.location,
+        u1_0.password_hash,
+        u1_0.reputation_score,
+        u1_0.role,
+        u1_0.updated_at,
+        u1_0.username,
+        u1_0.website_url 
+    from
+        users u1_0 
+    where
+        u1_0.username=? 
+        or u1_0.email=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.is_active,
+        u1_0.avatar_url,
+        u1_0.is_banned,
+        u1_0.bio,
+        u1_0.created_at,
+        u1_0.display_name,
+        u1_0.email,
+        u1_0.github_url,
+        u1_0.location,
+        u1_0.password_hash,
+        u1_0.reputation_score,
+        u1_0.role,
+        u1_0.updated_at,
+        u1_0.username,
+        u1_0.website_url 
+    from
+        users u1_0 
+    where
+        u1_0.username=? 
+        or u1_0.email=?
+14:02:26.970 &amp#27;[31mWARN &amp#27;[0;39m [           main] &amp#27;[36mc.s.s.exception.GlobalExceptionHandler  &amp#27;[0;39m | 3a52e16e | AppException [UNAUTHORIZED]: Invalid credentials
+14:02:26.971 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | 3a52e16e | POST /api/v1/auth/login 401 557ms
+]]></system-out>
+  </testcase>
+  <testcase name="logout_invalidatesRefreshToken" classname="com.synora.modules.auth.AuthControllerTest" time="0.686">
+    <system-out><![CDATA[14:02:26.980 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 8a6c7f6f | Securing POST /api/v1/auth/register
+14:02:26.981 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.s.w.a.AnonymousAuthenticationFilter &amp#27;[0;39m | 8a6c7f6f | Set SecurityContextHolder to anonymous SecurityContext
+14:02:26.981 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 8a6c7f6f | Secured POST /api/v1/auth/register
+14:02:26.981 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 8a6c7f6f | 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.username=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.username=? 
+    fetch
+        first ? rows only
+14:02:26.991 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 8a6c7f6f | 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.email=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.email=? 
+    fetch
+        first ? rows only
+14:02:27.511 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 8a6c7f6f | 
+    insert 
+    into
+        users
+        (is_active, avatar_url, is_banned, bio, created_at, display_name, email, github_url, location, password_hash, reputation_score, role, updated_at, username, website_url, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        users
+        (is_active, avatar_url, is_banned, bio, created_at, display_name, email, github_url, location, password_hash, reputation_score, role, updated_at, username, website_url, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+14:02:27.545 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 8a6c7f6f | 
+    insert 
+    into
+        refresh_tokens
+        (created_at, expires_at, token, user_id) 
+    values
+        (?, ?, ?, ?) 
+    returning id
+Hibernate: 
+    insert 
+    into
+        refresh_tokens
+        (created_at, expires_at, token, user_id) 
+    values
+        (?, ?, ?, ?) 
+    returning id
+14:02:27.563 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | 8a6c7f6f | POST /api/v1/auth/register 201 584ms
+14:02:27.563 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | f3d60e0c | Securing POST /api/v1/auth/logout
+14:02:27.569 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | f3d60e0c | 
+    select
+        u1_0.id,
+        u1_0.is_active,
+        u1_0.avatar_url,
+        u1_0.is_banned,
+        u1_0.bio,
+        u1_0.created_at,
+        u1_0.display_name,
+        u1_0.email,
+        u1_0.github_url,
+        u1_0.location,
+        u1_0.password_hash,
+        u1_0.reputation_score,
+        u1_0.role,
+        u1_0.updated_at,
+        u1_0.username,
+        u1_0.website_url 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.is_active,
+        u1_0.avatar_url,
+        u1_0.is_banned,
+        u1_0.bio,
+        u1_0.created_at,
+        u1_0.display_name,
+        u1_0.email,
+        u1_0.github_url,
+        u1_0.location,
+        u1_0.password_hash,
+        u1_0.reputation_score,
+        u1_0.role,
+        u1_0.updated_at,
+        u1_0.username,
+        u1_0.website_url 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+14:02:27.589 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | f3d60e0c | Secured POST /api/v1/auth/logout
+14:02:27.605 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | f3d60e0c | 
+    delete 
+    from
+        refresh_tokens rt1_0 
+    where
+        rt1_0.user_id=?
+Hibernate: 
+    delete 
+    from
+        refresh_tokens rt1_0 
+    where
+        rt1_0.user_id=?
+14:02:27.628 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | f3d60e0c | POST /api/v1/auth/logout 200 65ms
+14:02:27.628 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 0333e4ee | Securing POST /api/v1/auth/refresh
+14:02:27.628 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.s.w.a.AnonymousAuthenticationFilter &amp#27;[0;39m | 0333e4ee | Set SecurityContextHolder to anonymous SecurityContext
+14:02:27.628 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 0333e4ee | Secured POST /api/v1/auth/refresh
+14:02:27.628 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 0333e4ee | 
+    select
+        rt1_0.id,
+        rt1_0.created_at,
+        rt1_0.expires_at,
+        rt1_0.token,
+        rt1_0.user_id 
+    from
+        refresh_tokens rt1_0 
+    where
+        rt1_0.token=?
+Hibernate: 
+    select
+        rt1_0.id,
+        rt1_0.created_at,
+        rt1_0.expires_at,
+        rt1_0.token,
+        rt1_0.user_id 
+    from
+        refresh_tokens rt1_0 
+    where
+        rt1_0.token=?
+14:02:27.661 &amp#27;[31mWARN &amp#27;[0;39m [           main] &amp#27;[36mc.s.s.exception.GlobalExceptionHandler  &amp#27;[0;39m | 0333e4ee | AppException [UNAUTHORIZED]: Refresh token not found
+14:02:27.661 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | 0333e4ee | POST /api/v1/auth/refresh 401 33ms
+]]></system-out>
+  </testcase>
+  <testcase name="refresh_success" classname="com.synora.modules.auth.AuthControllerTest" time="0.588">
+    <system-out><![CDATA[14:02:27.670 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 13b0bca6 | Securing POST /api/v1/auth/register
+14:02:27.670 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.s.w.a.AnonymousAuthenticationFilter &amp#27;[0;39m | 13b0bca6 | Set SecurityContextHolder to anonymous SecurityContext
+14:02:27.670 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 13b0bca6 | Secured POST /api/v1/auth/register
+14:02:27.675 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 13b0bca6 | 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.username=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.username=? 
+    fetch
+        first ? rows only
+14:02:27.682 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 13b0bca6 | 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.email=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.email=? 
+    fetch
+        first ? rows only
+14:02:28.199 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 13b0bca6 | 
+    insert 
+    into
+        users
+        (is_active, avatar_url, is_banned, bio, created_at, display_name, email, github_url, location, password_hash, reputation_score, role, updated_at, username, website_url, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        users
+        (is_active, avatar_url, is_banned, bio, created_at, display_name, email, github_url, location, password_hash, reputation_score, role, updated_at, username, website_url, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+14:02:28.206 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 13b0bca6 | 
+    insert 
+    into
+        refresh_tokens
+        (created_at, expires_at, token, user_id) 
+    values
+        (?, ?, ?, ?) 
+    returning id
+Hibernate: 
+    insert 
+    into
+        refresh_tokens
+        (created_at, expires_at, token, user_id) 
+    values
+        (?, ?, ?, ?) 
+    returning id
+14:02:28.214 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | 13b0bca6 | POST /api/v1/auth/register 201 545ms
+14:02:28.215 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 44ebf52e | Securing POST /api/v1/auth/refresh
+14:02:28.216 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.s.w.a.AnonymousAuthenticationFilter &amp#27;[0;39m | 44ebf52e | Set SecurityContextHolder to anonymous SecurityContext
+14:02:28.217 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 44ebf52e | Secured POST /api/v1/auth/refresh
+14:02:28.220 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 44ebf52e | 
+    select
+        rt1_0.id,
+        rt1_0.created_at,
+        rt1_0.expires_at,
+        rt1_0.token,
+        rt1_0.user_id 
+    from
+        refresh_tokens rt1_0 
+    where
+        rt1_0.token=?
+Hibernate: 
+    select
+        rt1_0.id,
+        rt1_0.created_at,
+        rt1_0.expires_at,
+        rt1_0.token,
+        rt1_0.user_id 
+    from
+        refresh_tokens rt1_0 
+    where
+        rt1_0.token=?
+14:02:28.224 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 44ebf52e | 
+    select
+        u1_0.id,
+        u1_0.is_active,
+        u1_0.avatar_url,
+        u1_0.is_banned,
+        u1_0.bio,
+        u1_0.created_at,
+        u1_0.display_name,
+        u1_0.email,
+        u1_0.github_url,
+        u1_0.location,
+        u1_0.password_hash,
+        u1_0.reputation_score,
+        u1_0.role,
+        u1_0.updated_at,
+        u1_0.username,
+        u1_0.website_url 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.is_active,
+        u1_0.avatar_url,
+        u1_0.is_banned,
+        u1_0.bio,
+        u1_0.created_at,
+        u1_0.display_name,
+        u1_0.email,
+        u1_0.github_url,
+        u1_0.location,
+        u1_0.password_hash,
+        u1_0.reputation_score,
+        u1_0.role,
+        u1_0.updated_at,
+        u1_0.username,
+        u1_0.website_url 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+14:02:28.232 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 44ebf52e | 
+    insert 
+    into
+        refresh_tokens
+        (created_at, expires_at, token, user_id) 
+    values
+        (?, ?, ?, ?) 
+    returning id
+Hibernate: 
+    insert 
+    into
+        refresh_tokens
+        (created_at, expires_at, token, user_id) 
+    values
+        (?, ?, ?, ?) 
+    returning id
+14:02:28.237 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 44ebf52e | 
+    delete 
+    from
+        refresh_tokens 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        refresh_tokens 
+    where
+        id=?
+14:02:28.249 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | 44ebf52e | POST /api/v1/auth/refresh 200 34ms
+]]></system-out>
+  </testcase>
+</testsuite>

@@ -1,0 +1,16 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "emmet.includeLanguages": {
+      "javascript": "javascriptreact"
+    },
+    "claudeCode.useTerminal": true,
+    "java.configuration.updateBuildConfiguration": "interactive"
+  }
+}
