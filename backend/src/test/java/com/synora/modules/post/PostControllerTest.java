@@ -2,11 +2,9 @@ package com.synora.modules.post;
 
 import com.synora.BaseIntegrationTest;
 import com.synora.modules.post.dto.CreatePostRequest;
-import com.synora.modules.post.dto.UpdatePostRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 
-import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 

@@ -6,11 +6,12 @@
   ],
   "settings": {
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": null,
     "emmet.includeLanguages": {
       "javascript": "javascriptreact"
     },
     "claudeCode.useTerminal": true,
-    "java.configuration.updateBuildConfiguration": "interactive"
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "java.compile.nullAnalysis.mode": "automatic"
   }
 }

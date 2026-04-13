@@ -21,10 +21,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
+@SuppressWarnings("resource")
 public abstract class BaseIntegrationTest {
 
     static final PostgreSQLContainer<?> postgres;
-    @SuppressWarnings("resource")
     static final GenericContainer<?> redis;
 
     static {
@@ -37,6 +37,12 @@ public abstract class BaseIntegrationTest {
         redis = new GenericContainer<>("redis:7-alpine")
                 .withExposedPorts(6379);
         redis.start();
+
+        // Cleanup containers on JVM shutdown
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            if (postgres != null) postgres.stop();
+            if (redis != null) redis.stop();
+        }));
     }
 
     @DynamicPropertySource

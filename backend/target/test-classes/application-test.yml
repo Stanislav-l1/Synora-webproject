@@ -14,7 +14,7 @@ spring:
       port: 6379
 
 jwt:
-  secret: dGVzdC1zZWNyZXQta2V5LWF0LWxlYXN0LTI1Ni1iaXRzLWxvbmctZm9yLWhtYWMtc2hh
+  secret: test-secret-key-at-least-256-bits-long-for-hmac-sha
   access-token-expiration: 900
   refresh-token-expiration: 604800
 

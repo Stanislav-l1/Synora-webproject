@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.synora.modules.auth.AuthControllerTest
 -------------------------------------------------------------------------------
-Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 42.01 s -- in com.synora.modules.auth.AuthControllerTest
+Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 17.03 s -- in com.synora.modules.auth.AuthControllerTest

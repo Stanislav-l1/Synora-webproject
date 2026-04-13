@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.synora.modules.project.ProjectControllerTest" time="4.534" tests="7" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.synora.modules.project.ProjectControllerTest" time="2.154" tests="7" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -18,7 +18,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="RU"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Amazon Corretto\jdk21.0.10_7\bin"/>
-    <property name="sun.java.command" value="C:\Users\stas5\AppData\Local\Temp\surefire10809322830494055535\surefirebooter-20260412140144960_3.jar C:\Users\stas5\AppData\Local\Temp\surefire10809322830494055535 2026-04-12T14-01-44_707-jvmRun1 surefire-20260412140144960_1tmp surefire_0-20260412140144960_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\stas5\AppData\Local\Temp\surefire16732644686813743890\surefirebooter-20260412182314136_3.jar C:\Users\stas5\AppData\Local\Temp\surefire16732644686813743890 2026-04-12T18-23-14_022-jvmRun1 surefire-20260412182314136_1tmp surefire_0-20260412182314136_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\stas5\Synora-proj\backend\target\test-classes;C:\Users\stas5\Synora-proj\backend\target\classes;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-starter-web\3.3.0\spring-boot-starter-web-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-starter\3.3.0\spring-boot-starter-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot\3.3.0\spring-boot-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\3.3.0\spring-boot-autoconfigure-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-starter-logging\3.3.0\spring-boot-starter-logging-3.3.0.jar;C:\Users\stas5\.m2\repository\ch\qos\logback\logback-classic\1.5.6\logback-classic-1.5.6.jar;C:\Users\stas5\.m2\repository\ch\qos\logback\logback-core\1.5.6\logback-core-1.5.6.jar;C:\Users\stas5\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.23.1\log4j-to-slf4j-2.23.1.jar;C:\Users\stas5\.m2\repository\org\apache\logging\log4j\log4j-api\2.23.1\log4j-api-2.23.1.jar;C:\Users\stas5\.m2\repository\org\slf4j\jul-to-slf4j\2.0.13\jul-to-slf4j-2.0.13.jar;C:\Users\stas5\.m2\repository\jakarta\annotation\jakarta.annotation-api\2.1.1\jakarta.annotation-api-2.1.1.jar;C:\Users\stas5\.m2\repository\org\yaml\snakeyaml\2.2\snakeyaml-2.2.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-starter-json\3.3.0\spring-boot-starter-json-3.3.0.jar;C:\Users\stas5\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jdk8\2.17.1\jackson-datatype-jdk8-2.17.1.jar;C:\Users\stas5\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.17.1\jackson-datatype-jsr310-2.17.1.jar;C:\Users\stas5\.m2\repository\com\fasterxml\jackson\module\jackson-module-parameter-names\2.17.1\jackson-module-parameter-names-2.17.1.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-starter-tomcat\3.3.0\spring-boot-starter-tomcat-3.3.0.jar;C:\Users\stas5\.m2\repository\org\apache\tomcat\embed\tomcat-embed-core\10.1.24\tomcat-embed-core-10.1.24.jar;C:\Users\stas5\.m2\repository\org\apache\tomcat\embed\tomcat-embed-websocket\10.1.24\tomcat-embed-websocket-10.1.24.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-web\6.1.8\spring-web-6.1.8.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-beans\6.1.8\spring-beans-6.1.8.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-webmvc\6.1.8\spring-webmvc-6.1.8.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-context\6.1.8\spring-context-6.1.8.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-expression\6.1.8\spring-expression-6.1.8.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-starter-websocket\3.3.0\spring-boot-starter-websocket-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-messaging\6.1.8\spring-messaging-6.1.8.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-websocket\6.1.8\spring-websocket-6.1.8.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-starter-security\3.3.0\spring-boot-starter-security-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-aop\6.1.8\spring-aop-6.1.8.jar;C:\Users\stas5\.m2\repository\org\springframework\security\spring-security-config\6.3.0\spring-security-config-6.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\security\spring-security-web\6.3.0\spring-security-web-6.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-starter-validation\3.3.0\spring-boot-starter-validation-3.3.0.jar;C:\Users\stas5\.m2\repository\org\apache\tomcat\embed\tomcat-embed-el\10.1.24\tomcat-embed-el-10.1.24.jar;C:\Users\stas5\.m2\repository\org\hibernate\validator\hibernate-validator\8.0.1.Final\hibernate-validator-8.0.1.Final.jar;C:\Users\stas5\.m2\repository\jakarta\validation\jakarta.validation-api\3.0.2\jakarta.validation-api-3.0.2.jar;C:\Users\stas5\.m2\repository\org\jboss\logging\jboss-logging\3.5.3.Final\jboss-logging-3.5.3.Final.jar;C:\Users\stas5\.m2\repository\com\fasterxml\classmate\1.7.0\classmate-1.7.0.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-starter-data-jpa\3.3.0\spring-boot-starter-data-jpa-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-starter-aop\3.3.0\spring-boot-starter-aop-3.3.0.jar;C:\Users\stas5\.m2\repository\org\aspectj\aspectjweaver\1.9.22\aspectjweaver-1.9.22.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-starter-jdbc\3.3.0\spring-boot-starter-jdbc-3.3.0.jar;C:\Users\stas5\.m2\repository\com\zaxxer\HikariCP\5.1.0\HikariCP-5.1.0.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-jdbc\6.1.8\spring-jdbc-6.1.8.jar;C:\Users\stas5\.m2\repository\org\hibernate\orm\hibernate-core\6.5.2.Final\hibernate-core-6.5.2.Final.jar;C:\Users\stas5\.m2\repository\jakarta\persistence\jakarta.persistence-api\3.1.0\jakarta.persistence-api-3.1.0.jar;C:\Users\stas5\.m2\repository\jakarta\transaction\jakarta.transaction-api\2.0.1\jakarta.transaction-api-2.0.1.jar;C:\Users\stas5\.m2\repository\org\hibernate\common\hibernate-commons-annotations\6.0.6.Final\hibernate-commons-annotations-6.0.6.Final.jar;C:\Users\stas5\.m2\repository\io\smallrye\jandex\3.1.2\jandex-3.1.2.jar;C:\Users\stas5\.m2\repository\net\bytebuddy\byte-buddy\1.14.16\byte-buddy-1.14.16.jar;C:\Users\stas5\.m2\repository\org\glassfish\jaxb\jaxb-runtime\4.0.5\jaxb-runtime-4.0.5.jar;C:\Users\stas5\.m2\repository\org\glassfish\jaxb\jaxb-core\4.0.5\jaxb-core-4.0.5.jar;C:\Users\stas5\.m2\repository\org\eclipse\angus\angus-activation\2.0.2\angus-activation-2.0.2.jar;C:\Users\stas5\.m2\repository\org\glassfish\jaxb\txw2\4.0.5\txw2-4.0.5.jar;C:\Users\stas5\.m2\repository\com\sun\istack\istack-commons-runtime\4.1.2\istack-commons-runtime-4.1.2.jar;C:\Users\stas5\.m2\repository\jakarta\inject\jakarta.inject-api\2.0.1\jakarta.inject-api-2.0.1.jar;C:\Users\stas5\.m2\repository\org\antlr\antlr4-runtime\4.13.0\antlr4-runtime-4.13.0.jar;C:\Users\stas5\.m2\repository\org\springframework\data\spring-data-jpa\3.3.0\spring-data-jpa-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\data\spring-data-commons\3.3.0\spring-data-commons-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-orm\6.1.8\spring-orm-6.1.8.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-tx\6.1.8\spring-tx-6.1.8.jar;C:\Users\stas5\.m2\repository\org\slf4j\slf4j-api\2.0.13\slf4j-api-2.0.13.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-aspects\6.1.8\spring-aspects-6.1.8.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-starter-data-redis\3.3.0\spring-boot-starter-data-redis-3.3.0.jar;C:\Users\stas5\.m2\repository\io\lettuce\lettuce-core\6.3.2.RELEASE\lettuce-core-6.3.2.RELEASE.jar;C:\Users\stas5\.m2\repository\io\netty\netty-common\4.1.110.Final\netty-common-4.1.110.Final.jar;C:\Users\stas5\.m2\repository\io\netty\netty-handler\4.1.110.Final\netty-handler-4.1.110.Final.jar;C:\Users\stas5\.m2\repository\io\netty\netty-transport-native-unix-common\4.1.110.Final\netty-transport-native-unix-common-4.1.110.Final.jar;C:\Users\stas5\.m2\repository\io\netty\netty-transport\4.1.110.Final\netty-transport-4.1.110.Final.jar;C:\Users\stas5\.m2\repository\io\projectreactor\reactor-core\3.6.6\reactor-core-3.6.6.jar;C:\Users\stas5\.m2\repository\org\springframework\data\spring-data-redis\3.3.0\spring-data-redis-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\data\spring-data-keyvalue\3.3.0\spring-data-keyvalue-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-oxm\6.1.8\spring-oxm-6.1.8.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-context-support\6.1.8\spring-context-support-6.1.8.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-starter-actuator\3.3.0\spring-boot-starter-actuator-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-actuator-autoconfigure\3.3.0\spring-boot-actuator-autoconfigure-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-actuator\3.3.0\spring-boot-actuator-3.3.0.jar;C:\Users\stas5\.m2\repository\io\micrometer\micrometer-observation\1.13.0\micrometer-observation-1.13.0.jar;C:\Users\stas5\.m2\repository\io\micrometer\micrometer-commons\1.13.0\micrometer-commons-1.13.0.jar;C:\Users\stas5\.m2\repository\io\micrometer\micrometer-jakarta9\1.13.0\micrometer-jakarta9-1.13.0.jar;C:\Users\stas5\.m2\repository\io\micrometer\micrometer-registry-prometheus\1.13.0\micrometer-registry-prometheus-1.13.0.jar;C:\Users\stas5\.m2\repository\io\micrometer\micrometer-core\1.13.0\micrometer-core-1.13.0.jar;C:\Users\stas5\.m2\repository\org\hdrhistogram\HdrHistogram\2.2.1\HdrHistogram-2.2.1.jar;C:\Users\stas5\.m2\repository\org\latencyutils\LatencyUtils\2.0.3\LatencyUtils-2.0.3.jar;C:\Users\stas5\.m2\repository\io\prometheus\prometheus-metrics-core\1.2.1\prometheus-metrics-core-1.2.1.jar;C:\Users\stas5\.m2\repository\io\prometheus\prometheus-metrics-model\1.2.1\prometheus-metrics-model-1.2.1.jar;C:\Users\stas5\.m2\repository\io\prometheus\prometheus-metrics-config\1.2.1\prometheus-metrics-config-1.2.1.jar;C:\Users\stas5\.m2\repository\io\prometheus\prometheus-metrics-tracer-common\1.2.1\prometheus-metrics-tracer-common-1.2.1.jar;C:\Users\stas5\.m2\repository\io\prometheus\prometheus-metrics-exposition-formats\1.2.1\prometheus-metrics-exposition-formats-1.2.1.jar;C:\Users\stas5\.m2\repository\io\prometheus\prometheus-metrics-shaded-protobuf\1.2.1\prometheus-metrics-shaded-protobuf-1.2.1.jar;C:\Users\stas5\.m2\repository\org\postgresql\postgresql\42.7.3\postgresql-42.7.3.jar;C:\Users\stas5\.m2\repository\org\checkerframework\checker-qual\3.42.0\checker-qual-3.42.0.jar;C:\Users\stas5\.m2\repository\org\flywaydb\flyway-core\10.10.0\flyway-core-10.10.0.jar;C:\Users\stas5\.m2\repository\com\fasterxml\jackson\dataformat\jackson-dataformat-toml\2.17.1\jackson-dataformat-toml-2.17.1.jar;C:\Users\stas5\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.17.1\jackson-core-2.17.1.jar;C:\Users\stas5\.m2\repository\com\google\code\gson\gson\2.10.1\gson-2.10.1.jar;C:\Users\stas5\.m2\repository\org\flywaydb\flyway-database-postgresql\10.10.0\flyway-database-postgresql-10.10.0.jar;C:\Users\stas5\.m2\repository\io\jsonwebtoken\jjwt-api\0.12.6\jjwt-api-0.12.6.jar;C:\Users\stas5\.m2\repository\io\jsonwebtoken\jjwt-impl\0.12.6\jjwt-impl-0.12.6.jar;C:\Users\stas5\.m2\repository\io\jsonwebtoken\jjwt-jackson\0.12.6\jjwt-jackson-0.12.6.jar;C:\Users\stas5\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.17.1\jackson-databind-2.17.1.jar;C:\Users\stas5\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.17.1\jackson-annotations-2.17.1.jar;C:\Users\stas5\.m2\repository\org\projectlombok\lombok\1.18.32\lombok-1.18.32.jar;C:\Users\stas5\.m2\repository\org\springdoc\springdoc-openapi-starter-webmvc-ui\2.5.0\springdoc-openapi-starter-webmvc-ui-2.5.0.jar;C:\Users\stas5\.m2\repository\org\springdoc\springdoc-openapi-starter-webmvc-api\2.5.0\springdoc-openapi-starter-webmvc-api-2.5.0.jar;C:\Users\stas5\.m2\repository\org\springdoc\springdoc-openapi-starter-common\2.5.0\springdoc-openapi-starter-common-2.5.0.jar;C:\Users\stas5\.m2\repository\io\swagger\core\v3\swagger-core-jakarta\2.2.21\swagger-core-jakarta-2.2.21.jar;C:\Users\stas5\.m2\repository\org\apache\commons\commons-lang3\3.14.0\commons-lang3-3.14.0.jar;C:\Users\stas5\.m2\repository\io\swagger\core\v3\swagger-annotations-jakarta\2.2.21\swagger-annotations-jakarta-2.2.21.jar;C:\Users\stas5\.m2\repository\io\swagger\core\v3\swagger-models-jakarta\2.2.21\swagger-models-jakarta-2.2.21.jar;C:\Users\stas5\.m2\repository\com\fasterxml\jackson\dataformat\jackson-dataformat-yaml\2.17.1\jackson-dataformat-yaml-2.17.1.jar;C:\Users\stas5\.m2\repository\org\webjars\swagger-ui\5.13.0\swagger-ui-5.13.0.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\s3\2.26.12\s3-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\aws-xml-protocol\2.26.12\aws-xml-protocol-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\aws-query-protocol\2.26.12\aws-query-protocol-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\protocol-core\2.26.12\protocol-core-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\arns\2.26.12\arns-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\profiles\2.26.12\profiles-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\crt-core\2.26.12\crt-core-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\http-auth\2.26.12\http-auth-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\identity-spi\2.26.12\identity-spi-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\http-auth-spi\2.26.12\http-auth-spi-2.26.12.jar;C:\Users\stas5\.m2\repository\org\reactivestreams\reactive-streams\1.0.4\reactive-streams-1.0.4.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\http-auth-aws\2.26.12\http-auth-aws-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\checksums\2.26.12\checksums-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\checksums-spi\2.26.12\checksums-spi-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\retries-spi\2.26.12\retries-spi-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\sdk-core\2.26.12\sdk-core-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\retries\2.26.12\retries-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\auth\2.26.12\auth-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\eventstream\eventstream\1.0.1\eventstream-1.0.1.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\http-client-spi\2.26.12\http-client-spi-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\regions\2.26.12\regions-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\annotations\2.26.12\annotations-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\utils\2.26.12\utils-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\aws-core\2.26.12\aws-core-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\metrics-spi\2.26.12\metrics-spi-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\json-utils\2.26.12\json-utils-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\third-party-jackson-core\2.26.12\third-party-jackson-core-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\endpoints-spi\2.26.12\endpoints-spi-2.26.12.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\apache-client\2.26.12\apache-client-2.26.12.jar;C:\Users\stas5\.m2\repository\org\apache\httpcomponents\httpclient\4.5.13\httpclient-4.5.13.jar;C:\Users\stas5\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\stas5\.m2\repository\org\apache\httpcomponents\httpcore\4.4.16\httpcore-4.4.16.jar;C:\Users\stas5\.m2\repository\commons-codec\commons-codec\1.16.1\commons-codec-1.16.1.jar;C:\Users\stas5\.m2\repository\software\amazon\awssdk\netty-nio-client\2.26.12\netty-nio-client-2.26.12.jar;C:\Users\stas5\.m2\repository\io\netty\netty-codec-http\4.1.110.Final\netty-codec-http-4.1.110.Final.jar;C:\Users\stas5\.m2\repository\io\netty\netty-codec-http2\4.1.110.Final\netty-codec-http2-4.1.110.Final.jar;C:\Users\stas5\.m2\repository\io\netty\netty-codec\4.1.110.Final\netty-codec-4.1.110.Final.jar;C:\Users\stas5\.m2\repository\io\netty\netty-buffer\4.1.110.Final\netty-buffer-4.1.110.Final.jar;C:\Users\stas5\.m2\repository\io\netty\netty-transport-classes-epoll\4.1.110.Final\netty-transport-classes-epoll-4.1.110.Final.jar;C:\Users\stas5\.m2\repository\io\netty\netty-resolver\4.1.110.Final\netty-resolver-4.1.110.Final.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-starter-test\3.3.0\spring-boot-starter-test-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-test\3.3.0\spring-boot-test-3.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\boot\spring-boot-test-autoconfigure\3.3.0\spring-boot-test-autoconfigure-3.3.0.jar;C:\Users\stas5\.m2\repository\com\jayway\jsonpath\json-path\2.9.0\json-path-2.9.0.jar;C:\Users\stas5\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\4.0.2\jakarta.xml.bind-api-4.0.2.jar;C:\Users\stas5\.m2\repository\jakarta\activation\jakarta.activation-api\2.1.3\jakarta.activation-api-2.1.3.jar;C:\Users\stas5\.m2\repository\net\minidev\json-smart\2.5.1\json-smart-2.5.1.jar;C:\Users\stas5\.m2\repository\net\minidev\accessors-smart\2.5.1\accessors-smart-2.5.1.jar;C:\Users\stas5\.m2\repository\org\ow2\asm\asm\9.6\asm-9.6.jar;C:\Users\stas5\.m2\repository\org\assertj\assertj-core\3.25.3\assertj-core-3.25.3.jar;C:\Users\stas5\.m2\repository\org\awaitility\awaitility\4.2.1\awaitility-4.2.1.jar;C:\Users\stas5\.m2\repository\org\hamcrest\hamcrest\2.2\hamcrest-2.2.jar;C:\Users\stas5\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.2\junit-jupiter-5.10.2.jar;C:\Users\stas5\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\stas5\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\stas5\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\stas5\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\stas5\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.2\junit-jupiter-params-5.10.2.jar;C:\Users\stas5\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\stas5\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;C:\Users\stas5\.m2\repository\org\mockito\mockito-core\5.11.0\mockito-core-5.11.0.jar;C:\Users\stas5\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.16\byte-buddy-agent-1.14.16.jar;C:\Users\stas5\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\stas5\.m2\repository\org\mockito\mockito-junit-jupiter\5.11.0\mockito-junit-jupiter-5.11.0.jar;C:\Users\stas5\.m2\repository\org\skyscreamer\jsonassert\1.5.1\jsonassert-1.5.1.jar;C:\Users\stas5\.m2\repository\com\vaadin\external\google\android-json\0.0.20131108.vaadin1\android-json-0.0.20131108.vaadin1.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-core\6.1.8\spring-core-6.1.8.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-jcl\6.1.8\spring-jcl-6.1.8.jar;C:\Users\stas5\.m2\repository\org\springframework\spring-test\6.1.8\spring-test-6.1.8.jar;C:\Users\stas5\.m2\repository\org\xmlunit\xmlunit-core\2.9.1\xmlunit-core-2.9.1.jar;C:\Users\stas5\.m2\repository\org\springframework\security\spring-security-test\6.3.0\spring-security-test-6.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\security\spring-security-core\6.3.0\spring-security-core-6.3.0.jar;C:\Users\stas5\.m2\repository\org\springframework\security\spring-security-crypto\6.3.0\spring-security-crypto-6.3.0.jar;C:\Users\stas5\.m2\repository\org\testcontainers\postgresql\1.20.4\postgresql-1.20.4.jar;C:\Users\stas5\.m2\repository\org\testcontainers\jdbc\1.20.4\jdbc-1.20.4.jar;C:\Users\stas5\.m2\repository\org\testcontainers\database-commons\1.20.4\database-commons-1.20.4.jar;C:\Users\stas5\.m2\repository\org\testcontainers\junit-jupiter\1.20.4\junit-jupiter-1.20.4.jar;C:\Users\stas5\.m2\repository\org\testcontainers\testcontainers\1.20.4\testcontainers-1.20.4.jar;C:\Users\stas5\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\stas5\.m2\repository\org\hamcrest\hamcrest-core\2.2\hamcrest-core-2.2.jar;C:\Users\stas5\.m2\repository\org\apache\commons\commons-compress\1.24.0\commons-compress-1.24.0.jar;C:\Users\stas5\.m2\repository\org\rnorth\duct-tape\duct-tape\1.0.8\duct-tape-1.0.8.jar;C:\Users\stas5\.m2\repository\org\jetbrains\annotations\17.0.0\annotations-17.0.0.jar;C:\Users\stas5\.m2\repository\com\github\docker-java\docker-java-api\3.4.0\docker-java-api-3.4.0.jar;C:\Users\stas5\.m2\repository\com\github\docker-java\docker-java-transport-zerodep\3.4.0\docker-java-transport-zerodep-3.4.0.jar;C:\Users\stas5\.m2\repository\com\github\docker-java\docker-java-transport\3.4.0\docker-java-transport-3.4.0.jar;C:\Users\stas5\.m2\repository\net\java\dev\jna\jna\5.13.0\jna-5.13.0.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -27,7 +27,6 @@
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="java.version.date" value="2026-01-20"/>
     <property name="java.home" value="C:\Program Files\Amazon Corretto\jdk21.0.10_7"/>
-    <property name="spring.profiles.active" value="test"/>
     <property name="file.separator" value="\"/>
     <property name="basedir" value="C:\Users\stas5\Synora-proj\backend"/>
     <property name="java.vm.compressedOopsMode" value="Zero based"/>
@@ -36,7 +35,7 @@
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="FILE_LOG_CHARSET" value="UTF-8"/>
     <property name="java.awt.headless" value="true"/>
-    <property name="surefire.real.class.path" value="C:\Users\stas5\AppData\Local\Temp\surefire10809322830494055535\surefirebooter-20260412140144960_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\stas5\AppData\Local\Temp\surefire16732644686813743890\surefirebooter-20260412182314136_3.jar"/>
     <property name="api.version" value="1.44"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
@@ -52,16 +51,16 @@
     <property name="localRepository" value="C:\Users\stas5\.m2\repository"/>
     <property name="java.vendor.url.bug" value="https://github.com/corretto/corretto-21/issues/"/>
     <property name="java.io.tmpdir" value="C:\Users\stas5\AppData\Local\Temp\"/>
-    <property name="catalina.home" value="C:\Users\stas5\AppData\Local\Temp\tomcat.0.1996913815210183262"/>
+    <property name="catalina.home" value="C:\Users\stas5\AppData\Local\Temp\tomcat.0.12347364092744825792"/>
     <property name="com.zaxxer.hikari.pool_number" value="1"/>
     <property name="java.version" value="21.0.10"/>
     <property name="user.dir" value="C:\Users\stas5\Synora-proj\backend"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="PID" value="29892"/>
+    <property name="PID" value="31176"/>
     <property name="sun.os.patch.level" value=""/>
     <property name="CONSOLE_LOG_CHARSET" value="UTF-8"/>
-    <property name="catalina.base" value="C:\Users\stas5\AppData\Local\Temp\tomcat.0.1996913815210183262"/>
+    <property name="catalina.base" value="C:\Users\stas5\AppData\Local\Temp\tomcat.0.12347364092744825792"/>
     <property name="native.encoding" value="Cp1251"/>
     <property name="java.library.path" value="C:\Program Files\Amazon Corretto\jdk21.0.10_7\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Users\stas5\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\stas5\bin;C:\Users\stas5\AppData\Local\Programs\Microsoft VS Code;C:\Program Files\Amazon Corretto\jdk21.0.10_7\bin;C:\Program Files\Python312\Scripts;C:\Program Files\Python312;C:\Windows\System32\HWAudioDriver;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\Git\cmd;D:\dev\android\Sdk\cmdline-tools\latest\cmdline-tools\bin;C:\Users\stas5\AppData\Local\Android\Sdk\cmdline-tools\latest\bin\platform-tools;C:\Users\stas5\AppData\Local\Android\Sdk\cmdline-tools\latest\bin\cmdline-tools\latest\bin;C:\Users\stas5\AppData\Local\Android\Sdk\cmdline-tools\latest\bin\tools;C:\Users\stas5\AppData\Local\Android\Sdk\cmdline-tools\latest\bin\tools\bin;C:\Users\stas5\AppData\Local\Android\Sdk\cmdline-tools\latest\bin\build-tools\34.0.0;C:\Program Files\nodejs;C:\Program Files\Docker\Docker\resources\bin;C:\Users\stas5\AppData\Local\Microsoft\WindowsApps;C:\Users\stas5\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\stas5\flutter\bin;C:\Users\stas5\flutter\flutter\bin;C:\Users\stas5\.android\cmdline-tools\bin;C:\Users\stas5\AppData\Roaming\npm;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl;."/>
     <property name="java.vm.info" value="mixed mode, sharing"/>
@@ -72,13 +71,13 @@
     <property name="java.class.version" value="65.0"/>
     <property name="LOGGED_APPLICATION_NAME" value="[synora-backend] "/>
   </properties>
-  <testcase name="createProject_authenticated_returns201" classname="com.synora.modules.project.ProjectControllerTest" time="0.652">
-    <system-out><![CDATA[14:02:33.464 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mt.c.s.AnnotationConfigContextLoaderUtils&amp#27;[0;39m | none | Could not detect default configuration classes for test class [com.synora.modules.project.ProjectControllerTest]: ProjectControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-14:02:33.555 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36m.b.t.c.SpringBootTestContextBootstrapper&amp#27;[0;39m | none | Found @SpringBootConfiguration com.synora.SynoraApplication for test class com.synora.modules.project.ProjectControllerTest
-14:02:33.569 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 3a4b54cc | Securing POST /api/v1/auth/register
-14:02:33.569 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.s.w.a.AnonymousAuthenticationFilter &amp#27;[0;39m | 3a4b54cc | Set SecurityContextHolder to anonymous SecurityContext
-14:02:33.569 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 3a4b54cc | Secured POST /api/v1/auth/register
-14:02:33.573 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 3a4b54cc | 
+  <testcase name="createProject_authenticated_returns201" classname="com.synora.modules.project.ProjectControllerTest" time="0.286">
+    <system-out><![CDATA[18:23:34.546 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mt.c.s.AnnotationConfigContextLoaderUtils&amp#27;[0;39m | none | Could not detect default configuration classes for test class [com.synora.modules.project.ProjectControllerTest]: ProjectControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+18:23:34.564 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36m.b.t.c.SpringBootTestContextBootstrapper&amp#27;[0;39m | none | Found @SpringBootConfiguration com.synora.SynoraApplication for test class com.synora.modules.project.ProjectControllerTest
+18:23:34.564 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 388e42b9 | Securing POST /api/v1/auth/register
+18:23:34.564 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.s.w.a.AnonymousAuthenticationFilter &amp#27;[0;39m | 388e42b9 | Set SecurityContextHolder to anonymous SecurityContext
+18:23:34.564 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 388e42b9 | Secured POST /api/v1/auth/register
+18:23:34.571 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 388e42b9 | 
     select
         u1_0.id 
     from
@@ -96,7 +95,7 @@ Hibernate:
         u1_0.username=? 
     fetch
         first ? rows only
-14:02:33.579 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 3a4b54cc | 
+18:23:34.574 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 388e42b9 | 
     select
         u1_0.id 
     from
@@ -114,7 +113,7 @@ Hibernate:
         u1_0.email=? 
     fetch
         first ? rows only
-14:02:34.113 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 3a4b54cc | 
+18:23:34.778 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 388e42b9 | 
     insert 
     into
         users
@@ -128,7 +127,7 @@ Hibernate:
         (is_active, avatar_url, is_banned, bio, created_at, display_name, email, github_url, location, password_hash, reputation_score, role, updated_at, username, website_url, id) 
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-14:02:34.118 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 3a4b54cc | 
+18:23:34.793 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 388e42b9 | 
     insert 
     into
         refresh_tokens
@@ -144,9 +143,9 @@ Hibernate:
     values
         (?, ?, ?, ?) 
     returning id
-14:02:34.125 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | 3a4b54cc | POST /api/v1/auth/register 201 558ms
-14:02:34.130 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | e2bdf367 | Securing POST /api/v1/projects
-14:02:34.135 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | e2bdf367 | 
+18:23:34.805 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | 388e42b9 | POST /api/v1/auth/register 201 241ms
+18:23:34.808 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 7b009569 | Securing POST /api/v1/projects
+18:23:34.811 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 7b009569 | 
     select
         u1_0.id,
         u1_0.is_active,
@@ -190,8 +189,8 @@ Hibernate:
         users u1_0 
     where
         u1_0.username=?
-14:02:34.143 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | e2bdf367 | Secured POST /api/v1/projects
-14:02:34.160 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | e2bdf367 | 
+18:23:34.815 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 7b009569 | Secured POST /api/v1/projects
+18:23:34.825 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 7b009569 | 
     select
         pm1_0.project_id,
         pm1_0.user_id,
@@ -215,7 +214,7 @@ Hibernate:
         (
             pm1_0.project_id, pm1_0.user_id
         ) in ((?, ?))
-14:02:34.181 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | e2bdf367 | 
+18:23:34.835 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 7b009569 | 
     insert 
     into
         projects
@@ -229,7 +228,7 @@ Hibernate:
         (cover_url, created_at, description, is_public, members_count, name, owner_id, repo_url, stars_count, status, updated_at, website_url, id) 
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-14:02:34.190 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | e2bdf367 | 
+18:23:34.837 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 7b009569 | 
     insert 
     into
         project_members
@@ -243,7 +242,7 @@ Hibernate:
         (joined_at, role, project_id, user_id) 
     values
         (?, ?, ?, ?)
-14:02:34.198 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | e2bdf367 | 
+18:23:34.841 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 7b009569 | 
     select
         pm1_0.project_id,
         pm1_0.user_id 
@@ -265,14 +264,14 @@ Hibernate:
         and pm1_0.user_id=? 
     fetch
         first ? rows only
-14:02:34.212 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | e2bdf367 | POST /api/v1/projects 201 82ms
+18:23:34.848 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | 7b009569 | POST /api/v1/projects 201 40ms
 ]]></system-out>
   </testcase>
-  <testcase name="deleteProject_byOwner_succeeds" classname="com.synora.modules.project.ProjectControllerTest" time="0.612">
-    <system-out><![CDATA[14:02:34.221 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 44d740cf | Securing POST /api/v1/auth/register
-14:02:34.221 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.s.w.a.AnonymousAuthenticationFilter &amp#27;[0;39m | 44d740cf | Set SecurityContextHolder to anonymous SecurityContext
-14:02:34.221 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 44d740cf | Secured POST /api/v1/auth/register
-14:02:34.225 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 44d740cf | 
+  <testcase name="deleteProject_byOwner_succeeds" classname="com.synora.modules.project.ProjectControllerTest" time="0.289">
+    <system-out><![CDATA[18:23:34.851 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 49d92bc1 | Securing POST /api/v1/auth/register
+18:23:34.852 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.s.w.a.AnonymousAuthenticationFilter &amp#27;[0;39m | 49d92bc1 | Set SecurityContextHolder to anonymous SecurityContext
+18:23:34.852 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 49d92bc1 | Secured POST /api/v1/auth/register
+18:23:34.854 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 49d92bc1 | 
     select
         u1_0.id 
     from
@@ -290,7 +289,7 @@ Hibernate:
         u1_0.username=? 
     fetch
         first ? rows only
-14:02:34.230 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 44d740cf | 
+18:23:34.856 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 49d92bc1 | 
     select
         u1_0.id 
     from
@@ -308,7 +307,7 @@ Hibernate:
         u1_0.email=? 
     fetch
         first ? rows only
-14:02:34.663 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 44d740cf | 
+18:23:35.068 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 49d92bc1 | 
     insert 
     into
         users
@@ -322,7 +321,7 @@ Hibernate:
         (is_active, avatar_url, is_banned, bio, created_at, display_name, email, github_url, location, password_hash, reputation_score, role, updated_at, username, website_url, id) 
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-14:02:34.669 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 44d740cf | 
+18:23:35.076 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 49d92bc1 | 
     insert 
     into
         refresh_tokens
@@ -338,9 +337,9 @@ Hibernate:
     values
         (?, ?, ?, ?) 
     returning id
-14:02:34.677 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | 44d740cf | POST /api/v1/auth/register 201 458ms
-14:02:34.679 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 5460d735 | Securing POST /api/v1/projects
-14:02:34.681 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 5460d735 | 
+18:23:35.080 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | 49d92bc1 | POST /api/v1/auth/register 201 229ms
+18:23:35.081 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | dd96b7e9 | Securing POST /api/v1/projects
+18:23:35.083 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | dd96b7e9 | 
     select
         u1_0.id,
         u1_0.is_active,
@@ -384,8 +383,8 @@ Hibernate:
         users u1_0 
     where
         u1_0.username=?
-14:02:34.691 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 5460d735 | Secured POST /api/v1/projects
-14:02:34.694 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 5460d735 | 
+18:23:35.086 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | dd96b7e9 | Secured POST /api/v1/projects
+18:23:35.088 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | dd96b7e9 | 
     select
         pm1_0.project_id,
         pm1_0.user_id,
@@ -409,7 +408,7 @@ Hibernate:
         (
             pm1_0.project_id, pm1_0.user_id
         ) in ((?, ?))
-14:02:34.700 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 5460d735 | 
+18:23:35.090 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | dd96b7e9 | 
     insert 
     into
         projects
@@ -423,7 +422,7 @@ Hibernate:
         (cover_url, created_at, description, is_public, members_count, name, owner_id, repo_url, stars_count, status, updated_at, website_url, id) 
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-14:02:34.705 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 5460d735 | 
+18:23:35.093 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | dd96b7e9 | 
     insert 
     into
         project_members
@@ -437,7 +436,7 @@ Hibernate:
         (joined_at, role, project_id, user_id) 
     values
         (?, ?, ?, ?)
-14:02:34.709 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 5460d735 | 
+18:23:35.094 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | dd96b7e9 | 
     select
         pm1_0.project_id,
         pm1_0.user_id 
@@ -459,9 +458,9 @@ Hibernate:
         and pm1_0.user_id=? 
     fetch
         first ? rows only
-14:02:34.717 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | 5460d735 | POST /api/v1/projects 201 39ms
-14:02:34.718 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 0e7f0f3a | Securing DELETE /api/v1/projects/8bdcde21-e7a3-4e64-9d38-4addad9bc446
-14:02:34.719 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 0e7f0f3a | 
+18:23:35.098 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | dd96b7e9 | POST /api/v1/projects 201 18ms
+18:23:35.099 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 580d70c2 | Securing DELETE /api/v1/projects/c6a5e1f4-1029-442d-b3d3-8d70fdd830e7
+18:23:35.100 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 580d70c2 | 
     select
         u1_0.id,
         u1_0.is_active,
@@ -505,8 +504,8 @@ Hibernate:
         users u1_0 
     where
         u1_0.username=?
-14:02:34.794 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 0e7f0f3a | Secured DELETE /api/v1/projects/8bdcde21-e7a3-4e64-9d38-4addad9bc446
-14:02:34.796 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 0e7f0f3a | 
+18:23:35.105 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 580d70c2 | Secured DELETE /api/v1/projects/c6a5e1f4-1029-442d-b3d3-8d70fdd830e7
+18:23:35.105 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 580d70c2 | 
     select
         p1_0.id,
         p1_0.cover_url,
@@ -544,7 +543,7 @@ Hibernate:
         projects p1_0 
     where
         p1_0.id=?
-14:02:34.814 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 0e7f0f3a | 
+18:23:35.126 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 580d70c2 | 
     delete 
     from
         project_tags 
@@ -556,7 +555,7 @@ Hibernate:
         project_tags 
     where
         project_id=?
-14:02:34.817 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 0e7f0f3a | 
+18:23:35.130 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 580d70c2 | 
     delete 
     from
         projects 
@@ -568,14 +567,14 @@ Hibernate:
         projects 
     where
         id=?
-14:02:34.827 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | 0e7f0f3a | DELETE /api/v1/projects/8bdcde21-e7a3-4e64-9d38-4addad9bc446 200 109ms
+18:23:35.137 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | 580d70c2 | DELETE /api/v1/projects/c6a5e1f4-1029-442d-b3d3-8d70fdd830e7 200 38ms
 ]]></system-out>
   </testcase>
-  <testcase name="getProject_existingId_returnsProject" classname="com.synora.modules.project.ProjectControllerTest" time="0.526">
-    <system-out><![CDATA[14:02:34.829 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | ef6e6478 | Securing POST /api/v1/auth/register
-14:02:34.829 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.s.w.a.AnonymousAuthenticationFilter &amp#27;[0;39m | ef6e6478 | Set SecurityContextHolder to anonymous SecurityContext
-14:02:34.829 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | ef6e6478 | Secured POST /api/v1/auth/register
-14:02:34.829 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | ef6e6478 | 
+  <testcase name="getProject_existingId_returnsProject" classname="com.synora.modules.project.ProjectControllerTest" time="0.261">
+    <system-out><![CDATA[18:23:35.142 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | d36fb50c | Securing POST /api/v1/auth/register
+18:23:35.142 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.s.w.a.AnonymousAuthenticationFilter &amp#27;[0;39m | d36fb50c | Set SecurityContextHolder to anonymous SecurityContext
+18:23:35.142 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | d36fb50c | Secured POST /api/v1/auth/register
+18:23:35.143 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | d36fb50c | 
     select
         u1_0.id 
     from
@@ -593,7 +592,7 @@ Hibernate:
         u1_0.username=? 
     fetch
         first ? rows only
-14:02:34.844 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | ef6e6478 | 
+18:23:35.147 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | d36fb50c | 
     select
         u1_0.id 
     from
@@ -611,7 +610,7 @@ Hibernate:
         u1_0.email=? 
     fetch
         first ? rows only
-14:02:35.218 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | ef6e6478 | 
+18:23:35.370 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | d36fb50c | 
     insert 
     into
         users
@@ -625,7 +624,7 @@ Hibernate:
         (is_active, avatar_url, is_banned, bio, created_at, display_name, email, github_url, location, password_hash, reputation_score, role, updated_at, username, website_url, id) 
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-14:02:35.236 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | ef6e6478 | 
+18:23:35.372 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | d36fb50c | 
     insert 
     into
         refresh_tokens
@@ -641,9 +640,9 @@ Hibernate:
     values
         (?, ?, ?, ?) 
     returning id
-14:02:35.260 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | ef6e6478 | POST /api/v1/auth/register 201 431ms
-14:02:35.260 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 8f6e66e0 | Securing POST /api/v1/projects
-14:02:35.260 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 8f6e66e0 | 
+18:23:35.375 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | d36fb50c | POST /api/v1/auth/register 201 234ms
+18:23:35.375 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | d2622ded | Securing POST /api/v1/projects
+18:23:35.377 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | d2622ded | 
     select
         u1_0.id,
         u1_0.is_active,
@@ -687,8 +686,8 @@ Hibernate:
         users u1_0 
     where
         u1_0.username=?
-14:02:35.284 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 8f6e66e0 | Secured POST /api/v1/projects
-14:02:35.286 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 8f6e66e0 | 
+18:23:35.380 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | d2622ded | Secured POST /api/v1/projects
+18:23:35.382 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | d2622ded | 
     select
         pm1_0.project_id,
         pm1_0.user_id,
@@ -712,7 +711,7 @@ Hibernate:
         (
             pm1_0.project_id, pm1_0.user_id
         ) in ((?, ?))
-14:02:35.292 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 8f6e66e0 | 
+18:23:35.385 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | d2622ded | 
     insert 
     into
         projects
@@ -726,7 +725,7 @@ Hibernate:
         (cover_url, created_at, description, is_public, members_count, name, owner_id, repo_url, stars_count, status, updated_at, website_url, id) 
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-14:02:35.297 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 8f6e66e0 | 
+18:23:35.388 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | d2622ded | 
     insert 
     into
         project_members
@@ -740,7 +739,7 @@ Hibernate:
         (joined_at, role, project_id, user_id) 
     values
         (?, ?, ?, ?)
-14:02:35.301 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 8f6e66e0 | 
+18:23:35.389 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | d2622ded | 
     select
         pm1_0.project_id,
         pm1_0.user_id 
@@ -762,11 +761,11 @@ Hibernate:
         and pm1_0.user_id=? 
     fetch
         first ? rows only
-14:02:35.308 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | 8f6e66e0 | POST /api/v1/projects 201 48ms
-14:02:35.310 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | fe183ed2 | Securing GET /api/v1/projects/8ec04a7c-bb4d-473e-a578-f39bdba47da0
-14:02:35.310 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.s.w.a.AnonymousAuthenticationFilter &amp#27;[0;39m | fe183ed2 | Set SecurityContextHolder to anonymous SecurityContext
-14:02:35.310 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | fe183ed2 | Secured GET /api/v1/projects/8ec04a7c-bb4d-473e-a578-f39bdba47da0
-14:02:35.310 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | fe183ed2 | 
+18:23:35.392 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | d2622ded | POST /api/v1/projects 201 17ms
+18:23:35.393 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | f0895ccd | Securing GET /api/v1/projects/cb249b35-5aaf-4bb7-aee4-3b60366b4a07
+18:23:35.393 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.s.w.a.AnonymousAuthenticationFilter &amp#27;[0;39m | f0895ccd | Set SecurityContextHolder to anonymous SecurityContext
+18:23:35.393 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | f0895ccd | Secured GET /api/v1/projects/cb249b35-5aaf-4bb7-aee4-3b60366b4a07
+18:23:35.394 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | f0895ccd | 
     select
         p1_0.id,
         p1_0.cover_url,
@@ -804,7 +803,7 @@ Hibernate:
         projects p1_0 
     where
         p1_0.id=?
-14:02:35.319 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | fe183ed2 | 
+18:23:35.397 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | f0895ccd | 
     select
         u1_0.id,
         u1_0.is_active,
@@ -848,7 +847,7 @@ Hibernate:
         users u1_0 
     where
         u1_0.id=?
-14:02:35.329 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | fe183ed2 | 
+18:23:35.398 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | f0895ccd | 
     select
         t1_0.project_id,
         t1_1.id,
@@ -876,20 +875,20 @@ Hibernate:
             on t1_1.id=t1_0.tag_id 
     where
         t1_0.project_id=?
-14:02:35.352 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | fe183ed2 | GET /api/v1/projects/8ec04a7c-bb4d-473e-a578-f39bdba47da0 200 44ms
+18:23:35.400 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | f0895ccd | GET /api/v1/projects/cb249b35-5aaf-4bb7-aee4-3b60366b4a07 200 7ms
 ]]></system-out>
   </testcase>
-  <testcase name="createProject_unauthenticated_returns401" classname="com.synora.modules.project.ProjectControllerTest" time="0.0">
-    <system-out><![CDATA[14:02:35.355 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | e8617f79 | Securing POST /api/v1/projects
-14:02:35.355 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.s.w.a.AnonymousAuthenticationFilter &amp#27;[0;39m | e8617f79 | Set SecurityContextHolder to anonymous SecurityContext
-14:02:35.355 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | e8617f79 | POST /api/v1/projects 401 0ms
+  <testcase name="createProject_unauthenticated_returns401" classname="com.synora.modules.project.ProjectControllerTest" time="0.003">
+    <system-out><![CDATA[18:23:35.403 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 032eac03 | Securing POST /api/v1/projects
+18:23:35.403 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.s.w.a.AnonymousAuthenticationFilter &amp#27;[0;39m | 032eac03 | Set SecurityContextHolder to anonymous SecurityContext
+18:23:35.405 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | 032eac03 | POST /api/v1/projects 401 2ms
 ]]></system-out>
   </testcase>
-  <testcase name="deleteProject_byNonOwner_returns403" classname="com.synora.modules.project.ProjectControllerTest" time="1.009">
-    <system-out><![CDATA[14:02:35.355 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 4bc13374 | Securing POST /api/v1/auth/register
-14:02:35.355 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.s.w.a.AnonymousAuthenticationFilter &amp#27;[0;39m | 4bc13374 | Set SecurityContextHolder to anonymous SecurityContext
-14:02:35.355 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 4bc13374 | Secured POST /api/v1/auth/register
-14:02:35.375 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 4bc13374 | 
+  <testcase name="deleteProject_byNonOwner_returns403" classname="com.synora.modules.project.ProjectControllerTest" time="0.489">
+    <system-out><![CDATA[18:23:35.408 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | bb17666f | Securing POST /api/v1/auth/register
+18:23:35.408 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.s.w.a.AnonymousAuthenticationFilter &amp#27;[0;39m | bb17666f | Set SecurityContextHolder to anonymous SecurityContext
+18:23:35.408 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | bb17666f | Secured POST /api/v1/auth/register
+18:23:35.408 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | bb17666f | 
     select
         u1_0.id 
     from
@@ -907,7 +906,7 @@ Hibernate:
         u1_0.username=? 
     fetch
         first ? rows only
-14:02:35.382 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 4bc13374 | 
+18:23:35.412 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | bb17666f | 
     select
         u1_0.id 
     from
@@ -925,7 +924,7 @@ Hibernate:
         u1_0.email=? 
     fetch
         first ? rows only
-14:02:35.801 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 4bc13374 | 
+18:23:35.631 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | bb17666f | 
     insert 
     into
         users
@@ -939,7 +938,7 @@ Hibernate:
         (is_active, avatar_url, is_banned, bio, created_at, display_name, email, github_url, location, password_hash, reputation_score, role, updated_at, username, website_url, id) 
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-14:02:35.806 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 4bc13374 | 
+18:23:35.633 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | bb17666f | 
     insert 
     into
         refresh_tokens
@@ -955,11 +954,11 @@ Hibernate:
     values
         (?, ?, ?, ?) 
     returning id
-14:02:35.815 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | 4bc13374 | POST /api/v1/auth/register 201 460ms
-14:02:35.816 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 10b7a67a | Securing POST /api/v1/auth/register
-14:02:35.817 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.s.w.a.AnonymousAuthenticationFilter &amp#27;[0;39m | 10b7a67a | Set SecurityContextHolder to anonymous SecurityContext
-14:02:35.817 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 10b7a67a | Secured POST /api/v1/auth/register
-14:02:35.820 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 10b7a67a | 
+18:23:35.638 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | bb17666f | POST /api/v1/auth/register 201 231ms
+18:23:35.638 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 83747cad | Securing POST /api/v1/auth/register
+18:23:35.638 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.s.w.a.AnonymousAuthenticationFilter &amp#27;[0;39m | 83747cad | Set SecurityContextHolder to anonymous SecurityContext
+18:23:35.639 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 83747cad | Secured POST /api/v1/auth/register
+18:23:35.641 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 83747cad | 
     select
         u1_0.id 
     from
@@ -977,7 +976,7 @@ Hibernate:
         u1_0.username=? 
     fetch
         first ? rows only
-14:02:35.827 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 10b7a67a | 
+18:23:35.643 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 83747cad | 
     select
         u1_0.id 
     from
@@ -995,7 +994,7 @@ Hibernate:
         u1_0.email=? 
     fetch
         first ? rows only
-14:02:36.279 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 10b7a67a | 
+18:23:35.858 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 83747cad | 
     insert 
     into
         users
@@ -1009,7 +1008,7 @@ Hibernate:
         (is_active, avatar_url, is_banned, bio, created_at, display_name, email, github_url, location, password_hash, reputation_score, role, updated_at, username, website_url, id) 
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-14:02:36.294 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 10b7a67a | 
+18:23:35.863 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 83747cad | 
     insert 
     into
         refresh_tokens
@@ -1025,9 +1024,9 @@ Hibernate:
     values
         (?, ?, ?, ?) 
     returning id
-14:02:36.301 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | 10b7a67a | POST /api/v1/auth/register 201 485ms
-14:02:36.303 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | ce8784a8 | Securing POST /api/v1/projects
-14:02:36.306 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | ce8784a8 | 
+18:23:35.866 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | 83747cad | POST /api/v1/auth/register 201 228ms
+18:23:35.867 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 6afec736 | Securing POST /api/v1/projects
+18:23:35.869 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 6afec736 | 
     select
         u1_0.id,
         u1_0.is_active,
@@ -1071,8 +1070,8 @@ Hibernate:
         users u1_0 
     where
         u1_0.username=?
-14:02:36.314 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | ce8784a8 | Secured POST /api/v1/projects
-14:02:36.317 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | ce8784a8 | 
+18:23:35.873 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 6afec736 | Secured POST /api/v1/projects
+18:23:35.874 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 6afec736 | 
     select
         pm1_0.project_id,
         pm1_0.user_id,
@@ -1096,7 +1095,7 @@ Hibernate:
         (
             pm1_0.project_id, pm1_0.user_id
         ) in ((?, ?))
-14:02:36.324 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | ce8784a8 | 
+18:23:35.877 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 6afec736 | 
     insert 
     into
         projects
@@ -1110,7 +1109,7 @@ Hibernate:
         (cover_url, created_at, description, is_public, members_count, name, owner_id, repo_url, stars_count, status, updated_at, website_url, id) 
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-14:02:36.328 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | ce8784a8 | 
+18:23:35.879 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 6afec736 | 
     insert 
     into
         project_members
@@ -1124,7 +1123,7 @@ Hibernate:
         (joined_at, role, project_id, user_id) 
     values
         (?, ?, ?, ?)
-14:02:36.332 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | ce8784a8 | 
+18:23:35.880 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 6afec736 | 
     select
         pm1_0.project_id,
         pm1_0.user_id 
@@ -1146,9 +1145,9 @@ Hibernate:
         and pm1_0.user_id=? 
     fetch
         first ? rows only
-14:02:36.341 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | ce8784a8 | POST /api/v1/projects 201 39ms
-14:02:36.343 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | faa6f8df | Securing DELETE /api/v1/projects/75ee2d57-f15f-4503-a520-b799576b61a0
-14:02:36.343 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | faa6f8df | 
+18:23:35.883 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | 6afec736 | POST /api/v1/projects 201 16ms
+18:23:35.883 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 324875d5 | Securing DELETE /api/v1/projects/78a9c340-5976-41cb-8ae1-e05bfa04806c
+18:23:35.885 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 324875d5 | 
     select
         u1_0.id,
         u1_0.is_active,
@@ -1192,8 +1191,8 @@ Hibernate:
         users u1_0 
     where
         u1_0.username=?
-14:02:36.355 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | faa6f8df | Secured DELETE /api/v1/projects/75ee2d57-f15f-4503-a520-b799576b61a0
-14:02:36.357 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | faa6f8df | 
+18:23:35.888 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 324875d5 | Secured DELETE /api/v1/projects/78a9c340-5976-41cb-8ae1-e05bfa04806c
+18:23:35.889 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 324875d5 | 
     select
         p1_0.id,
         p1_0.cover_url,
@@ -1231,15 +1230,15 @@ Hibernate:
         projects p1_0 
     where
         p1_0.id=?
-14:02:36.364 &amp#27;[31mWARN &amp#27;[0;39m [           main] &amp#27;[36mc.s.s.exception.GlobalExceptionHandler  &amp#27;[0;39m | faa6f8df | AppException [FORBIDDEN]: Access denied
-14:02:36.364 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | faa6f8df | DELETE /api/v1/projects/75ee2d57-f15f-4503-a520-b799576b61a0 403 21ms
+18:23:35.892 &amp#27;[31mWARN &amp#27;[0;39m [           main] &amp#27;[36mc.s.s.exception.GlobalExceptionHandler  &amp#27;[0;39m | 324875d5 | AppException [FORBIDDEN]: Access denied
+18:23:35.893 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | 324875d5 | DELETE /api/v1/projects/78a9c340-5976-41cb-8ae1-e05bfa04806c 403 10ms
 ]]></system-out>
   </testcase>
-  <testcase name="joinAndLeave_project" classname="com.synora.modules.project.ProjectControllerTest" time="1.142">
-    <system-out><![CDATA[14:02:36.371 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 9de996fa | Securing POST /api/v1/auth/register
-14:02:36.371 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.s.w.a.AnonymousAuthenticationFilter &amp#27;[0;39m | 9de996fa | Set SecurityContextHolder to anonymous SecurityContext
-14:02:36.371 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 9de996fa | Secured POST /api/v1/auth/register
-14:02:36.371 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 9de996fa | 
+  <testcase name="joinAndLeave_project" classname="com.synora.modules.project.ProjectControllerTest" time="0.537">
+    <system-out><![CDATA[18:23:35.896 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | c5ec0aed | Securing POST /api/v1/auth/register
+18:23:35.896 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.s.w.a.AnonymousAuthenticationFilter &amp#27;[0;39m | c5ec0aed | Set SecurityContextHolder to anonymous SecurityContext
+18:23:35.896 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | c5ec0aed | Secured POST /api/v1/auth/register
+18:23:35.898 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | c5ec0aed | 
     select
         u1_0.id 
     from
@@ -1257,7 +1256,7 @@ Hibernate:
         u1_0.username=? 
     fetch
         first ? rows only
-14:02:36.382 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 9de996fa | 
+18:23:35.900 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | c5ec0aed | 
     select
         u1_0.id 
     from
@@ -1275,7 +1274,7 @@ Hibernate:
         u1_0.email=? 
     fetch
         first ? rows only
-14:02:36.799 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 9de996fa | 
+18:23:36.114 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | c5ec0aed | 
     insert 
     into
         users
@@ -1289,7 +1288,7 @@ Hibernate:
         (is_active, avatar_url, is_banned, bio, created_at, display_name, email, github_url, location, password_hash, reputation_score, role, updated_at, username, website_url, id) 
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-14:02:36.803 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 9de996fa | 
+18:23:36.117 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | c5ec0aed | 
     insert 
     into
         refresh_tokens
@@ -1305,11 +1304,11 @@ Hibernate:
     values
         (?, ?, ?, ?) 
     returning id
-14:02:36.813 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | 9de996fa | POST /api/v1/auth/register 201 442ms
-14:02:36.815 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 6888471b | Securing POST /api/v1/auth/register
-14:02:36.816 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.s.w.a.AnonymousAuthenticationFilter &amp#27;[0;39m | 6888471b | Set SecurityContextHolder to anonymous SecurityContext
-14:02:36.816 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 6888471b | Secured POST /api/v1/auth/register
-14:02:36.820 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 6888471b | 
+18:23:36.121 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | c5ec0aed | POST /api/v1/auth/register 201 225ms
+18:23:36.122 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 2d149ea0 | Securing POST /api/v1/auth/register
+18:23:36.122 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.s.w.a.AnonymousAuthenticationFilter &amp#27;[0;39m | 2d149ea0 | Set SecurityContextHolder to anonymous SecurityContext
+18:23:36.123 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 2d149ea0 | Secured POST /api/v1/auth/register
+18:23:36.124 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 2d149ea0 | 
     select
         u1_0.id 
     from
@@ -1327,7 +1326,7 @@ Hibernate:
         u1_0.username=? 
     fetch
         first ? rows only
-14:02:36.827 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 6888471b | 
+18:23:36.126 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 2d149ea0 | 
     select
         u1_0.id 
     from
@@ -1345,7 +1344,7 @@ Hibernate:
         u1_0.email=? 
     fetch
         first ? rows only
-14:02:37.245 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 6888471b | 
+18:23:36.342 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 2d149ea0 | 
     insert 
     into
         users
@@ -1359,7 +1358,7 @@ Hibernate:
         (is_active, avatar_url, is_banned, bio, created_at, display_name, email, github_url, location, password_hash, reputation_score, role, updated_at, username, website_url, id) 
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-14:02:37.252 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 6888471b | 
+18:23:36.345 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 2d149ea0 | 
     insert 
     into
         refresh_tokens
@@ -1375,9 +1374,9 @@ Hibernate:
     values
         (?, ?, ?, ?) 
     returning id
-14:02:37.258 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | 6888471b | POST /api/v1/auth/register 201 443ms
-14:02:37.259 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | bdc50bf1 | Securing POST /api/v1/projects
-14:02:37.265 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | bdc50bf1 | 
+18:23:36.348 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | 2d149ea0 | POST /api/v1/auth/register 201 226ms
+18:23:36.349 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | d6ae5804 | Securing POST /api/v1/projects
+18:23:36.352 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | d6ae5804 | 
     select
         u1_0.id,
         u1_0.is_active,
@@ -1421,8 +1420,8 @@ Hibernate:
         users u1_0 
     where
         u1_0.username=?
-14:02:37.273 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | bdc50bf1 | Secured POST /api/v1/projects
-14:02:37.276 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | bdc50bf1 | 
+18:23:36.355 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | d6ae5804 | Secured POST /api/v1/projects
+18:23:36.357 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | d6ae5804 | 
     select
         pm1_0.project_id,
         pm1_0.user_id,
@@ -1446,7 +1445,7 @@ Hibernate:
         (
             pm1_0.project_id, pm1_0.user_id
         ) in ((?, ?))
-14:02:37.285 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | bdc50bf1 | 
+18:23:36.361 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | d6ae5804 | 
     insert 
     into
         projects
@@ -1460,7 +1459,7 @@ Hibernate:
         (cover_url, created_at, description, is_public, members_count, name, owner_id, repo_url, stars_count, status, updated_at, website_url, id) 
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-14:02:37.291 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | bdc50bf1 | 
+18:23:36.362 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | d6ae5804 | 
     insert 
     into
         project_members
@@ -1474,7 +1473,7 @@ Hibernate:
         (joined_at, role, project_id, user_id) 
     values
         (?, ?, ?, ?)
-14:02:37.297 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | bdc50bf1 | 
+18:23:36.363 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | d6ae5804 | 
     select
         pm1_0.project_id,
         pm1_0.user_id 
@@ -1496,9 +1495,9 @@ Hibernate:
         and pm1_0.user_id=? 
     fetch
         first ? rows only
-14:02:37.315 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | bdc50bf1 | POST /api/v1/projects 201 56ms
-14:02:37.315 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | fdcd36ad | Securing POST /api/v1/projects/1f7c0579-f115-44b9-9d8c-06029402f225/join
-14:02:37.315 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | fdcd36ad | 
+18:23:36.367 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | d6ae5804 | POST /api/v1/projects 201 18ms
+18:23:36.368 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | f1318b0f | Securing POST /api/v1/projects/349380c0-ef60-4386-9fcc-45c9282a2c28/join
+18:23:36.370 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | f1318b0f | 
     select
         u1_0.id,
         u1_0.is_active,
@@ -1542,8 +1541,8 @@ Hibernate:
         users u1_0 
     where
         u1_0.username=?
-14:02:37.341 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | fdcd36ad | Secured POST /api/v1/projects/1f7c0579-f115-44b9-9d8c-06029402f225/join
-14:02:37.344 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | fdcd36ad | 
+18:23:36.373 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | f1318b0f | Secured POST /api/v1/projects/349380c0-ef60-4386-9fcc-45c9282a2c28/join
+18:23:36.375 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | f1318b0f | 
     select
         p1_0.id,
         p1_0.cover_url,
@@ -1581,7 +1580,7 @@ Hibernate:
         projects p1_0 
     where
         p1_0.id=?
-14:02:37.361 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | fdcd36ad | 
+18:23:36.377 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | f1318b0f | 
     select
         count(*) 
     from
@@ -1603,7 +1602,7 @@ Hibernate:
         )=(
             ?, ?
         )
-14:02:37.372 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | fdcd36ad | 
+18:23:36.379 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | f1318b0f | 
     select
         pm1_0.project_id,
         pm1_0.user_id,
@@ -1627,7 +1626,7 @@ Hibernate:
         (
             pm1_0.project_id, pm1_0.user_id
         ) in ((?, ?))
-14:02:37.377 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | fdcd36ad | 
+18:23:36.383 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | f1318b0f | 
     update
         projects p1_0 
     set
@@ -1641,7 +1640,7 @@ Hibernate:
         members_count=(p1_0.members_count+?) 
     where
         p1_0.id=?
-14:02:37.389 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | fdcd36ad | 
+18:23:36.386 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | f1318b0f | 
     insert 
     into
         project_members
@@ -1655,11 +1654,11 @@ Hibernate:
         (joined_at, role, project_id, user_id) 
     values
         (?, ?, ?, ?)
-14:02:37.413 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | fdcd36ad | POST /api/v1/projects/1f7c0579-f115-44b9-9d8c-06029402f225/join 200 98ms
-14:02:37.413 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 69bea928 | Securing GET /api/v1/projects/1f7c0579-f115-44b9-9d8c-06029402f225/members
-14:02:37.413 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.s.w.a.AnonymousAuthenticationFilter &amp#27;[0;39m | 69bea928 | Set SecurityContextHolder to anonymous SecurityContext
-14:02:37.413 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 69bea928 | Secured GET /api/v1/projects/1f7c0579-f115-44b9-9d8c-06029402f225/members
-14:02:37.413 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 69bea928 | 
+18:23:36.389 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | f1318b0f | POST /api/v1/projects/349380c0-ef60-4386-9fcc-45c9282a2c28/join 200 22ms
+18:23:36.390 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | a7983df1 | Securing GET /api/v1/projects/349380c0-ef60-4386-9fcc-45c9282a2c28/members
+18:23:36.390 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.s.w.a.AnonymousAuthenticationFilter &amp#27;[0;39m | a7983df1 | Set SecurityContextHolder to anonymous SecurityContext
+18:23:36.390 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | a7983df1 | Secured GET /api/v1/projects/349380c0-ef60-4386-9fcc-45c9282a2c28/members
+18:23:36.394 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | a7983df1 | 
     select
         pm1_0.project_id,
         pm1_0.user_id,
@@ -1679,7 +1678,7 @@ Hibernate:
         project_members pm1_0 
     where
         pm1_0.project_id=?
-14:02:37.438 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 69bea928 | 
+18:23:36.399 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | a7983df1 | 
     select
         u1_0.id,
         u1_0.is_active,
@@ -1723,9 +1722,9 @@ Hibernate:
         users u1_0 
     where
         u1_0.id = any (?)
-14:02:37.448 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | 69bea928 | GET /api/v1/projects/1f7c0579-f115-44b9-9d8c-06029402f225/members 200 35ms
-14:02:37.457 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 37a5c761 | Securing POST /api/v1/projects/1f7c0579-f115-44b9-9d8c-06029402f225/leave
-14:02:37.462 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 37a5c761 | 
+18:23:36.404 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | a7983df1 | GET /api/v1/projects/349380c0-ef60-4386-9fcc-45c9282a2c28/members 200 14ms
+18:23:36.408 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 587e1c24 | Securing POST /api/v1/projects/349380c0-ef60-4386-9fcc-45c9282a2c28/leave
+18:23:36.409 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 587e1c24 | 
     select
         u1_0.id,
         u1_0.is_active,
@@ -1769,8 +1768,8 @@ Hibernate:
         users u1_0 
     where
         u1_0.username=?
-14:02:37.470 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 37a5c761 | Secured POST /api/v1/projects/1f7c0579-f115-44b9-9d8c-06029402f225/leave
-14:02:37.470 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 37a5c761 | 
+18:23:36.413 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 587e1c24 | Secured POST /api/v1/projects/349380c0-ef60-4386-9fcc-45c9282a2c28/leave
+18:23:36.414 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 587e1c24 | 
     select
         pm1_0.project_id,
         pm1_0.user_id,
@@ -1794,7 +1793,7 @@ Hibernate:
         (
             pm1_0.project_id, pm1_0.user_id
         ) in ((?, ?))
-14:02:37.477 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 37a5c761 | 
+18:23:36.417 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 587e1c24 | 
     update
         projects p1_0 
     set
@@ -1808,7 +1807,7 @@ Hibernate:
         members_count=(p1_0.members_count+?) 
     where
         p1_0.id=?
-14:02:37.487 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 37a5c761 | 
+18:23:36.419 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 587e1c24 | 
     delete 
     from
         project_members 
@@ -1822,11 +1821,11 @@ Hibernate:
     where
         project_id=? 
         and user_id=?
-14:02:37.493 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | 37a5c761 | POST /api/v1/projects/1f7c0579-f115-44b9-9d8c-06029402f225/leave 200 36ms
-14:02:37.493 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | de137aa1 | Securing GET /api/v1/projects/1f7c0579-f115-44b9-9d8c-06029402f225/members
-14:02:37.493 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.s.w.a.AnonymousAuthenticationFilter &amp#27;[0;39m | de137aa1 | Set SecurityContextHolder to anonymous SecurityContext
-14:02:37.493 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | de137aa1 | Secured GET /api/v1/projects/1f7c0579-f115-44b9-9d8c-06029402f225/members
-14:02:37.493 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | de137aa1 | 
+18:23:36.423 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | 587e1c24 | POST /api/v1/projects/349380c0-ef60-4386-9fcc-45c9282a2c28/leave 200 16ms
+18:23:36.425 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 7f80df39 | Securing GET /api/v1/projects/349380c0-ef60-4386-9fcc-45c9282a2c28/members
+18:23:36.425 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.s.w.a.AnonymousAuthenticationFilter &amp#27;[0;39m | 7f80df39 | Set SecurityContextHolder to anonymous SecurityContext
+18:23:36.425 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 7f80df39 | Secured GET /api/v1/projects/349380c0-ef60-4386-9fcc-45c9282a2c28/members
+18:23:36.426 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 7f80df39 | 
     select
         pm1_0.project_id,
         pm1_0.user_id,
@@ -1846,7 +1845,7 @@ Hibernate:
         project_members pm1_0 
     where
         pm1_0.project_id=?
-14:02:37.503 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | de137aa1 | 
+18:23:36.428 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 7f80df39 | 
     select
         u1_0.id,
         u1_0.is_active,
@@ -1890,14 +1889,14 @@ Hibernate:
         users u1_0 
     where
         u1_0.id=?
-14:02:37.513 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | de137aa1 | GET /api/v1/projects/1f7c0579-f115-44b9-9d8c-06029402f225/members 200 20ms
+18:23:36.432 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | 7f80df39 | GET /api/v1/projects/349380c0-ef60-4386-9fcc-45c9282a2c28/members 200 8ms
 ]]></system-out>
   </testcase>
-  <testcase name="getProjects_returnsPublicList" classname="com.synora.modules.project.ProjectControllerTest" time="0.485">
-    <system-out><![CDATA[14:02:37.513 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 5fa76442 | Securing POST /api/v1/auth/register
-14:02:37.513 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.s.w.a.AnonymousAuthenticationFilter &amp#27;[0;39m | 5fa76442 | Set SecurityContextHolder to anonymous SecurityContext
-14:02:37.513 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 5fa76442 | Secured POST /api/v1/auth/register
-14:02:37.513 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 5fa76442 | 
+  <testcase name="getProjects_returnsPublicList" classname="com.synora.modules.project.ProjectControllerTest" time="0.264">
+    <system-out><![CDATA[18:23:36.434 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 2e459ce1 | Securing POST /api/v1/auth/register
+18:23:36.434 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.s.w.a.AnonymousAuthenticationFilter &amp#27;[0;39m | 2e459ce1 | Set SecurityContextHolder to anonymous SecurityContext
+18:23:36.434 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | 2e459ce1 | Secured POST /api/v1/auth/register
+18:23:36.437 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 2e459ce1 | 
     select
         u1_0.id 
     from
@@ -1915,7 +1914,7 @@ Hibernate:
         u1_0.username=? 
     fetch
         first ? rows only
-14:02:37.527 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 5fa76442 | 
+18:23:36.440 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 2e459ce1 | 
     select
         u1_0.id 
     from
@@ -1933,7 +1932,7 @@ Hibernate:
         u1_0.email=? 
     fetch
         first ? rows only
-14:02:37.924 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 5fa76442 | 
+18:23:36.650 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 2e459ce1 | 
     insert 
     into
         users
@@ -1947,7 +1946,7 @@ Hibernate:
         (is_active, avatar_url, is_banned, bio, created_at, display_name, email, github_url, location, password_hash, reputation_score, role, updated_at, username, website_url, id) 
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-14:02:37.927 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 5fa76442 | 
+18:23:36.660 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | 2e459ce1 | 
     insert 
     into
         refresh_tokens
@@ -1963,9 +1962,9 @@ Hibernate:
     values
         (?, ?, ?, ?) 
     returning id
-14:02:37.934 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | 5fa76442 | POST /api/v1/auth/register 201 421ms
-14:02:37.934 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | ee393093 | Securing POST /api/v1/projects
-14:02:37.937 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | ee393093 | 
+18:23:36.663 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | 2e459ce1 | POST /api/v1/auth/register 201 229ms
+18:23:36.663 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | a89be90f | Securing POST /api/v1/projects
+18:23:36.665 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | a89be90f | 
     select
         u1_0.id,
         u1_0.is_active,
@@ -2009,8 +2008,8 @@ Hibernate:
         users u1_0 
     where
         u1_0.username=?
-14:02:37.944 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | ee393093 | Secured POST /api/v1/projects
-14:02:37.947 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | ee393093 | 
+18:23:36.668 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | a89be90f | Secured POST /api/v1/projects
+18:23:36.670 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | a89be90f | 
     select
         pm1_0.project_id,
         pm1_0.user_id,
@@ -2034,7 +2033,7 @@ Hibernate:
         (
             pm1_0.project_id, pm1_0.user_id
         ) in ((?, ?))
-14:02:37.953 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | ee393093 | 
+18:23:36.672 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | a89be90f | 
     insert 
     into
         projects
@@ -2048,7 +2047,7 @@ Hibernate:
         (cover_url, created_at, description, is_public, members_count, name, owner_id, repo_url, stars_count, status, updated_at, website_url, id) 
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-14:02:37.956 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | ee393093 | 
+18:23:36.675 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | a89be90f | 
     insert 
     into
         project_members
@@ -2062,7 +2061,7 @@ Hibernate:
         (joined_at, role, project_id, user_id) 
     values
         (?, ?, ?, ?)
-14:02:37.959 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | ee393093 | 
+18:23:36.676 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | a89be90f | 
     select
         pm1_0.project_id,
         pm1_0.user_id 
@@ -2084,11 +2083,11 @@ Hibernate:
         and pm1_0.user_id=? 
     fetch
         first ? rows only
-14:02:37.966 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | ee393093 | POST /api/v1/projects 201 32ms
-14:02:37.967 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | c40021e1 | Securing GET /api/v1/projects
-14:02:37.967 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.s.w.a.AnonymousAuthenticationFilter &amp#27;[0;39m | c40021e1 | Set SecurityContextHolder to anonymous SecurityContext
-14:02:37.967 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | c40021e1 | Secured GET /api/v1/projects
-14:02:37.974 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | c40021e1 | 
+18:23:36.678 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | a89be90f | POST /api/v1/projects 201 15ms
+18:23:36.679 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | ffe4f4be | Securing GET /api/v1/projects
+18:23:36.679 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.s.w.a.AnonymousAuthenticationFilter &amp#27;[0;39m | ffe4f4be | Set SecurityContextHolder to anonymous SecurityContext
+18:23:36.679 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36mo.s.security.web.FilterChainProxy       &amp#27;[0;39m | ffe4f4be | Secured GET /api/v1/projects
+18:23:36.682 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | ffe4f4be | 
     select
         p1_0.id,
         p1_0.cover_url,
@@ -2138,7 +2137,7 @@ Hibernate:
         ? rows 
     fetch
         first ? rows only
-14:02:37.979 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | c40021e1 | 
+18:23:36.688 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | ffe4f4be | 
     select
         u1_0.id,
         u1_0.is_active,
@@ -2182,7 +2181,7 @@ Hibernate:
         users u1_0 
     where
         u1_0.id = any (?)
-14:02:37.986 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | c40021e1 | 
+18:23:36.691 &amp#27;[39mDEBUG&amp#27;[0;39m [           main] &amp#27;[36morg.hibernate.SQL                       &amp#27;[0;39m | ffe4f4be | 
     select
         t1_0.project_id,
         t1_1.id,
@@ -2210,7 +2209,7 @@ Hibernate:
             on t1_1.id=t1_0.tag_id 
     where
         t1_0.project_id = any (?)
-14:02:37.993 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | c40021e1 | GET /api/v1/projects 200 27ms
+18:23:36.696 &amp#27;[34mINFO &amp#27;[0;39m [           main] &amp#27;[36mcom.synora.config.RequestLoggingFilter  &amp#27;[0;39m | ffe4f4be | GET /api/v1/projects 200 17ms
 ]]></system-out>
   </testcase>
 </testsuite>
