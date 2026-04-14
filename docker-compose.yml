@@ -7,9 +7,7 @@ services:
     environment:
       POSTGRES_DB: ${DB_NAME:-synora}
       POSTGRES_USER: ${DB_USER:-synora}
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-synora_pass}
-    ports:
-      - "${DB_PORT:-5432}:5432"
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD is required}
     volumes:
       - pg_data:/var/lib/postgresql/data
     healthcheck:
@@ -17,22 +15,34 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - synora-net
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   # ── Redis ──
   redis:
     image: redis:7-alpine
     container_name: synora-redis
     restart: unless-stopped
-    command: redis-server --appendonly yes
-    ports:
-      - "${REDIS_PORT:-6379}:6379"
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:?REDIS_PASSWORD is required}
     volumes:
       - redis_data:/data
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD}", "ping"]
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - synora-net
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   # ── MinIO (S3) ──
   minio:
@@ -41,11 +51,8 @@ services:
     restart: unless-stopped
     command: server /data --console-address ":9001"
     environment:
-      MINIO_ROOT_USER: ${S3_ACCESS_KEY:-minioadmin}
-      MINIO_ROOT_PASSWORD: ${S3_SECRET_KEY:-minioadmin}
-    ports:
-      - "${MINIO_API_PORT:-9000}:9000"
-      - "${MINIO_CONSOLE_PORT:-9001}:9001"
+      MINIO_ROOT_USER: ${S3_ACCESS_KEY:?S3_ACCESS_KEY is required}
+      MINIO_ROOT_PASSWORD: ${S3_SECRET_KEY:?S3_SECRET_KEY is required}
     volumes:
       - minio_data:/data
     healthcheck:
@@ -53,21 +60,35 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - synora-net
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
 
-  # ── MinIO bucket init ──
+  # ── MinIO bucket init (one-shot) ──
   minio-init:
     image: minio/mc:latest
     container_name: synora-minio-init
+    restart: "no"
     depends_on:
       minio:
         condition: service_healthy
+    environment:
+      S3_ACCESS_KEY: ${S3_ACCESS_KEY:?S3_ACCESS_KEY is required}
+      S3_SECRET_KEY: ${S3_SECRET_KEY:?S3_SECRET_KEY is required}
+      S3_BUCKET: ${S3_BUCKET:-synora-files}
     entrypoint: >
       /bin/sh -c "
-        mc alias set synora http://minio:9000 $${MINIO_ROOT_USER:-minioadmin} $${MINIO_ROOT_PASSWORD:-minioadmin};
-        mc mb --ignore-existing synora/$${S3_BUCKET:-synora-files};
-        mc anonymous set download synora/$${S3_BUCKET:-synora-files}/public;
+        mc alias set synora http://minio:9000 $${S3_ACCESS_KEY} $${S3_SECRET_KEY};
+        mc mb --ignore-existing synora/$${S3_BUCKET};
+        mc anonymous set download synora/$${S3_BUCKET}/public;
         exit 0;
       "
+    networks:
+      - synora-net
 
   # ── Backend (Spring Boot) ──
   backend:
@@ -86,26 +107,32 @@ services:
     environment:
       DB_URL: jdbc:postgresql://postgres:5432/${DB_NAME:-synora}
       DB_USER: ${DB_USER:-synora}
-      DB_PASSWORD: ${DB_PASSWORD:-synora_pass}
+      DB_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD is required}
       REDIS_HOST: redis
       REDIS_PORT: 6379
-      REDIS_PASSWORD: ${REDIS_PASSWORD:-}
+      REDIS_PASSWORD: ${REDIS_PASSWORD:?REDIS_PASSWORD is required}
       S3_ENDPOINT: http://minio:9000
       S3_BUCKET: ${S3_BUCKET:-synora-files}
-      S3_ACCESS_KEY: ${S3_ACCESS_KEY:-minioadmin}
-      S3_SECRET_KEY: ${S3_SECRET_KEY:-minioadmin}
+      S3_ACCESS_KEY: ${S3_ACCESS_KEY:?S3_ACCESS_KEY is required}
+      S3_SECRET_KEY: ${S3_SECRET_KEY:?S3_SECRET_KEY is required}
       S3_REGION: ${S3_REGION:-us-east-1}
-      JWT_SECRET: ${JWT_SECRET:-changeme-in-production-use-256-bit-key}
+      JWT_SECRET: ${JWT_SECRET:?JWT_SECRET is required}
       SERVER_PORT: 8080
-      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILE:-default}
-    ports:
-      - "${BACKEND_PORT:-8080}:8080"
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILE:-prod}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://localhost:8080/actuator/health"]
       interval: 30s
       timeout: 5s
       retries: 3
       start_period: 40s
+    networks:
+      - synora-net
+    logging:
+      driver: json-file
+      options:
+        max-size: "20m"
+        max-file: "5"
 
   # ── Frontend (Next.js) ──
   frontend:
@@ -126,8 +153,15 @@ services:
       timeout: 5s
       retries: 3
       start_period: 20s
+    networks:
+      - synora-net
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
 
-  # ── Nginx (reverse proxy) ──
+  # ── Nginx (reverse proxy — only externally exposed service) ──
   nginx:
     image: nginx:alpine
     container_name: synora-nginx
@@ -142,8 +176,25 @@ services:
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./nginx/conf.d:/etc/nginx/conf.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost/ || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    networks:
+      - synora-net
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
 
 volumes:
   pg_data:
   redis_data:
   minio_data:
+
+networks:
+  synora-net:
+    driver: bridge

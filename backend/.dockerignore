@@ -1,6 +1,9 @@
 target/
 .idea/
-*.iml
 .git/
 .gitignore
-README.md
+*.iml
+*.md
+.env
+.env.*
+src/test/
