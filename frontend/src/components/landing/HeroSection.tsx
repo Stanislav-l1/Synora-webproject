@@ -2,122 +2,117 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { Code2, MessageSquare, Users, GitBranch, Calendar } from 'lucide-react';
+import { ArrowRight, Sparkles } from 'lucide-react';
+import { TerminalPulse } from './TerminalPulse';
+import { useT } from '@/lib/i18n';
 
-const floatingCards = [
-  {
-    icon: <Code2 size={16} />,
-    label: 'New Project',
-    detail: 'synora-cli v2.0',
-    className: 'top-[15%] left-[5%] rotate-[-6deg]',
-    animation: 'animate-float',
-  },
-  {
-    icon: <MessageSquare size={16} />,
-    label: 'Alex shared',
-    detail: 'Just shipped dark mode!',
-    className: 'top-[8%] right-[8%] rotate-[4deg]',
-    animation: 'animate-float-delayed',
-  },
-  {
-    icon: <Users size={16} />,
-    label: 'Community',
-    detail: 'Rust Devs — 2.4k members',
-    className: 'bottom-[20%] left-[2%] rotate-[3deg]',
-    animation: 'animate-float-slow',
-  },
-  {
-    icon: <GitBranch size={16} />,
-    label: 'Pull Request',
-    detail: '#142 merged',
-    className: 'bottom-[25%] right-[5%] rotate-[-3deg]',
-    animation: 'animate-float',
-  },
-  {
-    icon: <Calendar size={16} />,
-    label: 'Event',
-    detail: 'WebDev Conf — Tomorrow',
-    className: 'top-[45%] right-[2%] rotate-[2deg]',
-    animation: 'animate-float-delayed',
-  },
-];
-
-const headlineWords = ['Where', 'developers', 'build,', 'share,', 'and', 'grow', 'together.'];
+const ITALIC_WORDS = new Set(['build,', 'share,', 'grow', 'строят,', 'делятся', 'растут']);
 
 export function HeroSection() {
+  const t = useT();
+  const headlineWords = t.landing.heroHeadline.split(' ');
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-retro-bg pt-16">
-      {/* Subtle radial gradient */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(204,120,92,0.06)_0%,_transparent_70%)]" />
+    <section className="relative min-h-[calc(100vh-64px)] flex items-center overflow-hidden bg-retro-bg pt-24 pb-16">
+      {/* Decorative blobs */}
+      <div className="blob-tyrian w-[520px] h-[520px] -top-40 -left-40 opacity-70 animate-blob" />
+      <div className="blob-banana w-[480px] h-[480px] top-1/3 -right-40 opacity-80 animate-blob [animation-delay:4s]" />
+      <div className="blob-moss w-[360px] h-[360px] -bottom-24 left-1/4 opacity-50 animate-blob [animation-delay:8s]" />
 
-      {/* Floating cards */}
-      <div className="absolute inset-0 hidden lg:block">
-        {floatingCards.map((card, i) => (
-          <div
-            key={i}
-            className={`absolute ${card.className} ${card.animation}`}
+      {/* Paper grain */}
+      <div className="absolute inset-0 paper-noise opacity-60 pointer-events-none" aria-hidden />
+
+      {/* Ribbons */}
+      <div className="ribbon w-[260px] top-[22%] left-[5%] animate-ribbon" />
+      <div className="ribbon w-[180px] bottom-[18%] right-[8%] animate-ribbon [animation-delay:2s]" />
+
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 grid lg:grid-cols-[1.1fr_1fr] gap-12 items-center">
+        {/* Left: headline + CTAs */}
+        <div className="text-left">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-banana-soft border border-banana-deep/40 text-moss-deep text-xs font-medium mb-6"
           >
-            <div className="retro-card px-4 py-3 flex items-center gap-3 select-none">
-              <div className="w-8 h-8 rounded-lg bg-retro-bg-alt flex items-center justify-center text-retro-accent shrink-0">
-                {card.icon}
-              </div>
-              <div>
-                <p className="text-xs font-medium text-retro-text">{card.label}</p>
-                <p className="text-xs text-retro-text-muted">{card.detail}</p>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
+            <Sparkles size={14} className="text-tyrian" />
+            {t.landing.heroBadge}
+          </motion.div>
 
-      {/* Content */}
-      <div className="relative z-10 max-w-3xl mx-auto px-6 text-center">
-        <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl leading-[1.1] text-retro-ink mb-6">
-          {headlineWords.map((word, i) => (
-            <motion.span
-              key={i}
-              className={`inline-block mr-[0.3em] ${
-                word === 'build,' || word === 'share,' || word === 'grow'
-                  ? 'italic text-retro-accent'
-                  : ''
-              }`}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 + i * 0.1, ease: 'easeOut' }}
+          <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl leading-[1.05] text-retro-ink mb-6 tracking-tight">
+            {headlineWords.map((word, i) => (
+              <motion.span
+                key={i}
+                className={`inline-block mr-[0.25em] ${
+                  ITALIC_WORDS.has(word) ? 'italic text-gradient' : ''
+                }`}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 + i * 0.08, ease: 'easeOut' }}
+              >
+                {word}
+              </motion.span>
+            ))}
+          </h1>
+
+          <motion.p
+            className="text-lg md:text-xl text-retro-text-muted max-w-xl mb-10 leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.9, ease: 'easeOut' }}
+          >
+            {t.landing.heroSubtitle}
+          </motion.p>
+
+          <motion.div
+            className="flex flex-col sm:flex-row items-start sm:items-center gap-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 1.1, ease: 'easeOut' }}
+          >
+            <Link
+              href="/register"
+              className="group inline-flex items-center gap-2 bg-tyrian hover:bg-tyrian-soft text-cloud font-medium px-7 py-3.5 rounded-full text-base transition-all shadow-tyrian hover:shadow-lg hover:-translate-y-0.5"
             >
-              {word}
-            </motion.span>
-          ))}
-        </h1>
+              {t.landing.heroJoin}
+              <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
+            </Link>
+            <Link
+              href="#features"
+              className="inline-flex items-center gap-2 border border-retro-border hover:border-tyrian text-retro-text hover:text-tyrian font-medium px-7 py-3.5 rounded-full text-base transition-all"
+            >
+              {t.landing.heroExplore}
+            </Link>
+          </motion.div>
 
-        <motion.p
-          className="text-lg md:text-xl text-retro-text-muted max-w-xl mx-auto mb-10 leading-relaxed"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.1, ease: 'easeOut' }}
-        >
-          The platform for developers to collaborate on projects, share ideas,
-          build communities, and attend events — all in one place.
-        </motion.p>
+          <motion.div
+            className="mt-10 flex items-center gap-6 text-sm text-retro-text-muted"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 1.4 }}
+          >
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-tyrian" />
+              {t.landing.heroTagNetwork}
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-banana-deep" />
+              {t.landing.heroTagChat}
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-moss" />
+              {t.landing.heroTagRep}
+            </div>
+          </motion.div>
+        </div>
 
+        {/* Right: terminal animation */}
         <motion.div
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.3, ease: 'easeOut' }}
+          initial={{ opacity: 0, x: 30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.7, delay: 0.5, ease: 'easeOut' }}
+          className="relative"
         >
-          <Link
-            href="/register"
-            className="bg-retro-accent hover:bg-retro-accent-hover text-white font-medium px-8 py-3 rounded-full text-base transition-colors shadow-sm"
-          >
-            Join Synora
-          </Link>
-          <Link
-            href="#features"
-            className="border border-retro-border hover:border-retro-accent text-retro-text font-medium px-8 py-3 rounded-full text-base transition-colors"
-          >
-            Explore Features
-          </Link>
+          <TerminalPulse limit={30} />
         </motion.div>
       </div>
     </section>

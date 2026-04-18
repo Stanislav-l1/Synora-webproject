@@ -38,4 +38,6 @@ public interface PostRepository extends JpaRepository<Post, UUID> {
     @Modifying
     @Query("UPDATE Post p SET p.commentsCount = p.commentsCount + :delta WHERE p.id = :id")
     void adjustComments(@Param("id") UUID id, @Param("delta") int delta);
+
+    long countByAuthorId(UUID authorId);
 }

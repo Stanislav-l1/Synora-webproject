@@ -126,6 +126,13 @@ public class ProjectService {
     }
 
     @Transactional(readOnly = true)
+    public PageResponse<ProjectSummaryResponse> getByOwner(String username, int page, int size) {
+        var pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdAt"));
+        return PageResponse.from(
+                projectRepository.findByOwnerUsername(username, pageable).map(this::toSummary));
+    }
+
+    @Transactional(readOnly = true)
     public List<ProjectMemberResponse> getMembers(UUID id) {
         return memberRepository.findByIdProjectId(id).stream()
                 .map(m -> ProjectMemberResponse.builder()

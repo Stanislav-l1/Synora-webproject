@@ -31,4 +31,21 @@ public class TagController {
             @RequestParam String q) {
         return ResponseEntity.ok(ApiResponse.ok(tagService.searchTags(q)));
     }
+
+    @Operation(summary = "Top trending tags by usage")
+    @GetMapping("/trending")
+    public ResponseEntity<ApiResponse<List<java.util.Map<String, Object>>>> trending(
+            @RequestParam(defaultValue = "5") int limit) {
+        int capped = Math.max(1, Math.min(limit, 50));
+        List<java.util.Map<String, Object>> result = tagService.getAllTags().stream()
+                .limit(capped)
+                .map(t -> {
+                    java.util.Map<String, Object> m = new java.util.HashMap<>();
+                    m.put("tag", t.getName());
+                    m.put("posts", t.getUsageCount());
+                    return m;
+                })
+                .toList();
+        return ResponseEntity.ok(ApiResponse.ok(result));
+    }
 }

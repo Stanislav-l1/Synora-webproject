@@ -1,7 +1,10 @@
+'use client';
+
 import Link from 'next/link';
 import { Users, Star } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
+import { useT } from '@/lib/i18n';
 
 interface ProjectCardProps {
   id: string;
@@ -15,11 +18,11 @@ interface ProjectCardProps {
 }
 
 const gradients = [
-  'from-accent/60 to-info/40',
-  'from-success/50 to-accent/40',
-  'from-warning/50 to-danger/40',
-  'from-info/60 to-accent/40',
-  'from-danger/50 to-warning/40',
+  'from-tyrian to-tyrian-glow',
+  'from-moss via-moss-velvet to-banana-deep',
+  'from-banana via-banana-deep to-moss',
+  'from-tyrian-glow via-tyrian to-moss-deep',
+  'from-moss-deep via-tyrian to-banana',
 ];
 
 export function ProjectCard({
@@ -32,20 +35,21 @@ export function ProjectCard({
   progress,
   coverGradient,
 }: ProjectCardProps) {
+  const t = useT();
   const gradient = coverGradient || gradients[name.length % gradients.length];
 
   return (
     <Link href={`/projects/${id}`} className="group block">
-      <div className="bg-surface-secondary border border-border rounded-xl overflow-hidden hover:border-border-hover hover:shadow-sm transition-all">
+      <div className="bg-cloud-soft border border-cloud-deep rounded-xl overflow-hidden hover:border-moss-soft hover:shadow-md hover:-translate-y-0.5 transition-all duration-200">
         {/* Cover */}
         <div className={cn('h-24 bg-gradient-to-br', gradient)} />
 
         {/* Body */}
         <div className="p-4">
-          <h3 className="text-sm font-semibold text-content-primary group-hover:text-accent-light transition-colors truncate">
+          <h3 className="text-sm font-semibold text-cloud-ink group-hover:text-tyrian transition-colors truncate">
             {name}
           </h3>
-          <p className="text-xs text-content-secondary mt-1 line-clamp-2">
+          <p className="text-xs text-cloud-muted mt-1 line-clamp-2">
             {description}
           </p>
 
@@ -59,13 +63,13 @@ export function ProjectCard({
           )}
 
           {/* Footer */}
-          <div className="mt-3 flex items-center justify-between text-xs text-content-tertiary">
+          <div className="mt-3 flex items-center justify-between text-xs text-cloud-muted">
             <div className="flex items-center gap-3">
               <span className="flex items-center gap-1">
                 <Users size={12} /> {members}
               </span>
               <span className="flex items-center gap-1">
-                <Star size={12} /> {stars}
+                <Star size={12} className="text-banana-deep" /> {stars}
               </span>
             </div>
           </div>
@@ -73,12 +77,12 @@ export function ProjectCard({
           {/* Progress */}
           <div className="mt-2.5">
             <div className="flex items-center justify-between mb-1">
-              <span className="text-[10px] text-content-tertiary">Progress</span>
-              <span className="text-[10px] font-medium text-content-secondary">{progress}%</span>
+              <span className="text-[10px] text-cloud-muted">{t.projects.progress}</span>
+              <span className="text-[10px] font-medium text-cloud-ink/80">{progress}%</span>
             </div>
-            <div className="h-1.5 bg-surface-tertiary rounded-full overflow-hidden">
+            <div className="h-1.5 bg-cloud-deep rounded-full overflow-hidden">
               <div
-                className="h-full bg-accent rounded-full transition-all duration-500"
+                className={cn('h-full rounded-full transition-all duration-500 bg-gradient-to-r from-tyrian to-tyrian-glow', `w-[${progress}%]`)}
                 style={{ width: `${progress}%` }}
               />
             </div>

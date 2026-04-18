@@ -105,4 +105,14 @@ public class ProjectController {
 
         return ResponseEntity.ok(ApiResponse.ok(projectService.getMembers(id)));
     }
+
+    @Operation(summary = "List projects owned by a user")
+    @GetMapping("/by/{username}")
+    public ResponseEntity<ApiResponse<PageResponse<ProjectSummaryResponse>>> getByOwner(
+            @PathVariable String username,
+            @RequestParam(defaultValue = "0")  int page,
+            @RequestParam(defaultValue = "20") int size) {
+
+        return ResponseEntity.ok(ApiResponse.ok(projectService.getByOwner(username, page, size)));
+    }
 }

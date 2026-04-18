@@ -5,6 +5,9 @@ export interface User {
   displayName: string | null;
   bio: string | null;
   avatarUrl: string | null;
+  location: string | null;
+  websiteUrl: string | null;
+  githubUrl: string | null;
   role: 'USER' | 'MODERATOR' | 'ADMIN';
   reputationScore: number;
   active: boolean;
@@ -40,6 +43,9 @@ export interface FollowStats {
 }
 
 export interface UpdateProfileRequest {
-  displayName?: string;
-  bio?: string;
+  displayName?: string | null;
+  bio?: string | null;
+  location?: string | null;
+  websiteUrl?: string | null;
+  githubUrl?: string | null;
 }

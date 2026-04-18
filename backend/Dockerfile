@@ -25,7 +25,8 @@ WORKDIR /app
 
 COPY --from=build /app/app.jar app.jar
 
-RUN chown -R synora:synora /app
+RUN mkdir -p /var/log/synora && \
+    chown -R synora:synora /app /var/log/synora
 USER synora
 
 EXPOSE 8080

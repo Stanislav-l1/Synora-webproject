@@ -7,3 +7,4 @@ export { CommunitySection } from './CommunitySection';
 export { CTASection } from './CTASection';
 export { LandingFooter } from './LandingFooter';
 export { ScrollReveal } from './ScrollReveal';
+export { TerminalPulse } from './TerminalPulse';

@@ -59,4 +59,21 @@ public class UserController {
 
         return ResponseEntity.ok(ApiResponse.ok(userService.getTopByReputation(page, size)));
     }
+
+    @Operation(summary = "Suggested users to follow")
+    @GetMapping("/suggested")
+    public ResponseEntity<ApiResponse<java.util.List<UserProfileResponse>>> suggested(
+            @AuthenticationPrincipal User currentUser,
+            @RequestParam(defaultValue = "3") int limit) {
+        int capped = Math.max(1, Math.min(limit, 20));
+        UUID excludeId = currentUser != null ? currentUser.getId() : null;
+        return ResponseEntity.ok(ApiResponse.ok(userService.getSuggested(excludeId, capped)));
+    }
+
+    @Operation(summary = "Aggregate stats for a user")
+    @GetMapping("/{id}/stats")
+    public ResponseEntity<ApiResponse<java.util.Map<String, Long>>> stats(
+            @PathVariable UUID id) {
+        return ResponseEntity.ok(ApiResponse.ok(userService.getStats(id)));
+    }
 }

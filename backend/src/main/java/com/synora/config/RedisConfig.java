@@ -58,6 +58,8 @@ public class RedisConfig {
                         config.entryTtl(Duration.ofHours(1)))
                 .withCacheConfiguration("notifications",
                         config.entryTtl(Duration.ofMinutes(2)))
+                .withCacheConfiguration("pulse",
+                        config.entryTtl(Duration.ofSeconds(30)))
                 .build();
     }
 }

@@ -52,6 +52,8 @@ public class SecurityConfig {
             "/api/v1/users/top",
             "/api/v1/projects/**",
             "/api/v1/tags",
+            "/api/v1/tags/**",
+            "/api/v1/pulse/**",
             "/api/v1/search/**",
             "/actuator/health",
             "/swagger-ui/**",

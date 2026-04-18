@@ -3,16 +3,17 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
-
-const navLinks = [
-  { label: 'Features', href: '#features' },
-  { label: 'Community', href: '#community' },
-  { label: 'Feed', href: '#feed' },
-];
+import { useT, LocaleSwitcher } from '@/lib/i18n';
 
 export function LandingNavbar() {
+  const t = useT();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const navLinks = [
+    { label: t.landing.navFeatures, href: '#features' },
+    { label: t.landing.navCommunity, href: '#community' },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -29,7 +30,6 @@ export function LandingNavbar() {
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group">
           <div className="w-8 h-8 rounded-lg bg-retro-accent flex items-center justify-center text-white font-serif text-lg font-bold">
             S
@@ -39,7 +39,6 @@ export function LandingNavbar() {
           </span>
         </Link>
 
-        {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <a
@@ -52,32 +51,31 @@ export function LandingNavbar() {
           ))}
         </div>
 
-        {/* Desktop CTA */}
         <div className="hidden md:flex items-center gap-4">
+          <LocaleSwitcher />
           <Link
             href="/login"
             className="text-retro-text-muted hover:text-retro-text text-sm font-medium transition-colors"
           >
-            Sign In
+            {t.landing.navSignIn}
           </Link>
           <Link
             href="/register"
             className="bg-retro-accent hover:bg-retro-accent-hover text-white text-sm font-medium px-5 py-2 rounded-full transition-colors"
           >
-            Get Started
+            {t.landing.navJoin}
           </Link>
         </div>
 
-        {/* Mobile hamburger */}
         <button
           className="md:hidden text-retro-text p-2"
           onClick={() => setMobileOpen(!mobileOpen)}
+          aria-label="menu"
         >
           {mobileOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
       </div>
 
-      {/* Mobile menu */}
       {mobileOpen && (
         <div className="md:hidden bg-retro-bg border-t border-retro-border px-6 py-4 space-y-3">
           {navLinks.map((link) => (
@@ -91,17 +89,15 @@ export function LandingNavbar() {
             </a>
           ))}
           <div className="pt-3 border-t border-retro-border flex flex-col gap-2">
-            <Link
-              href="/login"
-              className="text-retro-text-muted text-sm font-medium py-2"
-            >
-              Sign In
+            <LocaleSwitcher className="self-start" />
+            <Link href="/login" className="text-retro-text-muted text-sm font-medium py-2">
+              {t.landing.navSignIn}
             </Link>
             <Link
               href="/register"
               className="bg-retro-accent text-white text-sm font-medium px-5 py-2 rounded-full text-center"
             >
-              Get Started
+              {t.landing.navJoin}
             </Link>
           </div>
         </div>

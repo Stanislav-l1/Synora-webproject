@@ -17,39 +17,42 @@ interface TabBarProps {
 
 export function TabBar({ tabs, activeTab, onChange, className }: TabBarProps) {
   return (
-    <div className={cn('flex border-b border-border', className)}>
-      {tabs.map((tab) => (
-        <button
-          key={tab.id}
-          onClick={() => onChange(tab.id)}
-          className={cn(
-            'relative px-4 py-3 text-sm font-medium transition-colors duration-150',
-            'hover:text-content-primary',
-            activeTab === tab.id
-              ? 'text-content-primary'
-              : 'text-content-secondary',
-          )}
-        >
-          <span className="flex items-center gap-2">
-            {tab.label}
-            {tab.count !== undefined && (
-              <span
-                className={cn(
-                  'text-xs px-1.5 py-0.5 rounded-full',
-                  activeTab === tab.id
-                    ? 'bg-accent-muted text-accent-light'
-                    : 'bg-surface-tertiary text-content-tertiary',
-                )}
-              >
-                {tab.count}
-              </span>
+    <div className={cn('flex border-b border-cloud-deep', className)}>
+      {tabs.map((tab) => {
+        const isActive = activeTab === tab.id;
+        return (
+          <button
+            key={tab.id}
+            type="button"
+            onClick={() => onChange(tab.id)}
+            className={cn(
+              'relative px-4 py-3 text-sm transition-colors duration-150',
+              isActive
+                ? 'text-cloud-ink font-semibold'
+                : 'text-cloud-muted font-medium hover:text-cloud-ink',
             )}
-          </span>
-          {activeTab === tab.id && (
-            <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent rounded-full" />
-          )}
-        </button>
-      ))}
+          >
+            <span className="flex items-center gap-2">
+              {tab.label}
+              {tab.count !== undefined && (
+                <span
+                  className={cn(
+                    'text-xs px-1.5 py-0.5 rounded-full',
+                    isActive
+                      ? 'bg-tyrian/10 text-tyrian'
+                      : 'bg-cloud-deep text-cloud-muted',
+                  )}
+                >
+                  {tab.count}
+                </span>
+              )}
+            </span>
+            {isActive && (
+              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-tyrian rounded-full" />
+            )}
+          </button>
+        );
+      })}
     </div>
   );
 }

@@ -1,28 +1,39 @@
+'use client';
+
 import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 import { ScrollReveal } from './ScrollReveal';
+import { useT } from '@/lib/i18n';
 
 export function CTASection() {
+  const t = useT();
   return (
-    <section className="bg-retro-ink py-24 px-6">
-      <ScrollReveal className="max-w-3xl mx-auto text-center">
-        <h2 className="font-serif text-4xl md:text-5xl text-retro-bg mb-4">
-          Ready to join the community?
+    <section className="relative bg-moss-deep py-24 px-6 overflow-hidden">
+      <div className="absolute top-0 inset-x-0 h-2 bg-gradient-to-r from-tyrian via-banana to-tyrian" />
+
+      <div className="blob-tyrian w-[500px] h-[500px] -top-32 -left-32 opacity-60" />
+      <div className="blob-banana w-[420px] h-[420px] -bottom-28 -right-28 opacity-50" />
+
+      <ScrollReveal className="relative max-w-3xl mx-auto text-center">
+        <h2 className="font-serif text-4xl md:text-5xl text-cloud mb-4 leading-tight">
+          {t.landing.ctaHeadline}
         </h2>
-        <p className="text-retro-bg/60 text-lg mb-10 max-w-xl mx-auto">
-          Start building projects, connecting with developers, and growing your skills today.
+        <p className="text-cloud/70 text-lg mb-10 max-w-xl mx-auto leading-relaxed">
+          {t.landing.ctaSubtitle}
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link
             href="/register"
-            className="bg-retro-accent hover:bg-retro-accent-hover text-white font-medium px-8 py-3 rounded-full text-base transition-colors"
+            className="group inline-flex items-center gap-2 bg-banana hover:bg-banana-deep text-moss-deep font-semibold px-8 py-3.5 rounded-full text-base transition-all shadow-lg hover:shadow-tyrian hover:-translate-y-0.5"
           >
-            Create your account
+            {t.landing.ctaButton}
+            <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
           </Link>
           <Link
             href="/login"
-            className="text-retro-bg/60 hover:text-retro-bg text-sm font-medium transition-colors"
+            className="text-cloud/70 hover:text-cloud text-sm font-medium transition-colors"
           >
-            Already have an account? Sign in &rarr;
+            {t.auth.haveAccount} {t.auth.signIn} &rarr;
           </Link>
         </div>
       </ScrollReveal>

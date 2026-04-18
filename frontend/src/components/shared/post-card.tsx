@@ -5,6 +5,7 @@ import { Heart, MessageCircle, Bookmark, Share2, MoreHorizontal } from 'lucide-r
 import { Avatar } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
+import { useT } from '@/lib/i18n';
 
 interface PostCardProps {
   author: {
@@ -33,8 +34,9 @@ export function PostCard({
   liked = false,
   bookmarked = false,
 }: PostCardProps) {
+  const t = useT();
   return (
-    <article className="bg-surface-secondary border border-border rounded-md p-4 hover:border-border-hover transition-colors animate-fade-in">
+    <article className="bg-cloud-soft border border-cloud-deep rounded-lg p-4 hover:border-moss-soft hover:shadow-md transition-all duration-200 animate-fade-in">
       {/* Header */}
       <div className="flex items-start justify-between">
         <div className="flex items-center gap-3">
@@ -44,30 +46,30 @@ export function PostCard({
           <div>
             <Link
               href={`/profile/${author.handle}`}
-              className="text-sm font-semibold text-content-primary hover:text-accent-light transition-colors"
+              className="text-sm font-semibold text-cloud-ink hover:text-tyrian transition-colors"
             >
               {author.name}
             </Link>
-            <p className="text-xs text-content-tertiary">
+            <p className="text-xs text-cloud-muted">
               {author.handle} &middot; {timeAgo}
             </p>
           </div>
         </div>
-        <button className="p-1.5 rounded-sm text-content-tertiary hover:text-content-secondary hover:bg-surface-tertiary transition-colors">
+        <button type="button" aria-label="more" className="p-1.5 rounded-md text-cloud-muted hover:text-cloud-ink hover:bg-cloud-deep transition-colors">
           <MoreHorizontal size={16} />
         </button>
       </div>
 
       {/* Content */}
       <div className="mt-3">
-        <p className="text-sm text-content-primary leading-relaxed whitespace-pre-line">
+        <p className="text-sm text-cloud-ink leading-relaxed whitespace-pre-line">
           {content}
         </p>
       </div>
 
       {/* Image */}
       {image && (
-        <div className="mt-3 rounded-md overflow-hidden border border-border">
+        <div className="mt-3 rounded-md overflow-hidden border border-cloud-deep">
           <img src={image} alt="" className="w-full object-cover max-h-96" />
         </div>
       )}
@@ -84,33 +86,37 @@ export function PostCard({
       )}
 
       {/* Actions */}
-      <div className="mt-3 pt-3 border-t border-border flex items-center gap-1">
+      <div className="mt-3 pt-3 border-t border-cloud-deep flex items-center gap-1">
         <button
+          type="button"
+          aria-label="like"
           className={cn(
-            'flex items-center gap-1.5 px-3 py-1.5 rounded-sm text-xs font-medium transition-colors',
+            'flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-colors',
             liked
-              ? 'text-danger bg-danger-muted'
-              : 'text-content-secondary hover:text-danger hover:bg-danger-muted',
+              ? 'text-tyrian bg-tyrian-muted'
+              : 'text-cloud-ink/70 hover:text-tyrian hover:bg-tyrian-muted',
           )}
         >
           <Heart size={14} fill={liked ? 'currentColor' : 'none'} />
           {likes}
         </button>
-        <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-sm text-xs font-medium text-content-secondary hover:text-accent-light hover:bg-accent-muted transition-colors">
+        <button type="button" aria-label="comments" className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium text-cloud-ink/70 hover:text-tyrian hover:bg-tyrian-muted transition-colors">
           <MessageCircle size={14} />
           {comments}
         </button>
         <button
+          type="button"
+          aria-label="bookmark"
           className={cn(
-            'flex items-center gap-1.5 px-3 py-1.5 rounded-sm text-xs font-medium transition-colors',
+            'flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-colors',
             bookmarked
-              ? 'text-warning bg-warning-muted'
-              : 'text-content-secondary hover:text-warning hover:bg-warning-muted',
+              ? 'text-moss-deep bg-banana-soft'
+              : 'text-cloud-ink/70 hover:text-moss-deep hover:bg-banana-soft',
           )}
         >
           <Bookmark size={14} fill={bookmarked ? 'currentColor' : 'none'} />
         </button>
-        <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-sm text-xs font-medium text-content-secondary hover:text-info hover:bg-info-muted transition-colors ml-auto">
+        <button type="button" aria-label={t.common.share} className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium text-cloud-ink/70 hover:text-moss hover:bg-moss/10 transition-colors ml-auto">
           <Share2 size={14} />
         </button>
       </div>

@@ -36,7 +36,8 @@ function getInitials(name: string): string {
 }
 
 function hashColor(name: string): string {
-  const colors = ['#6C5CE7', '#00C48C', '#339AF0', '#FFB800', '#FF4757', '#A29BFE'];
+  // Palette aligned with app tokens — moss / tyrian / banana / neutrals (no red)
+  const colors = ['#5D1049', '#7A2564', '#C84BA4', '#2F4A3A', '#3A5A47', '#6B8A77', '#D9A441', '#E6CF6B', '#4A7A8A'];
   let hash = 0;
   for (let i = 0; i < name.length; i++) {
     hash = name.charCodeAt(i) + ((hash << 5) - hash);
@@ -67,8 +68,8 @@ export function Avatar({ src, name, size = 'md', className, online }: AvatarProp
       {online !== undefined && (
         <span
           className={cn(
-            'absolute bottom-0 right-0 rounded-full border-surface-primary',
-            online ? 'bg-success' : 'bg-content-tertiary',
+            'absolute bottom-0 right-0 rounded-full border-cloud',
+            online ? 'bg-success' : 'bg-cloud-muted',
             indicatorSize[size],
           )}
         />

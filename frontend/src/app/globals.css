@@ -5,6 +5,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
 @layer base {
+  :root {
+    --bg-app: #F2ECE0;
+    --bg-elevated: #FAF6EC;
+    --bg-deep: #E4DCCC;
+    --bg-input: #FFFFFF;
+    --text-primary: #1B2420;
+    --text-secondary: #4C5A53;
+    --text-muted: #5A6660;
+    --border-default: #E4DCCC;
+    --border-hover: #C9BFA7;
+    --overlay: rgba(14, 27, 20, 0.5);
+  }
+
+  .dark {
+    --bg-app: #0E1B14;
+    --bg-elevated: #1B2E24;
+    --bg-deep: #2F4A3A;
+    --bg-input: #1B2E24;
+    --text-primary: #F2ECE0;
+    --text-secondary: #C8D2CC;
+    --text-muted: #8FA199;
+    --border-default: #2F4A3A;
+    --border-hover: #3A5A47;
+    --overlay: rgba(0, 0, 0, 0.6);
+  }
+
   * {
     box-sizing: border-box;
     margin: 0;
@@ -17,7 +43,9 @@
   }
 
   body {
-    @apply bg-surface-primary text-content-primary font-sans;
+    background-color: var(--bg-app);
+    color: var(--text-primary);
+    @apply font-sans;
   }
 
   /* Scrollbar */
@@ -26,45 +54,88 @@
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-surface-primary;
+    background-color: var(--bg-deep);
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-border rounded-full;
+    @apply bg-moss-soft rounded-full;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-border-hover;
+    @apply bg-moss-velvet;
   }
 
   /* Selection */
   ::selection {
-    @apply bg-accent/20 text-content-primary;
+    background-color: rgba(93, 16, 73, 0.22);
+    color: inherit;
   }
+
+  /*
+   * Dark theme overrides — reroute "cloud" content palette to the moss-dark
+   * equivalents when .dark is active on <html>. The moss chrome palette
+   * (navbar/sidebar) is intentionally unchanged — it stays dark in both themes.
+   */
+  .dark .bg-cloud { background-color: var(--bg-app) !important; }
+  .dark .bg-cloud-soft { background-color: var(--bg-elevated) !important; }
+  .dark .bg-cloud-deep { background-color: var(--bg-deep) !important; }
+  .dark .bg-white { background-color: var(--bg-input) !important; }
+
+  .dark .text-cloud-ink { color: var(--text-primary) !important; }
+  .dark .text-cloud-muted { color: var(--text-muted) !important; }
+
+  .dark .border-cloud-deep { border-color: var(--border-default) !important; }
+
+  /* Opacity modifiers (Tailwind inlines the base rgb, so we override explicitly) */
+  .dark .text-cloud-ink\/90 { color: rgba(242, 236, 224, 0.92) !important; }
+  .dark .text-cloud-ink\/80 { color: rgba(242, 236, 224, 0.85) !important; }
+  .dark .text-cloud-ink\/70 { color: rgba(242, 236, 224, 0.75) !important; }
+  .dark .text-cloud-ink\/50 { color: rgba(242, 236, 224, 0.55) !important; }
+
+  .dark .bg-cloud-ink\/50 { background-color: rgba(0, 0, 0, 0.6) !important; }
+  .dark .bg-cloud-deep\/60 { background-color: rgba(47, 74, 58, 0.6) !important; }
+  .dark .bg-cloud-deep\/50 { background-color: rgba(47, 74, 58, 0.5) !important; }
+  .dark .bg-cloud-soft\/85 { background-color: rgba(27, 46, 36, 0.88) !important; }
 }
 
 @layer components {
   .focus-ring {
-    @apply outline-none ring-2 ring-accent/40 ring-offset-2 ring-offset-surface-primary;
+    @apply outline-none ring-2 ring-tyrian/40 ring-offset-2 ring-offset-cloud;
+  }
+
+  .focus-ring-dark {
+    @apply outline-none ring-2 ring-banana/60 ring-offset-2 ring-offset-moss;
   }
 
   .text-gradient {
-    @apply bg-gradient-to-r from-accent to-accent-light bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-tyrian to-tyrian-glow bg-clip-text text-transparent;
+  }
+
+  .text-gradient-warm {
+    @apply bg-gradient-to-r from-tyrian via-tyrian-glow to-banana-deep bg-clip-text text-transparent;
   }
 
   .glass {
-    @apply bg-surface-secondary/80 backdrop-blur-md border border-border;
+    @apply bg-moss/85 backdrop-blur-md border border-moss-deep;
+  }
+
+  .glass-light {
+    @apply bg-cloud-soft/85 backdrop-blur-md border border-cloud-deep;
   }
 
   .retro-card {
-    @apply bg-retro-surface border border-retro-border rounded-xl;
-    box-shadow: 0 1px 3px rgba(26, 22, 18, 0.08);
+    @apply bg-cloud-soft border border-cloud-deep rounded-xl;
+    box-shadow: 0 1px 3px rgba(27, 36, 32, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
 
   .retro-card:hover {
-    box-shadow: 0 4px 12px rgba(26, 22, 18, 0.12);
+    box-shadow: 0 8px 24px rgba(27, 36, 32, 0.10);
     transform: translateY(-2px);
-    transition: all 0.2s ease;
+  }
+
+  .card-tyrian-glow:hover {
+    box-shadow: 0 12px 32px rgba(93, 16, 73, 0.15);
   }
 }
 
@@ -97,5 +168,71 @@
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+  }
+
+  /* Decorative blobs */
+  .blob-tyrian {
+    position: absolute;
+    border-radius: 9999px;
+    background: radial-gradient(circle at 30% 30%, rgba(200, 75, 164, 0.45), rgba(93, 16, 73, 0.25) 55%, transparent 72%);
+    filter: blur(60px);
+    pointer-events: none;
+  }
+
+  .blob-banana {
+    position: absolute;
+    border-radius: 9999px;
+    background: radial-gradient(circle at 30% 30%, rgba(247, 231, 161, 0.75), rgba(230, 207, 107, 0.35) 55%, transparent 75%);
+    filter: blur(55px);
+    pointer-events: none;
+  }
+
+  .blob-moss {
+    position: absolute;
+    border-radius: 9999px;
+    background: radial-gradient(circle at 30% 30%, rgba(58, 90, 71, 0.45), rgba(27, 46, 36, 0.2) 55%, transparent 72%);
+    filter: blur(60px);
+    pointer-events: none;
+  }
+
+  /* Ribbon decor between sections */
+  .ribbon {
+    position: absolute;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #F7E7A1 30%, #E6CF6B 50%, #F7E7A1 70%, transparent);
+    border-radius: 9999px;
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  /* Pause terminal scroll on hover */
+  .terminal-scroll-wrap:hover .terminal-scroll-inner {
+    animation-play-state: paused;
+  }
+
+  /* Step dot — used in sidebar stepper nav */
+  .step-dot {
+    @apply relative flex items-center justify-center w-3 h-3 rounded-full border transition-all duration-200;
+  }
+
+  .step-dot-inactive {
+    @apply border-moss-soft bg-transparent;
+  }
+
+  .step-dot-hover {
+    @apply border-cloud bg-moss-velvet;
+  }
+
+  .step-dot-active {
+    @apply border-banana bg-banana shadow-[0_0_0_4px_rgba(247,231,161,0.18)];
+  }
+
+  /* Noise / paper texture overlay for landing */
+  .paper-noise {
+    background-image:
+      radial-gradient(rgba(27, 36, 32, 0.025) 1px, transparent 1px),
+      radial-gradient(rgba(27, 36, 32, 0.015) 1px, transparent 1px);
+    background-size: 20px 20px, 40px 40px;
+    background-position: 0 0, 10px 10px;
   }
 }

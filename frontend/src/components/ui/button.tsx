@@ -1,25 +1,46 @@
 import { forwardRef, type ButtonHTMLAttributes } from 'react';
 import { cn } from '@/lib/utils';
 
-type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger';
+type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger' | 'moss' | 'banana';
 type ButtonSize = 'sm' | 'md' | 'lg';
+type ButtonTone = 'light' | 'dark';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   size?: ButtonSize;
+  tone?: ButtonTone;
   loading?: boolean;
   icon?: React.ReactNode;
 }
 
-const variants: Record<ButtonVariant, string> = {
+const variantsLight: Record<ButtonVariant, string> = {
   primary:
-    'bg-accent text-white hover:bg-accent-hover active:bg-accent/90 shadow-sm',
+    'bg-tyrian text-cloud hover:bg-tyrian-soft active:bg-tyrian/90 shadow-sm',
   secondary:
-    'bg-transparent text-content-primary border border-border hover:border-border-hover hover:bg-surface-tertiary',
+    'bg-cloud-soft text-cloud-ink border border-cloud-deep hover:border-moss-soft hover:bg-cloud',
   ghost:
-    'bg-transparent text-content-secondary hover:text-content-primary hover:bg-surface-tertiary',
+    'bg-transparent text-cloud-ink/80 hover:text-cloud-ink hover:bg-cloud-deep/60',
   danger:
-    'bg-danger text-white hover:bg-danger/90 active:bg-danger/80',
+    'bg-transparent text-tyrian border border-tyrian hover:bg-tyrian hover:text-cloud',
+  moss:
+    'bg-moss text-cloud hover:bg-moss-velvet active:bg-moss-deep shadow-moss',
+  banana:
+    'bg-banana text-moss-deep hover:bg-banana-deep active:bg-banana-deep/90',
+};
+
+const variantsDark: Record<ButtonVariant, string> = {
+  primary:
+    'bg-tyrian text-cloud hover:bg-tyrian-soft active:bg-tyrian/90 shadow-tyrian',
+  secondary:
+    'bg-moss-velvet text-cloud border border-moss-soft/40 hover:border-banana/40 hover:bg-moss-deep',
+  ghost:
+    'bg-transparent text-cloud/80 hover:text-cloud hover:bg-moss-velvet',
+  danger:
+    'bg-transparent text-banana border border-banana/60 hover:bg-banana hover:text-moss-deep',
+  moss:
+    'bg-moss-deep text-cloud hover:bg-moss-velvet active:bg-moss',
+  banana:
+    'bg-banana text-moss-deep hover:bg-banana-deep',
 };
 
 const sizes: Record<ButtonSize, string> = {
@@ -29,14 +50,20 @@ const sizes: Record<ButtonSize, string> = {
 };
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = 'primary', size = 'md', loading, icon, children, disabled, ...props }, ref) => {
+  ({ className, variant = 'primary', size = 'md', tone = 'light', loading, icon, children, disabled, ...props }, ref) => {
+    const variants = tone === 'dark' ? variantsDark : variantsLight;
+    const focusRing = tone === 'dark'
+      ? 'focus-visible:ring-banana/60 focus-visible:ring-offset-moss'
+      : 'focus-visible:ring-tyrian/40 focus-visible:ring-offset-cloud';
+
     return (
       <button
         ref={ref}
         className={cn(
-          'inline-flex items-center justify-center font-medium rounded-sm transition-all duration-150',
-          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-primary',
+          'inline-flex items-center justify-center font-medium rounded-md transition-all duration-150',
+          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
           'disabled:opacity-50 disabled:pointer-events-none',
+          focusRing,
           variants[variant],
           sizes[size],
           className,
@@ -59,4 +86,4 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 );
 
 Button.displayName = 'Button';
-export { Button, type ButtonProps, type ButtonVariant, type ButtonSize };
+export { Button, type ButtonProps, type ButtonVariant, type ButtonSize, type ButtonTone };

@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useCallback } from 'react';
 import { Client, IMessage } from '@stomp/stompjs';
-import SockJS from 'sockjs-client';
 import { getAccessToken } from '@/lib/auth';
 import { useAuthStore } from '@/store/useAuthStore';
 import { useNotificationStore } from '@/store/useNotificationStore';
@@ -17,11 +16,14 @@ export function useWebSocket() {
   const { addNotification } = useNotificationStore();
   const { activeChat, addMessage, updateLastMessage, setTyping, clearTyping } = useChatStore();
 
-  const connect = useCallback(() => {
+  const connect = useCallback(async () => {
+    if (typeof window === 'undefined') return;
     if (clientRef.current?.connected || !isAuthenticated) return;
 
     const token = getAccessToken();
     if (!token) return;
+
+    const SockJS = (await import('sockjs-client')).default;
 
     const client = new Client({
       webSocketFactory: () => new SockJS(WS_URL),

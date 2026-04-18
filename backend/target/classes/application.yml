@@ -57,7 +57,7 @@ server:
     include-message: never      # не утекаем stacktrace в production
 
 jwt:
-  secret: ${JWT_SECRET:changeme-in-production-use-256-bit-key}
+  secret: ${JWT_SECRET:Y2hhbmdlbWUtaW4tcHJvZHVjdGlvbi11c2UtMjU2LWJpdC1rZXk=}
   access-token-expiration: 900       # 15 минут (секунды)
   refresh-token-expiration: 604800   # 7 дней
 
@@ -85,10 +85,11 @@ management:
     health:
       show-details: when-authorized
       show-components: when-authorized
-  metrics:
-    export:
-      prometheus:
+  prometheus:
+    metrics:
+      export:
         enabled: true
+  metrics:
     tags:
       application: synora-backend
     distribution:

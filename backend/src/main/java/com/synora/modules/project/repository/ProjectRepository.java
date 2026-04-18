@@ -32,4 +32,6 @@ public interface ProjectRepository extends JpaRepository<Project, UUID> {
     @Modifying
     @Query("UPDATE Project p SET p.starsCount = p.starsCount + :delta WHERE p.id = :id")
     void adjustStars(@Param("id") UUID id, @Param("delta") int delta);
+
+    long countByOwnerId(UUID ownerId);
 }

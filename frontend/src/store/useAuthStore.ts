@@ -9,7 +9,9 @@ interface AuthState {
   user: User | null;
   isLoading: boolean;
   isAuthenticated: boolean;
+  _hydrated: boolean;
 
+  hydrate: () => void;
   login: (data: LoginRequest) => Promise<void>;
   register: (data: RegisterRequest) => Promise<void>;
   logout: () => Promise<void>;
@@ -20,7 +22,12 @@ interface AuthState {
 export const useAuthStore = create<AuthState>((set) => ({
   user: null,
   isLoading: false,
-  isAuthenticated: !!getAccessToken(),
+  isAuthenticated: false,
+  _hydrated: false,
+
+  hydrate: () => {
+    set({ isAuthenticated: !!getAccessToken(), _hydrated: true });
+  },
 
   login: async (data) => {
     set({ isLoading: true });
@@ -28,10 +35,13 @@ export const useAuthStore = create<AuthState>((set) => ({
       const res = await api.post<ApiResponse<AuthResponse>>('/auth/login', data);
       const { accessToken, refreshToken } = res.data.data;
       setTokens(accessToken, refreshToken);
-      set({ isAuthenticated: true });
 
-      const userRes = await api.get<ApiResponse<User>>('/users/me');
-      set({ user: userRes.data.data });
+      const userRes = await api.get<ApiResponse<User>>('/auth/me');
+      set({ user: userRes.data.data, isAuthenticated: true });
+    } catch (err) {
+      clearTokens();
+      set({ user: null, isAuthenticated: false });
+      throw err;
     } finally {
       set({ isLoading: false });
     }
@@ -43,10 +53,13 @@ export const useAuthStore = create<AuthState>((set) => ({
       const res = await api.post<ApiResponse<AuthResponse>>('/auth/register', data);
       const { accessToken, refreshToken } = res.data.data;
       setTokens(accessToken, refreshToken);
-      set({ isAuthenticated: true });
 
-      const userRes = await api.get<ApiResponse<User>>('/users/me');
-      set({ user: userRes.data.data });
+      const userRes = await api.get<ApiResponse<User>>('/auth/me');
+      set({ user: userRes.data.data, isAuthenticated: true });
+    } catch (err) {
+      clearTokens();
+      set({ user: null, isAuthenticated: false });
+      throw err;
     } finally {
       set({ isLoading: false });
     }
@@ -67,7 +80,7 @@ export const useAuthStore = create<AuthState>((set) => ({
     if (!getAccessToken()) return;
     set({ isLoading: true });
     try {
-      const res = await api.get<ApiResponse<User>>('/users/me');
+      const res = await api.get<ApiResponse<User>>('/auth/me');
       set({ user: res.data.data, isAuthenticated: true });
     } catch {
       clearTokens();

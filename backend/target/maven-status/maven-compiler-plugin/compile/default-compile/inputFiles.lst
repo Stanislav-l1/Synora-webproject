@@ -99,6 +99,9 @@ C:\Users\stas5\Synora-proj\backend\src\main\java\com\synora\modules\project\repo
 C:\Users\stas5\Synora-proj\backend\src\main\java\com\synora\modules\project\repository\TaskRepository.java
 C:\Users\stas5\Synora-proj\backend\src\main\java\com\synora\modules\project\service\ProjectService.java
 C:\Users\stas5\Synora-proj\backend\src\main\java\com\synora\modules\project\service\TaskService.java
+C:\Users\stas5\Synora-proj\backend\src\main\java\com\synora\modules\pulse\controller\PulseController.java
+C:\Users\stas5\Synora-proj\backend\src\main\java\com\synora\modules\pulse\dto\PulseEntryResponse.java
+C:\Users\stas5\Synora-proj\backend\src\main\java\com\synora\modules\pulse\service\PulseService.java
 C:\Users\stas5\Synora-proj\backend\src\main\java\com\synora\modules\report\controller\AdminReportController.java
 C:\Users\stas5\Synora-proj\backend\src\main\java\com\synora\modules\report\controller\ReportController.java
 C:\Users\stas5\Synora-proj\backend\src\main\java\com\synora\modules\report\dto\CreateReportRequest.java
