@@ -2,7 +2,7 @@
 
 import { create } from 'zustand';
 import api from '@/lib/api';
-import type { Chat, Message, ApiResponse, PageResponse } from '@/types';
+import type { Chat, Message, ApiResponse, PageResponse, CreateGroupChatRequest } from '@/types';
 
 interface ChatState {
   chats: Chat[];
@@ -18,6 +18,9 @@ interface ChatState {
   setTyping: (chatId: string, username: string) => void;
   clearTyping: (chatId: string, username: string) => void;
   updateLastMessage: (chatId: string, message: Message) => void;
+  createDirect: (otherUserId: string) => Promise<Chat>;
+  createGroup: (req: CreateGroupChatRequest) => Promise<Chat>;
+  openProjectChat: (projectId: string) => Promise<Chat>;
 }
 
 export const useChatStore = create<ChatState>((set, get) => ({
@@ -80,5 +83,42 @@ export const useChatStore = create<ChatState>((set, get) => ({
         c.id === chatId ? { ...c, lastMessage: message } : c,
       ),
     });
+  },
+
+  createDirect: async (otherUserId) => {
+    const res = await api.post<ApiResponse<Chat>>(`/chats/direct/${otherUserId}`);
+    const chat = res.data.data;
+    const existing = get().chats.find((c) => c.id === chat.id);
+    set({
+      chats: existing ? get().chats : [chat, ...get().chats],
+      activeChat: chat,
+      messages: [],
+    });
+    return chat;
+  },
+
+  createGroup: async (req) => {
+    const res = await api.post<ApiResponse<Chat>>('/chats/group', req);
+    const chat = res.data.data;
+    set({
+      chats: [chat, ...get().chats],
+      activeChat: chat,
+      messages: [],
+    });
+    return chat;
+  },
+
+  openProjectChat: async (projectId) => {
+    const res = await api.get<ApiResponse<Chat>>(`/chats/project/${projectId}`);
+    const chat = res.data.data;
+    const existing = get().chats.find((c) => c.id === chat.id);
+    set({
+      chats: existing
+        ? get().chats.map((c) => (c.id === chat.id ? chat : c))
+        : [chat, ...get().chats],
+      activeChat: chat,
+      messages: [],
+    });
+    return chat;
   },
 }));

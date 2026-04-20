@@ -1,20 +1,27 @@
-export type ChatType = 'DIRECT' | 'GROUP';
+export type ChatType = 'DIRECT' | 'GROUP' | 'PROJECT';
 
 export interface Chat {
   id: string;
   name: string | null;
+  avatarUrl: string | null;
   type: ChatType;
   lastMessage: Message | null;
   unreadCount: number;
-  participants: ChatParticipant[];
+  members: ChatMember[];
+  projectId?: string | null;
+  projectName?: string | null;
   createdAt: string;
 }
 
-export interface ChatParticipant {
+export interface ChatMember {
   userId: string;
   username: string;
   displayName: string | null;
   avatarUrl: string | null;
+  admin: boolean;
+  muted: boolean;
+  joinedAt: string;
+  lastReadAt: string | null;
 }
 
 export interface Message {
@@ -24,16 +31,22 @@ export interface Message {
   senderUsername: string;
   senderDisplayName: string | null;
   senderAvatarUrl: string | null;
-  content: string;
+  replyToId: string | null;
+  replyToContent: string | null;
+  content: string | null;
+  deleted: boolean;
+  editedAt: string | null;
   createdAt: string;
 }
 
 export interface SendMessageRequest {
   content: string;
+  replyToId?: string;
 }
 
-export interface CreateChatRequest {
-  participantIds: string[];
-  name?: string;
-  type?: ChatType;
+export interface CreateGroupChatRequest {
+  type: 'GROUP';
+  name: string;
+  avatarUrl?: string;
+  memberIds: string[];
 }

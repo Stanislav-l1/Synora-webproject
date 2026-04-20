@@ -1,10 +1,12 @@
 'use client';
 
 import Link from 'next/link';
-import { Search, Bell, MessageSquare, Menu } from 'lucide-react';
+import { Search, MessageSquare, Menu } from 'lucide-react';
 import { Avatar } from '@/components/ui';
+import { NotificationsDropdown } from '@/components/shared';
 import { cn } from '@/lib/utils';
 import { useAuthStore } from '@/store/useAuthStore';
+import { useChatStore } from '@/store/useChatStore';
 import { useT, LocaleSwitcher } from '@/lib/i18n';
 import { ThemeSwitcher } from '@/lib/theme';
 
@@ -15,6 +17,8 @@ interface NavbarProps {
 export function Navbar({ onMenuToggle }: NavbarProps) {
   const t = useT();
   const { user } = useAuthStore();
+  const chats = useChatStore((s) => s.chats);
+  const chatUnread = chats.reduce((sum, c) => sum + (c.unreadCount || 0), 0);
   return (
     <header className="fixed top-0 left-0 right-0 z-50 h-navbar bg-moss/95 backdrop-blur-md border-b border-moss-deep">
       <div className="flex items-center justify-between h-full px-4">
@@ -61,15 +65,17 @@ export function Navbar({ onMenuToggle }: NavbarProps) {
           </button>
           <Link
             href="/messages"
+            aria-label={t.nav.messages}
             className="relative p-2 rounded-md text-cloud/80 hover:text-cloud hover:bg-moss-velvet transition-colors"
           >
             <MessageSquare size={20} />
-            <span className="absolute top-1 right-1 w-2 h-2 bg-banana rounded-full" />
+            {chatUnread > 0 && (
+              <span className="absolute top-0.5 right-0.5 min-w-[16px] h-4 px-1 bg-banana text-moss-deep rounded-full text-[10px] font-semibold flex items-center justify-center">
+                {chatUnread > 99 ? '99+' : chatUnread}
+              </span>
+            )}
           </Link>
-          <button aria-label={t.nav.notifications} className="relative p-2 rounded-md text-cloud/80 hover:text-cloud hover:bg-moss-velvet transition-colors">
-            <Bell size={20} />
-            <span className="absolute top-1 right-1 w-2 h-2 bg-tyrian-glow rounded-full" />
-          </button>
+          <NotificationsDropdown />
           <div className="ml-2 hidden sm:flex items-center gap-1">
             <ThemeSwitcher tone="dark" />
             <LocaleSwitcher tone="dark" />

@@ -1,10 +1,13 @@
 'use client';
 
 import Link from 'next/link';
-import { Users, Star } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { Users, Star, MessageSquare, Loader2 } from 'lucide-react';
+import { useState } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { useT } from '@/lib/i18n';
+import { useChatStore } from '@/store/useChatStore';
 
 interface ProjectCardProps {
   id: string;
@@ -36,10 +39,39 @@ export function ProjectCard({
   coverGradient,
 }: ProjectCardProps) {
   const t = useT();
+  const router = useRouter();
+  const { openProjectChat } = useChatStore();
+  const [openingChat, setOpeningChat] = useState(false);
   const gradient = coverGradient || gradients[name.length % gradients.length];
 
+  async function handleOpenChat(e: React.MouseEvent) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (openingChat) return;
+    setOpeningChat(true);
+    try {
+      await openProjectChat(id);
+      router.push('/messages');
+    } catch {
+      setOpeningChat(false);
+    }
+  }
+
   return (
-    <Link href={`/projects/${id}`} className="group block">
+    <Link href={`/projects/${id}`} className="group block relative">
+      <span
+        role="button"
+        tabIndex={0}
+        onClick={handleOpenChat}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') handleOpenChat(e as unknown as React.MouseEvent);
+        }}
+        aria-label={t.messages.openProjectChat}
+        title={t.messages.openProjectChat}
+        className="absolute top-2 right-2 z-10 h-8 w-8 flex items-center justify-center bg-cloud-soft/90 border border-cloud-deep text-cloud-ink hover:text-tyrian hover:border-tyrian rounded-sm backdrop-blur-sm transition-colors cursor-pointer"
+      >
+        {openingChat ? <Loader2 size={14} className="animate-spin" /> : <MessageSquare size={14} />}
+      </span>
       <div className="bg-cloud-soft border border-cloud-deep rounded-xl overflow-hidden hover:border-moss-soft hover:shadow-md hover:-translate-y-0.5 transition-all duration-200">
         {/* Cover */}
         <div className={cn('h-24 bg-gradient-to-br', gradient)} />
@@ -82,7 +114,7 @@ export function ProjectCard({
             </div>
             <div className="h-1.5 bg-cloud-deep rounded-full overflow-hidden">
               <div
-                className={cn('h-full rounded-full transition-all duration-500 bg-gradient-to-r from-tyrian to-tyrian-glow', `w-[${progress}%]`)}
+                className="h-full rounded-full transition-all duration-500 bg-gradient-to-r from-tyrian to-tyrian-glow"
                 style={{ width: `${progress}%` }}
               />
             </div>
