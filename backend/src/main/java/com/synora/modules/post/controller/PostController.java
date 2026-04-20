@@ -82,7 +82,7 @@ public class PostController {
             @PathVariable UUID id,
             @AuthenticationPrincipal User currentUser) {
 
-        boolean liked = postService.toggleLike(id, currentUser.getId());
+        boolean liked = postService.toggleLike(id, currentUser);
         return ResponseEntity.ok(ApiResponse.ok(liked ? "Liked" : "Unliked", liked));
     }
 

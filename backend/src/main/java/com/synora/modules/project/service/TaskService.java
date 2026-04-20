@@ -1,5 +1,7 @@
 package com.synora.modules.project.service;
 
+import com.synora.modules.notification.entity.NotificationType;
+import com.synora.modules.notification.service.NotificationService;
 import com.synora.modules.project.dto.*;
 import com.synora.modules.project.entity.*;
 import com.synora.modules.project.repository.*;
@@ -22,6 +24,7 @@ public class TaskService {
     private final ProjectRepository       projectRepository;
     private final ProjectMemberRepository memberRepository;
     private final UserRepository          userRepository;
+    private final NotificationService     notificationService;
 
     @Transactional(readOnly = true)
     public KanbanBoardResponse getBoard(UUID projectId) {
@@ -81,7 +84,11 @@ public class TaskService {
                 .storyPoints(req.getStoryPoints())
                 .build();
 
-        return toResponse(taskRepository.save(task));
+        Task saved = taskRepository.save(task);
+        if (assignee != null) {
+            notifyAssigned(saved, reporter, assignee);
+        }
+        return toResponse(saved);
     }
 
     @Transactional
@@ -95,13 +102,32 @@ public class TaskService {
         if (req.getPriority()    != null) task.setPriority(req.getPriority());
         if (req.getDueDate()     != null) task.setDueDate(req.getDueDate());
         if (req.getStoryPoints() != null) task.setStoryPoints(req.getStoryPoints());
+        UUID previousAssigneeId = task.getAssignee() != null ? task.getAssignee().getId() : null;
         if (req.getAssigneeId()  != null) {
             User assignee = userRepository.findById(req.getAssigneeId())
                     .orElseThrow(() -> AppException.notFound("User", req.getAssigneeId()));
             task.setAssignee(assignee);
         }
 
-        return toResponse(taskRepository.save(task));
+        Task saved = taskRepository.save(task);
+        if (saved.getAssignee() != null
+                && !saved.getAssignee().getId().equals(previousAssigneeId)) {
+            notifyAssigned(saved, currentUser, saved.getAssignee());
+        }
+        return toResponse(saved);
+    }
+
+    private void notifyAssigned(Task task, User actor, User assignee) {
+        notificationService.send(
+                assignee.getId(), actor, NotificationType.TASK_ASSIGNED,
+                task.getId(), "TASK",
+                "{\"title\":\"" + escapeJson(task.getTitle())
+                        + "\",\"projectId\":\"" + task.getProject().getId() + "\"}");
+    }
+
+    private static String escapeJson(String s) {
+        if (s == null) return "";
+        return s.replace("\\", "\\\\").replace("\"", "\\\"");
     }
 
     @Transactional

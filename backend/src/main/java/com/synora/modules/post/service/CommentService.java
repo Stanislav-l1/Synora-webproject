@@ -1,5 +1,7 @@
 package com.synora.modules.post.service;
 
+import com.synora.modules.notification.entity.NotificationType;
+import com.synora.modules.notification.service.NotificationService;
 import com.synora.modules.post.dto.CommentResponse;
 import com.synora.modules.post.dto.CreateCommentRequest;
 import com.synora.modules.post.entity.Comment;
@@ -23,6 +25,7 @@ public class CommentService {
 
     private final CommentRepository commentRepository;
     private final PostRepository    postRepository;
+    private final NotificationService notificationService;
 
     @Transactional(readOnly = true)
     public PageResponse<CommentResponse> getComments(UUID postId, int page, int size) {
@@ -60,6 +63,19 @@ public class CommentService {
 
         Comment saved = commentRepository.save(comment);
         postRepository.adjustComments(postId, 1);
+
+        if (parent != null) {
+            notificationService.send(
+                    parent.getAuthor().getId(), author, NotificationType.COMMENT_REPLY,
+                    saved.getId(), "COMMENT",
+                    "{\"postId\":\"" + postId + "\"}");
+        } else {
+            notificationService.send(
+                    post.getAuthor().getId(), author, NotificationType.POST_COMMENT,
+                    saved.getId(), "COMMENT",
+                    "{\"postId\":\"" + postId + "\"}");
+        }
+
         return toResponse(saved);
     }
 

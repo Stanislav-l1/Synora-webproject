@@ -1,5 +1,7 @@
 package com.synora.modules.project.service;
 
+import com.synora.modules.notification.entity.NotificationType;
+import com.synora.modules.notification.service.NotificationService;
 import com.synora.modules.post.entity.Tag;
 import com.synora.modules.post.repository.TagRepository;
 import com.synora.modules.project.dto.*;
@@ -25,6 +27,7 @@ public class ProjectService {
     private final ProjectRepository       projectRepository;
     private final ProjectMemberRepository memberRepository;
     private final TagRepository           tagRepository;
+    private final NotificationService     notificationService;
 
     @Transactional(readOnly = true)
     public PageResponse<ProjectSummaryResponse> getProjects(int page, int size, Long tagId, String status) {
@@ -102,7 +105,7 @@ public class ProjectService {
 
     @Transactional
     public void joinProject(UUID id, User user) {
-        findOrThrow(id);
+        Project project = findOrThrow(id);
         ProjectMemberId key = new ProjectMemberId(id, user.getId());
         if (memberRepository.existsById(key)) {
             throw AppException.conflict("Already a member of this project");
@@ -111,6 +114,16 @@ public class ProjectService {
                 .id(key).project(Project.builder().id(id).build())
                 .user(user).role(MemberRole.MEMBER).build());
         projectRepository.adjustMembers(id, 1);
+
+        notificationService.send(
+                project.getOwner().getId(), user, NotificationType.PROJECT_JOIN,
+                id, "PROJECT",
+                "{\"projectName\":\"" + escapeJson(project.getName()) + "\"}");
+    }
+
+    private static String escapeJson(String s) {
+        if (s == null) return "";
+        return s.replace("\\", "\\\\").replace("\"", "\\\"");
     }
 
     @Transactional

@@ -1,5 +1,7 @@
 package com.synora.modules.post.service;
 
+import com.synora.modules.notification.entity.NotificationType;
+import com.synora.modules.notification.service.NotificationService;
 import com.synora.modules.post.dto.*;
 import com.synora.modules.post.entity.*;
 import com.synora.modules.post.repository.*;
@@ -24,6 +26,7 @@ public class PostService {
     private final TagRepository      tagRepository;
     private final PostLikeRepository likeRepository;
     private final PostBookmarkRepository bookmarkRepository;
+    private final NotificationService notificationService;
 
     @Transactional(readOnly = true)
     public PageResponse<PostSummaryResponse> getFeed(int page, int size, Long tagId) {
@@ -85,9 +88,9 @@ public class PostService {
     }
 
     @Transactional
-    public boolean toggleLike(UUID postId, UUID userId) {
-        findPublishedOrThrow(postId);
-        PostLikeId key = new PostLikeId(postId, userId);
+    public boolean toggleLike(UUID postId, User actor) {
+        Post post = findPublishedOrThrow(postId);
+        PostLikeId key = new PostLikeId(postId, actor.getId());
         if (likeRepository.existsById(key)) {
             likeRepository.deleteById(key);
             postRepository.adjustLikes(postId, -1);
@@ -95,8 +98,17 @@ public class PostService {
         } else {
             likeRepository.save(new PostLike(key, null));
             postRepository.adjustLikes(postId, 1);
+            notificationService.send(
+                    post.getAuthor().getId(), actor, NotificationType.POST_LIKE,
+                    postId, "POST",
+                    "{\"title\":\"" + escapeJson(post.getTitle()) + "\"}");
             return true;
         }
+    }
+
+    private static String escapeJson(String s) {
+        if (s == null) return "";
+        return s.replace("\\", "\\\\").replace("\"", "\\\"");
     }
 
     @Transactional
