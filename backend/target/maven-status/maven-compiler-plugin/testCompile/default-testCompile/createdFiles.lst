@@ -1,6 +1,0 @@
-com\synora\modules\search\SearchControllerTest.class
-com\synora\modules\project\ProjectControllerTest.class
-com\synora\modules\auth\AuthControllerTest.class
-com\synora\BaseIntegrationTest.class
-com\synora\modules\post\PostControllerTest.class
-com\synora\modules\user\UserFollowControllerTest.class
