@@ -15,6 +15,8 @@ public class ChatResponse {
     private String type;
     private String name;
     private String avatarUrl;
+    private UUID   projectId;
+    private String projectName;
     private List<ChatMemberResponse> members;
     private MessageResponse lastMessage;
     private long   unreadCount;

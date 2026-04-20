@@ -2,8 +2,12 @@ package com.synora.modules.message.service;
 
 import com.synora.modules.message.dto.MessageResponse;
 import com.synora.modules.message.dto.SendMessageRequest;
+import com.synora.modules.message.entity.ChatMember;
 import com.synora.modules.message.entity.Message;
+import com.synora.modules.message.repository.ChatMemberRepository;
 import com.synora.modules.message.repository.MessageRepository;
+import com.synora.modules.notification.entity.NotificationType;
+import com.synora.modules.notification.service.NotificationService;
 import com.synora.modules.user.entity.User;
 import com.synora.shared.dto.PageResponse;
 import com.synora.shared.exception.AppException;
@@ -22,7 +26,9 @@ import java.util.UUID;
 public class MessageService {
 
     private final MessageRepository       messageRepository;
+    private final ChatMemberRepository    chatMemberRepository;
     private final ChatService             chatService;
+    private final NotificationService     notificationService;
     private final SimpMessagingTemplate   messagingTemplate;
 
     @Transactional(readOnly = true)
@@ -55,7 +61,24 @@ public class MessageService {
         // Broadcast via WebSocket to all chat subscribers
         messagingTemplate.convertAndSend("/topic/chat." + chatId, response);
 
+        // Notify every chat member except sender
+        String preview = req.getContent() != null && req.getContent().length() > 120
+                ? req.getContent().substring(0, 120) + "\u2026"
+                : req.getContent();
+        String payload = "{\"chatId\":\"" + chatId
+                + "\",\"preview\":\"" + escapeJson(preview) + "\"}";
+        for (ChatMember m : chatMemberRepository.findByIdChatId(chatId)) {
+            notificationService.send(
+                    m.getUser().getId(), sender, NotificationType.MESSAGE_RECEIVED,
+                    message.getId(), "MESSAGE", payload);
+        }
+
         return response;
+    }
+
+    private static String escapeJson(String s) {
+        if (s == null) return "";
+        return s.replace("\\", "\\\\").replace("\"", "\\\"");
     }
 
     @Transactional
@@ -104,6 +127,7 @@ public class MessageService {
         return MessageResponse.builder()
                 .id(m.getId())
                 .chatId(m.getChat().getId())
+                .senderId(m.getSender().getId())
                 .senderUsername(m.getSender().getUsername())
                 .senderDisplayName(m.getSender().getDisplayName())
                 .senderAvatarUrl(m.getSender().getAvatarUrl())

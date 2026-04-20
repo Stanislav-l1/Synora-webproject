@@ -1,5 +1,6 @@
 package com.synora.modules.message.controller;
 
+import com.synora.modules.message.dto.ChatMemberResponse;
 import com.synora.modules.message.dto.ChatResponse;
 import com.synora.modules.message.dto.CreateChatRequest;
 import com.synora.modules.message.service.ChatService;
@@ -62,6 +63,39 @@ public class ChatController {
             @AuthenticationPrincipal User currentUser) {
 
         chatService.markRead(chatId, currentUser.getId());
+        return ResponseEntity.ok(ApiResponse.ok(null));
+    }
+
+    @Operation(summary = "Get or create project chat", security = @SecurityRequirement(name = "bearerAuth"))
+    @GetMapping("/project/{projectId}")
+    public ResponseEntity<ApiResponse<ChatResponse>> getOrCreateProjectChat(
+            @PathVariable UUID projectId,
+            @AuthenticationPrincipal User currentUser) {
+
+        return ResponseEntity.ok(
+                ApiResponse.ok(chatService.getOrCreateProjectChat(projectId, currentUser)));
+    }
+
+    @Operation(summary = "Add a member to a GROUP chat", security = @SecurityRequirement(name = "bearerAuth"))
+    @PostMapping("/{chatId}/members/{userId}")
+    public ResponseEntity<ApiResponse<ChatMemberResponse>> addMember(
+            @PathVariable UUID chatId,
+            @PathVariable UUID userId,
+            @AuthenticationPrincipal User currentUser) {
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(ApiResponse.ok("Member added",
+                        chatService.addUserToGroup(chatId, userId, currentUser)));
+    }
+
+    @Operation(summary = "Remove a member from a GROUP chat (or leave)", security = @SecurityRequirement(name = "bearerAuth"))
+    @DeleteMapping("/{chatId}/members/{userId}")
+    public ResponseEntity<ApiResponse<Void>> removeMember(
+            @PathVariable UUID chatId,
+            @PathVariable UUID userId,
+            @AuthenticationPrincipal User currentUser) {
+
+        chatService.removeUserFromGroup(chatId, userId, currentUser);
         return ResponseEntity.ok(ApiResponse.ok(null));
     }
 }

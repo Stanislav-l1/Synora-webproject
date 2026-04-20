@@ -29,7 +29,9 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class MessageController {
 
-    private final MessageService messageService;
+    private final MessageService                                 messageService;
+    private final org.springframework.messaging.simp.SimpMessagingTemplate messagingTemplate;
+    private final com.synora.modules.message.service.ChatService chatService;
 
     // ───── REST endpoints ─────
 
@@ -107,5 +109,30 @@ public class MessageController {
                 .UsernamePasswordAuthenticationToken) principal).getPrincipal();
 
         messageService.sendMessage(chatId, sender, req);
+    }
+
+    /**
+     * Client sends to: /app/chat/{chatId}/typing
+     * Broadcast to:    /topic/chat.{chatId}.typing
+     *
+     * No payload — just the fact that this user is typing. We broadcast their
+     * userId + displayName so other clients can show "X is typing...".
+     */
+    @MessageMapping("/chat/{chatId}/typing")
+    public void handleTyping(
+            @DestinationVariable UUID chatId,
+            Principal principal) {
+
+        User sender = (User) ((org.springframework.security.authentication
+                .UsernamePasswordAuthenticationToken) principal).getPrincipal();
+
+        chatService.assertMember(chatId, sender.getId());
+
+        messagingTemplate.convertAndSend(
+                "/topic/chat." + chatId + ".typing",
+                java.util.Map.of(
+                        "userId",      sender.getId().toString(),
+                        "username",    sender.getUsername(),
+                        "displayName", sender.getDisplayName() != null ? sender.getDisplayName() : sender.getUsername()));
     }
 }

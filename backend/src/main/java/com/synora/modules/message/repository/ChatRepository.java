@@ -30,4 +30,6 @@ public interface ChatRepository extends JpaRepository<Chat, UUID> {
             @Param("userId1") UUID userId1,
             @Param("userId2") UUID userId2,
             @Param("type") ChatType type);
+
+    Optional<Chat> findByProjectIdAndType(UUID projectId, ChatType type);
 }

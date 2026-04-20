@@ -12,6 +12,7 @@ import java.util.UUID;
 public class MessageResponse {
     private UUID    id;
     private UUID    chatId;
+    private UUID    senderId;
     private String  senderUsername;
     private String  senderDisplayName;
     private String  senderAvatarUrl;

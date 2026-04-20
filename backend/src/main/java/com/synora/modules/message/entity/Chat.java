@@ -1,5 +1,6 @@
 package com.synora.modules.message.entity;
 
+import com.synora.modules.project.entity.Project;
 import com.synora.modules.user.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
@@ -37,6 +38,10 @@ public class Chat {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "created_by", nullable = false)
     private User createdBy;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_id")
+    private Project project;
 
     @CreatedDate
     @Column(name = "created_at", nullable = false, updatable = false)
