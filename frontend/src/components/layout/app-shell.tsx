@@ -5,9 +5,11 @@ import { useRouter } from 'next/navigation';
 import { Navbar } from './navbar';
 import { Sidebar } from './sidebar';
 import { BottomNav, OnboardingWizard } from '@/components/shared';
+import { PushPermissionPrompt } from '@/components/shared/push-permission-prompt';
 import { useAuthStore } from '@/store/useAuthStore';
 import { useNotificationStore } from '@/store/useNotificationStore';
 import { useWebSocket } from '@/hooks/useWebSocket';
+import { useServiceWorker } from '@/hooks/useServiceWorker';
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -16,8 +18,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const { fetchUnreadCount } = useNotificationStore();
   const router = useRouter();
 
-  // Mount WebSocket once per authenticated session (not per page)
   useWebSocket();
+  useServiceWorker();
 
   useEffect(() => {
     hydrate();
@@ -52,6 +54,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         {children}
       </main>
       <BottomNav />
+      <PushPermissionPrompt />
       {user && user.onboardingCompleted === false && !onboardingDismissed && (
         <OnboardingWizard onClose={() => setOnboardingDismissed(true)} />
       )}

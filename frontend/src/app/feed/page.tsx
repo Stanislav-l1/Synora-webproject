@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { ImagePlus, Send, Loader2 } from 'lucide-react';
+import { useState, useEffect, useCallback } from 'react';
+import { ImagePlus, Send, Loader2, RefreshCw } from 'lucide-react';
+import { usePullToRefresh } from '@/hooks/usePullToRefresh';
 import { AppShell } from '@/components/layout/app-shell';
 import { RightPanel } from '@/components/layout/right-panel';
 import { Avatar } from '@/components/ui/avatar';
@@ -20,12 +21,16 @@ export default function FeedPage() {
   const [postText, setPostText] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
-  useEffect(() => {
-    api.get<ApiResponse<PageResponse<PostSummary>>>('/posts?page=0&size=20')
-      .then((res) => setPosts(res.data.data.content))
-      .catch(() => {})
-      .finally(() => setLoading(false));
+  const fetchPosts = useCallback(async () => {
+    const res = await api.get<ApiResponse<PageResponse<PostSummary>>>('/posts?page=0&size=20');
+    setPosts(res.data.data.content);
   }, []);
+
+  useEffect(() => {
+    fetchPosts().catch(() => {}).finally(() => setLoading(false));
+  }, [fetchPosts]);
+
+  const { refreshing } = usePullToRefresh({ onRefresh: fetchPosts });
 
   async function handlePost() {
     const text = postText.trim();
@@ -56,6 +61,14 @@ export default function FeedPage() {
 
   return (
     <AppShell>
+      {/* Pull-to-refresh indicator */}
+      {refreshing && (
+        <div className="fixed top-navbar left-0 right-0 z-30 flex justify-center pointer-events-none pt-3">
+          <div className="w-9 h-9 rounded-full bg-surface-secondary border border-border-default shadow-lg flex items-center justify-center">
+            <RefreshCw size={16} className="animate-spin text-accent" />
+          </div>
+        </div>
+      )}
       <div className="flex">
         <div className="flex-1 max-w-feed mx-auto px-4 py-6 space-y-4">
           <div className="bg-cloud-soft border border-cloud-deep rounded-lg p-4 shadow-sm">
