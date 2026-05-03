@@ -7,16 +7,23 @@ import {
   Compass,
   FolderKanban,
   MessageSquare,
+  Calendar,
   GraduationCap,
   User,
+  Users,
+  Building2,
   Bookmark,
   Settings,
   Hash,
   X,
+  Briefcase,
+  Github,
+  Shield,
   type LucideIcon,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useT } from '@/lib/i18n';
+import { useAuthStore } from '@/store/useAuthStore';
 
 interface SidebarProps {
   open: boolean;
@@ -70,18 +77,24 @@ function StepNavLink({
 export function Sidebar({ open, onClose }: SidebarProps) {
   const pathname = usePathname() || '';
   const t = useT();
+  const { user } = useAuthStore();
 
   const mainNav: NavItem[] = [
     { href: '/feed', label: t.nav.home, icon: Home },
     { href: '/search', label: t.nav.explore, icon: Compass },
     { href: '/projects', label: t.nav.projects, icon: FolderKanban },
     { href: '/messages', label: t.nav.messages, icon: MessageSquare },
+    { href: '/calendar', label: 'Calendar', icon: Calendar },
+    { href: '/career', label: 'Career', icon: Briefcase },
+    { href: '/repositories', label: 'Repositories', icon: Github },
+    { href: '/communities', label: 'Communities', icon: Building2 },
+    { href: '/people', label: 'People', icon: Users },
     { href: '/courses', label: t.nav.courses, icon: GraduationCap },
     { href: '/profile', label: t.nav.profile, icon: User },
   ];
 
   const secondaryNav: NavItem[] = [
-    { href: '/bookmarks', label: t.nav.bookmarks, icon: Bookmark },
+    { href: '/saved', label: t.nav.bookmarks, icon: Bookmark },
     { href: '/tags', label: t.nav.trendingTags, icon: Hash },
     { href: '/settings', label: t.nav.settings, icon: Settings },
   ];
@@ -168,6 +181,25 @@ export function Sidebar({ open, onClose }: SidebarProps) {
               ))}
             </div>
           </div>
+
+          {user?.role === 'ADMIN' && (
+            <>
+              <div className="my-5 mx-2 border-t border-moss-velvet" />
+              <p className="pl-8 text-[10px] font-semibold text-moss-soft uppercase tracking-[0.15em] mb-3">
+                Admin
+              </p>
+              <div className="relative">
+                <span aria-hidden className="absolute left-[15px] top-1 bottom-1 w-px bg-moss-velvet" />
+                <div className="space-y-0.5">
+                  <StepNavLink
+                    item={{ href: '/admin', label: 'Admin Panel', icon: Shield }}
+                    isActive={pathname.startsWith('/admin')}
+                    onClose={onClose}
+                  />
+                </div>
+              </div>
+            </>
+          )}
 
           <div className="my-5 mx-2 border-t border-moss-velvet" />
 

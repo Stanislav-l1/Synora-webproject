@@ -1,6 +1,7 @@
 package com.synora.modules.post.controller;
 
 import com.synora.modules.post.dto.*;
+import com.synora.modules.post.entity.ReactionType;
 import com.synora.modules.post.service.PostService;
 import com.synora.modules.user.entity.User;
 import com.synora.shared.dto.ApiResponse;
@@ -30,9 +31,21 @@ public class PostController {
     public ResponseEntity<ApiResponse<PageResponse<PostSummaryResponse>>> getFeed(
             @RequestParam(defaultValue = "0")  int page,
             @RequestParam(defaultValue = "20") int size,
-            @RequestParam(required = false)    Long tagId) {
+            @RequestParam(required = false)    Long tagId,
+            @AuthenticationPrincipal User currentUser) {
 
-        return ResponseEntity.ok(ApiResponse.ok(postService.getFeed(page, size, tagId)));
+        UUID uid = currentUser != null ? currentUser.getId() : null;
+        return ResponseEntity.ok(ApiResponse.ok(postService.getFeed(page, size, tagId, uid)));
+    }
+
+    @Operation(summary = "Get saved (bookmarked) posts", security = @SecurityRequirement(name = "bearerAuth"))
+    @GetMapping("/saved")
+    public ResponseEntity<ApiResponse<PageResponse<PostSummaryResponse>>> getSaved(
+            @AuthenticationPrincipal User currentUser,
+            @RequestParam(defaultValue = "0")  int page,
+            @RequestParam(defaultValue = "20") int size) {
+
+        return ResponseEntity.ok(ApiResponse.ok(postService.getSaved(currentUser.getId(), page, size)));
     }
 
     @Operation(summary = "Get post by ID")
@@ -96,13 +109,66 @@ public class PostController {
         return ResponseEntity.ok(ApiResponse.ok(bookmarked ? "Bookmarked" : "Removed from bookmarks", bookmarked));
     }
 
+    @Operation(summary = "Set reaction on a post", security = @SecurityRequirement(name = "bearerAuth"))
+    @PutMapping("/{id}/reaction")
+    public ResponseEntity<ApiResponse<String>> setReaction(
+            @PathVariable UUID id,
+            @RequestParam ReactionType type,
+            @AuthenticationPrincipal User currentUser) {
+
+        ReactionType result = postService.setReaction(id, currentUser, type);
+        return ResponseEntity.ok(ApiResponse.ok("Reaction set", result.name()));
+    }
+
+    @Operation(summary = "Clear reaction on a post", security = @SecurityRequirement(name = "bearerAuth"))
+    @DeleteMapping("/{id}/reaction")
+    public ResponseEntity<ApiResponse<Void>> clearReaction(
+            @PathVariable UUID id,
+            @AuthenticationPrincipal User currentUser) {
+
+        postService.clearReaction(id, currentUser);
+        return ResponseEntity.ok(ApiResponse.ok(null));
+    }
+
+    @Operation(summary = "Toggle hide post from feed", security = @SecurityRequirement(name = "bearerAuth"))
+    @PostMapping("/{id}/hide")
+    public ResponseEntity<ApiResponse<Boolean>> toggleHide(
+            @PathVariable UUID id,
+            @AuthenticationPrincipal User currentUser) {
+
+        boolean hidden = postService.toggleHide(id, currentUser.getId());
+        return ResponseEntity.ok(ApiResponse.ok(hidden ? "Hidden" : "Unhidden", hidden));
+    }
+
+    @Operation(summary = "Repost a post", security = @SecurityRequirement(name = "bearerAuth"))
+    @PostMapping("/{id}/repost")
+    public ResponseEntity<ApiResponse<PostResponse>> repost(
+            @PathVariable UUID id,
+            @AuthenticationPrincipal User currentUser) {
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(ApiResponse.ok("Reposted", postService.repost(id, currentUser)));
+    }
+
+    @Operation(summary = "Toggle pin on a post (owner only)", security = @SecurityRequirement(name = "bearerAuth"))
+    @PostMapping("/{id}/pin")
+    public ResponseEntity<ApiResponse<Boolean>> togglePin(
+            @PathVariable UUID id,
+            @AuthenticationPrincipal User currentUser) {
+
+        boolean pinned = postService.togglePin(id, currentUser);
+        return ResponseEntity.ok(ApiResponse.ok(pinned ? "Pinned" : "Unpinned", pinned));
+    }
+
     @Operation(summary = "Get posts by author username")
     @GetMapping("/by/{username}")
     public ResponseEntity<ApiResponse<PageResponse<PostSummaryResponse>>> getByAuthor(
             @PathVariable String username,
             @RequestParam(defaultValue = "0")  int page,
-            @RequestParam(defaultValue = "20") int size) {
+            @RequestParam(defaultValue = "20") int size,
+            @AuthenticationPrincipal User currentUser) {
 
-        return ResponseEntity.ok(ApiResponse.ok(postService.getByAuthor(username, page, size)));
+        UUID uid = currentUser != null ? currentUser.getId() : null;
+        return ResponseEntity.ok(ApiResponse.ok(postService.getByAuthor(username, page, size, uid)));
     }
 }

@@ -13,6 +13,7 @@ export function LandingNavbar() {
   const navLinks = [
     { label: t.landing.navFeatures, href: '#features' },
     { label: t.landing.navCommunity, href: '#community' },
+    { label: 'FAQ', href: '#faq' },
   ];
 
   useEffect(() => {

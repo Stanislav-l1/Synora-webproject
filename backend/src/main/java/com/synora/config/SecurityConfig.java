@@ -49,12 +49,30 @@ public class SecurityConfig {
             "/api/v1/users/*/following",
             "/api/v1/users/*/follow-stats",
             "/api/v1/users/*/reputation/**",
+            "/api/v1/users/*/skills",
+            "/api/v1/users/*/progress",
+            "/api/v1/users/*/endorsements",
+            "/api/v1/users/*/peer-reviews",
+            "/api/v1/users/*/reputation/**",
+            "/api/v1/users/*/vcard",
+            "/api/v1/users/*/repos",
+            "/api/v1/users/*/repos/**",
+            "/api/v1/users/*/contributions",
             "/api/v1/users/top",
             "/api/v1/projects/**",
             "/api/v1/tags",
             "/api/v1/tags/**",
+            "/api/v1/news",
+            "/api/v1/news/**",
             "/api/v1/pulse/**",
             "/api/v1/search/**",
+            "/api/v1/invitations/preview/**",
+            "/api/v1/career",
+            "/api/v1/career/*",
+            "/api/v1/communities",
+            "/api/v1/communities/*",
+            "/api/v1/communities/*/posts",
+            "/api/v1/communities/*/members",
             "/actuator/health",
             "/swagger-ui/**",
             "/api-docs/**"
@@ -68,6 +86,7 @@ public class SecurityConfig {
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST, PUBLIC_POST).permitAll()
+                        .requestMatchers(HttpMethod.GET,  "/api/v1/posts/saved").authenticated()
                         .requestMatchers(HttpMethod.GET,  PUBLIC_GET).permitAll()
                         // WebSocket handshake
                         .requestMatchers("/ws/**").permitAll()

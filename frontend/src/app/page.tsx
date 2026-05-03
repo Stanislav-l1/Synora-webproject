@@ -4,6 +4,7 @@ import {
   FeaturesGrid,
   FeedPreview,
   CommunitySection,
+  FAQSection,
   CTASection,
   LandingFooter,
 } from '@/components/landing';
@@ -19,6 +20,7 @@ export default function LandingPage() {
       <FeedPreview />
       <FeaturesGrid />
       <CommunitySection />
+      <FAQSection />
       <CTASection />
       <LandingFooter />
     </div>

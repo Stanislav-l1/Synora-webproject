@@ -77,7 +77,8 @@ public class AuthController {
                 "id",       user.getId(),
                 "username", user.getUsername(),
                 "email",    user.getEmail(),
-                "role",     user.getRole()
+                "role",     user.getRole(),
+                "onboardingCompleted", user.isOnboardingCompleted()
         )));
     }
 }

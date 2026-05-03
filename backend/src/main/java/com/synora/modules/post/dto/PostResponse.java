@@ -6,6 +6,7 @@ import lombok.Getter;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Getter @Builder
@@ -26,12 +27,22 @@ public class PostResponse {
     private int  viewsCount;
     private int  likesCount;
     private int  commentsCount;
+    private int  repostsCount;
     private boolean pinned;
 
     private List<TagResponse> tags;
 
     private Boolean liked;
     private Boolean bookmarked;
+    private Boolean reposted;
+    private String  myReaction;
+    private Map<String, Long> reactions;
+
+    private PostSummaryResponse repostOf;
+
+    private UUID    communityId;
+    private String  communitySlug;
+    private String  communityName;
 
     private Instant createdAt;
     private Instant updatedAt;

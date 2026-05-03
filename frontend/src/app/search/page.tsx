@@ -92,17 +92,9 @@ function SearchContent() {
           {posts.map((post) => (
             <PostCard
               key={post.id}
-              author={{
-                name: post.authorDisplayName || post.authorUsername,
-                handle: `@${post.authorUsername}`,
-              }}
-              content={post.content}
-              tags={post.tags}
-              likes={post.likesCount}
-              comments={post.commentsCount}
-              liked={post.liked}
-              bookmarked={post.bookmarked}
-              timeAgo={post.createdAt}
+              post={post}
+              onChange={(next) => setPosts((ps) => ps.map((p) => (p.id === next.id ? next : p)) as Post[])}
+              onRemove={(id) => setPosts((ps) => ps.filter((p) => p.id !== id))}
             />
           ))}
         </div>

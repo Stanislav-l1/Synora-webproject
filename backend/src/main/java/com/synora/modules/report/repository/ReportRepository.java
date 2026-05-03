@@ -16,6 +16,8 @@ public interface ReportRepository extends JpaRepository<Report, Long> {
 
     Page<Report> findAllByOrderByCreatedAtDesc(Pageable pageable);
 
+    long countByStatus(ReportStatus status);
+
     boolean existsByReporterIdAndEntityIdAndEntityType(
             UUID reporterId, UUID entityId,
             com.synora.modules.report.entity.ReportType entityType);

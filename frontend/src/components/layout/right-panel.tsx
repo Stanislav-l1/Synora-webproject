@@ -79,9 +79,14 @@ export function RightPanel() {
     <aside className="hidden xl:block w-right-panel shrink-0 sticky top-navbar h-[calc(100vh-theme(spacing.navbar))] overflow-y-auto scrollbar-hidden p-4 space-y-4">
       {/* Trending */}
       <Card tone="light">
-        <div className="flex items-center gap-2 mb-3">
-          <TrendingUp size={16} className="text-tyrian" />
-          <h3 className="text-sm font-semibold text-cloud-ink">{t.rightPanel.trending}</h3>
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-2">
+            <TrendingUp size={16} className="text-tyrian" />
+            <h3 className="text-sm font-semibold text-cloud-ink">{t.rightPanel.trending}</h3>
+          </div>
+          <Link href="/trending" className="text-[11px] text-cloud-muted hover:text-tyrian">
+            View all
+          </Link>
         </div>
         {trending === null ? (
           <div className="space-y-2">

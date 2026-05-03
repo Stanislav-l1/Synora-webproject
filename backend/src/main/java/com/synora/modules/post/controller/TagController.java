@@ -1,5 +1,6 @@
 package com.synora.modules.post.controller;
 
+import com.synora.modules.post.dto.TagDetailsResponse;
 import com.synora.modules.post.dto.TagResponse;
 import com.synora.modules.post.service.TagService;
 import com.synora.shared.dto.ApiResponse;
@@ -47,5 +48,11 @@ public class TagController {
                 })
                 .toList();
         return ResponseEntity.ok(ApiResponse.ok(result));
+    }
+
+    @Operation(summary = "Tag details (posts, projects, specialists, activity)")
+    @GetMapping("/{name}/details")
+    public ResponseEntity<ApiResponse<TagDetailsResponse>> details(@PathVariable String name) {
+        return ResponseEntity.ok(ApiResponse.ok(tagService.getDetails(name)));
     }
 }

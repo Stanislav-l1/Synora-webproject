@@ -8,12 +8,25 @@ export interface User {
   location: string | null;
   websiteUrl: string | null;
   githubUrl: string | null;
+  headline: string | null;
+  pronouns: string | null;
+  availableFor: string | null;
   role: 'USER' | 'MODERATOR' | 'ADMIN';
+  onboardingCompleted?: boolean;
+  specialization?: string | null;
+  careerGoal?: string | null;
+  interests?: string[] | null;
   reputationScore: number;
   active: boolean;
   banned: boolean;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface Skill {
+  id: number;
+  name: string;
+  level: number | null;
 }
 
 export interface UserProfile {
@@ -22,11 +35,20 @@ export interface UserProfile {
   displayName: string | null;
   bio: string | null;
   avatarUrl: string | null;
+  githubUrl: string | null;
+  websiteUrl: string | null;
+  location: string | null;
+  headline: string | null;
+  pronouns: string | null;
+  availableFor: string | null;
   reputationScore: number;
-  followersCount: number;
-  followingCount: number;
-  isFollowing?: boolean;
+  role: string;
+  specialization?: string | null;
+  careerGoal?: string | null;
+  interests?: string[] | null;
+  onboardingCompleted?: boolean;
   createdAt: string;
+  skills: Skill[] | null;
 }
 
 export interface FollowResponse {
@@ -38,8 +60,8 @@ export interface FollowResponse {
 }
 
 export interface FollowStats {
-  followersCount: number;
-  followingCount: number;
+  followers: number;
+  following: number;
 }
 
 export interface UpdateProfileRequest {
@@ -48,4 +70,7 @@ export interface UpdateProfileRequest {
   location?: string | null;
   websiteUrl?: string | null;
   githubUrl?: string | null;
+  headline?: string | null;
+  pronouns?: string | null;
+  availableFor?: string | null;
 }

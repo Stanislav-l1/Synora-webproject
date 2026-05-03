@@ -63,6 +63,14 @@ public class Post {
     @Column(name = "is_pinned", nullable = false)
     private boolean pinned = false;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "repost_of_id")
+    private Post repostOf;
+
+    @Builder.Default
+    @Column(name = "reposts_count", nullable = false)
+    private int repostsCount = 0;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "post_tags",
@@ -71,6 +79,9 @@ public class Post {
     )
     @Builder.Default
     private Set<Tag> tags = new HashSet<>();
+
+    @Column(name = "community_id")
+    private UUID communityId;
 
     @CreatedDate
     @Column(name = "created_at", nullable = false, updatable = false)

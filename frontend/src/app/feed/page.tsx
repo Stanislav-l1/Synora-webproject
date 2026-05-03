@@ -9,22 +9,8 @@ import { Button } from '@/components/ui/button';
 import { PostCard } from '@/components/shared/post-card';
 import { useAuthStore } from '@/store/useAuthStore';
 import api from '@/lib/api';
-import { timeAgo } from '@/lib/utils';
-import type { ApiResponse, PageResponse } from '@/types';
+import type { ApiResponse, PageResponse, PostSummary } from '@/types';
 import { useT } from '@/lib/i18n';
-
-interface PostSummary {
-  id: string;
-  authorUsername: string;
-  authorDisplayName: string | null;
-  authorAvatarUrl: string | null;
-  title: string | null;
-  preview: string | null;
-  likesCount: number;
-  commentsCount: number;
-  tags: { id: number; name: string }[];
-  createdAt: string;
-}
 
 export default function FeedPage() {
   const t = useT();
@@ -60,17 +46,24 @@ export default function FeedPage() {
     }
   }
 
+  function updatePost(next: PostSummary) {
+    setPosts((ps) => ps.map((p) => (p.id === next.id ? next : p)));
+  }
+
+  function removePost(id: string) {
+    setPosts((ps) => ps.filter((p) => p.id !== id));
+  }
+
   return (
     <AppShell>
       <div className="flex">
-        {/* Feed content */}
         <div className="flex-1 max-w-feed mx-auto px-4 py-6 space-y-4">
-          {/* Compose box */}
           <div className="bg-cloud-soft border border-cloud-deep rounded-lg p-4 shadow-sm">
             <div className="flex gap-3">
               <Avatar name={user?.displayName || user?.username || '?'} size="md" />
               <div className="flex-1">
                 <textarea
+                  aria-label="Compose post"
                   value={postText}
                   onChange={(e) => setPostText(e.target.value)}
                   placeholder={t.feed.composePlaceholder}
@@ -97,7 +90,6 @@ export default function FeedPage() {
             </div>
           </div>
 
-          {/* Posts */}
           {loading ? (
             <div className="flex justify-center py-12">
               <Loader2 size={24} className="animate-spin text-tyrian/60" />
@@ -110,22 +102,15 @@ export default function FeedPage() {
             posts.map((post) => (
               <PostCard
                 key={post.id}
-                author={{
-                  name: post.authorDisplayName || post.authorUsername,
-                  handle: `@${post.authorUsername}`,
-                  avatar: post.authorAvatarUrl || undefined,
-                }}
-                content={post.preview || post.title || ''}
-                tags={post.tags?.map((t) => t.name)}
-                likes={post.likesCount}
-                comments={post.commentsCount}
-                timeAgo={timeAgo(post.createdAt)}
+                post={post}
+                currentUsername={user?.username}
+                onChange={updatePost}
+                onRemove={removePost}
               />
             ))
           )}
         </div>
 
-        {/* Right panel */}
         <RightPanel />
       </div>
     </AppShell>

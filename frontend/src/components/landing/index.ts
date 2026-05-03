@@ -5,6 +5,7 @@ export { FeatureCard } from './FeatureCard';
 export { FeedPreview } from './FeedPreview';
 export { CommunitySection } from './CommunitySection';
 export { CTASection } from './CTASection';
+export { FAQSection } from './FAQSection';
 export { LandingFooter } from './LandingFooter';
 export { ScrollReveal } from './ScrollReveal';
 export { TerminalPulse } from './TerminalPulse';

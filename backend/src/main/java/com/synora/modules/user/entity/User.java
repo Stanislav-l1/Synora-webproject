@@ -52,6 +52,25 @@ public class User implements UserDetails {
     @Column(length = 100)
     private String location;
 
+    @Column(length = 120)
+    private String headline;
+
+    @Column(length = 30)
+    private String pronouns;
+
+    @Column(name = "available_for", length = 120)
+    private String availableFor;
+
+    @Column(length = 60)
+    private String specialization;
+
+    @Column(name = "career_goal", length = 60)
+    private String careerGoal;
+
+    @Builder.Default
+    @Column(name = "onboarding_completed", nullable = false)
+    private boolean onboardingCompleted = false;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, columnDefinition = "user_role")
     @org.hibernate.annotations.JdbcTypeCode(org.hibernate.type.SqlTypes.NAMED_ENUM)
@@ -65,6 +84,15 @@ public class User implements UserDetails {
     @Builder.Default
     @Column(name = "is_banned", nullable = false)
     private boolean banned = false;
+
+    @Column(name = "ban_reason", length = 500)
+    private String banReason;
+
+    @Column(name = "banned_at")
+    private Instant bannedAt;
+
+    @Column(name = "banned_by")
+    private UUID bannedById;
 
     @Builder.Default
     @Column(name = "reputation_score", nullable = false)

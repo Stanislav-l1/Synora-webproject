@@ -13,4 +13,8 @@ public interface TagRepository extends JpaRepository<Tag, Long> {
     List<Tag> findAllByOrderByUsageCountDesc();
 
     List<Tag> findByNameContainingIgnoreCaseOrderByUsageCountDesc(String query);
+
+    @org.springframework.data.jpa.repository.Query(
+            "SELECT t FROM Tag t WHERE LOWER(t.name) IN :names")
+    List<Tag> findByNamesLowerIn(@org.springframework.data.repository.query.Param("names") java.util.Collection<String> names);
 }

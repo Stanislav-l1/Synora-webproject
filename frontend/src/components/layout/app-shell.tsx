@@ -4,12 +4,14 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Navbar } from './navbar';
 import { Sidebar } from './sidebar';
+import { BottomNav, OnboardingWizard } from '@/components/shared';
 import { useAuthStore } from '@/store/useAuthStore';
 import { useNotificationStore } from '@/store/useNotificationStore';
 import { useWebSocket } from '@/hooks/useWebSocket';
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [onboardingDismissed, setOnboardingDismissed] = useState(false);
   const { user, isAuthenticated, _hydrated, hydrate, fetchCurrentUser } = useAuthStore();
   const { fetchUnreadCount } = useNotificationStore();
   const router = useRouter();
@@ -46,9 +48,13 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     <>
       <Navbar onMenuToggle={() => setSidebarOpen(!sidebarOpen)} />
       <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-      <main className="pt-navbar lg:pl-sidebar min-h-screen bg-theme-bg text-theme-text">
+      <main className="pt-navbar lg:pl-sidebar pb-16 lg:pb-0 min-h-screen bg-theme-bg text-theme-text">
         {children}
       </main>
+      <BottomNav />
+      {user && user.onboardingCompleted === false && !onboardingDismissed && (
+        <OnboardingWizard onClose={() => setOnboardingDismissed(true)} />
+      )}
     </>
   );
 }

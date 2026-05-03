@@ -20,4 +20,13 @@ public class UpdateProfileRequest {
 
     @Size(max = 100)
     private String location;
+
+    @Size(max = 120)
+    private String headline;
+
+    @Size(max = 30)
+    private String pronouns;
+
+    @Size(max = 120)
+    private String availableFor;
 }
