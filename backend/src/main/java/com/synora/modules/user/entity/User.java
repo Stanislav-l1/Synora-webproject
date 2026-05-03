@@ -1,5 +1,6 @@
 package com.synora.modules.user.entity;
 
+import com.synora.modules.subscription.entity.SubscriptionTier;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -93,6 +94,12 @@ public class User implements UserDetails {
 
     @Column(name = "banned_by")
     private UUID bannedById;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "subscription_tier", nullable = false, columnDefinition = "subscription_tier")
+    @org.hibernate.annotations.JdbcTypeCode(org.hibernate.type.SqlTypes.NAMED_ENUM)
+    @Builder.Default
+    private SubscriptionTier subscriptionTier = SubscriptionTier.FREE;
 
     @Builder.Default
     @Column(name = "reputation_score", nullable = false)

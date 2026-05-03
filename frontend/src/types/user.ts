@@ -12,6 +12,7 @@ export interface User {
   pronouns: string | null;
   availableFor: string | null;
   role: 'USER' | 'MODERATOR' | 'ADMIN';
+  subscriptionTier?: 'FREE' | 'PRO' | 'TEAM' | 'BUSINESS';
   onboardingCompleted?: boolean;
   specialization?: string | null;
   careerGoal?: string | null;

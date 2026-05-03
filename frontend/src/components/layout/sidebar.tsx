@@ -19,6 +19,8 @@ import {
   Briefcase,
   Github,
   Shield,
+  Zap,
+  CreditCard,
   type LucideIcon,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -96,6 +98,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
   const secondaryNav: NavItem[] = [
     { href: '/saved', label: t.nav.bookmarks, icon: Bookmark },
     { href: '/tags', label: t.nav.trendingTags, icon: Hash },
+    { href: '/billing', label: 'Billing', icon: CreditCard },
     { href: '/settings', label: t.nav.settings, icon: Settings },
   ];
 
@@ -223,7 +226,20 @@ export function Sidebar({ open, onClose }: SidebarProps) {
         </nav>
 
         {/* Footer */}
-        <div className="p-4 border-t border-moss-deep">
+        <div className="p-4 border-t border-moss-deep space-y-3">
+          {(!user?.subscriptionTier || user.subscriptionTier === 'FREE') && (
+            <Link
+              href="/pricing"
+              onClick={onClose}
+              className="flex items-center gap-2 px-3 py-2 rounded-lg bg-tyrian/20 hover:bg-tyrian/30 transition-colors"
+            >
+              <Zap size={14} className="text-tyrian shrink-0" />
+              <div className="min-w-0">
+                <p className="text-xs font-semibold text-cloud leading-tight">Upgrade to Pro</p>
+                <p className="text-[10px] text-moss-soft leading-tight truncate">Private projects &amp; AI tools</p>
+              </div>
+            </Link>
+          )}
           <p className="text-xs text-moss-soft">&copy; 2026 Synora</p>
         </div>
       </aside>

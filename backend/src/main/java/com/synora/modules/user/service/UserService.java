@@ -195,6 +195,7 @@ public class UserService {
                 .onboardingCompleted(u.isOnboardingCompleted())
                 .reputationScore(u.getReputationScore())
                 .role(u.getRole().name())
+                .subscriptionTier(u.getSubscriptionTier() != null ? u.getSubscriptionTier().name() : "FREE")
                 .createdAt(u.getCreatedAt())
                 .skills(skills)
                 .build();

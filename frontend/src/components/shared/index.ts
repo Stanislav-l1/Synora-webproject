@@ -21,3 +21,4 @@ export { ReputationPanel } from './reputation-panel';
 export { NewsList } from './news-list';
 export { RepoCard } from './repo-card';
 export { ContributionGraph } from './contribution-graph';
+export { UpgradeGate } from './upgrade-gate';

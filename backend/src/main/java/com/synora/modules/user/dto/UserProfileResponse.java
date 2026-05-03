@@ -29,4 +29,5 @@ public class UserProfileResponse {
     private String  role;
     private Instant createdAt;
     private List<SkillDto> skills;
+    private String  subscriptionTier;
 }
