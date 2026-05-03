@@ -1,6 +1,7 @@
 package com.synora.modules.user.entity;
 
 import com.synora.modules.subscription.entity.SubscriptionTier;
+import com.synora.modules.verification.entity.VerificationType;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -100,6 +101,15 @@ public class User implements UserDetails {
     @org.hibernate.annotations.JdbcTypeCode(org.hibernate.type.SqlTypes.NAMED_ENUM)
     @Builder.Default
     private SubscriptionTier subscriptionTier = SubscriptionTier.FREE;
+
+    @Builder.Default
+    @Column(name = "is_verified", nullable = false)
+    private boolean verified = false;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "verification_type", columnDefinition = "verification_type")
+    @org.hibernate.annotations.JdbcTypeCode(org.hibernate.type.SqlTypes.NAMED_ENUM)
+    private VerificationType verificationType;
 
     @Builder.Default
     @Column(name = "reputation_score", nullable = false)

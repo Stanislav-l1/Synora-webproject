@@ -196,6 +196,8 @@ public class UserService {
                 .reputationScore(u.getReputationScore())
                 .role(u.getRole().name())
                 .subscriptionTier(u.getSubscriptionTier() != null ? u.getSubscriptionTier().name() : "FREE")
+                .verified(u.isVerified())
+                .verificationType(u.getVerificationType() != null ? u.getVerificationType().name() : null)
                 .createdAt(u.getCreatedAt())
                 .skills(skills)
                 .build();

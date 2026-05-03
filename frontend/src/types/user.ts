@@ -48,6 +48,9 @@ export interface UserProfile {
   careerGoal?: string | null;
   interests?: string[] | null;
   onboardingCompleted?: boolean;
+  subscriptionTier?: string | null;
+  verified?: boolean;
+  verificationType?: string | null;
   createdAt: string;
   skills: Skill[] | null;
 }

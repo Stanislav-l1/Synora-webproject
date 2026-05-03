@@ -5,6 +5,8 @@ export interface PostSummary {
   authorUsername: string;
   authorDisplayName: string | null;
   authorAvatarUrl: string | null;
+  authorVerified?: boolean;
+  authorVerificationType?: string | null;
   title: string | null;
   preview: string | null;
   coverUrl?: string | null;

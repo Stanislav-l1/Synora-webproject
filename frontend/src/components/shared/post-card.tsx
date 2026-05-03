@@ -13,7 +13,8 @@ import { timeAgo } from '@/lib/utils';
 import api from '@/lib/api';
 import { useAuthStore } from '@/store/useAuthStore';
 import { PostComments } from './post-comments';
-import type { PostSummary, ReactionType } from '@/types';
+import { VerificationBadge } from './verification-badge';
+import type { PostSummary, ReactionType, VerificationType } from '@/types';
 
 interface PostCardProps {
   post: PostSummary;
@@ -186,9 +187,14 @@ export function PostCard({ post, currentUsername, onChange, onRemove }: PostCard
             <Avatar name={rendered.authorDisplayName || rendered.authorUsername} src={rendered.authorAvatarUrl || undefined} size="md" />
           </Link>
           <div>
-            <Link href={`/u/${rendered.authorUsername}`} className="text-sm font-semibold text-cloud-ink hover:text-tyrian transition-colors">
-              {rendered.authorDisplayName || rendered.authorUsername}
-            </Link>
+            <div className="flex items-center gap-1">
+              <Link href={`/u/${rendered.authorUsername}`} className="text-sm font-semibold text-cloud-ink hover:text-tyrian transition-colors">
+                {rendered.authorDisplayName || rendered.authorUsername}
+              </Link>
+              {rendered.authorVerified && rendered.authorVerificationType && (
+                <VerificationBadge type={rendered.authorVerificationType as VerificationType} size="sm" />
+              )}
+            </div>
             <p className="text-xs text-cloud-muted">
               @{rendered.authorUsername} · {timeAgo(rendered.createdAt)}
             </p>

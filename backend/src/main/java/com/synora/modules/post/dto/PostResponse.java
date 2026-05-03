@@ -17,6 +17,8 @@ public class PostResponse {
     private String authorUsername;
     private String authorDisplayName;
     private String authorAvatarUrl;
+    private Boolean authorVerified;
+    private String  authorVerificationType;
 
     private String title;
     private String content;

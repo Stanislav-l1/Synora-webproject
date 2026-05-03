@@ -30,4 +30,6 @@ public class UserProfileResponse {
     private Instant createdAt;
     private List<SkillDto> skills;
     private String  subscriptionTier;
+    private boolean verified;
+    private String  verificationType;
 }

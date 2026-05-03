@@ -21,6 +21,7 @@ import {
   Shield,
   Zap,
   CreditCard,
+  BadgeCheck,
   type LucideIcon,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -98,7 +99,8 @@ export function Sidebar({ open, onClose }: SidebarProps) {
   const secondaryNav: NavItem[] = [
     { href: '/saved', label: t.nav.bookmarks, icon: Bookmark },
     { href: '/tags', label: t.nav.trendingTags, icon: Hash },
-    { href: '/billing', label: 'Billing', icon: CreditCard },
+    { href: '/billing',       label: 'Billing',    icon: CreditCard },
+    { href: '/verification',  label: 'Verification', icon: BadgeCheck },
     { href: '/settings', label: t.nav.settings, icon: Settings },
   ];
 

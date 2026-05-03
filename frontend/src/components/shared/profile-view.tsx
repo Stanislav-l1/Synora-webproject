@@ -1,7 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { MapPin, LinkIcon, Calendar, Star, Loader2, Github, Briefcase } from 'lucide-react';
+import { MapPin, LinkIcon, Calendar, Star, Loader2, Github, Briefcase, BadgeCheck } from 'lucide-react';
+import { VerificationBadge } from './verification-badge';
+import type { VerificationType } from '@/types';
 import { Avatar } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { TabBar } from '@/components/ui/tab-bar';
@@ -145,6 +147,13 @@ export function ProfileView({ username, isOwn, locale = 'en' }: ProfileViewProps
         <div>
           <div className="flex items-center gap-2 flex-wrap">
             <h1 className="text-2xl font-bold text-cloud-ink">{displayName}</h1>
+            {profile.verified && profile.verificationType && (
+              <VerificationBadge
+                type={profile.verificationType as VerificationType}
+                size="lg"
+                showLabel
+              />
+            )}
             {profile.pronouns && (
               <span className="text-xs text-cloud-muted border border-cloud-deep rounded-full px-2 py-0.5">
                 {profile.pronouns}

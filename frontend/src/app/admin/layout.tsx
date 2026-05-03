@@ -5,16 +5,17 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
-  LayoutDashboard, Users, Flag, Shield,
+  LayoutDashboard, Users, Flag, Shield, BadgeCheck,
 } from 'lucide-react';
 import { useAuthStore } from '@/store/useAuthStore';
 import { Navbar } from '@/components/layout/navbar';
 import { cn } from '@/lib/utils';
 
 const adminNav = [
-  { href: '/admin',         label: 'Dashboard', icon: LayoutDashboard, exact: true },
-  { href: '/admin/users',   label: 'Users',     icon: Users },
-  { href: '/admin/reports', label: 'Reports',   icon: Flag },
+  { href: '/admin',                  label: 'Dashboard',     icon: LayoutDashboard, exact: true },
+  { href: '/admin/users',            label: 'Users',         icon: Users },
+  { href: '/admin/reports',          label: 'Reports',       icon: Flag },
+  { href: '/admin/verifications',    label: 'Verifications', icon: BadgeCheck },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
