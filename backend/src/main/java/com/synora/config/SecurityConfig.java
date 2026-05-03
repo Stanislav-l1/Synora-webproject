@@ -73,6 +73,8 @@ public class SecurityConfig {
             "/api/v1/communities/*",
             "/api/v1/communities/*/posts",
             "/api/v1/communities/*/members",
+            "/api/v1/events",
+            "/api/v1/events/*",
             "/actuator/health",
             "/swagger-ui/**",
             "/api-docs/**"

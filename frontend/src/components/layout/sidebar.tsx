@@ -22,6 +22,7 @@ import {
   Zap,
   CreditCard,
   BadgeCheck,
+  Globe,
   type LucideIcon,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -88,6 +89,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
     { href: '/projects', label: t.nav.projects, icon: FolderKanban },
     { href: '/messages', label: t.nav.messages, icon: MessageSquare },
     { href: '/calendar', label: 'Calendar', icon: Calendar },
+    { href: '/events', label: 'Events', icon: Globe },
     { href: '/career', label: 'Career', icon: Briefcase },
     { href: '/repositories', label: 'Repositories', icon: Github },
     { href: '/communities', label: 'Communities', icon: Building2 },

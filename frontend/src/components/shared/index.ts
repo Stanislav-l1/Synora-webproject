@@ -23,3 +23,4 @@ export { RepoCard } from './repo-card';
 export { ContributionGraph } from './contribution-graph';
 export { UpgradeGate } from './upgrade-gate';
 export { VerificationBadge } from './verification-badge';
+export { CreateEventModal } from './create-event-modal';

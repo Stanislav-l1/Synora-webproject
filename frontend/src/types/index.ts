@@ -19,3 +19,4 @@ export * from './community';
 export * from './admin';
 export * from './subscription';
 export * from './verification';
+export * from './event';
