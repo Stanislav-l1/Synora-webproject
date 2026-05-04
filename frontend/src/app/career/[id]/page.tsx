@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import {
   Briefcase, MapPin, Globe, ArrowLeft, Eye, Users, ExternalLink,
-  CheckCircle, Clock, Send, Trash2, Edit,
+  CheckCircle, Clock, Send, Trash2, Edit, Bookmark, BookmarkCheck,
 } from 'lucide-react';
 import Link from 'next/link';
 import { AppShell } from '@/components/layout/app-shell';
@@ -22,8 +22,9 @@ export default function JobDetailPage() {
   const { user } = useAuthStore();
   const [job, setJob] = useState<JobPosting | null>(null);
   const [loading, setLoading] = useState(true);
-  const [applying, setApplying] = useState(false);
+  const [applying, setApplying]     = useState(false);
   const [withdrawing, setWithdrawing] = useState(false);
+  const [saving, setSaving]         = useState(false);
   const [coverLetter, setCoverLetter] = useState('');
   const [showApplyForm, setShowApplyForm] = useState(false);
 
@@ -45,6 +46,24 @@ export default function JobDetailPage() {
       // ignore
     } finally {
       setApplying(false);
+    }
+  }
+
+  async function handleSaveToggle() {
+    if (!job) return;
+    setSaving(true);
+    try {
+      if (job.saved) {
+        await api.delete(`/career/${job.id}/save`);
+        setJob(j => j ? { ...j, saved: false } : j);
+      } else {
+        await api.post(`/career/${job.id}/save`);
+        setJob(j => j ? { ...j, saved: true } : j);
+      }
+    } catch {
+      // ignore
+    } finally {
+      setSaving(false);
     }
   }
 
@@ -176,6 +195,17 @@ export default function JobDetailPage() {
 
           {/* Actions */}
           <div className="flex items-center gap-3 pt-4 border-t border-border-default">
+            {user && !isOwner && (
+              <Button
+                variant="ghost"
+                size="sm"
+                loading={saving}
+                onClick={handleSaveToggle}
+                icon={job.saved ? <BookmarkCheck size={14} className="text-accent" /> : <Bookmark size={14} />}
+              >
+                {job.saved ? 'Saved' : 'Save'}
+              </Button>
+            )}
             {isOwner ? (
               <>
                 <Link href={`/career/${job.id}/applications`}>

@@ -37,6 +37,7 @@ public class JobPostingResponse {
     private int viewsCount;
     private Set<String> skills;
     private boolean applied;
+    private boolean saved;
     private Instant createdAt;
     private Instant updatedAt;
 }

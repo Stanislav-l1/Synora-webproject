@@ -12,5 +12,6 @@ public enum NotificationType {
     MESSAGE_RECEIVED,
     FOLLOW,
     REPUTATION_MILESTONE,
+    JOB_APPLICATION,
     SYSTEM
 }

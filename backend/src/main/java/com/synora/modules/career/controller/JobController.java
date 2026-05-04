@@ -34,10 +34,11 @@ public class JobController {
             @RequestParam(defaultValue = "20") int size,
             @RequestParam(required = false) JobType type,
             @RequestParam(defaultValue = "false") boolean remote,
+            @RequestParam(required = false) String q,
             @AuthenticationPrincipal User currentUser) {
 
         UUID uid = currentUser != null ? currentUser.getId() : null;
-        return ResponseEntity.ok(ApiResponse.ok(jobService.listJobs(page, size, type, remote, uid)));
+        return ResponseEntity.ok(ApiResponse.ok(jobService.listJobs(page, size, type, remote, q, uid)));
     }
 
     @Operation(summary = "Get job posting by ID")
@@ -101,6 +102,26 @@ public class JobController {
         return ResponseEntity.ok(ApiResponse.ok(null));
     }
 
+    @Operation(summary = "Save job posting", security = @SecurityRequirement(name = "bearerAuth"))
+    @PostMapping("/{id}/save")
+    public ResponseEntity<ApiResponse<Void>> saveJob(
+            @PathVariable UUID id,
+            @AuthenticationPrincipal User currentUser) {
+
+        jobService.saveJob(id, currentUser);
+        return ResponseEntity.ok(ApiResponse.ok(null));
+    }
+
+    @Operation(summary = "Unsave job posting", security = @SecurityRequirement(name = "bearerAuth"))
+    @DeleteMapping("/{id}/save")
+    public ResponseEntity<ApiResponse<Void>> unsaveJob(
+            @PathVariable UUID id,
+            @AuthenticationPrincipal User currentUser) {
+
+        jobService.unsaveJob(id, currentUser);
+        return ResponseEntity.ok(ApiResponse.ok(null));
+    }
+
     @Operation(summary = "List applications for a job (owner only)", security = @SecurityRequirement(name = "bearerAuth"))
     @GetMapping("/{id}/applications")
     public ResponseEntity<ApiResponse<PageResponse<JobApplicationResponse>>> getApplications(
@@ -120,6 +141,16 @@ public class JobController {
             @RequestParam(defaultValue = "20") int size) {
 
         return ResponseEntity.ok(ApiResponse.ok(jobService.getMyApplications(currentUser.getId(), page, size)));
+    }
+
+    @Operation(summary = "My saved jobs", security = @SecurityRequirement(name = "bearerAuth"))
+    @GetMapping("/my/saved")
+    public ResponseEntity<ApiResponse<PageResponse<JobPostingResponse>>> mySaved(
+            @AuthenticationPrincipal User currentUser,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size) {
+
+        return ResponseEntity.ok(ApiResponse.ok(jobService.getSavedJobs(currentUser.getId(), page, size)));
     }
 
     @Operation(summary = "Update application status (owner only)", security = @SecurityRequirement(name = "bearerAuth"))

@@ -102,6 +102,7 @@ public class NotificationService {
             case TASK_COMPLETED    -> "A task was completed";
             case MESSAGE_RECEIVED  -> name + " sent you a message";
             case REPUTATION_MILESTONE -> "You reached a reputation milestone!";
+            case JOB_APPLICATION   -> name + " applied to your job posting";
             default                -> "You have a new notification";
         };
     }

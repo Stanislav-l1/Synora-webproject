@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { Briefcase, MapPin, Globe, Users, Zap, Search, Filter, Plus } from 'lucide-react';
+import { useState, useEffect, useCallback } from 'react';
+import { Briefcase, MapPin, Globe, Users, Search, Filter, Plus, Bookmark, BookmarkCheck } from 'lucide-react';
 import Link from 'next/link';
 import { AppShell } from '@/components/layout/app-shell';
 import { Button } from '@/components/ui/button';
@@ -9,6 +9,7 @@ import { Badge } from '@/components/ui/badge';
 import { Avatar } from '@/components/ui/avatar';
 import { useAuthStore } from '@/store/useAuthStore';
 import api from '@/lib/api';
+import { cn } from '@/lib/utils';
 import type { ApiResponse, PageResponse, JobPosting, JobType } from '@/types';
 import { JOB_TYPE_LABELS, JOB_TYPE_COLORS } from '@/types';
 
@@ -22,7 +23,30 @@ const JOB_TYPE_FILTERS: { label: string; value: JobType | '' }[] = [
   { label: 'Team Member', value: 'TEAM_MEMBER' },
 ];
 
-function JobCard({ job }: { job: JobPosting }) {
+function JobCard({ job, onSaveToggle }: { job: JobPosting; onSaveToggle?: (id: string, saved: boolean) => void }) {
+  const { user } = useAuthStore();
+  const [saving, setSaving] = useState(false);
+
+  async function toggleSave(e: React.MouseEvent) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!user) return;
+    setSaving(true);
+    try {
+      if (job.saved) {
+        await api.delete(`/career/${job.id}/save`);
+        onSaveToggle?.(job.id, false);
+      } else {
+        await api.post(`/career/${job.id}/save`);
+        onSaveToggle?.(job.id, true);
+      }
+    } catch {
+      // ignore
+    } finally {
+      setSaving(false);
+    }
+  }
+
   return (
     <Link href={`/career/${job.id}`}>
       <div className="group bg-surface-secondary border border-border-default hover:border-border-accent rounded-xl p-5 transition-all duration-200 hover:shadow-lg hover:shadow-accent/5 cursor-pointer">
@@ -42,9 +66,27 @@ function JobCard({ job }: { job: JobPosting }) {
               </p>
             </div>
           </div>
-          <Badge variant="default" className={JOB_TYPE_COLORS[job.type]}>
-            {JOB_TYPE_LABELS[job.type]}
-          </Badge>
+          <div className="flex items-center gap-2 shrink-0">
+            <Badge variant="default" className={JOB_TYPE_COLORS[job.type]}>
+              {JOB_TYPE_LABELS[job.type]}
+            </Badge>
+            {user && (
+              <button
+                type="button"
+                onClick={toggleSave}
+                disabled={saving}
+                aria-label={job.saved ? 'Unsave job' : 'Save job'}
+                className={cn(
+                  'p-1.5 rounded-md transition-colors',
+                  job.saved
+                    ? 'text-accent bg-accent/10 hover:bg-accent/20'
+                    : 'text-content-tertiary hover:text-accent hover:bg-surface-tertiary',
+                )}
+              >
+                {job.saved ? <BookmarkCheck size={15} /> : <Bookmark size={15} />}
+              </button>
+            )}
+          </div>
         </div>
 
         <p className="text-sm text-content-secondary line-clamp-2 mb-4">
@@ -75,7 +117,7 @@ function JobCard({ job }: { job: JobPosting }) {
 
         {job.skills.length > 0 && (
           <div className="flex flex-wrap gap-1.5 mt-3">
-            {job.skills.slice(0, 5).map((s) => (
+            {job.skills.slice(0, 5).map(s => (
               <span
                 key={s}
                 className="px-2 py-0.5 text-xs rounded-full bg-surface-tertiary text-content-secondary border border-border-default"
@@ -106,33 +148,37 @@ function JobCard({ job }: { job: JobPosting }) {
 
 export default function CareerPage() {
   const { user } = useAuthStore();
-  const [jobs, setJobs] = useState<JobPosting[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [jobs, setJobs]           = useState<JobPosting[]>([]);
+  const [loading, setLoading]     = useState(true);
   const [typeFilter, setTypeFilter] = useState<JobType | ''>('');
   const [remoteOnly, setRemoteOnly] = useState(false);
-  const [search, setSearch] = useState('');
+  const [search, setSearch]       = useState('');
+  const [debouncedSearch, setDebouncedSearch] = useState('');
 
+  // Debounce search input
   useEffect(() => {
+    const t = setTimeout(() => setDebouncedSearch(search), 400);
+    return () => clearTimeout(t);
+  }, [search]);
+
+  const fetchJobs = useCallback(() => {
     setLoading(true);
     const params = new URLSearchParams({ page: '0', size: '30' });
     if (typeFilter) params.set('type', typeFilter);
     if (remoteOnly) params.set('remote', 'true');
+    if (debouncedSearch.trim()) params.set('q', debouncedSearch.trim());
 
     api.get<ApiResponse<PageResponse<JobPosting>>>(`/career?${params}`)
-      .then((res) => setJobs(res.data.data.content))
+      .then(res => setJobs(res.data.data.content))
       .catch(() => {})
       .finally(() => setLoading(false));
-  }, [typeFilter, remoteOnly]);
+  }, [typeFilter, remoteOnly, debouncedSearch]);
 
-  const filtered = search
-    ? jobs.filter(
-        (j) =>
-          j.title.toLowerCase().includes(search.toLowerCase()) ||
-          j.description.toLowerCase().includes(search.toLowerCase()) ||
-          (j.company || '').toLowerCase().includes(search.toLowerCase()) ||
-          j.skills.some((s) => s.toLowerCase().includes(search.toLowerCase())),
-      )
-    : jobs;
+  useEffect(() => { fetchJobs(); }, [fetchJobs]);
+
+  function handleSaveToggle(jobId: string, saved: boolean) {
+    setJobs(prev => prev.map(j => j.id === jobId ? { ...j, saved } : j));
+  }
 
   return (
     <AppShell>
@@ -148,13 +194,20 @@ export default function CareerPage() {
               Jobs, internships, freelance gigs, team & co-founder search
             </p>
           </div>
-          {user && (
-            <Link href="/career/post">
-              <Button variant="primary" size="sm" icon={<Plus size={16} />}>
-                Post
-              </Button>
-            </Link>
-          )}
+          <div className="flex items-center gap-2">
+            {user && (
+              <Link href="/career/my">
+                <Button variant="secondary" size="sm">My Career</Button>
+              </Link>
+            )}
+            {user && (
+              <Link href="/career/post">
+                <Button variant="primary" size="sm" icon={<Plus size={16} />}>
+                  Post
+                </Button>
+              </Link>
+            )}
+          </div>
         </div>
 
         {/* Search + filters */}
@@ -163,7 +216,7 @@ export default function CareerPage() {
             <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-content-tertiary" />
             <input
               value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={e => setSearch(e.target.value)}
               placeholder="Search jobs, skills, companies..."
               className="w-full pl-9 pr-4 py-2 bg-surface-input border border-border-default rounded-lg text-sm text-content-primary placeholder:text-content-tertiary focus:outline-none focus:border-border-accent"
             />
@@ -171,9 +224,10 @@ export default function CareerPage() {
 
           <div className="flex flex-wrap items-center gap-2">
             <Filter size={14} className="text-content-tertiary" />
-            {JOB_TYPE_FILTERS.map((f) => (
+            {JOB_TYPE_FILTERS.map(f => (
               <button
                 key={f.value}
+                type="button"
                 onClick={() => setTypeFilter(f.value as JobType | '')}
                 className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
                   typeFilter === f.value
@@ -185,6 +239,7 @@ export default function CareerPage() {
               </button>
             ))}
             <button
+              type="button"
               onClick={() => setRemoteOnly(!remoteOnly)}
               className={`px-3 py-1 rounded-full text-xs font-medium transition-colors flex items-center gap-1 ${
                 remoteOnly
@@ -201,9 +256,10 @@ export default function CareerPage() {
         <div className="flex items-center gap-4 text-xs text-content-tertiary mb-4">
           <span className="flex items-center gap-1">
             <Briefcase size={12} />
-            {filtered.length} posting{filtered.length !== 1 ? 's' : ''}
+            {jobs.length} posting{jobs.length !== 1 ? 's' : ''}
           </span>
           {remoteOnly && <span className="text-success">Remote only</span>}
+          {debouncedSearch && <span>Searching: "{debouncedSearch}"</span>}
         </div>
 
         {/* Job list */}
@@ -213,7 +269,7 @@ export default function CareerPage() {
               <div key={i} className="h-40 bg-surface-secondary rounded-xl animate-pulse" />
             ))}
           </div>
-        ) : filtered.length === 0 ? (
+        ) : jobs.length === 0 ? (
           <div className="text-center py-20 text-content-tertiary">
             <Briefcase size={40} className="mx-auto mb-3 opacity-30" />
             <p className="text-lg font-medium text-content-secondary">No postings found</p>
@@ -228,8 +284,8 @@ export default function CareerPage() {
           </div>
         ) : (
           <div className="space-y-3">
-            {filtered.map((job) => (
-              <JobCard key={job.id} job={job} />
+            {jobs.map(job => (
+              <JobCard key={job.id} job={job} onSaveToggle={handleSaveToggle} />
             ))}
           </div>
         )}

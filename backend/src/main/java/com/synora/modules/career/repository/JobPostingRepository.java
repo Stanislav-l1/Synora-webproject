@@ -23,6 +23,37 @@ public interface JobPostingRepository extends JpaRepository<JobPosting, UUID> {
 
     Page<JobPosting> findByAuthorId(UUID authorId, Pageable pageable);
 
+    @Query("""
+            SELECT j FROM JobPosting j WHERE j.status = :status
+            AND (LOWER(j.title) LIKE LOWER(CONCAT('%', :q, '%'))
+              OR LOWER(j.description) LIKE LOWER(CONCAT('%', :q, '%'))
+              OR LOWER(COALESCE(j.company, '')) LIKE LOWER(CONCAT('%', :q, '%')))
+            """)
+    Page<JobPosting> searchByKeyword(@Param("status") JobStatus status,
+                                     @Param("q") String q,
+                                     Pageable pageable);
+
+    @Query("""
+            SELECT j FROM JobPosting j WHERE j.status = :status AND j.remote = true
+            AND (LOWER(j.title) LIKE LOWER(CONCAT('%', :q, '%'))
+              OR LOWER(j.description) LIKE LOWER(CONCAT('%', :q, '%'))
+              OR LOWER(COALESCE(j.company, '')) LIKE LOWER(CONCAT('%', :q, '%')))
+            """)
+    Page<JobPosting> searchRemoteByKeyword(@Param("status") JobStatus status,
+                                            @Param("q") String q,
+                                            Pageable pageable);
+
+    @Query("""
+            SELECT j FROM JobPosting j WHERE j.status = :status AND j.type = :type
+            AND (LOWER(j.title) LIKE LOWER(CONCAT('%', :q, '%'))
+              OR LOWER(j.description) LIKE LOWER(CONCAT('%', :q, '%'))
+              OR LOWER(COALESCE(j.company, '')) LIKE LOWER(CONCAT('%', :q, '%')))
+            """)
+    Page<JobPosting> searchByTypeAndKeyword(@Param("status") JobStatus status,
+                                             @Param("type") JobType type,
+                                             @Param("q") String q,
+                                             Pageable pageable);
+
     @Modifying
     @Query("UPDATE JobPosting j SET j.viewsCount = j.viewsCount + 1 WHERE j.id = :id")
     void incrementViews(@Param("id") UUID id);

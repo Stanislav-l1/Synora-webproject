@@ -25,6 +25,7 @@ export interface JobPosting {
   viewsCount: number;
   skills: string[];
   applied: boolean;
+  saved: boolean;
   createdAt: string;
   updatedAt: string;
 }
