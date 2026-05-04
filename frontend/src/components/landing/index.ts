@@ -1,7 +1,13 @@
 export { LandingNavbar } from './LandingNavbar';
 export { HeroSection } from './HeroSection';
+export { PartnersSection } from './PartnersSection';
+export { TrustSection } from './TrustSection';
 export { FeaturesGrid } from './FeaturesGrid';
 export { FeatureCard } from './FeatureCard';
+export { UseCasesSection } from './UseCasesSection';
+export { TestimonialsSection } from './TestimonialsSection';
+export { ComparisonSection } from './ComparisonSection';
+export { LandingPricingSection } from './LandingPricingSection';
 export { FeedPreview } from './FeedPreview';
 export { CommunitySection } from './CommunitySection';
 export { CTASection } from './CTASection';

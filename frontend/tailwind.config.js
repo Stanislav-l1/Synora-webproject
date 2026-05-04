@@ -132,6 +132,7 @@ module.exports = {
         'terminal-scroll': 'terminalScroll 40s linear infinite',
         'blob': 'blob 18s ease-in-out infinite',
         'ribbon': 'ribbon 14s ease-in-out infinite',
+        'marquee': 'marquee 30s linear infinite',
       },
       keyframes: {
         float: {
@@ -162,6 +163,10 @@ module.exports = {
         ribbon: {
           '0%, 100%': { transform: 'translateX(-10px) rotate(-2deg)' },
           '50%': { transform: 'translateX(10px) rotate(2deg)' },
+        },
+        marquee: {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-100%)' },
         },
       },
     },

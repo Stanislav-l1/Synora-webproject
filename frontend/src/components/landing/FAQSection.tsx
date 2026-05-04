@@ -3,11 +3,12 @@
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { ScrollReveal } from './ScrollReveal';
+import { useLocale, useT } from '@/lib/i18n';
 
 type FaqItem = { q: string; a: string };
 type FaqCategory = { id: string; title: string; items: FaqItem[] };
 
-const CATEGORIES: FaqCategory[] = [
+const CATEGORIES_EN: FaqCategory[] = [
   {
     id: 'platform',
     title: 'About the platform',
@@ -220,25 +221,82 @@ const CATEGORIES: FaqCategory[] = [
   },
 ];
 
+const CATEGORIES_RU: FaqCategory[] = [
+  {
+    id: 'platform',
+    title: 'О платформе',
+    items: [
+      { q: 'Что такое Synora?', a: 'Synora — гибридная платформа для разработчиков: проектная коллаборация (как GitHub), социальная лента (как Dev.to), realtime-чат (как Slack) и обучающие сообщества. Всё в одном месте: код, общение и рост.' },
+      { q: 'Для кого Synora?', a: 'Для разработчиков любого уровня — студентов, инди-хакеров, мейнтейнеров open-source, IT-сообществ с курсами и команд, которым нужен простой проектный менеджмент без корпоративных инструментов.' },
+      { q: 'Synora бесплатна?', a: 'Да — основная платформа бесплатна навсегда: профили, проекты, чаты, посты, сообщества. Платные тарифы открывают расширенное хранилище, аналитику и инструменты для организаторов курсов.' },
+      { q: 'Можно использовать на русском?', a: 'Интерфейс доступен на русском и английском, другие языки в планах. Контент — без ограничений: пишите посты и ведите курсы на любом языке.' },
+    ],
+  },
+  {
+    id: 'projects',
+    title: 'Проекты и коллаборация',
+    items: [
+      { q: 'Как работают проекты?', a: 'У каждого проекта есть канбан-доска, задачи, участники с ролями (владелец / мейнтейнер / участник / наблюдатель), теги, встроенный чат и звёзды. Проект можно сделать приватным или публичным.' },
+      { q: 'Чем это отличается от GitHub?', a: 'Synora фокусируется на человеческой стороне разработки — обсуждениях, планировании, участниках, обучении. Код остаётся на вашем Git-хосте (GitHub, GitLab, self-hosted). Мы ссылаемся на него, а не заменяем.' },
+      { q: 'Можно пригласить команду?', a: 'Да. Используйте пригласительные ссылки из любого проекта — получатель попадает на превью, принимает приглашение и присоединяется после быстрой регистрации. Роли назначаются автоматически.' },
+    ],
+  },
+  {
+    id: 'communities',
+    title: 'Сообщества',
+    items: [
+      { q: 'Что такое сообщество?', a: 'Пространство, принадлежащее группе — например, университетскому CS-клубу, региональному митапу разработчиков или кружку контрибьюторов OSS-проекта. Есть своя лента, участники, ивенты и (опционально) курсы.' },
+      { q: 'Как создать или вступить?', a: 'Любой может создать сообщество со страницы Сообщества. Вступление — один клик для открытых. Закрытые требуют одобрения модератора.' },
+      { q: 'Можно проводить ивенты?', a: 'Да. Используйте календарь для митапов, докладов, воркшопов, AMA. Участники получают уведомления, регистрируются, ивент появляется в ленте сообщества и в личных календарях.' },
+    ],
+  },
+  {
+    id: 'security',
+    title: 'Безопасность',
+    items: [
+      { q: 'Как защищены мои данные?', a: 'Весь трафик — только HTTPS. Пароли хранятся как bcrypt-хеши (сила 12). Аутентификация — JWT access tokens (15 мин) с ротацией refresh tokens (7 дней). Сессии можно отозвать из настроек.' },
+      { q: 'Можно удалить аккаунт?', a: 'Да. Удаление аккаунта — самообслуживание из настроек. Профиль, посты и сообщения удаляются в течение 30 дней.' },
+    ],
+  },
+  {
+    id: 'subscriptions',
+    title: 'Подписки и цены',
+    items: [
+      { q: 'Что входит в бесплатный тариф?', a: 'Неограниченные публичные проекты, посты, 1:1 и групповые чаты, участие в сообществах, полный доступ к публичным курсам, базовый AI-ассистент.' },
+      { q: 'Можно отменить в любой момент?', a: 'Да — отмена из страницы биллинга. Тариф остаётся активным до конца текущего периода.' },
+    ],
+  },
+  {
+    id: 'roadmap',
+    title: 'Планы',
+    items: [
+      { q: 'Что выходит следующим?', a: 'Расширенный AI-ассистент, платформа курсов v1, мобильные приложения (iOS + Android), 2FA, выплаты в большем количестве валют, публичный маркетплейс шаблонов.' },
+      { q: 'Как влиять на то, что строится?', a: 'Голосуйте на публичном роадмап-борде, создавайте запросы с тегом #feature-request или присоединяйтесь к сообществу Synora на платформе.' },
+    ],
+  },
+];
+
 export function FAQSection() {
+  const { locale } = useLocale();
+  const t = useT();
+  const categories = locale === 'ru' ? CATEGORIES_RU : CATEGORIES_EN;
+
   return (
     <section id="faq" className="bg-retro-bg-alt py-24 px-6">
       <div className="max-w-4xl mx-auto">
         <ScrollReveal className="text-center mb-12">
           <h2 className="font-serif text-4xl md:text-5xl text-retro-ink mb-4">
-            Frequently asked{' '}
-            <span className="italic text-retro-accent">questions</span>
+            {t.landing.faqHeadline}
           </h2>
           <p className="text-retro-text-muted text-lg">
-            Everything you might want to know — about the platform, communities,
-            pricing, security, and what we&apos;re building next.
+            {t.landing.faqSubtitle}
           </p>
         </ScrollReveal>
 
         {/* Category nav */}
         <ScrollReveal className="mb-12">
           <nav className="flex flex-wrap gap-2 justify-center">
-            {CATEGORIES.map((c) => (
+            {categories.map((c) => (
               <a
                 key={c.id}
                 href={`#faq-${c.id}`}
@@ -250,9 +308,8 @@ export function FAQSection() {
           </nav>
         </ScrollReveal>
 
-        {/* Categories */}
         <div className="space-y-12">
-          {CATEGORIES.map((category, i) => (
+          {categories.map((category, i) => (
             <ScrollReveal key={category.id} delay={Math.min(i * 0.05, 0.3)}>
               <FAQCategoryBlock category={category} />
             </ScrollReveal>
@@ -286,7 +343,7 @@ function FAQItem({ item }: { item: FaqItem }) {
         type="button"
         onClick={() => setOpen((v) => !v)}
         className="w-full flex items-start justify-between gap-4 py-4 text-left group"
-        aria-expanded={open}
+        aria-expanded={open ? 'true' : 'false'}
       >
         <span className="text-base md:text-lg font-medium text-retro-ink group-hover:text-retro-accent transition-colors">
           {item.q}
