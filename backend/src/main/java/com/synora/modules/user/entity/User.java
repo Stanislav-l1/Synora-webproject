@@ -115,6 +115,34 @@ public class User implements UserDetails {
     @Column(name = "reputation_score", nullable = false)
     private int reputationScore = 0;
 
+    // --- 2FA ---
+    @Builder.Default
+    @Column(name = "two_factor_enabled", nullable = false)
+    private boolean twoFactorEnabled = false;
+
+    @Column(name = "totp_secret", length = 64)
+    private String totpSecret;
+
+    @Column(name = "totp_backup_codes", columnDefinition = "TEXT")
+    private String totpBackupCodes;
+
+    // --- Privacy ---
+    @Builder.Default
+    @Column(name = "profile_visibility", nullable = false, length = 20)
+    private String profileVisibility = "PUBLIC";
+
+    @Builder.Default
+    @Column(name = "show_email", nullable = false)
+    private boolean showEmail = false;
+
+    @Builder.Default
+    @Column(name = "show_activity", nullable = false)
+    private boolean showActivity = true;
+
+    @Builder.Default
+    @Column(name = "show_online_status", nullable = false)
+    private boolean showOnlineStatus = true;
+
     @CreatedDate
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;

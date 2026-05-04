@@ -78,6 +78,8 @@ public interface PostRepository extends JpaRepository<Post, UUID> {
     @Query("UPDATE Post p SET p.repostsCount = p.repostsCount + :delta WHERE p.id = :id")
     void adjustReposts(@Param("id") UUID id, @Param("delta") int delta);
 
+    Page<Post> findByAuthorIdAndStatus(UUID authorId, PostStatus status, Pageable pageable);
+
     long countByAuthorId(UUID authorId);
 
     long countByAuthorIdAndCreatedAtAfter(UUID authorId, Instant since);

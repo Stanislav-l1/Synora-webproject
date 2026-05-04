@@ -1,10 +1,12 @@
 package com.synora.modules.auth.service;
 
 import com.synora.modules.auth.dto.AuthResponse;
+import com.synora.modules.auth.dto.ChangePasswordRequest;
 import com.synora.modules.auth.dto.LoginRequest;
 import com.synora.modules.auth.dto.RegisterRequest;
 import com.synora.modules.auth.entity.RefreshToken;
 import com.synora.modules.auth.repository.RefreshTokenRepository;
+import com.synora.modules.security.service.SecurityService;
 import com.synora.modules.user.entity.User;
 import com.synora.modules.user.entity.UserRole;
 import com.synora.modules.user.repository.UserRepository;
@@ -12,10 +14,12 @@ import com.synora.shared.exception.AppException;
 import com.synora.shared.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Duration;
 import java.time.Instant;
 import java.util.UUID;
 
@@ -27,6 +31,10 @@ public class AuthService {
     private final RefreshTokenRepository refreshTokenRepository;
     private final PasswordEncoder        passwordEncoder;
     private final JwtUtil                jwtUtil;
+    private final SecurityService        securityService;
+    private final StringRedisTemplate    redis;
+
+    private static final String TWO_FA_PREFIX = "2fa:pending:";
 
     @Value("${jwt.access-token-expiration}")
     private long accessExpirationSec;
@@ -47,32 +55,62 @@ public class AuthService {
                 .username(req.getUsername())
                 .email(req.getEmail().toLowerCase())
                 .passwordHash(passwordEncoder.encode(req.getPassword()))
-                .displayName(req.getDisplayName() != null
-                        ? req.getDisplayName()
-                        : req.getUsername())
+                .displayName(req.getDisplayName() != null ? req.getDisplayName() : req.getUsername())
                 .role(UserRole.USER)
                 .build();
 
         user = userRepository.save(user);
-        return buildAuthResponse(user);
+        return buildAuthResponse(user, null, null);
     }
 
     @Transactional
-    public AuthResponse login(LoginRequest req) {
+    public AuthResponse login(LoginRequest req, String ip, String userAgent) {
         User user = userRepository.findByUsernameOrEmail(req.getLogin())
-                .orElseThrow(() -> AppException.unauthorized("Invalid credentials"));
+                .orElse(null);
 
-        if (!passwordEncoder.matches(req.getPassword(), user.getPasswordHash())) {
+        if (user == null || !passwordEncoder.matches(req.getPassword(), user.getPasswordHash())) {
+            if (user != null) {
+                securityService.logLogin(user, ip, userAgent, false, "Invalid credentials");
+            }
             throw AppException.unauthorized("Invalid credentials");
         }
         if (!user.isEnabled()) {
+            securityService.logLogin(user, ip, userAgent, false, "Account disabled");
             throw AppException.unauthorized("Account is disabled");
         }
         if (!user.isAccountNonLocked()) {
+            securityService.logLogin(user, ip, userAgent, false, "Account banned");
             throw AppException.unauthorized("Account is banned");
         }
 
-        return buildAuthResponse(user);
+        securityService.logLogin(user, ip, userAgent, true, null);
+
+        if (user.isTwoFactorEnabled()) {
+            String token = UUID.randomUUID().toString();
+            redis.opsForValue().set(TWO_FA_PREFIX + token, user.getId().toString(), Duration.ofMinutes(5));
+            return AuthResponse.builder()
+                    .requiresTwoFactor(true)
+                    .twoFactorToken(token)
+                    .build();
+        }
+
+        return buildAuthResponse(user, ip, userAgent);
+    }
+
+    @Transactional
+    public AuthResponse complete2FA(String twoFactorToken, String code, String ip, String userAgent) {
+        String userIdStr = redis.opsForValue().get(TWO_FA_PREFIX + twoFactorToken);
+        if (userIdStr == null) throw AppException.unauthorized("2FA session expired or invalid");
+
+        User user = userRepository.findById(UUID.fromString(userIdStr))
+                .orElseThrow(() -> AppException.unauthorized("User not found"));
+
+        if (!securityService.verifyTotpOrBackup(user, code)) {
+            throw AppException.unauthorized("Invalid 2FA code");
+        }
+
+        redis.delete(TWO_FA_PREFIX + twoFactorToken);
+        return buildAuthResponse(user, ip, userAgent);
     }
 
     @Transactional
@@ -85,26 +123,41 @@ public class AuthService {
             throw AppException.unauthorized("Refresh token expired");
         }
 
-        // Ротация: удаляем старый, выдаём новую пару
+        securityService.touchSession(rawRefreshToken);
         refreshTokenRepository.delete(rt);
-        return buildAuthResponse(rt.getUser());
+        return buildAuthResponse(rt.getUser(), null, null);
     }
 
     @Transactional
     public void logout(UUID userId) {
         refreshTokenRepository.deleteByUserId(userId);
+        securityService.revokeAll(userId);
+    }
+
+    @Transactional
+    public void changePassword(User user, ChangePasswordRequest req) {
+        if (!passwordEncoder.matches(req.getCurrentPassword(), user.getPasswordHash())) {
+            throw AppException.badRequest("Current password is incorrect");
+        }
+        user.setPasswordHash(passwordEncoder.encode(req.getNewPassword()));
+        userRepository.save(user);
+        refreshTokenRepository.deleteByUserId(user.getId());
     }
 
     // --- private ---
 
-    private AuthResponse buildAuthResponse(User user) {
-        String accessToken  = jwtUtil.generateAccessToken(
-                user.getId(), user.getUsername(), user.getRole().name());
-        String refreshToken = generateAndSaveRefreshToken(user);
+    private AuthResponse buildAuthResponse(User user, String ip, String userAgent) {
+        String accessToken   = jwtUtil.generateAccessToken(user.getId(), user.getUsername(), user.getRole().name());
+        String rawRefresh    = generateAndSaveRefreshToken(user);
+        Instant expiresAt    = Instant.now().plusSeconds(refreshExpirationSec);
+
+        if (ip != null) {
+            securityService.createSession(user, rawRefresh, ip, userAgent, expiresAt);
+        }
 
         return AuthResponse.builder()
                 .accessToken(accessToken)
-                .refreshToken(refreshToken)
+                .refreshToken(rawRefresh)
                 .expiresIn(accessExpirationSec)
                 .userId(user.getId())
                 .username(user.getUsername())
@@ -114,14 +167,11 @@ public class AuthService {
 
     private String generateAndSaveRefreshToken(User user) {
         String tokenValue = UUID.randomUUID().toString();
-
-        RefreshToken rt = RefreshToken.builder()
+        refreshTokenRepository.save(RefreshToken.builder()
                 .user(user)
                 .token(tokenValue)
                 .expiresAt(Instant.now().plusSeconds(refreshExpirationSec))
-                .build();
-
-        refreshTokenRepository.save(rt);
+                .build());
         return tokenValue;
     }
 }

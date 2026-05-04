@@ -28,6 +28,8 @@ public interface UserFollowRepository extends JpaRepository<UserFollow, UserFoll
            """)
     List<UUID> findFollowingIds(@Param("userId") UUID userId);
 
+    long countByIdFollowingIdAndCreatedAtAfter(UUID followingId, java.time.Instant after);
+
     @Query(value = """
            SELECT f2.following_id
            FROM user_follows f1
