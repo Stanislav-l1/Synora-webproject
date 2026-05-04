@@ -24,6 +24,7 @@ import {
   BadgeCheck,
   Globe,
   BarChart2,
+  Sparkles,
   type LucideIcon,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -96,8 +97,9 @@ export function Sidebar({ open, onClose }: SidebarProps) {
     { href: '/repositories', label: 'Repositories', icon: Github },
     { href: '/communities', label: 'Communities', icon: Building2 },
     { href: '/people', label: 'People', icon: Users },
-    { href: '/courses', label: t.nav.courses, icon: GraduationCap },
-    { href: '/profile', label: t.nav.profile, icon: User },
+    { href: '/courses',   label: t.nav.courses,      icon: GraduationCap },
+    { href: '/assistant', label: t.nav.aiAssistant,   icon: Sparkles      },
+    { href: '/profile',   label: t.nav.profile,       icon: User          },
   ];
 
   const secondaryNav: NavItem[] = [
