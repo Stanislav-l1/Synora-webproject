@@ -343,7 +343,7 @@ function FAQItem({ item }: { item: FaqItem }) {
         type="button"
         onClick={() => setOpen((v) => !v)}
         className="w-full flex items-start justify-between gap-4 py-4 text-left group"
-        aria-expanded={open ? 'true' : 'false'}
+        aria-expanded={open}
       >
         <span className="text-base md:text-lg font-medium text-retro-ink group-hover:text-retro-accent transition-colors">
           {item.q}

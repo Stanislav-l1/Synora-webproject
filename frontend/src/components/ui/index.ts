@@ -6,3 +6,4 @@ export { Input, Textarea } from './input';
 export { Card, CardHeader, CardContent, CardFooter } from './card';
 export { TabBar } from './tab-bar';
 export { Skeleton, SkeletonText } from './skeleton';
+export { ToastContainer } from './toast';
