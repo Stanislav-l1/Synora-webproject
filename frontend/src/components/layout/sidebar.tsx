@@ -25,6 +25,9 @@ import {
   Globe,
   BarChart2,
   Sparkles,
+  Lightbulb,
+  Trophy,
+  Gift,
   type LucideIcon,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -99,12 +102,15 @@ export function Sidebar({ open, onClose }: SidebarProps) {
     { href: '/people', label: 'People', icon: Users },
     { href: '/courses',   label: t.nav.courses,      icon: GraduationCap },
     { href: '/assistant', label: t.nav.aiAssistant,   icon: Sparkles      },
+    { href: '/discover',  label: t.nav.discover,      icon: Lightbulb     },
     { href: '/profile',   label: t.nav.profile,       icon: User          },
   ];
 
   const secondaryNav: NavItem[] = [
     { href: '/saved', label: t.nav.bookmarks, icon: Bookmark },
     { href: '/tags', label: t.nav.trendingTags, icon: Hash },
+    { href: '/leaderboard',   label: t.nav.leaderboard, icon: Trophy    },
+    { href: '/referral',      label: t.nav.referral,    icon: Gift      },
     { href: '/billing',       label: 'Billing',    icon: CreditCard },
     { href: '/verification',  label: 'Verification', icon: BadgeCheck },
     { href: '/settings', label: t.nav.settings, icon: Settings },

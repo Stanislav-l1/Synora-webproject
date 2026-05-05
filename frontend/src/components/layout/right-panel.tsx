@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { TrendingUp, UserPlus } from 'lucide-react';
+import { TrendingUp, UserPlus, Flame, Trophy, Zap, BookOpen, Star } from 'lucide-react';
 import { Avatar, Button, Card, Skeleton, SkeletonText } from '@/components/ui';
 import { api } from '@/lib/api';
 import { useAuthStore } from '@/store/useAuthStore';
@@ -159,6 +159,38 @@ export function RightPanel() {
             })}
           </div>
         )}
+      </Card>
+
+      {/* Streak & Achievements */}
+      <Card tone="light">
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-2">
+            <Flame size={16} className="text-orange-500" />
+            <h3 className="text-sm font-semibold text-cloud-ink">Activity Streak</h3>
+          </div>
+          <span className="text-xs font-bold text-orange-500">7 days 🔥</span>
+        </div>
+        <div className="flex gap-1 mb-3">
+          {['M','T','W','T','F','S','S'].map((day, i) => (
+            <div key={i} className="flex-1 flex flex-col items-center gap-1">
+              <div className={`w-full h-5 rounded-sm ${i < 6 ? 'bg-orange-400/80' : 'bg-cloud-deep'}`} />
+              <span className="text-[9px] text-cloud-muted">{day}</span>
+            </div>
+          ))}
+        </div>
+        <div className="space-y-1.5">
+          <p className="text-[10px] font-semibold text-cloud-muted uppercase tracking-wide mb-2">Recent achievements</p>
+          {[
+            { icon: <Trophy size={11} />, label: 'First 100 reputation', color: 'text-yellow-500' },
+            { icon: <Star size={11} />, label: 'Project contributor', color: 'text-tyrian' },
+            { icon: <BookOpen size={11} />, label: 'Course completed', color: 'text-green-500' },
+          ].map((a) => (
+            <div key={a.label} className="flex items-center gap-2">
+              <span className={`${a.color}`}>{a.icon}</span>
+              <span className="text-xs text-cloud-ink/80">{a.label}</span>
+            </div>
+          ))}
+        </div>
       </Card>
 
       {/* Your stats */}
