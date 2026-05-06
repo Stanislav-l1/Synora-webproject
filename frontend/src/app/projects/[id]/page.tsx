@@ -4,9 +4,9 @@ import { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import {
-  ArrowLeft, Star, Users, GitFork, Globe, Lock,
-  Plus, MoreHorizontal, AlertCircle, CheckCircle2,
-  Clock, ArrowUpDown, Loader2, Pencil,
+  ArrowLeft, Star, Users, Globe, Lock,
+  Plus, CheckCircle2,
+  Clock, ArrowUpDown, Loader2,
 } from 'lucide-react';
 import { AppShell } from '@/components/layout/app-shell';
 import { Avatar } from '@/components/ui/avatar';
@@ -28,35 +28,6 @@ const PRIORITY_COLOR: Record<TaskPriority, string> = {
   CRITICAL: 'bg-red-100 text-red-600',
 };
 
-const MOCK_COLUMNS: KanbanColumn[] = [
-  {
-    id: 'c1', projectId: '', name: 'Backlog', position: 0,
-    tasks: [
-      { id: 't1', projectId: '', columnId: 'c1', title: 'Design onboarding flow', description: null, status: 'BACKLOG', priority: 'MEDIUM', assigneeId: null, assigneeUsername: null, position: 0, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
-      { id: 't2', projectId: '', columnId: 'c1', title: 'Write API documentation', description: null, status: 'BACKLOG', priority: 'LOW', assigneeId: null, assigneeUsername: null, position: 1, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
-    ],
-  },
-  {
-    id: 'c2', projectId: '', name: 'In Progress', position: 1,
-    tasks: [
-      { id: 't3', projectId: '', columnId: 'c2', title: 'Implement auth module', description: 'JWT + refresh rotation', status: 'IN_PROGRESS', priority: 'HIGH', assigneeId: null, assigneeUsername: 'slin', position: 0, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
-      { id: 't4', projectId: '', columnId: 'c2', title: 'Set up CI/CD pipeline', description: null, status: 'IN_PROGRESS', priority: 'CRITICAL', assigneeId: null, assigneeUsername: 'mwebb', position: 1, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
-    ],
-  },
-  {
-    id: 'c3', projectId: '', name: 'Review', position: 2,
-    tasks: [
-      { id: 't5', projectId: '', columnId: 'c3', title: 'Code review: post module', description: null, status: 'REVIEW', priority: 'MEDIUM', assigneeId: null, assigneeUsername: null, position: 0, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
-    ],
-  },
-  {
-    id: 'c4', projectId: '', name: 'Done', position: 3,
-    tasks: [
-      { id: 't6', projectId: '', columnId: 'c4', title: 'Project scaffolding', description: null, status: 'DONE', priority: 'HIGH', assigneeId: null, assigneeUsername: null, position: 0, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
-      { id: 't7', projectId: '', columnId: 'c4', title: 'Database schema v1', description: null, status: 'DONE', priority: 'HIGH', assigneeId: null, assigneeUsername: null, position: 1, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
-    ],
-  },
-];
 
 function hashColor(str: string) {
   let h = 0;
@@ -87,7 +58,7 @@ export default function ProjectDetailPage() {
   const [tab, setTab] = useState<Tab>('overview');
   const [starred, setStarred] = useState(false);
   const [starsCount, setStarsCount] = useState(0);
-  const [columns] = useState<KanbanColumn[]>(MOCK_COLUMNS);
+  const [columns, setColumns] = useState<KanbanColumn[]>([]);
 
   useEffect(() => {
     if (!id) return;
@@ -95,7 +66,8 @@ export default function ProjectDetailPage() {
     Promise.allSettled([
       api.get(`/projects/${id}`),
       api.get(`/projects/${id}/members`),
-    ]).then(([projRes, membersRes]) => {
+      api.get(`/projects/${id}/board`),
+    ]).then(([projRes, membersRes, boardRes]) => {
       if (projRes.status === 'fulfilled') {
         const p: Project = projRes.value.data?.data ?? projRes.value.data;
         setProject(p);
@@ -106,6 +78,10 @@ export default function ProjectDetailPage() {
       if (membersRes.status === 'fulfilled') {
         const m = membersRes.value.data?.data ?? membersRes.value.data;
         setMembers(Array.isArray(m) ? m : m?.content ?? []);
+      }
+      if (boardRes.status === 'fulfilled') {
+        const board = boardRes.value.data?.data ?? boardRes.value.data;
+        setColumns(board?.columns ?? []);
       }
     }).finally(() => setLoading(false));
   }, [id]);
@@ -154,8 +130,10 @@ export default function ProjectDetailPage() {
     { id: 'members',  label: `Members (${project.membersCount})` },
   ];
 
-  const totalTasks = columns.reduce((a, c) => a + c.tasks.length, 0);
-  const doneTasks  = columns.find((c) => c.name === 'Done')?.tasks.length ?? 0;
+  const allTasks      = columns.flatMap((c) => c.tasks);
+  const totalTasks    = allTasks.length;
+  const doneTasks     = allTasks.filter((t) => t.status === 'DONE').length;
+  const inProgressTasks = allTasks.filter((t) => t.status === 'IN_PROGRESS').length;
 
   return (
     <AppShell>
@@ -250,7 +228,7 @@ export default function ProjectDetailPage() {
             {[
               { label: 'Total tasks',    value: totalTasks,                icon: <ArrowUpDown size={16} className="text-cloud-muted" /> },
               { label: 'Completed',      value: doneTasks,                 icon: <CheckCircle2 size={16} className="text-green-500" /> },
-              { label: 'In progress',    value: columns[1]?.tasks.length ?? 0, icon: <Clock size={16} className="text-blue-500" /> },
+              { label: 'In progress',    value: inProgressTasks,               icon: <Clock size={16} className="text-blue-500" /> },
               { label: 'Members',        value: project.membersCount,      icon: <Users size={16} className="text-tyrian" /> },
             ].map((s) => (
               <div key={s.label} className="bg-cloud border border-cloud-deep rounded-xl p-4 text-center">
@@ -272,7 +250,7 @@ export default function ProjectDetailPage() {
                     <span className="text-xs font-semibold text-cloud-muted uppercase tracking-wide">
                       {col.name} <span className="ml-1 text-cloud-muted/60">({col.tasks.length})</span>
                     </span>
-                    <button type="button" className="text-cloud-muted hover:text-cloud-ink transition-colors">
+                    <button type="button" aria-label="Add task" className="text-cloud-muted hover:text-cloud-ink transition-colors">
                       <Plus size={14} />
                     </button>
                   </div>

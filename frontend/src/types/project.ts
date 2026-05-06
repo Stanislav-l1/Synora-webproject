@@ -31,24 +31,35 @@ export interface ProjectMember {
 }
 
 export interface KanbanColumn {
-  id: string;
-  projectId: string;
+  id: number;
   name: string;
-  position: number;
+  color: string | null;
+  orderIndex: number;
+  wipLimit: number | null;
   tasks: Task[];
+}
+
+export interface KanbanBoardResponse {
+  projectId: string;
+  projectName: string;
+  columns: KanbanColumn[];
 }
 
 export interface Task {
   id: string;
   projectId: string;
-  columnId: string;
+  columnId: number;
   title: string;
   description: string | null;
-  status: TaskStatus;
+  status: string;
   priority: TaskPriority;
-  assigneeId: string | null;
   assigneeUsername: string | null;
-  position: number;
+  assigneeDisplayName: string | null;
+  assigneeAvatarUrl: string | null;
+  reporterUsername: string | null;
+  orderIndex: number;
+  dueDate: string | null;
+  storyPoints: number | null;
   createdAt: string;
   updatedAt: string;
 }
@@ -59,5 +70,5 @@ export interface CreateTaskRequest {
   status?: TaskStatus;
   priority?: TaskPriority;
   assigneeId?: string;
-  columnId: string;
+  columnId: number;
 }
