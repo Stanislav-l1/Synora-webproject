@@ -38,7 +38,7 @@ function ApplicationRow({ app }: { app: JobApplication }) {
             Applied {new Date(app.createdAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}
           </p>
           {app.coverLetter && (
-            <p className="text-xs text-content-tertiary mt-1 line-clamp-1 italic">"{app.coverLetter}"</p>
+            <p className="text-xs text-content-tertiary mt-1 line-clamp-1 italic">&ldquo;{app.coverLetter}&rdquo;</p>
           )}
         </div>
         <div className="flex items-center gap-3 shrink-0 ml-4">

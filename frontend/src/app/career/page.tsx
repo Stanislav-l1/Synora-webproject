@@ -259,7 +259,7 @@ export default function CareerPage() {
             {jobs.length} posting{jobs.length !== 1 ? 's' : ''}
           </span>
           {remoteOnly && <span className="text-success">Remote only</span>}
-          {debouncedSearch && <span>Searching: "{debouncedSearch}"</span>}
+          {debouncedSearch && <span>Searching: &ldquo;{debouncedSearch}&rdquo;</span>}
         </div>
 
         {/* Job list */}

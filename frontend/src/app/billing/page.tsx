@@ -80,7 +80,7 @@ export default function BillingPage() {
           {cancelDone && (
             <div className="flex items-center gap-2 text-sm text-success">
               <CheckCircle2 size={14} />
-              Subscription cancelled. You'll have access until the billing period ends.
+              Subscription cancelled. You&apos;ll have access until the billing period ends.
             </div>
           )}
 
