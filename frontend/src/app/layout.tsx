@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     statusBarStyle: 'black-translucent',
     title: 'Synora',
   },
-  themeColor: '#6C5CE7',
+  themeColor: '#F2ECE0',
   viewport: {
     width: 'device-width',
     initialScale: 1,
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   },
 };
 
-const themeInitScript = `(function(){try{var s=localStorage.getItem('synora.theme');var m=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;var t=(s==='light'||s==='dark')?s:(m?'dark':'light');if(t==='dark'){document.documentElement.classList.add('dark');}document.documentElement.dataset.theme=t;}catch(e){}})();`;
+const themeInitScript = `(function(){try{var s=localStorage.getItem('synora.theme');var t=(s==='light'||s==='dark')?s:'light';if(t==='dark'){document.documentElement.classList.add('dark');}document.documentElement.dataset.theme=t;}catch(e){}})();`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

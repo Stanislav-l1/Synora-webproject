@@ -19,9 +19,6 @@ function detectInitial(): Theme {
   if (typeof window === 'undefined') return DEFAULT_THEME;
   const stored = window.localStorage.getItem(STORAGE_KEY);
   if (stored === 'light' || stored === 'dark') return stored;
-  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    return 'dark';
-  }
   return DEFAULT_THEME;
 }
 
