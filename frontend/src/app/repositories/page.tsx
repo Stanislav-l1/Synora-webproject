@@ -67,7 +67,12 @@ function ImportModal({ onClose, onImport }: { onClose: () => void; onImport: (re
           <h2 className="font-semibold text-content-primary flex items-center gap-2">
             <Plus size={16} className="text-accent" /> Import Repository
           </h2>
-          <button onClick={onClose} className="text-content-tertiary hover:text-content-primary">
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close"
+            className="text-content-tertiary hover:text-content-primary"
+          >
             <X size={18} />
           </button>
         </div>
@@ -435,8 +440,10 @@ export default function RepositoriesPage() {
                           <Star size={14} fill={r.featured ? 'currentColor' : 'none'} />
                         </button>
                         <button
+                          type="button"
                           onClick={() => handleDelete(r.id)}
                           disabled={deletingId === r.id}
+                          aria-label="Delete repository"
                           className="p-1.5 rounded-lg text-content-tertiary hover:text-danger hover:bg-danger/10 transition-colors disabled:opacity-50"
                         >
                           <Trash2 size={14} />
