@@ -2,11 +2,15 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { TrendingUp, UserPlus, Flame, Trophy, Zap, BookOpen, Star } from 'lucide-react';
-import { Avatar, Button, Card, Skeleton, SkeletonText } from '@/components/ui';
+import { useRouter } from 'next/navigation';
+import {
+  Zap, GitBranch, UserPlus, Check, ExternalLink, Star, Package,
+} from 'lucide-react';
+import { Avatar, Skeleton, SkeletonText } from '@/components/ui';
 import { api } from '@/lib/api';
 import { useAuthStore } from '@/store/useAuthStore';
 import { useT } from '@/lib/i18n';
+import { cn } from '@/lib/utils';
 
 type TrendingTag = { tag: string; posts: number };
 type SuggestedUser = { id: string; username: string; displayName: string; bio?: string; avatarUrl?: string | null };
@@ -17,6 +21,222 @@ function unwrap<T>(payload: unknown): T | null {
     return (payload as { data: T }).data;
   }
   return (payload as T) ?? null;
+}
+
+function Divider({ label }: { label: string }) {
+  return (
+    <div className="flex items-center gap-2 mt-5 mb-3">
+      <span className="text-[10px] font-bold text-cloud-muted/80 uppercase tracking-wider whitespace-nowrap">
+        {label}
+      </span>
+      <div className="flex-1 h-px bg-cloud-deep" />
+    </div>
+  );
+}
+
+function QuickActions() {
+  const router = useRouter();
+  const t = useT();
+  const actions = [
+    { id: 'post',    label: t.rightPanel.quickPost,    icon: Zap,       href: '/feed' },
+    { id: 'project', label: t.rightPanel.quickProject, icon: GitBranch, href: '/projects?new=1' },
+    { id: 'collab',  label: t.rightPanel.quickCollab,  icon: UserPlus,  href: '/people' },
+  ];
+  return (
+    <div className="flex gap-1.5">
+      {actions.map((qa) => {
+        const Icon = qa.icon;
+        return (
+          <button
+            key={qa.id}
+            type="button"
+            onClick={() => router.push(qa.href)}
+            className="flex-1 flex flex-col items-center gap-1.5 py-3 rounded-xl bg-cloud-soft border border-cloud-deep hover:bg-cloud-deep/40 hover:-translate-y-0.5 active:scale-95 transition-all duration-150"
+          >
+            <Icon size={14} className="text-cloud-ink/60" />
+            <span className="text-[10px] font-semibold text-cloud-ink/70">{qa.label}</span>
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+function TrendingList({ items }: { items: TrendingTag[] }) {
+  const [expanded, setExpanded] = useState<string | null>(null);
+
+  return (
+    <div className="flex flex-col">
+      {items.map((item, i) => {
+        const isOpen = expanded === item.tag;
+        return (
+          <button
+            key={item.tag}
+            type="button"
+            onClick={() => setExpanded(isOpen ? null : item.tag)}
+            className={cn(
+              'rounded-xl px-3 py-2.5 text-left transition-colors',
+              isOpen ? 'bg-cloud-deep/60' : 'hover:bg-cloud-deep/30',
+            )}
+          >
+            <div className="flex items-start gap-2.5">
+              <span className="shrink-0 mt-0.5 text-[10px] font-bold text-cloud-muted/70 w-3.5 text-right">
+                {i + 1}
+              </span>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-1.5 mb-0.5 flex-wrap">
+                  <Package size={11} className="text-cloud-muted shrink-0" />
+                  <span className="text-xs font-bold text-cloud-ink truncate">#{item.tag}</span>
+                  <span className="text-[9px] font-semibold text-cloud-muted px-1.5 rounded bg-cloud-deep">
+                    {item.posts} {item.posts === 1 ? 'post' : 'posts'}
+                  </span>
+                </div>
+                {!isOpen && (
+                  <p className="text-[11px] text-cloud-muted truncate">
+                    Click to see actions
+                  </p>
+                )}
+              </div>
+            </div>
+
+            {isOpen && (
+              <div className="flex items-center gap-1.5 mt-2 ml-6">
+                <ExpandedActions tag={item.tag} />
+              </div>
+            )}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+function ExpandedActions({ tag }: { tag: string }) {
+  const t = useT();
+  return (
+    <>
+      <Link
+        href={`/tags/${tag}`}
+        className="flex items-center gap-1 px-2 py-0.5 rounded-lg bg-tyrian/10 text-tyrian text-[10px] font-semibold hover:bg-tyrian/15"
+      >
+        <ExternalLink size={9} />
+        {t.rightPanel.open}
+      </Link>
+      <button
+        type="button"
+        onClick={(e) => e.preventDefault()}
+        className="flex items-center gap-1 px-2 py-0.5 rounded-lg bg-cloud-deep/50 text-cloud-muted text-[10px] hover:bg-cloud-deep"
+      >
+        <Star size={9} />
+        {t.rightPanel.save}
+      </button>
+    </>
+  );
+}
+
+function SuggestedList({
+  users,
+  followingIds,
+  onFollow,
+}: {
+  users: SuggestedUser[];
+  followingIds: Set<string>;
+  onFollow: (id: string) => void;
+}) {
+  const t = useT();
+  return (
+    <div className="flex flex-col gap-1">
+      {users.map((u) => {
+        const isFollowing = followingIds.has(u.id);
+        return (
+          <div
+            key={u.id}
+            className="flex items-center justify-between gap-2 px-2 py-2 rounded-xl hover:bg-cloud-deep/40 transition-colors"
+          >
+            <Link href={`/u/${u.username}`} className="flex items-center gap-2 min-w-0 flex-1">
+              <Avatar name={u.displayName || u.username} src={u.avatarUrl || undefined} size="sm" />
+              <div className="min-w-0">
+                <p className="text-xs font-semibold text-cloud-ink truncate">
+                  {u.displayName || u.username}
+                </p>
+                <p className="text-[10px] text-cloud-muted truncate">@{u.username}</p>
+              </div>
+            </Link>
+            <button
+              type="button"
+              onClick={() => !isFollowing && onFollow(u.id)}
+              disabled={isFollowing}
+              className={cn(
+                'shrink-0 px-2.5 py-1 rounded-lg text-cloud text-[10px] font-semibold transition-all flex items-center gap-1 active:scale-95',
+                isFollowing ? 'bg-success' : 'bg-tyrian hover:bg-tyrian-soft',
+              )}
+            >
+              {isFollowing && <Check size={9} />}
+              {isFollowing ? t.rightPanel.followingAction : t.rightPanel.followAction}
+            </button>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function StatsGrid({ stats }: { stats: UserStats }) {
+  const t = useT();
+  const items = [
+    { label: t.rightPanel.posts, value: stats.posts },
+    { label: t.rightPanel.reputation, value: stats.reputation },
+    { label: t.rightPanel.followers, value: stats.followers },
+    { label: t.rightPanel.projects, value: stats.projects },
+  ];
+  return (
+    <div className="grid grid-cols-2 gap-2">
+      {items.map((s) => (
+        <div
+          key={s.label}
+          className="flex flex-col items-center justify-center py-3 rounded-xl bg-cloud-soft border border-cloud-deep hover:bg-cloud-deep/30 transition-colors"
+        >
+          <span className="text-lg font-bold text-cloud-ink leading-none">
+            {s.value.toLocaleString()}
+          </span>
+          <span className="text-[10px] text-cloud-muted mt-1">{s.label}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function ActivitySparkline() {
+  const t = useT();
+  const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  const heights = [3, 7, 5, 9, 4, 8, 6];
+  const todayIdx = new Date().getDay() === 0 ? 6 : new Date().getDay() - 1;
+  const max = Math.max(...heights);
+  return (
+    <div className="mt-3 px-1">
+      <div className="flex items-center justify-between mb-2">
+        <span className="text-[11px] text-cloud-muted">{t.rightPanel.activity}</span>
+        <span className="text-[10px] font-semibold text-success">{t.rightPanel.activityTrend}</span>
+      </div>
+      <div className="flex items-end gap-1 px-1 h-9">
+        {heights.map((h, i) => (
+          <div
+            key={i}
+            className={cn(
+              'flex-1 rounded-sm transition-all',
+              i === todayIdx ? 'bg-tyrian' : 'bg-cloud-deep',
+            )}
+            style={{ height: `${(h / max) * 100}%` }}
+          />
+        ))}
+      </div>
+      <div className="flex justify-between mt-1 px-1">
+        {days.map((d) => (
+          <span key={d} className="text-[9px] text-cloud-muted/70">{d}</span>
+        ))}
+      </div>
+    </div>
+  );
 }
 
 export function RightPanel() {
@@ -39,7 +259,7 @@ export function RightPanel() {
     })();
     (async () => {
       try {
-        const res = await api.get('/users/suggested', { params: { limit: 3 } });
+        const res = await api.get('/users/suggested', { params: { limit: 4 } });
         if (!cancelled) setSuggested(unwrap<SuggestedUser[]>(res.data) || []);
       } catch {
         if (!cancelled) setSuggested([]);
@@ -76,151 +296,53 @@ export function RightPanel() {
   }
 
   return (
-    <aside className="hidden xl:block w-right-panel shrink-0 sticky top-navbar h-[calc(100vh-theme(spacing.navbar))] overflow-y-auto scrollbar-hidden p-4 space-y-4">
-      {/* Trending */}
-      <Card tone="light">
-        <div className="flex items-center justify-between mb-3">
-          <div className="flex items-center gap-2">
-            <TrendingUp size={16} className="text-tyrian" />
-            <h3 className="text-sm font-semibold text-cloud-ink">{t.rightPanel.trending}</h3>
-          </div>
-          <Link href="/trending" className="text-[11px] text-cloud-muted hover:text-tyrian">
-            View all
-          </Link>
-        </div>
-        {trending === null ? (
-          <div className="space-y-2">
-            {Array.from({ length: 4 }).map((_, i) => (
-              <Skeleton key={i} className="h-4 w-full" />
-            ))}
-          </div>
-        ) : trending.length === 0 ? (
-          <p className="text-xs text-cloud-muted">{t.rightPanel.noTrending}</p>
-        ) : (
-          <div className="space-y-2.5">
-            {trending.map((topic) => (
-              <Link
-                key={topic.tag}
-                href={`/tags/${topic.tag}`}
-                className="flex items-center justify-between group"
-              >
-                <span className="text-sm text-cloud-ink/80 group-hover:text-tyrian transition-colors">
-                  #{topic.tag}
-                </span>
-                <span className="text-xs text-cloud-muted">{topic.posts} {t.rightPanel.posts.toLowerCase()}</span>
-              </Link>
-            ))}
-          </div>
-        )}
-      </Card>
+    <aside className="hidden xl:flex flex-col w-right-panel shrink-0 sticky top-navbar h-[calc(100vh-theme(spacing.navbar))] overflow-y-auto scrollbar-hidden border-l border-cloud-deep bg-cloud px-3.5 py-4">
+      <QuickActions />
 
-      {/* Suggested users */}
-      <Card tone="light">
-        <div className="flex items-center gap-2 mb-3">
-          <UserPlus size={16} className="text-tyrian" />
-          <h3 className="text-sm font-semibold text-cloud-ink">{t.rightPanel.whoToFollow}</h3>
+      <Divider label={t.rightPanel.trending} />
+      {trending === null ? (
+        <div className="space-y-2 px-2">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <Skeleton key={i} className="h-10 w-full" />
+          ))}
         </div>
-        {suggested === null ? (
-          <div className="space-y-3">
-            {Array.from({ length: 3 }).map((_, i) => (
-              <div key={i} className="flex items-center gap-3">
-                <Skeleton className="w-8 h-8 rounded-full" />
-                <div className="flex-1"><SkeletonText lines={2} /></div>
-              </div>
-            ))}
-          </div>
-        ) : suggested.length === 0 ? (
-          <p className="text-xs text-cloud-muted">{t.rightPanel.noSuggested}</p>
-        ) : (
-          <div className="space-y-3">
-            {suggested.map((u) => {
-              const isFollowing = followingIds.has(u.id);
-              return (
-                <div key={u.id} className="flex items-center gap-3">
-                  <Avatar name={u.displayName || u.username} src={u.avatarUrl || undefined} size="sm" />
-                  <div className="flex-1 min-w-0">
-                    <Link href={`/u/${u.username}`} className="block">
-                      <p className="text-sm font-medium text-cloud-ink truncate hover:text-tyrian transition-colors">
-                        {u.displayName || u.username}
-                      </p>
-                    </Link>
-                    <p className="text-xs text-cloud-muted truncate">{u.bio || `@${u.username}`}</p>
-                  </div>
-                  <Button
-                    variant={isFollowing ? 'secondary' : 'primary'}
-                    size="sm"
-                    disabled={isFollowing}
-                    onClick={() => onFollow(u.id)}
-                  >
-                    {isFollowing ? t.common.following : t.common.follow}
-                  </Button>
-                </div>
-              );
-            })}
-          </div>
-        )}
-      </Card>
+      ) : trending.length === 0 ? (
+        <p className="text-xs text-cloud-muted px-3">{t.rightPanel.noTrending}</p>
+      ) : (
+        <TrendingList items={trending} />
+      )}
 
-      {/* Streak & Achievements */}
-      <Card tone="light">
-        <div className="flex items-center justify-between mb-3">
-          <div className="flex items-center gap-2">
-            <Flame size={16} className="text-orange-500" />
-            <h3 className="text-sm font-semibold text-cloud-ink">Activity Streak</h3>
-          </div>
-          <span className="text-xs font-bold text-orange-500">7 days 🔥</span>
-        </div>
-        <div className="flex gap-1 mb-3">
-          {['M','T','W','T','F','S','S'].map((day, i) => (
-            <div key={i} className="flex-1 flex flex-col items-center gap-1">
-              <div className={`w-full h-5 rounded-sm ${i < 6 ? 'bg-orange-400/80' : 'bg-cloud-deep'}`} />
-              <span className="text-[9px] text-cloud-muted">{day}</span>
+      <Divider label={t.rightPanel.whoToFollow} />
+      {suggested === null ? (
+        <div className="space-y-3 px-2">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <div key={i} className="flex items-center gap-3">
+              <Skeleton className="w-7 h-7 rounded-full" />
+              <div className="flex-1"><SkeletonText lines={2} /></div>
             </div>
           ))}
         </div>
-        <div className="space-y-1.5">
-          <p className="text-[10px] font-semibold text-cloud-muted uppercase tracking-wide mb-2">Recent achievements</p>
-          {[
-            { icon: <Trophy size={11} />, label: 'First 100 reputation', color: 'text-yellow-500' },
-            { icon: <Star size={11} />, label: 'Project contributor', color: 'text-tyrian' },
-            { icon: <BookOpen size={11} />, label: 'Course completed', color: 'text-green-500' },
-          ].map((a) => (
-            <div key={a.label} className="flex items-center gap-2">
-              <span className={`${a.color}`}>{a.icon}</span>
-              <span className="text-xs text-cloud-ink/80">{a.label}</span>
-            </div>
+      ) : suggested.length === 0 ? (
+        <p className="text-xs text-cloud-muted px-3">{t.rightPanel.noSuggested}</p>
+      ) : (
+        <SuggestedList users={suggested} followingIds={followingIds} onFollow={onFollow} />
+      )}
+
+      <Divider label={t.rightPanel.yourStats} />
+      {stats === null ? (
+        <div className="grid grid-cols-2 gap-2">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <Skeleton key={i} className="h-16 rounded-xl" />
           ))}
         </div>
-      </Card>
+      ) : (
+        <>
+          <StatsGrid stats={stats} />
+          <ActivitySparkline />
+        </>
+      )}
 
-      {/* Your stats */}
-      <Card tone="light">
-        <h3 className="text-sm font-semibold text-cloud-ink mb-3">{t.rightPanel.yourStats}</h3>
-        {stats === null ? (
-          <div className="grid grid-cols-2 gap-3">
-            {Array.from({ length: 4 }).map((_, i) => (
-              <div key={i} className="space-y-1">
-                <Skeleton className="h-5 w-12 mx-auto" />
-                <Skeleton className="h-3 w-16 mx-auto" />
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className="grid grid-cols-2 gap-3">
-            {[
-              { label: t.rightPanel.posts, value: stats.posts },
-              { label: t.rightPanel.reputation, value: stats.reputation },
-              { label: t.rightPanel.followers, value: stats.followers },
-              { label: t.rightPanel.projects, value: stats.projects },
-            ].map((s) => (
-              <div key={s.label} className="text-center">
-                <p className="text-lg font-semibold text-cloud-ink">{s.value.toLocaleString()}</p>
-                <p className="text-xs text-cloud-muted">{s.label}</p>
-              </div>
-            ))}
-          </div>
-        )}
-      </Card>
+      <p className="mt-6 text-center text-[10px] text-cloud-muted/60">© 2026 Synora</p>
     </aside>
   );
 }
