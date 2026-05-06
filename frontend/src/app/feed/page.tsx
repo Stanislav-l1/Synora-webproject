@@ -63,7 +63,7 @@ export default function FeedPage() {
     <AppShell>
       {/* Pull-to-refresh indicator */}
       {refreshing && (
-        <div className="fixed top-navbar left-0 right-0 z-30 flex justify-center pointer-events-none pt-3">
+        <div className="fixed top-[calc(var(--banner-h,0px)+theme(spacing.navbar))] left-0 right-0 z-30 flex justify-center pointer-events-none pt-3">
           <div className="w-9 h-9 rounded-full bg-surface-secondary border border-border-default shadow-lg flex items-center justify-center">
             <RefreshCw size={16} className="animate-spin text-accent" />
           </div>

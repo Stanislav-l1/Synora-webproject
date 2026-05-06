@@ -20,6 +20,7 @@ type MessagesShape = {
   onboarding: Record<string, string>;
   referral: Record<string, string>;
   leaderboard: Record<string, string>;
+  announcement: Record<string, string>;
 };
 
 export const messages: Record<Locale, MessagesShape> = {
@@ -535,6 +536,11 @@ export const messages: Record<Locale, MessagesShape> = {
       ptProject: '+50 pts per project created',
       ptFollower: '+5 pts per new follower',
     },
+    announcement: {
+      message: 'New: AI code-review assistant is now available',
+      cta: 'Try it',
+      dismiss: 'Dismiss',
+    },
   },
   ru: {
     common: {
@@ -1047,6 +1053,11 @@ export const messages: Record<Locale, MessagesShape> = {
       ptLike: '+1 очко за лайк',
       ptProject: '+50 очков за создание проекта',
       ptFollower: '+5 очков за нового подписчика',
+    },
+    announcement: {
+      message: 'Новое: AI-ассистент для ревью кода уже доступен',
+      cta: 'Попробовать',
+      dismiss: 'Закрыть',
     },
   },
 };

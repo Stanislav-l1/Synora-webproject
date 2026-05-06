@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Navbar } from './navbar';
 import { Sidebar } from './sidebar';
 import { FloatingDock } from './floating-dock';
+import { AnnouncementBanner } from './announcement-banner';
 import { BottomNav, OnboardingWizard } from '@/components/shared';
 import { PushPermissionPrompt } from '@/components/shared/push-permission-prompt';
 import { useAuthStore } from '@/store/useAuthStore';
@@ -49,9 +50,10 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
     <>
+      <AnnouncementBanner />
       <Navbar onMenuToggle={() => setSidebarOpen(!sidebarOpen)} />
       <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-      <main className="pt-navbar lg:pl-sidebar-collapsed pb-16 lg:pb-0 min-h-screen bg-theme-bg text-theme-text">
+      <main className="pt-[calc(var(--banner-h,0px)+theme(spacing.navbar))] lg:pl-sidebar-collapsed pb-16 lg:pb-0 min-h-screen bg-theme-bg text-theme-text">
         {children}
       </main>
       <BottomNav />

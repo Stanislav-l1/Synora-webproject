@@ -296,7 +296,7 @@ export function RightPanel() {
   }
 
   return (
-    <aside className="hidden xl:flex flex-col w-right-panel shrink-0 sticky top-navbar h-[calc(100vh-theme(spacing.navbar))] overflow-y-auto scrollbar-hidden border-l border-cloud-deep bg-cloud px-3.5 py-4">
+    <aside className="hidden xl:flex flex-col w-right-panel shrink-0 sticky top-[calc(var(--banner-h,0px)+theme(spacing.navbar))] h-[calc(100vh-var(--banner-h,0px)-theme(spacing.navbar))] overflow-y-auto scrollbar-hidden border-l border-cloud-deep bg-cloud px-3.5 py-4">
       <QuickActions />
 
       <Divider label={t.rightPanel.trending} />

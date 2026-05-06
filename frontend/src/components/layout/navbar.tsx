@@ -23,7 +23,10 @@ export function Navbar({ onMenuToggle }: NavbarProps) {
   const chats = useChatStore((s) => s.chats);
   const chatUnread = chats.reduce((sum, c) => sum + (c.unreadCount || 0), 0);
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 h-navbar bg-moss/95 backdrop-blur-md border-b border-moss-deep">
+    <header
+      className="fixed left-0 right-0 z-50 h-navbar bg-moss/95 backdrop-blur-md border-b border-moss-deep transition-[top] duration-300"
+      style={{ top: 'var(--banner-h, 0px)' }}
+    >
       <div className="flex items-center justify-between h-full px-4 gap-3">
         {/* Left: Logo + Menu toggle */}
         <div className="flex items-center gap-3 shrink-0">

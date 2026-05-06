@@ -192,7 +192,9 @@ export function Sidebar({ open, onClose }: SidebarProps) {
 
       <motion.aside
         className={cn(
-          'fixed top-navbar left-0 z-40 h-[calc(100vh-theme(spacing.navbar))]',
+          'fixed left-0 z-40',
+          'top-[calc(var(--banner-h,0px)+theme(spacing.navbar))]',
+          'h-[calc(100vh-var(--banner-h,0px)-theme(spacing.navbar))]',
           'bg-moss border-r border-moss-deep flex flex-col overflow-hidden',
           'lg:translate-x-0 transition-transform duration-200 ease-out',
           open ? 'translate-x-0' : '-translate-x-full',

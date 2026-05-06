@@ -33,9 +33,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   return (
     <div className="min-h-screen bg-surface-primary">
       <Navbar />
-      <div className="flex pt-navbar">
+      <div className="flex pt-[calc(var(--banner-h,0px)+theme(spacing.navbar))]">
         {/* Admin sidebar */}
-        <aside className="w-56 shrink-0 h-[calc(100vh-theme(spacing.navbar))] sticky top-navbar bg-surface-secondary border-r border-border-default flex flex-col">
+        <aside className="w-56 shrink-0 h-[calc(100vh-var(--banner-h,0px)-theme(spacing.navbar))] sticky top-[calc(var(--banner-h,0px)+theme(spacing.navbar))] bg-surface-secondary border-r border-border-default flex flex-col">
           <div className="px-4 py-4 border-b border-border-default">
             <div className="flex items-center gap-2">
               <Shield size={16} className="text-accent" />
