@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Navbar } from './navbar';
 import { Sidebar } from './sidebar';
+import { FloatingDock } from './floating-dock';
 import { BottomNav, OnboardingWizard } from '@/components/shared';
 import { PushPermissionPrompt } from '@/components/shared/push-permission-prompt';
 import { useAuthStore } from '@/store/useAuthStore';
@@ -54,6 +55,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         {children}
       </main>
       <BottomNav />
+      <FloatingDock />
       <PushPermissionPrompt />
       {user && user.onboardingCompleted === false && !onboardingDismissed && (
         <OnboardingWizard onClose={() => setOnboardingDismissed(true)} />
