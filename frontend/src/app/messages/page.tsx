@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
   Search, Send, Paperclip, Smile, Phone, Video, MoreVertical, Loader2, Plus,
   Briefcase, Users as UsersIcon, CornerUpLeft, X, Check, CheckCheck,
@@ -11,7 +11,7 @@ import { NewChatModal } from '@/components/shared';
 import { cn, timeAgo } from '@/lib/utils';
 import { useAuthStore } from '@/store/useAuthStore';
 import { useChatStore } from '@/store/useChatStore';
-import { useWebSocket } from '@/hooks/useWebSocket';
+import { publishMessage, publishTyping } from '@/hooks/useWebSocket';
 import type { Chat, Message, ChatMember } from '@/types';
 import { useT } from '@/lib/i18n';
 
@@ -93,7 +93,8 @@ export default function MessagesPage() {
     setActiveChat,
     fetchMessages,
   } = useChatStore();
-  const { sendMessage, sendTyping } = useWebSocket();
+  const sendMessage = useCallback((chatId: string, content: string, replyToId?: string) => publishMessage(chatId, content, replyToId), []);
+  const sendTyping = useCallback((chatId: string) => publishTyping(chatId), []);
   const [message, setMessage] = useState('');
   const [search, setSearch] = useState('');
   const [showNewChat, setShowNewChat] = useState(false);
