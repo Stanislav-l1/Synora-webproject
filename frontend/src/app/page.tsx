@@ -1,9 +1,9 @@
 import {
   LandingNavbar,
   HeroSection,
-  PartnersSection,
   TrustSection,
   FeaturesGrid,
+  FeedPreview,
   UseCasesSection,
   TestimonialsSection,
   ComparisonSection,
@@ -18,9 +18,9 @@ export default function LandingPage() {
     <div className="bg-retro-bg text-retro-text min-h-screen overflow-x-hidden">
       <LandingNavbar />
       <HeroSection />
-      <PartnersSection />
       <TrustSection />
       <FeaturesGrid />
+      <FeedPreview />
       <UseCasesSection />
       <TestimonialsSection />
       <ComparisonSection />
