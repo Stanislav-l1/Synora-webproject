@@ -1,12 +1,12 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import {
   ArrowLeft, Star, Users, Globe, Lock,
   Plus, CheckCircle2,
-  Clock, ArrowUpDown, Loader2,
+  Clock, ArrowUpDown, Loader2, X,
 } from 'lucide-react';
 import { AppShell } from '@/components/layout/app-shell';
 import { Avatar } from '@/components/ui/avatar';
@@ -59,6 +59,7 @@ export default function ProjectDetailPage() {
   const [starred, setStarred] = useState(false);
   const [starsCount, setStarsCount] = useState(0);
   const [columns, setColumns] = useState<KanbanColumn[]>([]);
+  const [addingToColumn, setAddingToColumn] = useState<number | null>(null);
 
   useEffect(() => {
     if (!id) return;
@@ -85,6 +86,20 @@ export default function ProjectDetailPage() {
       }
     }).finally(() => setLoading(false));
   }, [id]);
+
+  async function createTask(columnId: number, title: string) {
+    if (!title.trim()) return;
+    try {
+      const res = await api.post(`/projects/${id}/tasks`, { title: title.trim(), columnId });
+      const task: Task = res.data?.data ?? res.data;
+      setColumns((cols) =>
+        cols.map((c) => c.id === columnId ? { ...c, tasks: [...c.tasks, task] } : c),
+      );
+    } catch {
+      toast.error('Failed to create task');
+    }
+    setAddingToColumn(null);
+  }
 
   async function toggleStar() {
     if (!user) { toast.info('Sign in to star projects'); return; }
@@ -250,7 +265,12 @@ export default function ProjectDetailPage() {
                     <span className="text-xs font-semibold text-cloud-muted uppercase tracking-wide">
                       {col.name} <span className="ml-1 text-cloud-muted/60">({col.tasks.length})</span>
                     </span>
-                    <button type="button" aria-label="Add task" className="text-cloud-muted hover:text-cloud-ink transition-colors">
+                    <button
+                      type="button"
+                      aria-label="Add task"
+                      onClick={() => setAddingToColumn(col.id)}
+                      className="text-cloud-muted hover:text-cloud-ink transition-colors"
+                    >
                       <Plus size={14} />
                     </button>
                   </div>
@@ -258,10 +278,17 @@ export default function ProjectDetailPage() {
                     {col.tasks.map((task) => (
                       <TaskCard key={task.id} task={task} />
                     ))}
-                    {col.tasks.length === 0 && (
+                    {col.tasks.length === 0 && addingToColumn !== col.id && (
                       <div className="h-16 border-2 border-dashed border-cloud-deep rounded-xl flex items-center justify-center">
                         <p className="text-xs text-cloud-muted">Drop here</p>
                       </div>
+                    )}
+                    {addingToColumn === col.id && (
+                      <AddTaskForm
+                        columnId={col.id}
+                        onSave={createTask}
+                        onCancel={() => setAddingToColumn(null)}
+                      />
                     )}
                   </div>
                 </div>
@@ -317,6 +344,65 @@ function TaskCard({ task }: { task: Task }) {
         {task.assigneeUsername && (
           <Avatar name={task.assigneeUsername} size="xs" />
         )}
+      </div>
+    </div>
+  );
+}
+
+function AddTaskForm({
+  columnId,
+  onSave,
+  onCancel,
+}: {
+  columnId: number;
+  onSave: (columnId: number, title: string) => Promise<void>;
+  onCancel: () => void;
+}) {
+  const [value, setValue] = useState('');
+  const [saving, setSaving] = useState(false);
+  const ref = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => { ref.current?.focus(); }, []);
+
+  async function submit() {
+    if (!value.trim() || saving) return;
+    setSaving(true);
+    await onSave(columnId, value);
+    setSaving(false);
+  }
+
+  return (
+    <div className="bg-cloud border border-tyrian/30 rounded-xl p-3 space-y-2">
+      <textarea
+        ref={ref}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); submit(); }
+          if (e.key === 'Escape') onCancel();
+        }}
+        placeholder="Task title…"
+        rows={2}
+        className="w-full bg-transparent text-sm text-cloud-ink placeholder:text-cloud-muted focus:outline-none resize-none leading-snug"
+      />
+      <div className="flex items-center gap-1.5">
+        <button
+          type="button"
+          onClick={submit}
+          disabled={!value.trim() || saving}
+          className="flex items-center gap-1 px-2.5 py-1 bg-tyrian text-cloud text-xs font-medium rounded-lg disabled:opacity-50 hover:bg-tyrian/90 transition-colors"
+        >
+          {saving ? <Loader2 size={11} className="animate-spin" /> : null}
+          Add
+        </button>
+        <button
+          type="button"
+          onClick={onCancel}
+          className="p-1 text-cloud-muted hover:text-cloud-ink transition-colors"
+          aria-label="Cancel"
+        >
+          <X size={14} />
+        </button>
       </div>
     </div>
   );
