@@ -50,7 +50,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     <>
       <Navbar onMenuToggle={() => setSidebarOpen(!sidebarOpen)} />
       <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-      <main className="pt-navbar lg:pl-sidebar pb-16 lg:pb-0 min-h-screen bg-theme-bg text-theme-text">
+      <main className="pt-navbar lg:pl-sidebar-collapsed pb-16 lg:pb-0 min-h-screen bg-theme-bg text-theme-text">
         {children}
       </main>
       <BottomNav />

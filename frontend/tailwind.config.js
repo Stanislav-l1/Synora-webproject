@@ -113,8 +113,8 @@ module.exports = {
         'tyrian': '0 8px 24px rgba(93, 16, 73, 0.25)',
       },
       spacing: {
-        'sidebar': '240px',
-        'sidebar-collapsed': '64px',
+        'sidebar': '220px',
+        'sidebar-collapsed': '52px',
         'navbar': '56px',
         'right-panel': '320px',
       },
