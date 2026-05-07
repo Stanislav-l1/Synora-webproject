@@ -15,11 +15,11 @@ import java.util.UUID;
 @Repository
 public interface UserContactRepository extends JpaRepository<UserContact, Long> {
 
-    Page<UserContact> findByUserId(UUID userId, Pageable pageable);
+    Page<UserContact> findByUser_Id(UUID userId, Pageable pageable);
 
-    Optional<UserContact> findByUserIdAndEmailIgnoreCase(UUID userId, String email);
+    Optional<UserContact> findByUser_IdAndEmailIgnoreCase(UUID userId, String email);
 
-    long countByUserId(UUID userId);
+    long countByUser_Id(UUID userId);
 
     @Query("""
            SELECT c FROM UserContact c

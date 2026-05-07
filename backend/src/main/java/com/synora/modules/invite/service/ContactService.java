@@ -37,7 +37,7 @@ public class ContactService {
             if (email.equalsIgnoreCase(owner.getEmail())) { skipped++; continue; }
 
             Optional<UserContact> existing =
-                    contactRepository.findByUserIdAndEmailIgnoreCase(owner.getId(), email);
+                    contactRepository.findByUser_IdAndEmailIgnoreCase(owner.getId(), email);
 
             UserContact contact = existing.orElseGet(() ->
                     UserContact.builder()
@@ -69,7 +69,7 @@ public class ContactService {
     @Transactional(readOnly = true)
     public PageResponse<ContactResponse> list(UUID ownerId, int page, int size) {
         var pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdAt"));
-        return PageResponse.from(contactRepository.findByUserId(ownerId, pageable).map(this::toResponse));
+        return PageResponse.from(contactRepository.findByUser_Id(ownerId, pageable).map(this::toResponse));
     }
 
     @Transactional(readOnly = true)

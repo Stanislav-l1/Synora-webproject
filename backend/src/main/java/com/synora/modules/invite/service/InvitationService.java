@@ -97,7 +97,7 @@ public class InvitationService {
         inv.setAcceptedAt(Instant.now());
         inv.setAcceptedBy(newUser);
 
-        userContactRepository.findByUserIdAndEmailIgnoreCase(
+        userContactRepository.findByUser_IdAndEmailIgnoreCase(
                 inv.getInviter().getId(), inv.getEmail())
                 .ifPresent(c -> c.setMatchedUser(newUser));
 

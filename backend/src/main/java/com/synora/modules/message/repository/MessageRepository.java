@@ -24,7 +24,7 @@ public interface MessageRepository extends JpaRepository<Message, UUID> {
 
     @Query("SELECT COUNT(m) FROM Message m " +
            "JOIN ChatMember cm ON cm.id.chatId = m.chat.id AND cm.id.userId = :userId " +
-           "WHERE m.author.id <> :userId " +
+           "WHERE m.sender.id <> :userId " +
            "AND m.createdAt > COALESCE(cm.lastReadAt, :epoch)")
     long countTotalUnreadForUser(@Param("userId") UUID userId,
                                  @Param("epoch") Instant epoch);
