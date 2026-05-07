@@ -7,6 +7,7 @@ import {
   ArrowLeft, Star, Users, Globe, Lock,
   Plus, CheckCircle2,
   Clock, ArrowUpDown, Loader2, X,
+  Trash2, Calendar as CalendarIcon, Flag, User as UserIcon,
 } from 'lucide-react';
 import { AppShell } from '@/components/layout/app-shell';
 import { Avatar } from '@/components/ui/avatar';
@@ -60,6 +61,7 @@ export default function ProjectDetailPage() {
   const [starsCount, setStarsCount] = useState(0);
   const [columns, setColumns] = useState<KanbanColumn[]>([]);
   const [addingToColumn, setAddingToColumn] = useState<number | null>(null);
+  const [selectedTask, setSelectedTask] = useState<Task | null>(null);
 
   useEffect(() => {
     if (!id) return;
@@ -99,6 +101,35 @@ export default function ProjectDetailPage() {
       toast.error('Failed to create task');
     }
     setAddingToColumn(null);
+  }
+
+  async function updateTask(taskId: string, patch: Partial<Task>) {
+    try {
+      const res = await api.patch(`/projects/${id}/tasks/${taskId}`, patch);
+      const updated: Task = res.data?.data ?? res.data;
+      setColumns((cols) =>
+        cols.map((c) => ({
+          ...c,
+          tasks: c.tasks.map((t) => t.id === taskId ? updated : t),
+        })),
+      );
+      setSelectedTask(updated);
+    } catch {
+      toast.error('Failed to save changes');
+    }
+  }
+
+  async function deleteTask(taskId: string) {
+    try {
+      await api.delete(`/projects/${id}/tasks/${taskId}`);
+      setColumns((cols) =>
+        cols.map((c) => ({ ...c, tasks: c.tasks.filter((t) => t.id !== taskId) })),
+      );
+      setSelectedTask(null);
+      toast.success('Task deleted');
+    } catch {
+      toast.error('Failed to delete task');
+    }
   }
 
   async function toggleStar() {
@@ -276,7 +307,7 @@ export default function ProjectDetailPage() {
                   </div>
                   <div className="space-y-2">
                     {col.tasks.map((task) => (
-                      <TaskCard key={task.id} task={task} />
+                      <TaskCard key={task.id} task={task} onClick={() => setSelectedTask(task)} />
                     ))}
                     {col.tasks.length === 0 && addingToColumn !== col.id && (
                       <div className="h-16 border-2 border-dashed border-cloud-deep rounded-xl flex items-center justify-center">
@@ -329,13 +360,27 @@ export default function ProjectDetailPage() {
           </div>
         )}
       </div>
+
+      {selectedTask && (
+        <TaskDetailPanel
+          task={selectedTask}
+          members={members}
+          onClose={() => setSelectedTask(null)}
+          onSave={(patch) => updateTask(selectedTask.id, patch)}
+          onDelete={() => deleteTask(selectedTask.id)}
+        />
+      )}
     </AppShell>
   );
 }
 
-function TaskCard({ task }: { task: Task }) {
+function TaskCard({ task, onClick }: { task: Task; onClick?: () => void }) {
   return (
-    <div className="bg-cloud border border-cloud-deep rounded-xl p-3 hover:border-tyrian/30 transition-colors cursor-pointer group">
+    <button
+      type="button"
+      onClick={onClick}
+      className="w-full text-left bg-cloud border border-cloud-deep rounded-xl p-3 hover:border-tyrian/30 transition-colors cursor-pointer group"
+    >
       <p className="text-sm text-cloud-ink leading-snug mb-2">{task.title}</p>
       <div className="flex items-center justify-between">
         <span className={cn('text-[10px] font-semibold px-1.5 py-0.5 rounded', PRIORITY_COLOR[task.priority])}>
@@ -345,7 +390,7 @@ function TaskCard({ task }: { task: Task }) {
           <Avatar name={task.assigneeUsername} size="xs" />
         )}
       </div>
-    </div>
+    </button>
   );
 }
 
@@ -405,5 +450,198 @@ function AddTaskForm({
         </button>
       </div>
     </div>
+  );
+}
+
+function TaskDetailPanel({
+  task,
+  members,
+  onClose,
+  onSave,
+  onDelete,
+}: {
+  task: Task;
+  members: ProjectMember[];
+  onClose: () => void;
+  onSave: (patch: Partial<Task>) => Promise<void> | void;
+  onDelete: () => Promise<void> | void;
+}) {
+  const [title, setTitle] = useState(task.title);
+  const [description, setDescription] = useState(task.description ?? '');
+  const [priority, setPriority] = useState<TaskPriority>(task.priority);
+  const [assigneeId, setAssigneeId] = useState<string>(
+    members.find((m) => m.username === task.assigneeUsername)?.userId ?? '',
+  );
+  const [dueDate, setDueDate] = useState(task.dueDate ?? '');
+  const [confirmDelete, setConfirmDelete] = useState(false);
+  const [saving, setSaving] = useState(false);
+
+  useEffect(() => {
+    setTitle(task.title);
+    setDescription(task.description ?? '');
+    setPriority(task.priority);
+    setAssigneeId(members.find((m) => m.username === task.assigneeUsername)?.userId ?? '');
+    setDueDate(task.dueDate ?? '');
+    setConfirmDelete(false);
+  }, [task.id, task.title, task.description, task.priority, task.assigneeUsername, task.dueDate, members]);
+
+  async function handleSave() {
+    setSaving(true);
+    const patch: Record<string, unknown> = {};
+    if (title.trim() && title !== task.title) patch.title = title.trim();
+    if (description !== (task.description ?? '')) patch.description = description || null;
+    if (priority !== task.priority) patch.priority = priority;
+    const currentAssignee = members.find((m) => m.username === task.assigneeUsername)?.userId ?? '';
+    if (assigneeId !== currentAssignee) patch.assigneeId = assigneeId || null;
+    if (dueDate !== (task.dueDate ?? '')) patch.dueDate = dueDate || null;
+    if (Object.keys(patch).length > 0) {
+      await onSave(patch as Partial<Task>);
+    }
+    setSaving(false);
+  }
+
+  return (
+    <>
+      <div
+        className="fixed inset-0 z-40 bg-cloud-ink/30"
+        onClick={onClose}
+        aria-hidden
+      />
+      <aside className="fixed top-[calc(var(--banner-h,0px)+theme(spacing.navbar))] right-0 bottom-0 w-full sm:w-[420px] z-50 bg-cloud border-l border-cloud-deep shadow-xl flex flex-col overflow-hidden">
+        <div className="flex items-center justify-between px-5 py-3.5 border-b border-cloud-deep">
+          <p className="text-xs font-semibold text-cloud-muted uppercase tracking-wide">Task</p>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close"
+            className="p-1 rounded-md text-cloud-muted hover:text-cloud-ink hover:bg-cloud-deep/40 transition-colors"
+          >
+            <X size={16} />
+          </button>
+        </div>
+
+        <div className="flex-1 overflow-y-auto px-5 py-4 space-y-5">
+          <div>
+            <label className="text-[11px] font-semibold text-cloud-muted uppercase tracking-wide block mb-1.5">
+              Title
+            </label>
+            <input
+              type="text"
+              aria-label="Task title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="w-full bg-cloud-soft border border-cloud-deep rounded-lg px-3 py-2 text-sm text-cloud-ink focus:outline-none focus:border-tyrian transition-colors"
+            />
+          </div>
+
+          <div>
+            <label className="text-[11px] font-semibold text-cloud-muted uppercase tracking-wide block mb-1.5">
+              Description
+            </label>
+            <textarea
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              rows={4}
+              placeholder="Add details..."
+              className="w-full bg-cloud-soft border border-cloud-deep rounded-lg px-3 py-2 text-sm text-cloud-ink placeholder:text-cloud-muted focus:outline-none focus:border-tyrian transition-colors resize-y"
+            />
+          </div>
+
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="flex items-center gap-1.5 text-[11px] font-semibold text-cloud-muted uppercase tracking-wide mb-1.5">
+                <Flag size={11} /> Priority
+              </label>
+              <select
+                aria-label="Task priority"
+                value={priority}
+                onChange={(e) => setPriority(e.target.value as TaskPriority)}
+                className="w-full bg-cloud-soft border border-cloud-deep rounded-lg px-2.5 py-2 text-sm text-cloud-ink focus:outline-none focus:border-tyrian transition-colors"
+              >
+                <option value="LOW">Low</option>
+                <option value="MEDIUM">Medium</option>
+                <option value="HIGH">High</option>
+                <option value="CRITICAL">Critical</option>
+              </select>
+            </div>
+            <div>
+              <label className="flex items-center gap-1.5 text-[11px] font-semibold text-cloud-muted uppercase tracking-wide mb-1.5">
+                <CalendarIcon size={11} /> Due date
+              </label>
+              <input
+                type="date"
+                aria-label="Due date"
+                value={dueDate}
+                onChange={(e) => setDueDate(e.target.value)}
+                className="w-full bg-cloud-soft border border-cloud-deep rounded-lg px-2.5 py-2 text-sm text-cloud-ink focus:outline-none focus:border-tyrian transition-colors"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="flex items-center gap-1.5 text-[11px] font-semibold text-cloud-muted uppercase tracking-wide mb-1.5">
+              <UserIcon size={11} /> Assignee
+            </label>
+            <select
+              aria-label="Assignee"
+              value={assigneeId}
+              onChange={(e) => setAssigneeId(e.target.value)}
+              className="w-full bg-cloud-soft border border-cloud-deep rounded-lg px-2.5 py-2 text-sm text-cloud-ink focus:outline-none focus:border-tyrian transition-colors"
+            >
+              <option value="">Unassigned</option>
+              {members.map((m) => (
+                <option key={m.userId} value={m.userId}>
+                  {m.displayName || m.username}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="text-xs text-cloud-muted pt-2 border-t border-cloud-deep">
+            <p>Status: <span className="text-cloud-ink font-medium">{task.status}</span></p>
+            <p className="mt-1">Created {timeAgo(task.createdAt)}</p>
+            {task.updatedAt && task.updatedAt !== task.createdAt && (
+              <p className="mt-1">Updated {timeAgo(task.updatedAt)}</p>
+            )}
+          </div>
+        </div>
+
+        <div className="flex items-center justify-between gap-2 px-5 py-3 border-t border-cloud-deep bg-cloud-soft">
+          {confirmDelete ? (
+            <div className="flex items-center gap-2 flex-1">
+              <span className="text-xs text-cloud-muted">Delete this task?</span>
+              <button
+                type="button"
+                onClick={onDelete}
+                className="px-2.5 py-1 text-xs font-semibold text-cloud bg-red-500 hover:bg-red-600 rounded-md transition-colors"
+              >
+                Confirm
+              </button>
+              <button
+                type="button"
+                onClick={() => setConfirmDelete(false)}
+                className="px-2.5 py-1 text-xs text-cloud-muted hover:text-cloud-ink transition-colors"
+              >
+                Cancel
+              </button>
+            </div>
+          ) : (
+            <>
+              <button
+                type="button"
+                onClick={() => setConfirmDelete(true)}
+                aria-label="Delete task"
+                className="p-2 rounded-md text-cloud-muted hover:text-red-500 hover:bg-red-500/10 transition-colors"
+              >
+                <Trash2 size={14} />
+              </button>
+              <Button variant="primary" size="sm" loading={saving} onClick={handleSave}>
+                Save changes
+              </Button>
+            </>
+          )}
+        </div>
+      </aside>
+    </>
   );
 }
