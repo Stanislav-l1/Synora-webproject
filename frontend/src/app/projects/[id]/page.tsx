@@ -62,6 +62,7 @@ export default function ProjectDetailPage() {
   const [columns, setColumns] = useState<KanbanColumn[]>([]);
   const [addingToColumn, setAddingToColumn] = useState<number | null>(null);
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
+  const [dragOverColumn, setDragOverColumn] = useState<number | null>(null);
 
   useEffect(() => {
     if (!id) return;
@@ -129,6 +130,45 @@ export default function ProjectDetailPage() {
       toast.success('Task deleted');
     } catch {
       toast.error('Failed to delete task');
+    }
+  }
+
+  async function moveTask(taskId: string, targetColumnId: number) {
+    let movedTask: Task | undefined;
+    let sourceColumnId: number | undefined;
+    for (const c of columns) {
+      const found = c.tasks.find((t) => t.id === taskId);
+      if (found) { movedTask = found; sourceColumnId = c.id; break; }
+    }
+    if (!movedTask || sourceColumnId === targetColumnId) return;
+
+    const targetCol = columns.find((c) => c.id === targetColumnId);
+    const newOrderIndex = targetCol?.tasks.length ?? 0;
+
+    // Optimistic update.
+    setColumns((cols) =>
+      cols.map((c) => {
+        if (c.id === sourceColumnId) return { ...c, tasks: c.tasks.filter((t) => t.id !== taskId) };
+        if (c.id === targetColumnId) return { ...c, tasks: [...c.tasks, { ...movedTask!, columnId: targetColumnId }] };
+        return c;
+      }),
+    );
+
+    try {
+      await api.patch(`/projects/${id}/tasks/${taskId}/move`, {
+        columnId: targetColumnId,
+        orderIndex: newOrderIndex,
+      });
+    } catch {
+      toast.error('Failed to move task');
+      // Rollback
+      setColumns((cols) =>
+        cols.map((c) => {
+          if (c.id === targetColumnId) return { ...c, tasks: c.tasks.filter((t) => t.id !== taskId) };
+          if (c.id === sourceColumnId) return { ...c, tasks: [...c.tasks, movedTask!] };
+          return c;
+        }),
+      );
     }
   }
 
@@ -290,40 +330,68 @@ export default function ProjectDetailPage() {
         {tab === 'board' && (
           <div className="overflow-x-auto pb-4">
             <div className="flex gap-3 min-w-max">
-              {columns.map((col) => (
-                <div key={col.id} className="w-64 shrink-0">
-                  <div className="flex items-center justify-between mb-2 px-1">
-                    <span className="text-xs font-semibold text-cloud-muted uppercase tracking-wide">
-                      {col.name} <span className="ml-1 text-cloud-muted/60">({col.tasks.length})</span>
-                    </span>
-                    <button
-                      type="button"
-                      aria-label="Add task"
-                      onClick={() => setAddingToColumn(col.id)}
-                      className="text-cloud-muted hover:text-cloud-ink transition-colors"
+              {columns.map((col) => {
+                const isDropTarget = dragOverColumn === col.id;
+                return (
+                  <div key={col.id} className="w-64 shrink-0">
+                    <div className="flex items-center justify-between mb-2 px-1">
+                      <span className="text-xs font-semibold text-cloud-muted uppercase tracking-wide">
+                        {col.name} <span className="ml-1 text-cloud-muted/60">({col.tasks.length})</span>
+                      </span>
+                      <button
+                        type="button"
+                        aria-label="Add task"
+                        onClick={() => setAddingToColumn(col.id)}
+                        className="text-cloud-muted hover:text-cloud-ink transition-colors"
+                      >
+                        <Plus size={14} />
+                      </button>
+                    </div>
+                    <div
+                      onDragOver={(e) => {
+                        e.preventDefault();
+                        e.dataTransfer.dropEffect = 'move';
+                        if (dragOverColumn !== col.id) setDragOverColumn(col.id);
+                      }}
+                      onDragLeave={(e) => {
+                        if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+                          setDragOverColumn(null);
+                        }
+                      }}
+                      onDrop={(e) => {
+                        e.preventDefault();
+                        const taskId = e.dataTransfer.getData('text/plain');
+                        if (taskId) moveTask(taskId, col.id);
+                        setDragOverColumn(null);
+                      }}
+                      className={cn(
+                        'space-y-2 min-h-[80px] rounded-xl p-1 -mx-1 transition-colors',
+                        isDropTarget && 'bg-tyrian/8 ring-2 ring-tyrian/30',
+                      )}
                     >
-                      <Plus size={14} />
-                    </button>
+                      {col.tasks.map((task) => (
+                        <TaskCard
+                          key={task.id}
+                          task={task}
+                          onClick={() => setSelectedTask(task)}
+                        />
+                      ))}
+                      {col.tasks.length === 0 && addingToColumn !== col.id && !isDropTarget && (
+                        <div className="h-16 border-2 border-dashed border-cloud-deep rounded-xl flex items-center justify-center">
+                          <p className="text-xs text-cloud-muted">Drop here</p>
+                        </div>
+                      )}
+                      {addingToColumn === col.id && (
+                        <AddTaskForm
+                          columnId={col.id}
+                          onSave={createTask}
+                          onCancel={() => setAddingToColumn(null)}
+                        />
+                      )}
+                    </div>
                   </div>
-                  <div className="space-y-2">
-                    {col.tasks.map((task) => (
-                      <TaskCard key={task.id} task={task} onClick={() => setSelectedTask(task)} />
-                    ))}
-                    {col.tasks.length === 0 && addingToColumn !== col.id && (
-                      <div className="h-16 border-2 border-dashed border-cloud-deep rounded-xl flex items-center justify-center">
-                        <p className="text-xs text-cloud-muted">Drop here</p>
-                      </div>
-                    )}
-                    {addingToColumn === col.id && (
-                      <AddTaskForm
-                        columnId={col.id}
-                        onSave={createTask}
-                        onCancel={() => setAddingToColumn(null)}
-                      />
-                    )}
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         )}
@@ -375,14 +443,25 @@ export default function ProjectDetailPage() {
 }
 
 function TaskCard({ task, onClick }: { task: Task; onClick?: () => void }) {
+  const [dragging, setDragging] = useState(false);
   return (
     <button
       type="button"
       onClick={onClick}
-      className="w-full text-left bg-cloud border border-cloud-deep rounded-xl p-3 hover:border-tyrian/30 transition-colors cursor-pointer group"
+      draggable
+      onDragStart={(e) => {
+        e.dataTransfer.setData('text/plain', task.id);
+        e.dataTransfer.effectAllowed = 'move';
+        setDragging(true);
+      }}
+      onDragEnd={() => setDragging(false)}
+      className={cn(
+        'w-full text-left bg-cloud border border-cloud-deep rounded-xl p-3 hover:border-tyrian/30 transition-all cursor-grab active:cursor-grabbing group',
+        dragging && 'opacity-40 scale-95',
+      )}
     >
-      <p className="text-sm text-cloud-ink leading-snug mb-2">{task.title}</p>
-      <div className="flex items-center justify-between">
+      <p className="text-sm text-cloud-ink leading-snug mb-2 pointer-events-none">{task.title}</p>
+      <div className="flex items-center justify-between pointer-events-none">
         <span className={cn('text-[10px] font-semibold px-1.5 py-0.5 rounded', PRIORITY_COLOR[task.priority])}>
           {task.priority}
         </span>
