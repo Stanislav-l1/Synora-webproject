@@ -47,6 +47,8 @@ export const messages: Record<Locale, MessagesShape> = {
       courses: 'Courses',
       bookmarks: 'Bookmarks',
       profile: 'Profile',
+      tasks: 'Tasks',
+      communities: 'Communities',
       settings: 'Settings',
       trendingTags: 'Trending tags',
       searchPlaceholder: 'Search projects, people, posts...',
@@ -563,6 +565,8 @@ export const messages: Record<Locale, MessagesShape> = {
     },
     nav: {
       home: 'Главная',
+      tasks: 'Задачи',
+      communities: 'Сообщества',
       explore: 'Обзор',
       projects: 'Проекты',
       messages: 'Сообщения',

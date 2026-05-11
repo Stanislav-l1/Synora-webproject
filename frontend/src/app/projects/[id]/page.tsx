@@ -9,6 +9,18 @@ import {
   Clock, ArrowUpDown, Loader2, X,
   Trash2, Calendar as CalendarIcon, Flag, User as UserIcon,
 } from 'lucide-react';
+import {
+  DndContext,
+  DragOverlay,
+  PointerSensor,
+  TouchSensor,
+  useDraggable,
+  useDroppable,
+  useSensor,
+  useSensors,
+  type DragEndEvent,
+  type DragStartEvent,
+} from '@dnd-kit/core';
 import { AppShell } from '@/components/layout/app-shell';
 import { Avatar } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
@@ -62,7 +74,27 @@ export default function ProjectDetailPage() {
   const [columns, setColumns] = useState<KanbanColumn[]>([]);
   const [addingToColumn, setAddingToColumn] = useState<number | null>(null);
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
-  const [dragOverColumn, setDragOverColumn] = useState<number | null>(null);
+  const [activeDragTask, setActiveDragTask] = useState<Task | null>(null);
+
+  // Activation constraints so click-to-open and touch-scroll still work.
+  const dndSensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
+    useSensor(TouchSensor, { activationConstraint: { delay: 200, tolerance: 6 } }),
+  );
+
+  function handleDragStart(e: DragStartEvent) {
+    const taskId = String(e.active.id);
+    const t = columns.flatMap((c) => c.tasks).find((x) => x.id === taskId);
+    setActiveDragTask(t ?? null);
+  }
+
+  function handleDragEnd(e: DragEndEvent) {
+    setActiveDragTask(null);
+    const overId = e.over?.id;
+    if (typeof overId !== 'number') return;
+    const taskId = String(e.active.id);
+    moveTask(taskId, overId);
+  }
 
   useEffect(() => {
     if (!id) return;
@@ -328,72 +360,31 @@ export default function ProjectDetailPage() {
 
         {/* Board tab */}
         {tab === 'board' && (
-          <div className="overflow-x-auto pb-4">
-            <div className="flex gap-3 min-w-max">
-              {columns.map((col) => {
-                const isDropTarget = dragOverColumn === col.id;
-                return (
-                  <div key={col.id} className="w-64 shrink-0">
-                    <div className="flex items-center justify-between mb-2 px-1">
-                      <span className="text-xs font-semibold text-cloud-muted uppercase tracking-wide">
-                        {col.name} <span className="ml-1 text-cloud-muted/60">({col.tasks.length})</span>
-                      </span>
-                      <button
-                        type="button"
-                        aria-label="Add task"
-                        onClick={() => setAddingToColumn(col.id)}
-                        className="text-cloud-muted hover:text-cloud-ink transition-colors"
-                      >
-                        <Plus size={14} />
-                      </button>
-                    </div>
-                    <div
-                      onDragOver={(e) => {
-                        e.preventDefault();
-                        e.dataTransfer.dropEffect = 'move';
-                        if (dragOverColumn !== col.id) setDragOverColumn(col.id);
-                      }}
-                      onDragLeave={(e) => {
-                        if (!e.currentTarget.contains(e.relatedTarget as Node)) {
-                          setDragOverColumn(null);
-                        }
-                      }}
-                      onDrop={(e) => {
-                        e.preventDefault();
-                        const taskId = e.dataTransfer.getData('text/plain');
-                        if (taskId) moveTask(taskId, col.id);
-                        setDragOverColumn(null);
-                      }}
-                      className={cn(
-                        'space-y-2 min-h-[80px] rounded-xl p-1 -mx-1 transition-colors',
-                        isDropTarget && 'bg-tyrian/8 ring-2 ring-tyrian/30',
-                      )}
-                    >
-                      {col.tasks.map((task) => (
-                        <TaskCard
-                          key={task.id}
-                          task={task}
-                          onClick={() => setSelectedTask(task)}
-                        />
-                      ))}
-                      {col.tasks.length === 0 && addingToColumn !== col.id && !isDropTarget && (
-                        <div className="h-16 border-2 border-dashed border-cloud-deep rounded-xl flex items-center justify-center">
-                          <p className="text-xs text-cloud-muted">Drop here</p>
-                        </div>
-                      )}
-                      {addingToColumn === col.id && (
-                        <AddTaskForm
-                          columnId={col.id}
-                          onSave={createTask}
-                          onCancel={() => setAddingToColumn(null)}
-                        />
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
+          <DndContext
+            sensors={dndSensors}
+            onDragStart={handleDragStart}
+            onDragEnd={handleDragEnd}
+            onDragCancel={() => setActiveDragTask(null)}
+          >
+            <div className="overflow-x-auto pb-4">
+              <div className="flex gap-3 min-w-max">
+                {columns.map((col) => (
+                  <BoardColumn
+                    key={col.id}
+                    column={col}
+                    isAdding={addingToColumn === col.id}
+                    onAddClick={() => setAddingToColumn(col.id)}
+                    onAddSave={createTask}
+                    onAddCancel={() => setAddingToColumn(null)}
+                    onTaskClick={setSelectedTask}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
+            <DragOverlay dropAnimation={null}>
+              {activeDragTask ? <TaskCardPreview task={activeDragTask} /> : null}
+            </DragOverlay>
+          </DndContext>
         )}
 
         {/* Members tab */}
@@ -442,22 +433,80 @@ export default function ProjectDetailPage() {
   );
 }
 
+function BoardColumn({
+  column,
+  isAdding,
+  onAddClick,
+  onAddSave,
+  onAddCancel,
+  onTaskClick,
+}: {
+  column: KanbanColumn;
+  isAdding: boolean;
+  onAddClick: () => void;
+  onAddSave: (columnId: number, title: string) => void | Promise<void>;
+  onAddCancel: () => void;
+  onTaskClick: (task: Task) => void;
+}) {
+  const { setNodeRef, isOver } = useDroppable({ id: column.id });
+  return (
+    <div className="w-64 shrink-0">
+      <div className="flex items-center justify-between mb-2 px-1">
+        <span className="text-xs font-semibold text-cloud-muted uppercase tracking-wide">
+          {column.name} <span className="ml-1 text-cloud-muted/60">({column.tasks.length})</span>
+        </span>
+        <button
+          type="button"
+          aria-label="Add task"
+          onClick={onAddClick}
+          className="text-cloud-muted hover:text-cloud-ink transition-colors"
+        >
+          <Plus size={14} />
+        </button>
+      </div>
+      <div
+        ref={setNodeRef}
+        className={cn(
+          'space-y-2 min-h-[80px] rounded-xl p-1 -mx-1 transition-colors touch-manipulation',
+          isOver && 'bg-tyrian/8 ring-2 ring-tyrian/30',
+        )}
+      >
+        {column.tasks.map((task) => (
+          <TaskCard
+            key={task.id}
+            task={task}
+            onClick={() => onTaskClick(task)}
+          />
+        ))}
+        {column.tasks.length === 0 && !isAdding && !isOver && (
+          <div className="h-16 border-2 border-dashed border-cloud-deep rounded-xl flex items-center justify-center">
+            <p className="text-xs text-cloud-muted">Drop here</p>
+          </div>
+        )}
+        {isAdding && (
+          <AddTaskForm
+            columnId={column.id}
+            onSave={onAddSave}
+            onCancel={onAddCancel}
+          />
+        )}
+      </div>
+    </div>
+  );
+}
+
 function TaskCard({ task, onClick }: { task: Task; onClick?: () => void }) {
-  const [dragging, setDragging] = useState(false);
+  const { attributes, listeners, setNodeRef, isDragging } = useDraggable({ id: task.id });
   return (
     <button
+      ref={setNodeRef}
+      {...attributes}
+      {...listeners}
       type="button"
       onClick={onClick}
-      draggable
-      onDragStart={(e) => {
-        e.dataTransfer.setData('text/plain', task.id);
-        e.dataTransfer.effectAllowed = 'move';
-        setDragging(true);
-      }}
-      onDragEnd={() => setDragging(false)}
       className={cn(
-        'w-full text-left bg-cloud border border-cloud-deep rounded-xl p-3 hover:border-tyrian/30 transition-all cursor-grab active:cursor-grabbing group',
-        dragging && 'opacity-40 scale-95',
+        'w-full text-left bg-cloud border border-cloud-deep rounded-xl p-3 hover:border-tyrian/30 transition-all cursor-grab active:cursor-grabbing group touch-none',
+        isDragging && 'opacity-30',
       )}
     >
       <p className="text-sm text-cloud-ink leading-snug mb-2 pointer-events-none">{task.title}</p>
@@ -473,13 +522,27 @@ function TaskCard({ task, onClick }: { task: Task; onClick?: () => void }) {
   );
 }
 
+function TaskCardPreview({ task }: { task: Task }) {
+  return (
+    <div className="w-64 bg-cloud border border-tyrian/40 shadow-xl rounded-xl p-3 rotate-2 cursor-grabbing">
+      <p className="text-sm text-cloud-ink leading-snug mb-2">{task.title}</p>
+      <div className="flex items-center justify-between">
+        <span className={cn('text-[10px] font-semibold px-1.5 py-0.5 rounded', PRIORITY_COLOR[task.priority])}>
+          {task.priority}
+        </span>
+        {task.assigneeUsername && <Avatar name={task.assigneeUsername} size="xs" />}
+      </div>
+    </div>
+  );
+}
+
 function AddTaskForm({
   columnId,
   onSave,
   onCancel,
 }: {
   columnId: number;
-  onSave: (columnId: number, title: string) => Promise<void>;
+  onSave: (columnId: number, title: string) => Promise<void> | void;
   onCancel: () => void;
 }) {
   const [value, setValue] = useState('');

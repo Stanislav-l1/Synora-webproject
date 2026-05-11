@@ -13,6 +13,7 @@ import {
 import { cn } from '@/lib/utils';
 import { useChatStore } from '@/store/useChatStore';
 import { useNotificationStore } from '@/store/useNotificationStore';
+import { useT } from '@/lib/i18n';
 
 type Tab = {
   href: string;
@@ -22,43 +23,44 @@ type Tab = {
   badgeKey?: 'chat' | 'notifications';
 };
 
-const tabs: Tab[] = [
-  {
-    href: '/feed',
-    label: 'Home',
-    icon: Home,
-    match: (p) => p === '/' || p.startsWith('/feed'),
-    badgeKey: 'notifications',
-  },
-  {
-    href: '/tasks',
-    label: 'Tasks',
-    icon: CheckSquare,
-    match: (p) => p.startsWith('/tasks'),
-  },
-  {
-    href: '/communities',
-    label: 'Communities',
-    icon: Users,
-    match: (p) => p.startsWith('/communities'),
-  },
-  {
-    href: '/messages',
-    label: 'Messages',
-    icon: MessageSquare,
-    match: (p) => p.startsWith('/messages'),
-    badgeKey: 'chat',
-  },
-  {
-    href: '/profile',
-    label: 'Profile',
-    icon: User,
-    match: (p) => p.startsWith('/profile') || p.startsWith('/u/'),
-  },
-];
-
 export function BottomNav() {
   const pathname = usePathname() || '/';
+  const t = useT();
+
+  const tabs: Tab[] = [
+    {
+      href: '/feed',
+      label: t.nav.home,
+      icon: Home,
+      match: (p) => p === '/' || p.startsWith('/feed'),
+      badgeKey: 'notifications',
+    },
+    {
+      href: '/tasks',
+      label: t.nav.tasks,
+      icon: CheckSquare,
+      match: (p) => p.startsWith('/tasks'),
+    },
+    {
+      href: '/communities',
+      label: t.nav.communities,
+      icon: Users,
+      match: (p) => p.startsWith('/communities'),
+    },
+    {
+      href: '/messages',
+      label: t.nav.messages,
+      icon: MessageSquare,
+      match: (p) => p.startsWith('/messages'),
+      badgeKey: 'chat',
+    },
+    {
+      href: '/profile',
+      label: t.nav.profile,
+      icon: User,
+      match: (p) => p.startsWith('/profile') || p.startsWith('/u/'),
+    },
+  ];
   const chats = useChatStore((s) => s.chats);
   const chatUnread = chats.reduce((sum, c) => sum + (c.unreadCount || 0), 0);
   const notifUnread = useNotificationStore((s) => s.unreadCount);
