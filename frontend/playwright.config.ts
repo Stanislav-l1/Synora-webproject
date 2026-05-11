@@ -25,7 +25,9 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: 'npm run dev',
+    // Locally: `next dev` (auto-reload). On CI: serve the prebuilt output —
+    // far faster than the first cold compile under `next dev`.
+    command: process.env.CI ? 'npm run start' : 'npm run dev',
     url: baseURL,
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
