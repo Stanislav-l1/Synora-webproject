@@ -90,29 +90,31 @@ export default function ProjectsPage() {
     <AppShell>
       <div className="max-w-6xl mx-auto px-4 py-6">
         {/* Header */}
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
           <div>
-            <h1 className="text-2xl font-bold text-cloud-ink">{t.projects.title}</h1>
+            <h1 className="text-xl sm:text-2xl font-bold text-cloud-ink">{t.projects.title}</h1>
             <p className="text-sm text-cloud-muted mt-1">
               {t.projects.subtitle}
             </p>
           </div>
-          <Button type="button" icon={<Plus size={16} />} onClick={() => setModalOpen(true)}>{t.projects.newProject}</Button>
+          <Button type="button" icon={<Plus size={16} />} onClick={() => setModalOpen(true)} className="self-start sm:self-auto">
+            {t.projects.newProject}
+          </Button>
         </div>
 
         {/* Filters bar */}
-        <div className="flex items-center justify-between gap-4 mb-4">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
           <TabBar tabs={tabs} activeTab={activeTab} onChange={setActiveTab} />
           <div className="flex items-center gap-2 shrink-0">
             {/* Search */}
-            <div className="relative hidden sm:block">
+            <div className="relative flex-1 sm:flex-initial">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-cloud-muted" size={14} />
               <input
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder={t.projects.searchPlaceholder}
-                className="w-48 h-9 pl-8 pr-3 bg-white border border-cloud-deep rounded-sm text-xs text-cloud-ink placeholder:text-cloud-muted focus:outline-none focus:border-tyrian transition-colors"
+                className="w-full sm:w-48 h-9 pl-8 pr-3 bg-white border border-cloud-deep rounded-sm text-xs text-cloud-ink placeholder:text-cloud-muted focus:outline-none focus:border-tyrian transition-colors"
               />
             </div>
             {/* View toggle */}

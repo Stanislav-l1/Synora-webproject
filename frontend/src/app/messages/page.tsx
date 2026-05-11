@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
   Search, Send, Paperclip, Smile, Phone, Video, MoreVertical, Loader2, Plus,
-  Briefcase, Users as UsersIcon, CornerUpLeft, X, Check, CheckCheck,
+  Briefcase, Users as UsersIcon, CornerUpLeft, X, Check, CheckCheck, ChevronLeft,
 } from 'lucide-react';
 import { AppShell } from '@/components/layout/app-shell';
 import { Avatar } from '@/components/ui/avatar';
@@ -336,8 +336,14 @@ export default function MessagesPage() {
   return (
     <AppShell>
       <div className="flex h-[calc(100vh-theme(spacing.navbar))] bg-cloud">
-        {/* Chat list */}
-        <div className="w-80 border-r border-cloud-deep bg-cloud-soft flex flex-col shrink-0">
+        {/* Chat list — full width on mobile when no chat selected; hidden when chat is open */}
+        <div
+          className={cn(
+            'border-r border-cloud-deep bg-cloud-soft flex flex-col shrink-0',
+            'md:w-80',
+            activeChat ? 'hidden md:flex' : 'flex w-full',
+          )}
+        >
           <div className="p-3 border-b border-cloud-deep space-y-2">
             <div className="flex items-center gap-2">
               <div className="flex-1 relative">
@@ -381,12 +387,25 @@ export default function MessagesPage() {
           </div>
         </div>
 
-        {/* Chat area */}
-        <div className="flex-1 flex flex-col bg-cloud">
+        {/* Chat area — hidden on mobile when no chat selected */}
+        <div
+          className={cn(
+            'flex-1 flex-col bg-cloud',
+            activeChat ? 'flex' : 'hidden md:flex',
+          )}
+        >
           {activeChat ? (
             <>
               <div className="flex items-center justify-between px-4 h-14 border-b border-cloud-deep bg-cloud-soft shrink-0">
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 min-w-0">
+                  <button
+                    type="button"
+                    aria-label="Back"
+                    onClick={() => setActiveChat(null)}
+                    className="md:hidden -ml-1 p-2 rounded-sm text-cloud-muted hover:text-tyrian hover:bg-cloud-deep transition-colors"
+                  >
+                    <ChevronLeft size={18} />
+                  </button>
                   <Avatar name={activeName} src={activeChat.avatarUrl ?? undefined} size="sm" />
                   <div>
                     <div className="flex items-center gap-2">
