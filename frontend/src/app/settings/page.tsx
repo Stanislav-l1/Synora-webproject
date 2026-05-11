@@ -1,7 +1,8 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import { Camera, Loader2, Save } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { Camera, Loader2, Save, ShieldCheck, ChevronRight } from 'lucide-react';
 import { AppShell } from '@/components/layout/app-shell';
 import { Avatar } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
@@ -15,6 +16,7 @@ import { useT } from '@/lib/i18n';
 
 export default function SettingsPage() {
   const t = useT();
+  const router = useRouter();
   const { user } = useAuth();
   const { setUser } = useAuthStore();
 
@@ -198,6 +200,27 @@ export default function SettingsPage() {
             </p>
           </CardContent>
         </Card>
+
+        <button
+          type="button"
+          onClick={() => router.push('/settings/security')}
+          className="w-full text-left"
+        >
+          <Card className="hover:border-border-hover transition-colors cursor-pointer">
+            <CardContent className="py-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <ShieldCheck size={18} className="text-tyrian shrink-0" />
+                  <div>
+                    <p className="text-sm font-medium text-cloud-ink">Security &amp; Privacy</p>
+                    <p className="text-xs text-cloud-muted">Password, 2FA, sessions, privacy settings</p>
+                  </div>
+                </div>
+                <ChevronRight size={16} className="text-cloud-muted" />
+              </div>
+            </CardContent>
+          </Card>
+        </button>
 
         <Card>
           <CardHeader>
