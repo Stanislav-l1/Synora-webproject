@@ -158,3 +158,9 @@ replay_pid*
 
 # Backups
 backups/
+
+# Playwright
+frontend/test-results/
+frontend/playwright-report/
+frontend/.playwright/
+frontend/blob-report/
