@@ -24,6 +24,10 @@ const nextConfig = {
           source: '/ws/:path*',
           destination: 'http://localhost:8080/ws/:path*',
         },
+        {
+          source: '/files/public/:path*',
+          destination: 'http://localhost:9000/synora-files/public/:path*',
+        },
       ];
     },
   }),

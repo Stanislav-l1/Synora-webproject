@@ -15,6 +15,7 @@ import com.synora.modules.user.dto.UserProfileResponse;
 import com.synora.modules.user.entity.User;
 import com.synora.modules.user.service.AchievementService;
 import com.synora.modules.user.service.ActivitySummaryService;
+import com.synora.modules.user.service.AvatarUploadService;
 import com.synora.modules.user.service.EndorsementService;
 import com.synora.modules.user.service.PeerReviewService;
 import com.synora.modules.user.service.RecommendationService;
@@ -32,6 +33,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Map;
 import java.util.UUID;
@@ -43,6 +45,7 @@ import java.util.UUID;
 public class UserController {
 
     private final UserService userService;
+    private final AvatarUploadService avatarUploadService;
     private final ActivitySummaryService activitySummaryService;
     private final AchievementService achievementService;
     private final RecommendationService recommendationService;
@@ -74,6 +77,16 @@ public class UserController {
 
         return ResponseEntity.ok(
                 ApiResponse.ok("Profile updated", userService.updateProfile(currentUser, req)));
+    }
+
+    @Operation(summary = "Upload avatar image", security = @SecurityRequirement(name = "bearerAuth"))
+    @PostMapping(value = "/me/avatar", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<ApiResponse<Map<String, String>>> uploadAvatar(
+            @AuthenticationPrincipal User currentUser,
+            @RequestParam("file") MultipartFile file) {
+
+        String url = avatarUploadService.upload(currentUser, file);
+        return ResponseEntity.ok(ApiResponse.ok("Avatar updated", Map.of("avatarUrl", url)));
     }
 
     @Operation(summary = "Complete onboarding", security = @SecurityRequirement(name = "bearerAuth"))

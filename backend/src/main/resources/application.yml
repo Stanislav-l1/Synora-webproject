@@ -77,6 +77,9 @@ aws:
     access-key: ${S3_ACCESS_KEY:minioadmin}
     secret-key: ${S3_SECRET_KEY:minioadmin}
     region: ${S3_REGION:us-east-1}
+    # Path/URL where the bucket's `public/` prefix is publicly served via nginx.
+    # Files written to `public/<key>` are reachable at `<public-base-url>/<key>`.
+    public-base-url: ${S3_PUBLIC_BASE_URL:/files/public}
 
 springdoc:
   api-docs:

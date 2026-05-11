@@ -104,6 +104,18 @@ server {
         proxy_set_header Host $host;
     }
 
+    # --- Public S3 files (avatars, etc.) ---
+    location /files/public/ {
+        proxy_pass http://minio:9000/synora-files/public/;
+        proxy_set_header Host $host;
+        proxy_hide_header x-amz-id-2;
+        proxy_hide_header x-amz-request-id;
+        proxy_hide_header x-amz-meta-server-side-encryption;
+        proxy_hide_header x-amz-server-side-encryption;
+        proxy_intercept_errors on;
+        add_header Cache-Control "public, max-age=86400" always;
+    }
+
     # --- Static (immutable) ---
     location /_next/static/ {
         proxy_pass http://frontend;

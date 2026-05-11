@@ -366,6 +366,10 @@ export const messages: Record<Locale, MessagesShape> = {
       deleteAccount: 'Delete Account',
       deleteWarning: 'Permanently delete your account and all data',
       changeAvatar: 'Change avatar',
+      avatarUpdated: 'Avatar updated',
+      avatarFailed: 'Failed to upload avatar',
+      avatarTooLarge: 'Image must be 5MB or smaller',
+      avatarInvalidType: 'Only PNG, JPEG, WebP, or GIF allowed',
     },
     search: {
       placeholder: 'Search posts, projects, people...',
@@ -829,6 +833,10 @@ export const messages: Record<Locale, MessagesShape> = {
       deleteAccount: 'Удалить аккаунт',
       deleteWarning: 'Безвозвратно удалить аккаунт и все данные',
       changeAvatar: 'Сменить аватар',
+      avatarUpdated: 'Аватар обновлён',
+      avatarFailed: 'Не удалось загрузить аватар',
+      avatarTooLarge: 'Размер изображения не более 5MB',
+      avatarInvalidType: 'Допустимы только PNG, JPEG, WebP или GIF',
     },
     search: {
       placeholder: 'Поиск постов, проектов, людей...',

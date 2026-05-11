@@ -68,6 +68,7 @@ public class UserService {
         if (req.getHeadline()    != null) currentUser.setHeadline(req.getHeadline());
         if (req.getPronouns()    != null) currentUser.setPronouns(req.getPronouns());
         if (req.getAvailableFor()!= null) currentUser.setAvailableFor(req.getAvailableFor());
+        if (req.getAvatarUrl()   != null) currentUser.setAvatarUrl(req.getAvatarUrl());
 
         return toResponse(userRepository.save(currentUser), true);
     }

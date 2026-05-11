@@ -29,4 +29,7 @@ public class UpdateProfileRequest {
 
     @Size(max = 120)
     private String availableFor;
+
+    @Size(max = 500)
+    private String avatarUrl;
 }

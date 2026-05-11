@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { Camera, Save } from 'lucide-react';
+import { useRef, useState } from 'react';
+import { Camera, Loader2, Save } from 'lucide-react';
 import { AppShell } from '@/components/layout/app-shell';
 import { Avatar } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
@@ -24,7 +24,43 @@ export default function SettingsPage() {
   const [websiteUrl, setWebsiteUrl] = useState(user?.websiteUrl || '');
   const [githubUrl, setGithubUrl] = useState(user?.githubUrl || '');
   const [isSaving, setIsSaving] = useState(false);
+  const [isUploadingAvatar, setIsUploadingAvatar] = useState(false);
   const [message, setMessage] = useState<{ type: 'ok' | 'err'; text: string } | null>(null);
+  const avatarInputRef = useRef<HTMLInputElement>(null);
+
+  async function handleAvatarChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    e.target.value = '';
+    if (!file) return;
+
+    if (!file.type.startsWith('image/')) {
+      setMessage({ type: 'err', text: t.settings.avatarInvalidType });
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      setMessage({ type: 'err', text: t.settings.avatarTooLarge });
+      return;
+    }
+
+    setIsUploadingAvatar(true);
+    setMessage(null);
+    try {
+      const form = new FormData();
+      form.append('file', file);
+      const res = await api.post<ApiResponse<{ avatarUrl: string }>>(
+        '/users/me/avatar',
+        form,
+        { headers: { 'Content-Type': 'multipart/form-data' } },
+      );
+      setUser({ ...user!, avatarUrl: res.data.data.avatarUrl });
+      setMessage({ type: 'ok', text: t.settings.avatarUpdated });
+    } catch (err: unknown) {
+      const e = err as { response?: { data?: { message?: string } } };
+      setMessage({ type: 'err', text: e?.response?.data?.message || t.settings.avatarFailed });
+    } finally {
+      setIsUploadingAvatar(false);
+    }
+  }
 
   async function handleSave() {
     setIsSaving(true);
@@ -61,13 +97,32 @@ export default function SettingsPage() {
           <CardContent className="space-y-4">
             <div className="flex items-center gap-4">
               <div className="relative">
-                <Avatar name={user.displayName || user.username} size="xl" />
+                <Avatar
+                  src={user.avatarUrl}
+                  name={user.displayName || user.username}
+                  size="xl"
+                />
+                <input
+                  ref={avatarInputRef}
+                  type="file"
+                  accept="image/png,image/jpeg,image/webp,image/gif"
+                  className="sr-only"
+                  aria-label={t.settings.changeAvatar}
+                  title={t.settings.changeAvatar}
+                  onChange={handleAvatarChange}
+                />
                 <button
                   type="button"
+                  onClick={() => avatarInputRef.current?.click()}
+                  disabled={isUploadingAvatar}
                   aria-label={t.settings.changeAvatar}
-                  className="absolute -bottom-1 -right-1 w-7 h-7 bg-tyrian rounded-full flex items-center justify-center text-cloud hover:bg-tyrian-soft transition-colors"
+                  className="absolute -bottom-1 -right-1 w-7 h-7 bg-tyrian rounded-full flex items-center justify-center text-cloud hover:bg-tyrian-soft transition-colors disabled:opacity-60"
                 >
-                  <Camera size={14} />
+                  {isUploadingAvatar ? (
+                    <Loader2 size={14} className="animate-spin" />
+                  ) : (
+                    <Camera size={14} />
+                  )}
                 </button>
               </div>
               <div>
