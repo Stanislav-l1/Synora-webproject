@@ -1,0 +1,54 @@
+# ============================================================
+# HTTPS overlay — adds Let's Encrypt + TLS termination on nginx
+# Usage:
+#   1. Point DOMAIN's A record at this host
+#   2. Set DOMAIN and LETSENCRYPT_EMAIL in .env
+#   3. Bootstrap once:   bash scripts/init-letsencrypt.sh
+#   4. Start with overlay:
+#        docker compose -f docker-compose.yml -f docker-compose.https.yml up -d
+# ============================================================
+services:
+  nginx:
+    ports:
+      - "443:443"
+    volumes:
+      # Replace base read-only conf.d with writable tmpfs (envsubst writes here)
+      - nginx_conf:/etc/nginx/conf.d
+      # Mount templates — official image substitutes ${VAR} into conf.d on start
+      - ./nginx/conf.d.https:/etc/nginx/templates:ro
+      - certbot_conf:/etc/letsencrypt
+      - certbot_www:/var/www/certbot
+    environment:
+      DOMAIN: ${DOMAIN:?DOMAIN is required for HTTPS}
+    # Override base CMD to also reload nginx every 6h (picks up renewed certs)
+    command: >
+      /bin/sh -c "
+        /docker-entrypoint.sh nginx -g 'daemon off;' &
+        NGINX_PID=$$!;
+        while :; do sleep 6h; nginx -s reload 2>/dev/null || true; done &
+        wait $$NGINX_PID
+      "
+
+  certbot:
+    image: certbot/certbot:latest
+    container_name: synora-certbot
+    restart: unless-stopped
+    volumes:
+      - certbot_conf:/etc/letsencrypt
+      - certbot_www:/var/www/certbot
+    # Check renewal every 12h; certbot only renews within 30 days of expiry
+    entrypoint: >
+      /bin/sh -c "
+        trap exit TERM;
+        while :; do
+          certbot renew --webroot -w /var/www/certbot --quiet;
+          sleep 12h & wait $$!;
+        done
+      "
+    networks:
+      - synora-net
+
+volumes:
+  nginx_conf:
+  certbot_conf:
+  certbot_www:
