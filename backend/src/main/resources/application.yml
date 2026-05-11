@@ -43,6 +43,19 @@ spring:
           max-active: 10
           max-idle: 5
 
+  mail:
+    host: ${SMTP_HOST:smtp.gmail.com}
+    port: ${SMTP_PORT:587}
+    username: ${SMTP_USER:}
+    password: ${SMTP_PASSWORD:}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+
   servlet:
     multipart:
       max-file-size: 50MB
@@ -58,6 +71,11 @@ server:
 
 app:
   public-base-url: ${PUBLIC_BASE_URL:http://localhost:3000}
+
+github:
+  oauth:
+    client-id: ${GITHUB_CLIENT_ID:}
+    client-secret: ${GITHUB_CLIENT_SECRET:}
 
 push:
   vapid:

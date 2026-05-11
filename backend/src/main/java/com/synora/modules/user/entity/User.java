@@ -45,6 +45,9 @@ public class User implements UserDetails {
     @Column(columnDefinition = "TEXT")
     private String bio;
 
+    @Column(name = "github_id", unique = true, length = 64)
+    private String githubId;
+
     @Column(name = "github_url")
     private String githubUrl;
 

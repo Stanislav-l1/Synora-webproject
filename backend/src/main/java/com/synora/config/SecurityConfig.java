@@ -46,6 +46,11 @@ public class SecurityConfig {
             "/api/v1/analytics/view"
     };
 
+    private static final String[] PUBLIC_GET_NO_AUTH = {
+            "/api/v1/auth/oauth/github",
+            "/api/v1/auth/oauth/github/callback"
+    };
+
     private static final String[] PUBLIC_GET = {
             "/api/v1/posts/**",
             "/api/v1/users/*/profile",
@@ -93,6 +98,7 @@ public class SecurityConfig {
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST, PUBLIC_POST).permitAll()
+                        .requestMatchers(HttpMethod.GET,  PUBLIC_GET_NO_AUTH).permitAll()
                         .requestMatchers(HttpMethod.GET,  "/api/v1/posts/saved").authenticated()
                         .requestMatchers(HttpMethod.GET,  PUBLIC_GET).permitAll()
                         // WebSocket handshake
