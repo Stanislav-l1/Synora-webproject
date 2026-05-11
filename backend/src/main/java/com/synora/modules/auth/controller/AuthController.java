@@ -1,6 +1,8 @@
 package com.synora.modules.auth.controller;
 
 import com.synora.modules.auth.dto.*;
+import com.synora.modules.auth.dto.ForgotPasswordRequest;
+import com.synora.modules.auth.dto.ResetPasswordRequest;
 import com.synora.modules.auth.service.AuthService;
 import com.synora.modules.user.entity.User;
 import com.synora.shared.dto.ApiResponse;
@@ -68,6 +70,22 @@ public class AuthController {
     public ResponseEntity<ApiResponse<Void>> logout(@AuthenticationPrincipal User user) {
         authService.logout(user.getId());
         return ResponseEntity.ok(ApiResponse.ok("Logged out", null));
+    }
+
+    @Operation(summary = "Request password reset link")
+    @PostMapping("/forgot-password")
+    public ResponseEntity<ApiResponse<Void>> forgotPassword(
+            @Valid @RequestBody ForgotPasswordRequest req) {
+        authService.forgotPassword(req);
+        return ResponseEntity.ok(ApiResponse.ok("If an account exists, a reset link has been sent", null));
+    }
+
+    @Operation(summary = "Reset password with token")
+    @PostMapping("/reset-password")
+    public ResponseEntity<ApiResponse<Void>> resetPassword(
+            @Valid @RequestBody ResetPasswordRequest req) {
+        authService.resetPassword(req);
+        return ResponseEntity.ok(ApiResponse.ok("Password reset successfully", null));
     }
 
     @Operation(summary = "Change password")

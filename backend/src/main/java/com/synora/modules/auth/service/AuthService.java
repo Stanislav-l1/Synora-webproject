@@ -2,8 +2,10 @@ package com.synora.modules.auth.service;
 
 import com.synora.modules.auth.dto.AuthResponse;
 import com.synora.modules.auth.dto.ChangePasswordRequest;
+import com.synora.modules.auth.dto.ForgotPasswordRequest;
 import com.synora.modules.auth.dto.LoginRequest;
 import com.synora.modules.auth.dto.RegisterRequest;
+import com.synora.modules.auth.dto.ResetPasswordRequest;
 import com.synora.modules.auth.entity.RefreshToken;
 import com.synora.modules.auth.repository.RefreshTokenRepository;
 import com.synora.modules.security.service.SecurityService;
@@ -137,6 +139,32 @@ public class AuthService {
     public void logout(UUID userId) {
         refreshTokenRepository.deleteByUserId(userId);
         securityService.revokeAll(userId);
+    }
+
+    private static final String RESET_PREFIX = "pwd:reset:";
+
+    @Transactional
+    public void forgotPassword(ForgotPasswordRequest req) {
+        userRepository.findByEmail(req.getEmail()).ifPresent(user -> {
+            String token = UUID.randomUUID().toString().replace("-", "");
+            redis.opsForValue().set(RESET_PREFIX + token, user.getId().toString(), Duration.ofHours(1));
+            // TODO: send email with reset link: /reset-password?token={token}
+            org.slf4j.LoggerFactory.getLogger(AuthService.class)
+                .info("Password reset token for {}: {}", user.getEmail(), token);
+        });
+    }
+
+    @Transactional
+    public void resetPassword(ResetPasswordRequest req) {
+        String key = RESET_PREFIX + req.getToken();
+        String userId = redis.opsForValue().get(key);
+        if (userId == null) throw AppException.badRequest("Invalid or expired reset token");
+        User user = userRepository.findById(UUID.fromString(userId))
+                .orElseThrow(() -> AppException.notFound("User", userId));
+        user.setPasswordHash(passwordEncoder.encode(req.getNewPassword()));
+        userRepository.save(user);
+        refreshTokenRepository.deleteByUserId(user.getId());
+        redis.delete(key);
     }
 
     @Transactional
