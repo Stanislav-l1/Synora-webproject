@@ -155,3 +155,6 @@ replay_pid*
 # Claude Code runtime
 .claude/scheduled_tasks.lock
 .claude/projects/
+
+# Backups
+backups/

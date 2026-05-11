@@ -1,0 +1,46 @@
+# ============================================================
+# Backup overlay — runs daily pg_dump + minio mirror to a host directory.
+#
+# Usage:
+#   docker compose -f docker-compose.yml -f docker-compose.backup.yml up -d
+#
+# Files land in ./backups/{postgres,minio}/synora-<UTC-timestamp>.{sql.gz,tar.gz}
+# Override BACKUP_HOST_DIR / BACKUP_CRON / RETENTION_DAYS in .env to relocate or
+# change cadence. Run a one-off backup with:
+#   docker compose exec backup synora-backup
+# ============================================================
+services:
+  backup:
+    build:
+      context: ./scripts
+      dockerfile: backup.Dockerfile
+    image: synora-backup:latest
+    container_name: synora-backup
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: ${DB_NAME:-synora}
+      DB_USER: ${DB_USER:-synora}
+      DB_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD is required}
+      S3_ENDPOINT: http://minio:9000
+      S3_ACCESS_KEY: ${S3_ACCESS_KEY:?S3_ACCESS_KEY is required}
+      S3_SECRET_KEY: ${S3_SECRET_KEY:?S3_SECRET_KEY is required}
+      S3_BUCKET: ${S3_BUCKET:-synora-files}
+      RETENTION_DAYS: ${BACKUP_RETENTION_DAYS:-14}
+      BACKUP_CRON: ${BACKUP_CRON:-0 3 * * *}
+      TZ: ${TZ:-UTC}
+    volumes:
+      - ${BACKUP_HOST_DIR:-./backups}:/backups
+    networks:
+      - synora-net
+    logging:
+      driver: json-file
+      options:
+        max-size: "5m"
+        max-file: "3"
