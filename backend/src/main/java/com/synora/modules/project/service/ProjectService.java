@@ -10,6 +10,7 @@ import com.synora.modules.project.repository.*;
 import com.synora.modules.user.entity.User;
 import com.synora.shared.dto.PageResponse;
 import com.synora.shared.exception.AppException;
+import io.micrometer.core.instrument.Counter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -28,6 +29,7 @@ public class ProjectService {
     private final ProjectMemberRepository memberRepository;
     private final TagRepository           tagRepository;
     private final NotificationService     notificationService;
+    private final Counter                 projectsCreated;
 
     @Transactional(readOnly = true)
     public PageResponse<ProjectSummaryResponse> getProjects(int page, int size, Long tagId, String status) {
@@ -72,6 +74,7 @@ public class ProjectService {
                 .role(MemberRole.OWNER)
                 .build());
 
+        projectsCreated.increment();
         return toFullResponse(saved, owner.getId());
     }
 

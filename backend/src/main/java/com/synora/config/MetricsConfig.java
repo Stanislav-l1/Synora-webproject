@@ -33,7 +33,7 @@ public class MetricsConfig {
     }
 
     @Bean
-    public Counter messagessSent(MeterRegistry registry) {
+    public Counter messagesSent(MeterRegistry registry) {
         return Counter.builder("synora.messages.sent")
                 .description("Total chat messages sent")
                 .register(registry);

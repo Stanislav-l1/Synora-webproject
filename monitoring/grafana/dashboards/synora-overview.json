@@ -1,0 +1,164 @@
+{
+  "title": "Synora — Overview",
+  "uid": "synora-overview",
+  "tags": ["synora"],
+  "timezone": "browser",
+  "schemaVersion": 39,
+  "refresh": "30s",
+  "time": { "from": "now-1h", "to": "now" },
+  "panels": [
+    {
+      "type": "stat",
+      "title": "Backend up",
+      "gridPos": { "h": 4, "w": 4, "x": 0, "y": 0 },
+      "targets": [{ "expr": "up{job=\"synora-backend\"}", "refId": "A" }],
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [
+            { "type": "value", "options": { "0": { "text": "DOWN", "color": "red" }, "1": { "text": "UP", "color": "green" } } }
+          ],
+          "color": { "mode": "thresholds" }
+        }
+      },
+      "options": { "colorMode": "background", "graphMode": "none" }
+    },
+    {
+      "type": "stat",
+      "title": "Requests / min",
+      "gridPos": { "h": 4, "w": 5, "x": 4, "y": 0 },
+      "targets": [{
+        "expr": "sum(rate(http_server_requests_seconds_count{job=\"synora-backend\"}[5m])) * 60",
+        "refId": "A"
+      }],
+      "fieldConfig": { "defaults": { "unit": "short", "decimals": 1 } }
+    },
+    {
+      "type": "stat",
+      "title": "Error rate (5xx) %",
+      "gridPos": { "h": 4, "w": 5, "x": 9, "y": 0 },
+      "targets": [{
+        "expr": "100 * sum(rate(http_server_requests_seconds_count{job=\"synora-backend\",status=~\"5..\"}[5m])) / clamp_min(sum(rate(http_server_requests_seconds_count{job=\"synora-backend\"}[5m])), 1e-9)",
+        "refId": "A"
+      }],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "decimals": 2,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "yellow", "value": 1 },
+              { "color": "red", "value": 5 }
+            ]
+          },
+          "color": { "mode": "thresholds" }
+        }
+      },
+      "options": { "colorMode": "background" }
+    },
+    {
+      "type": "stat",
+      "title": "p95 latency",
+      "gridPos": { "h": 4, "w": 5, "x": 14, "y": 0 },
+      "targets": [{
+        "expr": "histogram_quantile(0.95, sum by (le) (rate(http_server_requests_seconds_bucket{job=\"synora-backend\"}[5m])))",
+        "refId": "A"
+      }],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s",
+          "decimals": 3,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "yellow", "value": 0.5 },
+              { "color": "red", "value": 1 }
+            ]
+          },
+          "color": { "mode": "thresholds" }
+        }
+      },
+      "options": { "colorMode": "background" }
+    },
+    {
+      "type": "stat",
+      "title": "Heap used",
+      "gridPos": { "h": 4, "w": 5, "x": 19, "y": 0 },
+      "targets": [{
+        "expr": "sum(jvm_memory_used_bytes{job=\"synora-backend\",area=\"heap\"})",
+        "refId": "A"
+      }],
+      "fieldConfig": { "defaults": { "unit": "bytes" } }
+    },
+
+    {
+      "type": "timeseries",
+      "title": "HTTP requests / sec by status",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 4 },
+      "targets": [{
+        "expr": "sum by (status) (rate(http_server_requests_seconds_count{job=\"synora-backend\"}[1m]))",
+        "legendFormat": "{{status}}",
+        "refId": "A"
+      }],
+      "fieldConfig": { "defaults": { "unit": "reqps" } }
+    },
+    {
+      "type": "timeseries",
+      "title": "Latency p50 / p95 / p99",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 4 },
+      "targets": [
+        { "expr": "histogram_quantile(0.50, sum by (le) (rate(http_server_requests_seconds_bucket{job=\"synora-backend\"}[5m])))", "legendFormat": "p50", "refId": "A" },
+        { "expr": "histogram_quantile(0.95, sum by (le) (rate(http_server_requests_seconds_bucket{job=\"synora-backend\"}[5m])))", "legendFormat": "p95", "refId": "B" },
+        { "expr": "histogram_quantile(0.99, sum by (le) (rate(http_server_requests_seconds_bucket{job=\"synora-backend\"}[5m])))", "legendFormat": "p99", "refId": "C" }
+      ],
+      "fieldConfig": { "defaults": { "unit": "s" } }
+    },
+
+    {
+      "type": "timeseries",
+      "title": "JVM heap (used / committed)",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 12 },
+      "targets": [
+        { "expr": "sum(jvm_memory_used_bytes{job=\"synora-backend\",area=\"heap\"})", "legendFormat": "used", "refId": "A" },
+        { "expr": "sum(jvm_memory_committed_bytes{job=\"synora-backend\",area=\"heap\"})", "legendFormat": "committed", "refId": "B" }
+      ],
+      "fieldConfig": { "defaults": { "unit": "bytes" } }
+    },
+    {
+      "type": "timeseries",
+      "title": "CPU (process / system)",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 12 },
+      "targets": [
+        { "expr": "process_cpu_usage{job=\"synora-backend\"}", "legendFormat": "process", "refId": "A" },
+        { "expr": "system_cpu_usage{job=\"synora-backend\"}", "legendFormat": "system", "refId": "B" }
+      ],
+      "fieldConfig": { "defaults": { "unit": "percentunit", "max": 1, "min": 0 } }
+    },
+
+    {
+      "type": "timeseries",
+      "title": "HikariCP connections",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 20 },
+      "targets": [
+        { "expr": "hikaricp_connections_active{job=\"synora-backend\"}", "legendFormat": "active", "refId": "A" },
+        { "expr": "hikaricp_connections_idle{job=\"synora-backend\"}", "legendFormat": "idle", "refId": "B" },
+        { "expr": "hikaricp_connections_pending{job=\"synora-backend\"}", "legendFormat": "pending", "refId": "C" }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Business events (rate / min)",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 20 },
+      "targets": [
+        { "expr": "rate(synora_users_registrations_total{job=\"synora-backend\"}[5m]) * 60", "legendFormat": "registrations", "refId": "A" },
+        { "expr": "rate(synora_posts_created_total{job=\"synora-backend\"}[5m]) * 60",     "legendFormat": "posts",         "refId": "B" },
+        { "expr": "rate(synora_projects_created_total{job=\"synora-backend\"}[5m]) * 60",  "legendFormat": "projects",      "refId": "C" },
+        { "expr": "rate(synora_messages_sent_total{job=\"synora-backend\"}[5m]) * 60",     "legendFormat": "messages",      "refId": "D" },
+        { "expr": "rate(synora_auth_failures_total{job=\"synora-backend\"}[5m]) * 60",     "legendFormat": "auth failures", "refId": "E" }
+      ],
+      "fieldConfig": { "defaults": { "unit": "short" } }
+    }
+  ]
+}

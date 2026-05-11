@@ -12,6 +12,7 @@ import com.synora.modules.user.entity.UserRole;
 import com.synora.modules.user.repository.UserRepository;
 import com.synora.shared.exception.AppException;
 import com.synora.shared.util.JwtUtil;
+import io.micrometer.core.instrument.Counter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -33,6 +34,8 @@ public class AuthService {
     private final JwtUtil                jwtUtil;
     private final SecurityService        securityService;
     private final StringRedisTemplate    redis;
+    private final Counter                userRegistrations;
+    private final Counter                authFailures;
 
     private static final String TWO_FA_PREFIX = "2fa:pending:";
 
@@ -60,6 +63,7 @@ public class AuthService {
                 .build();
 
         user = userRepository.save(user);
+        userRegistrations.increment();
         return buildAuthResponse(user, null, null);
     }
 
@@ -72,6 +76,7 @@ public class AuthService {
             if (user != null) {
                 securityService.logLogin(user, ip, userAgent, false, "Invalid credentials");
             }
+            authFailures.increment();
             throw AppException.unauthorized("Invalid credentials");
         }
         if (!user.isEnabled()) {

@@ -8,6 +8,7 @@ import com.synora.modules.post.repository.*;
 import com.synora.modules.user.entity.User;
 import com.synora.shared.dto.PageResponse;
 import com.synora.shared.exception.AppException;
+import io.micrometer.core.instrument.Counter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -28,6 +29,7 @@ public class PostService {
     private final PostReactionRepository reactionRepository;
     private final PostHideRepository     hideRepository;
     private final NotificationService    notificationService;
+    private final Counter                postsCreated;
 
     @Transactional(readOnly = true)
     public PageResponse<PostSummaryResponse> getFeed(int page, int size, Long tagId, UUID currentUserId) {
@@ -80,6 +82,7 @@ public class PostService {
                 .build();
         Post saved = postRepository.save(post);
         incrementTagUsage(tags);
+        postsCreated.increment();
         return toFullResponse(saved, author.getId());
     }
 

@@ -11,6 +11,7 @@ import com.synora.modules.notification.service.NotificationService;
 import com.synora.modules.user.entity.User;
 import com.synora.shared.dto.PageResponse;
 import com.synora.shared.exception.AppException;
+import io.micrometer.core.instrument.Counter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -30,6 +31,7 @@ public class MessageService {
     private final ChatService             chatService;
     private final NotificationService     notificationService;
     private final SimpMessagingTemplate   messagingTemplate;
+    private final Counter                 messagesSent;
 
     @Transactional(readOnly = true)
     public PageResponse<MessageResponse> getHistory(UUID chatId, UUID userId, int page, int size) {
@@ -57,6 +59,7 @@ public class MessageService {
                 .build());
 
         MessageResponse response = toResponse(message);
+        messagesSent.increment();
 
         // Broadcast via WebSocket to all chat subscribers
         messagingTemplate.convertAndSend("/topic/chat." + chatId, response);

@@ -1,0 +1,18 @@
+# Prometheus scrape config for Synora.
+# Loaded by the prometheus service in docker-compose.monitoring.yml.
+
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    app: synora
+
+scrape_configs:
+  - job_name: synora-backend
+    metrics_path: /actuator/prometheus
+    static_configs:
+      - targets: ["backend:8080"]
+
+  - job_name: prometheus
+    static_configs:
+      - targets: ["localhost:9090"]
