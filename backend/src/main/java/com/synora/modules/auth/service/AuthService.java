@@ -36,6 +36,7 @@ public class AuthService {
     private final JwtUtil                jwtUtil;
     private final SecurityService        securityService;
     private final StringRedisTemplate    redis;
+    private final EmailService           emailService;
     private final Counter                userRegistrations;
     private final Counter                authFailures;
 
@@ -148,9 +149,7 @@ public class AuthService {
         userRepository.findByEmail(req.getEmail()).ifPresent(user -> {
             String token = UUID.randomUUID().toString().replace("-", "");
             redis.opsForValue().set(RESET_PREFIX + token, user.getId().toString(), Duration.ofHours(1));
-            // TODO: send email with reset link: /reset-password?token={token}
-            org.slf4j.LoggerFactory.getLogger(AuthService.class)
-                .info("Password reset token for {}: {}", user.getEmail(), token);
+            emailService.sendPasswordReset(user.getEmail(), token);
         });
     }
 
