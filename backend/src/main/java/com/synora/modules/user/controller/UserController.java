@@ -12,6 +12,7 @@ import com.synora.modules.user.dto.ReputationBreakdownResponse;
 import com.synora.modules.user.dto.SkillDto;
 import com.synora.modules.user.dto.UpdateProfileRequest;
 import com.synora.modules.user.dto.UserProfileResponse;
+import com.synora.modules.user.dto.WeeklyActivityResponse;
 import com.synora.modules.user.entity.User;
 import com.synora.modules.user.service.AchievementService;
 import com.synora.modules.user.service.ActivitySummaryService;
@@ -131,6 +132,15 @@ public class UserController {
     public ResponseEntity<ApiResponse<ActivitySummaryResponse>> activitySummary(
             @PathVariable UUID id) {
         return ResponseEntity.ok(ApiResponse.ok(activitySummaryService.getSummary(id)));
+    }
+
+    @Operation(summary = "Weekly activity counts (Mon..Sun, UTC) for current user",
+            security = @SecurityRequirement(name = "bearerAuth"))
+    @GetMapping("/me/activity/weekly")
+    public ResponseEntity<ApiResponse<WeeklyActivityResponse>> weeklyActivity(
+            @AuthenticationPrincipal User currentUser) {
+        return ResponseEntity.ok(
+                ApiResponse.ok(activitySummaryService.getWeeklyActivity(currentUser.getId())));
     }
 
     @Operation(summary = "Achievements + career progress for a user")

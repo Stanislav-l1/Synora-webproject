@@ -206,32 +206,53 @@ function StatsGrid({ stats }: { stats: UserStats }) {
   );
 }
 
-function ActivitySparkline() {
+interface WeeklyActivity {
+  days: string[];
+  counts: number[];
+  total: number;
+  deltaPercent: number | null;
+}
+
+function ActivitySparkline({ data }: { data: WeeklyActivity }) {
   const t = useT();
-  const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-  const heights = [3, 7, 5, 9, 4, 8, 6];
-  const todayIdx = new Date().getDay() === 0 ? 6 : new Date().getDay() - 1;
-  const max = Math.max(...heights);
+  const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  const todayIdx = new Date().getUTCDay() === 0 ? 6 : new Date().getUTCDay() - 1;
+  const max = Math.max(1, ...data.counts);
+  const trend =
+    data.deltaPercent === null
+      ? null
+      : `${data.deltaPercent >= 0 ? '+' : ''}${data.deltaPercent}%`;
+  const trendUp = (data.deltaPercent ?? 0) >= 0;
   return (
     <div className="mt-3 px-1">
       <div className="flex items-center justify-between mb-2">
         <span className="text-[11px] text-cloud-muted">{t.rightPanel.activity}</span>
-        <span className="text-[10px] font-semibold text-success">{t.rightPanel.activityTrend}</span>
+        {trend && (
+          <span
+            className={cn(
+              'text-[10px] font-semibold',
+              trendUp ? 'text-success' : 'text-tyrian',
+            )}
+          >
+            {trend}
+          </span>
+        )}
       </div>
       <div className="flex items-end gap-1 px-1 h-9">
-        {heights.map((h, i) => (
+        {data.counts.map((c, i) => (
           <div
             key={i}
+            title={`${labels[i]}: ${c}`}
             className={cn(
               'flex-1 rounded-sm transition-all',
               i === todayIdx ? 'bg-tyrian' : 'bg-cloud-deep',
             )}
-            style={{ height: `${(h / max) * 100}%` }}
+            style={{ height: `${Math.max(4, (c / max) * 100)}%` }}
           />
         ))}
       </div>
       <div className="flex justify-between mt-1 px-1">
-        {days.map((d) => (
+        {labels.map((d) => (
           <span key={d} className="text-[9px] text-cloud-muted/70">{d}</span>
         ))}
       </div>
@@ -245,6 +266,7 @@ export function RightPanel() {
   const [trending, setTrending] = useState<TrendingTag[] | null>(null);
   const [suggested, setSuggested] = useState<SuggestedUser[] | null>(null);
   const [stats, setStats] = useState<UserStats | null>(null);
+  const [activity, setActivity] = useState<WeeklyActivity | null>(null);
   const [followingIds, setFollowingIds] = useState<Set<string>>(new Set());
 
   useEffect(() => {
@@ -277,6 +299,16 @@ export function RightPanel() {
         if (!cancelled) setStats(unwrap<UserStats>(res.data));
       } catch {
         if (!cancelled) setStats({ posts: 0, reputation: 0, followers: 0, projects: 0 });
+      }
+    })();
+    (async () => {
+      try {
+        const res = await api.get('/users/me/activity/weekly');
+        if (!cancelled) setActivity(unwrap<WeeklyActivity>(res.data));
+      } catch {
+        if (!cancelled) {
+          setActivity({ days: [], counts: [0, 0, 0, 0, 0, 0, 0], total: 0, deltaPercent: null });
+        }
       }
     })();
     return () => { cancelled = true; };
@@ -338,7 +370,7 @@ export function RightPanel() {
       ) : (
         <>
           <StatsGrid stats={stats} />
-          <ActivitySparkline />
+          {activity && <ActivitySparkline data={activity} />}
         </>
       )}
 

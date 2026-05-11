@@ -11,6 +11,7 @@ import com.synora.modules.project.repository.ProjectRepository;
 import com.synora.modules.project.repository.TaskRepository;
 import com.synora.modules.reputation.repository.ReputationEventRepository;
 import com.synora.modules.user.dto.ActivitySummaryResponse;
+import com.synora.modules.user.dto.WeeklyActivityResponse;
 import com.synora.modules.user.repository.UserRepository;
 import com.synora.shared.exception.AppException;
 import lombok.RequiredArgsConstructor;
@@ -18,9 +19,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.DayOfWeek;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
@@ -76,6 +80,52 @@ public class ActivitySummaryService {
                 .upcomingTasks(upcoming.stream().map(this::toUpcomingTask).toList())
                 .currentProjectsList(currentProjects.stream()
                         .map(p -> toCurrentProject(p, userId)).toList())
+                .build();
+    }
+
+    @Transactional(readOnly = true)
+    public WeeklyActivityResponse getWeeklyActivity(UUID userId) {
+        if (!userRepository.existsById(userId)) {
+            throw AppException.notFound("User", userId);
+        }
+
+        LocalDate today = LocalDate.now(ZoneOffset.UTC);
+        LocalDate weekStart = today.with(DayOfWeek.MONDAY);
+        LocalDate priorStart = weekStart.minusDays(7);
+
+        Instant since = priorStart.atStartOfDay(ZoneOffset.UTC).toInstant();
+        List<Instant> events = reputationEventRepository.findCreatedAtSince(userId, since);
+
+        long[] current = new long[7];
+        long priorTotal = 0;
+        for (Instant at : events) {
+            LocalDate d = at.atZone(ZoneOffset.UTC).toLocalDate();
+            if (!d.isBefore(weekStart)) {
+                int idx = (int) ChronoUnit.DAYS.between(weekStart, d);
+                if (idx >= 0 && idx < 7) current[idx]++;
+            } else if (!d.isBefore(priorStart)) {
+                priorTotal++;
+            }
+        }
+
+        List<LocalDate> days = new ArrayList<>(7);
+        List<Long> counts = new ArrayList<>(7);
+        long total = 0;
+        for (int i = 0; i < 7; i++) {
+            days.add(weekStart.plusDays(i));
+            counts.add(current[i]);
+            total += current[i];
+        }
+
+        Integer deltaPercent = priorTotal == 0
+                ? null
+                : (int) Math.round(((double) (total - priorTotal) / priorTotal) * 100.0);
+
+        return WeeklyActivityResponse.builder()
+                .days(days)
+                .counts(counts)
+                .total(total)
+                .deltaPercent(deltaPercent)
                 .build();
     }
 
