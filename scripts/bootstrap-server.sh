@@ -9,7 +9,7 @@
 #   4. Clone the repo into /opt/synora and chown it to that user
 #
 # Run as root (or via sudo) on the VPS, ONCE:
-#   curl -fsSL https://raw.githubusercontent.com/<YOUR_GH>/synora/main/scripts/bootstrap-server.sh | sudo bash
+#   curl -fsSL https://raw.githubusercontent.com/Stanislav-l1/Synora-webproject/main/scripts/bootstrap-server.sh | sudo bash
 # Or, if the repo is private, scp it over and run:
 #   sudo bash bootstrap-server.sh
 # ============================================================
@@ -20,7 +20,7 @@ if [[ $EUID -ne 0 ]]; then
   exit 1
 fi
 
-REPO_URL="${REPO_URL:-https://github.com/CHANGE_ME/synora.git}"
+REPO_URL="${REPO_URL:-https://github.com/Stanislav-l1/Synora-webproject.git}"
 TARGET_USER="${TARGET_USER:-synora}"
 TARGET_DIR="${TARGET_DIR:-/opt/synora}"
 
