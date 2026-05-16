@@ -48,6 +48,9 @@ public class User implements UserDetails {
     @Column(name = "github_id", unique = true, length = 64)
     private String githubId;
 
+    @Column(name = "google_id", unique = true, length = 64)
+    private String googleId;
+
     @Column(name = "github_url")
     private String githubUrl;
 

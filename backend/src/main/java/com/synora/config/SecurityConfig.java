@@ -50,7 +50,9 @@ public class SecurityConfig {
 
     private static final String[] PUBLIC_GET_NO_AUTH = {
             "/api/v1/auth/oauth/github",
-            "/api/v1/auth/oauth/github/callback"
+            "/api/v1/auth/oauth/github/callback",
+            "/api/v1/auth/oauth/google",
+            "/api/v1/auth/oauth/google/callback"
     };
 
     private static final String[] PUBLIC_GET = {

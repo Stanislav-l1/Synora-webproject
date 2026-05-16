@@ -19,6 +19,7 @@ import java.util.UUID;
 public class OAuthController {
 
     private final GitHubOAuthService githubOAuthService;
+    private final GoogleOAuthService googleOAuthService;
 
     @Value("${app.public-base-url}")
     private String baseUrl;
@@ -36,8 +37,27 @@ public class OAuthController {
             @RequestParam String code,
             @RequestParam(required = false) String state,
             HttpServletResponse response) throws IOException {
+        handleCallback(() -> githubOAuthService.handleCallback(code), response);
+    }
+
+    @Operation(summary = "Redirect to Google OAuth")
+    @GetMapping("/google")
+    public void redirectToGoogle(HttpServletResponse response) throws IOException {
+        response.sendRedirect(googleOAuthService.buildAuthorizationUrl(UUID.randomUUID().toString()));
+    }
+
+    @Operation(summary = "Google OAuth callback")
+    @GetMapping("/google/callback")
+    public void googleCallback(
+            @RequestParam String code,
+            @RequestParam(required = false) String state,
+            HttpServletResponse response) throws IOException {
+        handleCallback(() -> googleOAuthService.handleCallback(code), response);
+    }
+
+    private void handleCallback(java.util.function.Supplier<AuthResponse> exchange, HttpServletResponse response) throws IOException {
         try {
-            AuthResponse auth = githubOAuthService.handleCallback(code);
+            AuthResponse auth = exchange.get();
             String redirect = baseUrl + "/oauth/callback"
                     + "?accessToken=" + auth.getAccessToken()
                     + "&refreshToken=" + auth.getRefreshToken()

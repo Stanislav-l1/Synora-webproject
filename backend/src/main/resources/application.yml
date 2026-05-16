@@ -77,6 +77,11 @@ github:
     client-id: ${GITHUB_CLIENT_ID:}
     client-secret: ${GITHUB_CLIENT_SECRET:}
 
+google:
+  oauth:
+    client-id: ${GOOGLE_CLIENT_ID:}
+    client-secret: ${GOOGLE_CLIENT_SECRET:}
+
 push:
   vapid:
     subject:     ${VAPID_SUBJECT:mailto:admin@synora.io}
