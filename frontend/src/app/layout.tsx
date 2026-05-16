@@ -6,9 +6,33 @@ import { ToastContainer } from '@/components/ui/toast';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Synora — IT Community Platform',
-  description: 'Projects, collaboration, learning and networking for developers',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://synoraa.space'),
+  title: {
+    default: 'Synora — IT Community Platform',
+    template: '%s · Synora',
+  },
+  description: 'GitHub meets a social network. Projects, kanban, real-time chat, courses and reputation — built for developers and IT communities.',
+  applicationName: 'Synora',
+  authors: [{ name: 'Synora' }],
+  keywords: ['developers', 'community', 'projects', 'collaboration', 'open source', 'kanban', 'github alternative'],
   manifest: '/manifest.json',
+  openGraph: {
+    type: 'website',
+    siteName: 'Synora',
+    title: 'Synora — IT Community Platform',
+    description: 'Projects, real-time chat, courses and reputation. A platform built for developers and IT communities.',
+    locale: 'en_US',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Synora — IT Community Platform',
+    description: 'Projects, real-time chat, courses and reputation. Built for developers.',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
+  },
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',
