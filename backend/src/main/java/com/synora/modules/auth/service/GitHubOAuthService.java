@@ -132,6 +132,7 @@ public class GitHubOAuthService {
                 .avatarUrl(avatarUrl)
                 .githubUrl(githubUrl)
                 .role(UserRole.USER)
+                .emailVerified(true)
                 .build());
     }
 

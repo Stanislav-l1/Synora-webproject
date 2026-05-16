@@ -88,6 +88,25 @@ public class AuthController {
         return ResponseEntity.ok(ApiResponse.ok("Password reset successfully", null));
     }
 
+    @Operation(summary = "Verify email with token")
+    @PostMapping("/verify-email")
+    public ResponseEntity<ApiResponse<Void>> verifyEmail(@RequestBody Map<String, String> body) {
+        String token = body.get("token");
+        if (token == null || token.isBlank()) {
+            return ResponseEntity.badRequest().body(ApiResponse.error("token is required", "BAD_REQUEST"));
+        }
+        authService.verifyEmail(token);
+        return ResponseEntity.ok(ApiResponse.ok("Email verified", null));
+    }
+
+    @Operation(summary = "Resend email verification link")
+    @PostMapping("/resend-verification")
+    public ResponseEntity<ApiResponse<Void>> resendVerification(@RequestBody Map<String, String> body) {
+        String email = body.get("email");
+        if (email != null && !email.isBlank()) authService.resendVerification(email);
+        return ResponseEntity.ok(ApiResponse.ok("If account exists and is unverified, a new link has been sent", null));
+    }
+
     @Operation(summary = "Change password")
     @PostMapping("/change-password")
     public ResponseEntity<ApiResponse<Void>> changePassword(
@@ -106,7 +125,8 @@ public class AuthController {
                 "username",            user.getUsername(),
                 "email",               user.getEmail(),
                 "role",                user.getRole(),
-                "onboardingCompleted", user.isOnboardingCompleted()
+                "onboardingCompleted", user.isOnboardingCompleted(),
+                "emailVerified",       user.isEmailVerified()
         )));
     }
 

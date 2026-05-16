@@ -14,6 +14,7 @@ export interface User {
   role: 'USER' | 'MODERATOR' | 'ADMIN';
   subscriptionTier?: 'FREE' | 'PRO' | 'TEAM' | 'BUSINESS';
   onboardingCompleted?: boolean;
+  emailVerified?: boolean;
   specialization?: string | null;
   careerGoal?: string | null;
   interests?: string[] | null;

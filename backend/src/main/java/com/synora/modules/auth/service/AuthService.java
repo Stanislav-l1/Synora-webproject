@@ -40,7 +40,8 @@ public class AuthService {
     private final Counter                userRegistrations;
     private final Counter                authFailures;
 
-    private static final String TWO_FA_PREFIX = "2fa:pending:";
+    private static final String TWO_FA_PREFIX  = "2fa:pending:";
+    private static final String VERIFY_PREFIX  = "email:verify:";
 
     @Value("${jwt.access-token-expiration}")
     private long accessExpirationSec;
@@ -67,7 +68,33 @@ public class AuthService {
 
         user = userRepository.save(user);
         userRegistrations.increment();
+        sendVerificationToken(user);
         return buildAuthResponse(user, null, null);
+    }
+
+    private void sendVerificationToken(User user) {
+        String token = UUID.randomUUID().toString().replace("-", "");
+        redis.opsForValue().set(VERIFY_PREFIX + token, user.getId().toString(), Duration.ofHours(24));
+        emailService.sendEmailVerification(user.getEmail(), token);
+    }
+
+    @Transactional
+    public void verifyEmail(String token) {
+        String key = VERIFY_PREFIX + token;
+        String userId = redis.opsForValue().get(key);
+        if (userId == null) throw AppException.badRequest("Invalid or expired verification token");
+        User user = userRepository.findById(UUID.fromString(userId))
+                .orElseThrow(() -> AppException.notFound("User", userId));
+        user.setEmailVerified(true);
+        userRepository.save(user);
+        redis.delete(key);
+    }
+
+    @Transactional(readOnly = true)
+    public void resendVerification(String email) {
+        userRepository.findByEmail(email.toLowerCase()).ifPresent(user -> {
+            if (!user.isEmailVerified()) sendVerificationToken(user);
+        });
     }
 
     @Transactional

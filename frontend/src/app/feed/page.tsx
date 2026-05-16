@@ -8,6 +8,7 @@ import { RightPanel } from '@/components/layout/right-panel';
 import { Avatar } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { PostCard } from '@/components/shared/post-card';
+import { EmailVerifyBanner } from '@/components/shared/email-verify-banner';
 import { useAuthStore } from '@/store/useAuthStore';
 import api from '@/lib/api';
 import type { ApiResponse, PageResponse, PostSummary } from '@/types';
@@ -71,6 +72,7 @@ export default function FeedPage() {
       )}
       <div className="flex">
         <div className="flex-1 max-w-feed mx-auto px-4 py-6 space-y-4">
+          <EmailVerifyBanner />
           <div className="bg-cloud-soft border border-cloud-deep rounded-lg p-4 shadow-sm">
             <div className="flex gap-3">
               <Avatar name={user?.displayName || user?.username || '?'} size="md" />
