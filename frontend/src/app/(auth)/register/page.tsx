@@ -150,6 +150,13 @@ export default function RegisterPage() {
             <Button type="submit" className="w-full" size="lg" loading={isLoading} variant="banana">
               {t.auth.registerBtn}
             </Button>
+
+            <p className="text-xs text-moss-soft text-center">
+              By signing up, you agree to our{' '}
+              <Link href="/terms" className="text-banana hover:underline">Terms</Link>
+              {' '}and{' '}
+              <Link href="/privacy" className="text-banana hover:underline">Privacy Policy</Link>.
+            </p>
           </form>
 
           {/* Divider */}

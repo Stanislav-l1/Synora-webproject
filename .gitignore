@@ -164,3 +164,11 @@ frontend/test-results/
 frontend/playwright-report/
 frontend/.playwright/
 frontend/blob-report/
+
+
+# Agent skills (installed via npx skills add — keep local, don't commit)
+.agents/
+.claude/skills/
+.kiro/
+skills-lock.json
+
